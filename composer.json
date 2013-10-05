@@ -1,0 +1,6 @@
+{
+   "require": {
+      "doctrine/dbal": "2.3.4",
+      "monolog/monolog": "1.2.*"
+   }
+}
