@@ -13,6 +13,3 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
-
-    uglifycss:          /path/to/bin/uglifycss
-    uglifyjs:           /path/to/bin/uglifyjs
