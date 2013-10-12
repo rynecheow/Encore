@@ -28,16 +28,54 @@ twig:
 
 # Assetic Configuration
 assetic:
-    debug:          %kernel.debug%
-    use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
     filters:
         cssrewrite: ~
-        #closure:
-        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
-        #yui_css:
-        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+        lessphp:
+            apply_to: "\.less$"
+            # Formatter options: compressed, lessjs, classic
+            formatter: "classic"
+            preserve_comments: true
+            presets:
+                my_variable: "#000"
+        uglifyjs2:
+            # the path to the uglifyjs executable
+            bin: /usr/local/bin/uglifyjs
+        uglifycss:
+            bin: /usr/local/bin/uglifycss
+    assets:
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less
+            filters:
+                - lessphp
+                - cssrewrite
+                - uglifycss
+            output: css/bootstrap.css
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-transition.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-alert.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-button.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-carousel.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-collapse.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-dropdown.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-modal.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-tooltip.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-popover.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-scrollspy.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-tab.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-typeahead.js
+                - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-affix.js
+            filters:
+                - uglifyjs2
+            output: js/bootstrap.min.js
+        jquery:
+            inputs:
+                - %kernel.root_dir%/../vendor/jquery/jquery/jquery-2.0.3.js
+            filters:
+                - uglifyjs2
+            output: js/jquery.min.js
 
 # Doctrine Configuration
 doctrine:
@@ -71,3 +109,13 @@ fos_facebook:
   secret: b733af0f4c714c076c7c5f10beacb5a5
   cookie: true
   permissions: [email, name, gender]
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Encore\CustomerBundle\Entity\User
+
+bc_bootstrap:
+    less_filter: lessphp
+    assets_dir:  %kernel.root_dir%/../vendor/twitter/bootstrap
+    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-2.0.3.js

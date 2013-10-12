@@ -5,12 +5,11 @@ namespace Encore\CustomerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use FOS\UserBundle\Model\User as BaseUser;
-
 /**
  * User
  *
- * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -28,84 +27,84 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=199)
+     * @ORM\Column(name="username", type="string", length=200)
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=199)
+     * @ORM\Column(name="email", type="string", length=200)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean")
      */
-    private $enabled;
+    protected $enabled;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="deactivatedAt", type="datetime")
+     * @ORM\Column(name="deactivatedAt", type="datetime", nullable=true)
      */
-    private $deactivatedAt;
+    protected $deactivatedAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="bannedAt", type="datetime")
      */
-    private $bannedAt;
+    protected $bannedAt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=199)
+     * @ORM\Column(name="salt", type="string", length=200)
      */
-    private $salt;
+    protected $salt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=199)
+     * @ORM\Column(name="password", type="string", length=200)
      */
-    private $password;
+    protected $password;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="lastLogin", type="datetime")
      */
-    private $lastLogin;
+    protected $lastLogin;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="roles", type="array")
+     * @ORM\Column(name="roleles", type="array")
      */
-    private $roles;
+    protected $roles;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="signedUpAt", type="datetime")
      */
-    private $signedUpAt;
+    protected $signedUpAt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mobileNumber", type="string", length=199)
+     * @ORM\Column(name="mobileNumber", type="string", length=200)
      */
-    private $mobileNumber;
+    protected $mobileNumber;
 
 
     /**
@@ -306,6 +305,7 @@ class User extends BaseUser
      * Set roles
      *
      * @param array $roles
+     *
      * @return User
      */
     public function setRoles(array $roles)
