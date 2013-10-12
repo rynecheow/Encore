@@ -20,21 +20,42 @@
         }
     ],
     "require": {
-         "php": ">=5.4.7",
+        "php": ">=5.5",
         "symfony/symfony": "2.3.*",
-        "doctrine/orm": ">=2.2.3,<2.4-dev",
-        "doctrine/doctrine-bundle": "1.2.*",
-        "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.3.*",
         "symfony/swiftmailer-bundle": "2.3.*",
         "symfony/monolog-bundle": "2.3.*",
+
+        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "doctrine/doctrine-bundle": "1.2.*",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
+        "doctrine/migrations": "dev-master",
+
+        "twig/extensions": "1.0.*",
+
         "sensio/distribution-bundle": "2.3.*",
         "sensio/framework-extra-bundle": "2.3.*",
         "sensio/generator-bundle": "2.3.*",
+
         "incenteev/composer-parameter-handler": "~2.0",
+
         "braincrafted/bootstrap-bundle": "dev-master",
         "twitter/bootstrap": "2.3.*",
-        "react/react": "0.3.*"
+        "react/react": "0.3.*",
+
+        "knplabs/knp-components": "1.1.2",
+        "knplabs/knp-paginator-bundle": "v2.3",
+        "knplabs/knp-snappy-bundle": "dev-master",
+        "knplabs/knp-menu": "2.0.*@dev",
+        "knplabs/knp-menu-bundle": "2.0.*@dev",
+        "knplabs/gaufrette": "dev-master",
+        "knplabs/knp-gaufrette-bundle": "dev-master",
+        "knplabs/doctrine-behaviors": "~1.0",
+
+        "facebook/php-sdk": "v3.2.2",
+
+        "friendsofsymfony/facebook-bundle": "1.2.1",
+        "friendsofsymfony/user-bundle": "dev-master#8be0c33"
     },
     "require-dev": {
         "doctrine/data-fixtures": "1.0.*@dev",

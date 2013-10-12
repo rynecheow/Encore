@@ -1,3 +1,8 @@
-encore_customer_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: EncoreCustomerBundle:Default:index }
+encore_customer_welcome:
+  pattern:  /
+  defaults: { _controller: EncoreCustomerBundle:Welcome:index }
+
+encore_customer_login:
+    pattern:  /login
+    defaults: { _controller: EncoreCustomerBundle:Login:index }
+
