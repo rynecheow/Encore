@@ -1,0 +1,3 @@
+encore_merchant_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: EncoreMerchantBundle:Default:index }
