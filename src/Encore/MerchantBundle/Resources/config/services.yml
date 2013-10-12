@@ -1,0 +1,7 @@
+parameters:
+#    encore_merchant.example.class: Encore\MerchantBundle\Example
+
+services:
+#    encore_merchant.example:
+#        class: %encore_merchant.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
