@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5d8c1849fd229e801f425af523a622ae",
+    "hash": "7950b8e994217415a5d75dae35615e9a",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -1742,6 +1742,47 @@
             "time": "2013-07-19 00:03:27"
         },
         {
+            "name": "leafo/lessphp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafo/lessphp.git",
+                "reference": "c6cd043c94ba2a94ae3eeedc7a4c925302b61252"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/c6cd043c94ba2a94ae3eeedc7a4c925302b61252",
+                "reference": "c6cd043c94ba2a94ae3eeedc7a4c925302b61252",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.4.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lessc.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Leaf Corcoran",
+                    "email": "leafot@gmail.com",
+                    "homepage": "http://leafo.net"
+                }
+            ],
+            "description": "lessphp is a compiler for LESS written in PHP.",
+            "homepage": "http://leafo.net/lessphp/",
+            "time": "2013-10-04 15:40:57"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.6.0",
             "source": {
@@ -2992,12 +3033,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e60a9a58fa240781ecc957540abadfdc3f8e3c29"
+                "reference": "61e996a1a8104a0e23cb0a10e5cf987a4e65e9be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e60a9a58fa240781ecc957540abadfdc3f8e3c29",
-                "reference": "e60a9a58fa240781ecc957540abadfdc3f8e3c29",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/61e996a1a8104a0e23cb0a10e5cf987a4e65e9be",
+                "reference": "61e996a1a8104a0e23cb0a10e5cf987a4e65e9be",
                 "shasum": ""
             },
             "require": {
@@ -3061,7 +3102,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-10-12 07:31:52"
+            "time": "2013-10-12 10:07:14"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3284,6 +3325,7 @@
         "knplabs/gaufrette": 20,
         "knplabs/knp-gaufrette-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
+        "leafo/lessphp": 20,
         "doctrine/data-fixtures": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "phpunit/php-code-coverage": 20,
