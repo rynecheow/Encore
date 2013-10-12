@@ -71,3 +71,12 @@ fos_facebook:
   secret: b733af0f4c714c076c7c5f10beacb5a5
   cookie: true
   permissions: [email, name, gender]
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Encore\CustomerBundle\Entity\User
+
+bc_bootstrap:
+    assets_dir:  %kernel.root_dir%/../vendor/twitter/bootstrap
+    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-2.0.3.js

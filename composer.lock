@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a727bb2cbf71bff772da4bb8fef1c97d",
+    "hash": "5d8c1849fd229e801f425af523a622ae",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -920,12 +920,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "8be0c33"
+                "reference": "f9ea1de0698e3055c9916e88c19f42e28844ef61"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f9ea1de0698e3055c9916e88c19f42e28844ef61",
-                "reference": "8be0c33",
+                "reference": "f9ea1de0698e3055c9916e88c19f42e28844ef61",
                 "shasum": ""
             },
             "require": {
@@ -980,7 +980,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-05-25 09:54:39"
+            "time": "2013-10-09 22:58:46"
         },
         {
             "name": "guzzle/parser",
@@ -1125,6 +1125,17 @@
                 "sql"
             ],
             "time": "2013-04-26 18:42:52"
+        },
+        {
+            "name": "jquery/jquery",
+            "version": "2.0.3",
+            "dist": {
+                "type": "file",
+                "url": "http://code.jquery.com/jquery-2.0.3.js",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
         },
         {
             "name": "knplabs/doctrine-behaviors",
@@ -2981,12 +2992,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1c26eb5524ad40afe6475af9414bd1f1b01eceaf"
+                "reference": "e60a9a58fa240781ecc957540abadfdc3f8e3c29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1c26eb5524ad40afe6475af9414bd1f1b01eceaf",
-                "reference": "1c26eb5524ad40afe6475af9414bd1f1b01eceaf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e60a9a58fa240781ecc957540abadfdc3f8e3c29",
+                "reference": "e60a9a58fa240781ecc957540abadfdc3f8e3c29",
                 "shasum": ""
             },
             "require": {
@@ -3050,7 +3061,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-10-04 20:47:21"
+            "time": "2013-10-12 07:31:52"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
