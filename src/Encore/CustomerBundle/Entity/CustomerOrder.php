@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CustomerOrder
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Entity\CustomerOrderRepository")
+ * @ORM\Table(name="CustomerOrder")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\CustomerOrderRepository")
  */
 class CustomerOrder
 {

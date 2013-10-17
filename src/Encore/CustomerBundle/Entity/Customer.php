@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Customer
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Entity\CustomerRepository")
+ * @ORM\Table(name="Customer")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\CustomerRepository")
  */
 class Customer
 {
@@ -38,9 +38,9 @@ class Customer
     /**
      * @var string
      *
-     * @ORM\Column(name="laststName", type="string", length=200)
+     * @ORM\Column(name="lastName", type="string", length=200)
      */
-    private $laststName;
+    private $lastName;
 
     /**
      * @var \DateTime
@@ -121,26 +121,26 @@ class Customer
     }
 
     /**
-     * Set laststName
+     * Set lastName
      *
-     * @param string $laststName
+     * @param string $lastName
      * @return Customer
      */
-    public function setLaststName($laststName)
+    public function setLastName($lastName)
     {
-        $this->laststName = $laststName;
+        $this->lastName = $lastName;
     
         return $this;
     }
 
     /**
-     * Get laststName
+     * Get lastName
      *
      * @return string 
      */
-    public function getLaststName()
+    public function getLastName()
     {
-        return $this->laststName;
+        return $this->lastName;
     }
 
     /**

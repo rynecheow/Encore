@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Section
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Entity\SectionRepository")
+ * @ORM\Table(name="Section")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\SectionRepository")
  */
 class Section
 {
