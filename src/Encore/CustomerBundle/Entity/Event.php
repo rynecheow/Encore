@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Event
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Entity\EventRepository")
+ * @ORM\Table(name="Event")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\EventRepository")
  */
 class Event
 {
@@ -71,11 +71,11 @@ class Event
     private $saleEnd;
 
     /**
-     * @var \DateTime
+     * @var \array
      *
-     * @ORM\Column(name="heldDate", type="datetime")
+     * @ORM\Column(name="heldDates", type="datetime")
      */
-    private $heldDate;
+    private $heldDates;
 
     /**
      * @var integer
@@ -257,26 +257,26 @@ class Event
     }
 
     /**
-     * Set heldDate
+     * Set heldDates
      *
-     * @param \DateTime $heldDate
+     * @param \array $heldDate
      * @return Event
      */
-    public function setHeldDate($heldDate)
+    public function setHeldDates($heldDate)
     {
-        $this->heldDate = $heldDate;
+        $this->heldDates = $heldDate;
     
         return $this;
     }
 
     /**
-     * Get heldDate
+     * Get heldDates
      *
-     * @return \DateTime 
+     * @return \array
      */
-    public function getHeldDate()
+    public function getHeldDates()
     {
-        return $this->heldDate;
+        return $this->heldDates;
     }
 
     /**

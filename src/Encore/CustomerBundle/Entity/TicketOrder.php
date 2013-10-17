@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TicketOrder
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Entity\TicketOrderRepository")
+ * @ORM\Table(name="TicketOrder")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\TicketOrderRepository")
  */
 class TicketOrder
 {
@@ -42,6 +42,12 @@ class TicketOrder
      */
     private $billingInfo;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="ticketIDs", type="integer")
+     */
+    private $ticketIDs;
 
     /**
      * Get id
@@ -120,5 +126,28 @@ class TicketOrder
     public function getBillingInfo()
     {
         return $this->billingInfo;
+    }
+
+    /**
+     * Set ticketIDs
+     *
+     * @param integer $ticketIDs
+     * @return Seat
+     */
+    public function setTicketIDs($ticketIDs)
+    {
+        $this->ticketIDs = $ticketIDs;
+
+        return $this;
+    }
+
+    /**
+     * Get ticketIDs
+     *
+     * @return integer
+     */
+    public function getTicketIDs()
+    {
+        return $this->ticketIDs;
     }
 }
