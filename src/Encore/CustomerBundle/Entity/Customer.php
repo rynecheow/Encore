@@ -15,11 +15,11 @@ class Customer
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="customerID", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $customerID;
 
     /**
      * @var string
@@ -65,13 +65,13 @@ class Customer
 
 
     /**
-     * Get id
+     * Get customerID
      *
      * @return integer 
      */
-    public function getId()
+    public function getCustomerID()
     {
-        return $this->id;
+        return $this->customerID;
     }
 
     /**

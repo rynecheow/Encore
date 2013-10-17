@@ -15,11 +15,11 @@ class CardInfo
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="cardInfoID", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $cardInfoID;
 
     /**
      * @var integer
@@ -51,13 +51,13 @@ class CardInfo
 
 
     /**
-     * Get id
+     * Get cardInfoID
      *
      * @return integer 
      */
-    public function getId()
+    public function getCardInfoID()
     {
-        return $this->id;
+        return $this->cardInfoID;
     }
 
     /**

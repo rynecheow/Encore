@@ -15,11 +15,11 @@ class Event
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="eventID", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $eventID;
 
     /**
      * @var integer
@@ -86,13 +86,13 @@ class Event
 
 
     /**
-     * Get id
+     * Get eventID
      *
      * @return integer 
      */
-    public function getId()
+    public function getEventID()
     {
-        return $this->id;
+        return $this->eventID;
     }
 
     /**
