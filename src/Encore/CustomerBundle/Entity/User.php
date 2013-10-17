@@ -30,27 +30,6 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=200)
-     */
-    protected $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=200)
-     */
-    protected $email;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enabled", type="boolean")
-     */
-    protected $enabled;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="deactivatedAt", type="datetime", nullable=true)
@@ -63,34 +42,6 @@ class User extends BaseUser
      * @ORM\Column(name="bannedAt", type="datetime")
      */
     protected $bannedAt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salt", type="string", length=200)
-     */
-    protected $salt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=200)
-     */
-    protected $password;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="lastLogin", type="datetime")
-     */
-    protected $lastLogin;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="roleles", type="array")
-     */
-    protected $roles;
 
     /**
      * @var \DateTime

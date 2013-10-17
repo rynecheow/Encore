@@ -43,11 +43,11 @@ class TicketOrder
     private $billingInfo;
 
     /**
-     * @var integer
+     * @var array
      *
-     * @ORM\Column(name="ticketID", type="integer")
+     * @ORM\Column(name="ticketIDs", type="integer")
      */
-    private $ticketID;
+    private $ticketIDs;
 
     /**
      * Get id
@@ -129,25 +129,25 @@ class TicketOrder
     }
 
     /**
-     * Set ticketID
+     * Set ticketIDs
      *
-     * @param integer $ticketID
+     * @param integer $ticketIDs
      * @return Seat
      */
-    public function setTicketID($ticketID)
+    public function setTicketIDs($ticketIDs)
     {
-        $this->ticketID = $ticketID;
+        $this->ticketIDs = $ticketIDs;
 
         return $this;
     }
 
     /**
-     * Get ticketID
+     * Get ticketIDs
      *
      * @return integer
      */
-    public function getTicketID()
+    public function getTicketIDs()
     {
-        return $this->ticketID;
+        return $this->ticketIDs;
     }
 }
