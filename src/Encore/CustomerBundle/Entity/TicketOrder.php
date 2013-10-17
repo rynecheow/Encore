@@ -45,7 +45,7 @@ class TicketOrder
     /**
      * @var array
      *
-     * @ORM\Column(name="ticketIDs", type="integer")
+     * @ORM\Column(name="ticketIDs", type="array")
      */
     private $ticketIDs;
 
@@ -131,7 +131,7 @@ class TicketOrder
     /**
      * Set ticketIDs
      *
-     * @param integer $ticketIDs
+     * @param array $ticketIDs
      * @return Seat
      */
     public function setTicketIDs($ticketIDs)
@@ -144,7 +144,7 @@ class TicketOrder
     /**
      * Get ticketIDs
      *
-     * @return integer
+     * @return array
      */
     public function getTicketIDs()
     {
