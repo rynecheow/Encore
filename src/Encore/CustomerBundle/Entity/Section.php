@@ -23,8 +23,8 @@ class Section
 
     /**
      * @var \Encore\CustomerBundle\Entity\Venue
-     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Venue", inversedBy="section")
-     * @ORM\JoinColumn(name="venueID", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Venue", inversedBy="sections")
+     * @ORM\JoinColumn(name="venueID", referencedColumnName="id", nullable=false)
      */
     private $venue;
 

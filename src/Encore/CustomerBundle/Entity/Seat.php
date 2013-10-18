@@ -43,11 +43,11 @@ class Seat
     protected $seatName;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="sectionID", type="integer")
+     * @var \Encore\CustomerBundle\Entity\Section
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Section", inversedBy="seats")
+     * @ORM\JoinColumn(name="sectionID", referencedColumnName="id", nullable=false)
      */
-    protected $sectionID;
+    private $section;
 
 
     /**
@@ -130,25 +130,18 @@ class Seat
     }
 
     /**
-     * Set sectionID
-     *
-     * @param integer $sectionID
-     * @return Seat
+     * @param \Encore\CustomerBundle\Entity\Section $section
      */
-    public function setSectionID($sectionID)
+    public function setSection($section)
     {
-        $this->sectionID = $sectionID;
-    
-        return $this;
+        $this->section = $section;
     }
 
     /**
-     * Get sectionID
-     *
-     * @return integer 
+     * @return \Encore\CustomerBundle\Entity\Section
      */
-    public function getSectionID()
+    public function getSection()
     {
-        return $this->sectionID;
+        return $this->section;
     }
 }

@@ -24,7 +24,7 @@ class Event
     /**
      * @var \Encore\CustomerBundle\Entity\Venue
      * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Venue", inversedBy="events")
-     * @ORM\JoinColumn(name="venueID", referencedColumnName="id")
+     * @ORM\JoinColumn(name="venueID", referencedColumnName="id", nullable=false)
      */
     private $venue;
 
