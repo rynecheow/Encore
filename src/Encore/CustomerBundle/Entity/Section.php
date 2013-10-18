@@ -22,11 +22,11 @@ class Section
     protected $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="venueID", type="integer")
+     * @var \Encore\CustomerBundle\Entity\Venue
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Venue", inversedBy="section")
+     * @ORM\JoinColumn(name="venueID", referencedColumnName="id")
      */
-    protected $venueID;
+    private $venue;
 
     /**
      * @var string
@@ -46,27 +46,21 @@ class Section
         return $this->id;
     }
 
+
     /**
-     * Set venueID
-     *
-     * @param integer $venueID
-     * @return Section
+     * @param \Encore\CustomerBundle\Entity\Venue $venue
      */
-    public function setVenueID($venueID)
+    public function setVenue($venue)
     {
-        $this->venueID = $venueID;
-    
-        return $this;
+        $this->venue = $venue;
     }
 
     /**
-     * Get venueID
-     *
-     * @return integer 
+     * @return \Encore\CustomerBundle\Entity\Venue
      */
-    public function getVenueID()
+    public function getVenue()
     {
-        return $this->venueID;
+        return $this->venue;
     }
 
     /**
