@@ -15,11 +15,11 @@ class CustomerOrder
     /**
      * @var integer
      *
-     * @ORM\Column(name="customerOrderID", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $customerOrderID;
+    private $id;
 
     /**
      * @var integer
@@ -37,13 +37,13 @@ class CustomerOrder
 
 
     /**
-     * Get customerOrderID
+     * Get id
      *
      * @return integer 
      */
-    public function getCustomerOrderID()
+    public function getId()
     {
-        return $this->customerOrderID;
+        return $this->id;
     }
 
     /**

@@ -15,11 +15,11 @@ class TicketOrder
     /**
      * @var integer
      *
-     * @ORM\Column(name="ticketOrderID", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $ticketOrderID;
+    private $id;
 
     /**
      * @var \DateTime
@@ -50,13 +50,13 @@ class TicketOrder
     private $ticketIDs;
 
     /**
-     * Get ticketOrderID
+     * Get id
      *
      * @return integer 
      */
-    public function getTicketOrderID()
+    public function getId()
     {
-        return $this->ticketOrderID;
+        return $this->id;
     }
 
     /**

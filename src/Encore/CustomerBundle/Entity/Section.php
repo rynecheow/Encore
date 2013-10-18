@@ -15,11 +15,11 @@ class Section
     /**
      * @var integer
      *
-     * @ORM\Column(name="sectionID", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $sectionID;
+    private $id;
 
     /**
      * @var integer
@@ -37,13 +37,13 @@ class Section
 
 
     /**
-     * Get sectionID
+     * Get id
      *
      * @return integer 
      */
-    public function getSectionID()
+    public function getId()
     {
-        return $this->sectionID;
+        return $this->id;
     }
 
     /**

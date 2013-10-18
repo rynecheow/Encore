@@ -15,11 +15,11 @@ class Venue
     /**
      * @var integer
      *
-     * @ORM\Column(name="venueID", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $venueID;
+    private $id;
 
     /**
      * @var string
@@ -37,13 +37,13 @@ class Venue
 
 
     /**
-     * Get venueID
+     * Get id
      *
      * @return integer 
      */
-    public function getVenueID()
+    public function getId()
     {
-        return $this->venueID;
+        return $this->id;
     }
 
     /**

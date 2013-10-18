@@ -15,11 +15,11 @@ class Merchant
     /**
      * @var integer
      *
-     * @ORM\Column(name="merchantID", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $merchantID;
+    private $id;
 
     /**
      * @var string
@@ -37,13 +37,13 @@ class Merchant
 
 
     /**
-     * Get merchantID
+     * Get id
      *
      * @return integer 
      */
-    public function getMerchantID()
+    public function getId()
     {
-        return $this->merchantID;
+        return $this->id;
     }
 
     /**

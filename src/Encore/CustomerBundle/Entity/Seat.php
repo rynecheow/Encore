@@ -15,11 +15,11 @@ class Seat
     /**
      * @var integer
      *
-     * @ORM\Column(name="seatID", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $seatID;
+    private $id;
 
     /**
      * @var string
@@ -51,13 +51,13 @@ class Seat
 
 
     /**
-     * Get seatID
+     * Get id
      *
      * @return integer 
      */
-    public function getSeatID()
+    public function getId()
     {
-        return $this->seatID;
+        return $this->id;
     }
 
     /**
