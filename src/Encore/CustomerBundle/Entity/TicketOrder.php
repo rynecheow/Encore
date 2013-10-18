@@ -19,35 +19,35 @@ class TicketOrder
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="purchaseDate", type="datetime")
      */
-    private $purchaseDate;
+    protected $purchaseDate;
 
     /**
      * @var float
      *
      * @ORM\Column(name="totalAmount", type="decimal")
      */
-    private $totalAmount;
+    protected $totalAmount;
 
     /**
      * @var \stdClass
      *
      * @ORM\Column(name="billingInfo", type="object")
      */
-    private $billingInfo;
+    protected $billingInfo;
 
     /**
      * @var array
      *
      * @ORM\Column(name="ticketIDs", type="array")
      */
-    private $ticketIDs;
+    protected $ticketIDs;
 
     /**
      * Get id

@@ -19,21 +19,21 @@ class Section
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="venueID", type="integer")
      */
-    private $venueID;
+    protected $venueID;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=200)
      */
-    private $name;
+    protected $name;
 
 
     /**

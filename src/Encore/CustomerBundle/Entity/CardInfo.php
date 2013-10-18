@@ -19,35 +19,35 @@ class CardInfo
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="type", type="integer")
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
      *
      * @ORM\Column(name="cardNum", type="string", length=20)
      */
-    private $cardNum;
+    protected $cardNum;
 
     /**
      * @var string
      *
      * @ORM\Column(name="secureNum", type="string", length=10)
      */
-    private $secureNum;
+    protected $secureNum;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="expireAt", type="datetime")
      */
-    private $expireAt;
+    protected $expireAt;
 
 
     /**

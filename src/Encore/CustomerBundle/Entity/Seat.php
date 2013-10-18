@@ -19,35 +19,35 @@ class Seat
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="row", type="string", length=10)
      */
-    private $row;
+    protected $row;
 
     /**
      * @var string
      *
      * @ORM\Column(name="col", type="string", length=10)
      */
-    private $col;
+    protected $col;
 
     /**
      * @var string
      *
      * @ORM\Column(name="seatName", type="string", length=100)
      */
-    private $seatName;
+    protected $seatName;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="sectionID", type="integer")
      */
-    private $sectionID;
+    protected $sectionID;
 
 
     /**

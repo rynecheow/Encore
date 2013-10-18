@@ -19,70 +19,70 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="venueID", type="integer")
      */
-    private $venueID;
+    protected $venueID;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=200)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="type", type="integer")
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createAt", type="datetime")
      */
-    private $createAt;
+    protected $createAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="saleStart", type="datetime")
      */
-    private $saleStart;
+    protected $saleStart;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="saleEnd", type="datetime")
      */
-    private $saleEnd;
+    protected $saleEnd;
 
     /**
      * @var \array
      *
      * @ORM\Column(name="heldDates", type="datetime")
      */
-    private $heldDates;
+    protected $heldDates;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="totalTickets", type="integer")
      */
-    private $totalTickets;
+    protected $totalTickets;
 
 
     /**
