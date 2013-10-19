@@ -19,21 +19,21 @@ class Ticket
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="seatID", type="integer")
      */
-    private $seatID;
+    protected $seatID;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="eventID", type="integer")
      */
-    private $eventID;
+    protected $eventID;
 
 
     /**

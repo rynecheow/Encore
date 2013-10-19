@@ -19,49 +19,49 @@ class Customer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=200)
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=200)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=200)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthDate", type="datetime")
      */
-    private $birthDate;
+    protected $birthDate;
 
     /**
      * @var string
      *
      * @ORM\Column(name="contactNo", type="string", length=200)
      */
-    private $contactNo;
+    protected $contactNo;
 
     /**
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=200)
      */
-    private $address;
+    protected $address;
 
 
     /**
