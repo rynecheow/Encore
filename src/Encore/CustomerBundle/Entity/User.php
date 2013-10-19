@@ -50,13 +50,6 @@ class User extends BaseUser
      */
     protected $signedUpAt;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mobileNumber", type="string", length=200)
-     */
-    protected $mobileNumber;
-
 
     /**
      * Set deactivatedAt
@@ -127,26 +120,4 @@ class User extends BaseUser
         return $this->signedUpAt;
     }
 
-    /**
-     * Set mobileNumber
-     *
-     * @param string $mobileNumber
-     * @return User
-     */
-    public function setMobileNumber($mobileNumber)
-    {
-        $this->mobileNumber = $mobileNumber;
-    
-        return $this;
-    }
-
-    /**
-     * Get mobileNumber
-     *
-     * @return string 
-     */
-    public function getMobileNumber()
-    {
-        return $this->mobileNumber;
-    }
 }
