@@ -19,42 +19,42 @@ class EventSection
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="eventID", type="integer")
      */
-    private $eventID;
+    protected $eventID;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="sectionID", type="integer")
      */
-    private $sectionID;
+    protected $sectionID;
 
     /**
      * @var float
      *
      * @ORM\Column(name="price", type="decimal")
      */
-    private $price;
+    protected $price;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="totalSeats", type="integer")
      */
-    private $totalSeats;
+    protected $totalSeats;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="totalSold", type="integer")
      */
-    private $totalSold;
+    protected $totalSold;
 
 
     /**

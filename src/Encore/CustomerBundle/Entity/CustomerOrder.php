@@ -19,21 +19,21 @@ class CustomerOrder
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="customerID", type="integer")
      */
-    private $customerID;
+    protected $customerID;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="orderID", type="integer")
      */
-    private $orderID;
+    protected $orderID;
 
 
     /**
