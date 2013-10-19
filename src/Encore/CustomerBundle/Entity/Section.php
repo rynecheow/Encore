@@ -19,21 +19,21 @@ class Section
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="venueID", type="integer")
+     * @var \Encore\CustomerBundle\Entity\Venue
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Venue", inversedBy="sections")
+     * @ORM\JoinColumn(name="venueID", referencedColumnName="id", nullable=false)
      */
-    private $venueID;
+    private $venue;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=200)
      */
-    private $name;
+    protected $name;
 
 
     /**
@@ -46,27 +46,21 @@ class Section
         return $this->id;
     }
 
+
     /**
-     * Set venueID
-     *
-     * @param integer $venueID
-     * @return Section
+     * @param \Encore\CustomerBundle\Entity\Venue $venue
      */
-    public function setVenueID($venueID)
+    public function setVenue($venue)
     {
-        $this->venueID = $venueID;
-    
-        return $this;
+        $this->venue = $venue;
     }
 
     /**
-     * Get venueID
-     *
-     * @return integer 
+     * @return \Encore\CustomerBundle\Entity\Venue
      */
-    public function getVenueID()
+    public function getVenue()
     {
-        return $this->venueID;
+        return $this->venue;
     }
 
     /**
