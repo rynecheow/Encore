@@ -19,70 +19,71 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="venueID", type="integer")
+     * @var \Encore\CustomerBundle\Entity\Venue
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Venue", inversedBy="events")
+     * @ORM\JoinColumn(name="venueID", referencedColumnName="id", nullable=false)
      */
-    private $venueID;
+    private $venue;
+
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=200)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="type", type="integer")
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createAt", type="datetime")
      */
-    private $createAt;
+    protected $createAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="saleStart", type="datetime")
      */
-    private $saleStart;
+    protected $saleStart;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="saleEnd", type="datetime")
      */
-    private $saleEnd;
+    protected $saleEnd;
 
     /**
      * @var \array
      *
      * @ORM\Column(name="heldDates", type="datetime")
      */
-    private $heldDates;
+    protected $heldDates;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="totalTickets", type="integer")
      */
-    private $totalTickets;
+    protected $totalTickets;
 
 
     /**
@@ -95,27 +96,21 @@ class Event
         return $this->id;
     }
 
+
     /**
-     * Set venueID
-     *
-     * @param integer $venueID
-     * @return Event
+     * @param \Encore\CustomerBundle\Entity\Venue $venue
      */
-    public function setVenueID($venueID)
+    public function setVenue($venue)
     {
-        $this->venueID = $venueID;
-    
-        return $this;
+        $this->venue = $venue;
     }
 
     /**
-     * Get venueID
-     *
-     * @return integer 
+     * @return \Encore\CustomerBundle\Entity\Venue
      */
-    public function getVenueID()
+    public function getVenue()
     {
-        return $this->venueID;
+        return $this->venue;
     }
 
     /**

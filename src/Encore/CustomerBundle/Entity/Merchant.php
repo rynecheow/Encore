@@ -19,21 +19,21 @@ class Merchant
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=200)
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
      *
      * @ORM\Column(name="merchantName", type="string", length=255)
      */
-    private $merchantName;
+    protected $merchantName;
 
 
     /**
