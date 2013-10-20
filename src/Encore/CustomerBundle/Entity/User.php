@@ -50,7 +50,17 @@ class User extends BaseUser
      */
     protected $signedUpAt;
 
+    /**
+     * @var \Encore\CustomerBundle\Entity\Customer
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\Customer", mappedBy="user");
+     */
+    private $customer;
 
+    /**
+     * @var \Encore\CustomerBundle\Entity\Merchant
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\Merchant", mappedBy="user");
+     */
+    private $merchant;
     /**
      * Set deactivatedAt
      *
