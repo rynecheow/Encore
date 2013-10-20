@@ -49,6 +49,11 @@ class CardInfo
      */
     protected $expireAt;
 
+    /**
+     * @var \Encore\CustomerBundle\Entity\Customer
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\Customer", mappedBy="cardInfo");
+     */
+    private $owner;
 
     /**
      * Get id
@@ -58,6 +63,24 @@ class CardInfo
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\Customer $owner
+     * @return CardInfo
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Customer
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 
     /**

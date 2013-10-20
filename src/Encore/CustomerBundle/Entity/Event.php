@@ -28,7 +28,6 @@ class Event
      */
     private $venue;
 
-
     /**
      * @var string
      *
@@ -85,6 +84,20 @@ class Event
      */
     protected $totalTickets;
 
+    /**
+     * @var \Encore\CustomerBundle\Entity\Merchant
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Merchant", inversedBy="events")
+     * @ORM\JoinColumn(name="merchantID", referencedColumnName="id", nullable=false)
+     */
+
+    private $creator;
+
+    /**
+     * @var \Encore\CustomerBundle\Entity\EventSection
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSection", mappedBy="event")
+     */
+
+    private $eventSections;
 
     /**
      * Get id
@@ -96,13 +109,53 @@ class Event
         return $this->id;
     }
 
+    /**
+     * @param \Encore\CustomerBundle\Entity\Merchant $creator
+     *
+     * @return Event
+     */
+    public function setCreator($creator)
+    {
+        $this->creator = $creator;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Merchant
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+
+    /**
+     * @param mixed $eventSections
+     *
+     * @return Event
+     */
+    public function setEventSections($eventSections)
+    {
+        $this->eventSections = $eventSections;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEventSections()
+    {
+        return $this->eventSections;
+    }
 
     /**
      * @param \Encore\CustomerBundle\Entity\Venue $venue
+     * @return Event
      */
     public function setVenue($venue)
     {
         $this->venue = $venue;
+        return $this;
     }
 
     /**

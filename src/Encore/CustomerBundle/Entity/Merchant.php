@@ -19,22 +19,34 @@ class Merchant
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=200)
      */
-    protected $username;
+    private $username;
 
     /**
      * @var string
      *
      * @ORM\Column(name="merchantName", type="string", length=255)
      */
-    protected $merchantName;
+    private $merchantName;
 
+    /**
+     * @var \Encore\CustomerBundle\Entity\Event
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Event", mappedBy="creator")
+     */
+    private $events;
+
+    /**
+     * @var \Encore\CustomerBundle\Entity\User
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\User", inversedBy="merchant")
+     * @ORM\JoinColumn(name="userID", referencedColumnName="id");
+     */
+    private $user;
 
     /**
      * Get id
@@ -44,6 +56,42 @@ class Merchant
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\User $user
+     * @return Merchant
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\Event $events
+     * @return Merchant
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Event
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 
     /**
