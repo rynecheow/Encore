@@ -44,7 +44,7 @@ class Merchant
     /**
      * @var \Encore\CustomerBundle\Entity\User
      * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\User", inversedBy="merchant")
-     * @ORM\JoinColumn(name="cardInfoID", referencedColumnName="id");
+     * @ORM\JoinColumn(name="userID", referencedColumnName="id");
      */
     private $user;
 
