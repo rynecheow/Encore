@@ -63,6 +63,18 @@ class Customer
      */
     protected $address;
 
+    /**
+     * @var \Encore\CustomerBundle\Entity\CardInfo
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\CardInfo", inversedBy="owner");
+     * @ORM\JoinColumn(name="cardInfoID", referencedColumnName="id", nullable=true);
+     */
+    private $cardInfo;
+
+    /**
+     * @var \Encore\CustomerBundle\Entity\TicketOrder
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\TicketOrder", mappedBy="customer")
+     */
+    private $ticketOrders;
 
     /**
      * Get id
@@ -72,6 +84,41 @@ class Customer
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\TicketOrder $ticketOrders
+     * @return Customer
+     */
+    public function setTicketOrders($ticketOrders)
+    {
+        $this->ticketOrders = $ticketOrders;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\TicketOrder
+     */
+    public function getTicketOrders()
+    {
+        return $this->ticketOrders;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\CardInfo $cardInfo
+     * @return Customer
+     */
+    public function setCardInfo($cardInfo)
+    {
+        $this->cardInfo = $cardInfo;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\CardInfo
+     */
+    public function getCardInfo()
+    {
+        return $this->cardInfo;
     }
 
     /**

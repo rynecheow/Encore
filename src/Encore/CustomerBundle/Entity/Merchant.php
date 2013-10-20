@@ -19,22 +19,27 @@ class Merchant
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=200)
      */
-    protected $username;
+    private $username;
 
     /**
      * @var string
      *
      * @ORM\Column(name="merchantName", type="string", length=255)
      */
-    protected $merchantName;
+    private $merchantName;
 
+    /**
+     * @var \Encore\CustomerBundle\Entity\Event
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Event", mappedBy="creator")
+     */
+    private $events;
 
     /**
      * Get id
@@ -44,6 +49,23 @@ class Merchant
     public function getId()
     {
         return $this->id;
+    }
+
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\Event $events
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Event
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 
     /**
