@@ -49,10 +49,12 @@ class Section
 
     /**
      * @param \Encore\CustomerBundle\Entity\Venue $venue
+     * @return Section
      */
     public function setVenue($venue)
     {
         $this->venue = $venue;
+        return $this;
     }
 
     /**

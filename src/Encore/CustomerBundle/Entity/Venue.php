@@ -42,6 +42,7 @@ class Venue
 
     private $events;
 
+
     /**
      * @var \Encore\CustomerBundle\Entity\Section
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Section", mappedBy="venue")
@@ -61,11 +62,31 @@ class Venue
 
 
     /**
+     * @param \Encore\CustomerBundle\Entity\Event $events
+     * @return Venue
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Event
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
      * @param \Encore\CustomerBundle\Entity\Section $sections
+     * @return Venue
      */
     public function setSections($sections)
     {
         $this->sections = $sections;
+        return $this;
     }
 
     /**
@@ -76,21 +97,6 @@ class Venue
         return $this->sections;
     }
 
-    /**
-     * @param mixed $events
-     */
-    public function setEvents($events)
-    {
-        $this->events = $events;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEvents()
-    {
-        return $this->events;
-    }
 
     /**
      * Set name
