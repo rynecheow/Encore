@@ -77,6 +77,13 @@ class Customer
     private $ticketOrders;
 
     /**
+     * @var \Encore\CustomerBundle\Entity\User
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\User", inversedBy="customer")
+     * @ORM\JoinColumn(name="userID", referencedColumnName="id");
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -93,6 +100,24 @@ class Customer
     public function setTicketOrders($ticketOrders)
     {
         $this->ticketOrders = $ticketOrders;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\User $user
+     * @return Customer
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

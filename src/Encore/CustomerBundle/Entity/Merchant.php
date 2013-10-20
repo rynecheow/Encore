@@ -42,6 +42,13 @@ class Merchant
     private $events;
 
     /**
+     * @var \Encore\CustomerBundle\Entity\User
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\User", inversedBy="merchant")
+     * @ORM\JoinColumn(name="cardInfoID", referencedColumnName="id");
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -51,13 +58,32 @@ class Merchant
         return $this->id;
     }
 
+    /**
+     * @param \Encore\CustomerBundle\Entity\User $user
+     * @return Merchant
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 
     /**
      * @param \Encore\CustomerBundle\Entity\Event $events
+     * @return Merchant
      */
     public function setEvents($events)
     {
         $this->events = $events;
+        return $this;
     }
 
     /**

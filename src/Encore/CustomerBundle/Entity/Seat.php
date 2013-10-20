@@ -153,10 +153,12 @@ class Seat
 
     /**
      * @param \Encore\CustomerBundle\Entity\Section $section
+     * @return Seat
      */
     public function setSection($section)
     {
         $this->section = $section;
+        return $this;
     }
 
     /**
