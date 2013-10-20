@@ -31,32 +31,73 @@ class TicketOrder
     /**
      * @var float
      *
-     * @ORM\Column(name="totalAmount", type="decimal")
+     * @ORM\Column(name="totalPaid", type="decimal")
      */
-    protected $totalAmount;
+    protected $totalPaid;
 
     /**
-     * @var \stdClass
+     * @var string
      *
-     * @ORM\Column(name="billingInfo", type="object")
+     * @ORM\Column(name="secureCardNumber", type="object")
      */
-    protected $billingInfo;
+    private $secureCardNumber;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="ticketIDs", type="array")
+     * @var \Encore\CustomerBundle\Entity\Ticket
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Ticket", mappedBy="ticketOrder")
      */
-    protected $ticketIDs;
+    private $tickets;
+
+    /**
+     * @var \Encore\CustomerBundle\Entity\Customer
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Customer", inversedBy="ticketOrders")
+     * @ORM\JoinColumn(name="customerID", referencedColumnName="id", nullable=false)
+     */
+    private $customer;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\Customer $customer
+     * @return TicketOrder
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\Ticket $tickets
+     * @return TicketOrder
+     */
+    public function setTickets($tickets)
+    {
+        $this->tickets = $tickets;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Ticket
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 
     /**
@@ -68,14 +109,14 @@ class TicketOrder
     public function setPurchaseDate($purchaseDate)
     {
         $this->purchaseDate = $purchaseDate;
-    
+
         return $this;
     }
 
     /**
      * Get purchaseDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPurchaseDate()
     {
@@ -83,71 +124,49 @@ class TicketOrder
     }
 
     /**
-     * Set totalAmount
+     * Set totalPaid
      *
-     * @param float $totalAmount
+     * @param float $totalPaid
      * @return TicketOrder
      */
-    public function setTotalAmount($totalAmount)
+    public function setTotalPaid($totalPaid)
     {
-        $this->totalAmount = $totalAmount;
-    
+        $this->totalPaid = $totalPaid;
+
         return $this;
     }
 
     /**
-     * Get totalAmount
+     * Get totalPaid
      *
-     * @return float 
+     * @return float
      */
-    public function getTotalAmount()
+    public function getTotalPaid()
     {
-        return $this->totalAmount;
+        return $this->totalPaid;
     }
 
     /**
-     * Set billingInfo
+     * Set secureCardNumber
      *
      * @param \stdClass $billingInfo
      * @return TicketOrder
      */
-    public function setBillingInfo($billingInfo)
+    public function setSecureCardNumber($billingInfo)
     {
-        $this->billingInfo = $billingInfo;
-    
-        return $this;
-    }
-
-    /**
-     * Get billingInfo
-     *
-     * @return \stdClass 
-     */
-    public function getBillingInfo()
-    {
-        return $this->billingInfo;
-    }
-
-    /**
-     * Set ticketIDs
-     *
-     * @param array $ticketIDs
-     * @return Seat
-     */
-    public function setTicketIDs($ticketIDs)
-    {
-        $this->ticketIDs = $ticketIDs;
+        $this->secureCardNumber = $billingInfo;
 
         return $this;
     }
 
     /**
-     * Get ticketIDs
+     * Get secureCardNumber
      *
-     * @return array
+     * @return \stdClass
      */
-    public function getTicketIDs()
+    public function getSecureCardNumber()
     {
-        return $this->ticketIDs;
+        return $this->secureCardNumber;
     }
+
 }

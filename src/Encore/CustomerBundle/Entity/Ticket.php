@@ -22,24 +22,57 @@ class Ticket
     protected $id;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="seatID", type="integer")
+     * @ORM\Column(name="seatName", type="string", length=200)
      */
-    protected $seatID;
+    protected $seatName;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="eventID", type="integer")
+     * @ORM\Column(name="eventName", type="string", length=200)
      */
-    protected $eventID;
+    protected $eventName;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="eventDate", type="datetime")
+     */
+    protected $eventDate;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="decimal")
+     */
+    protected $price;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="serialNumber", type="string", length=255)
+     */
+    protected $serialNumber;
+
+    /**
+     * @var \Encore\CustomerBundle\Entity\EventSeat
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\EventSeat", inversedBy="ticket")
+     * @ORM\JoinColumn(name="eventSeatID", referencedColumnName="id", nullable=false)
+     */
+    private $eventSeat;
+
+    /**
+     * @var \Encore\CustomerBundle\Entity\TicketOrder
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\TicketOrder", inversedBy="tickets")
+     * @ORM\JoinColumn(name="ticketOrderID", referencedColumnName="id", nullable=false)
+     */
+    private $ticketOrder;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -47,48 +80,137 @@ class Ticket
     }
 
     /**
-     * Set seatID
+     * @param \DateTime $eventDate
      *
-     * @param integer $seatID
      * @return Ticket
      */
-    public function setSeatID($seatID)
+    public function setEventDate($eventDate)
     {
-        $this->seatID = $seatID;
-    
+        $this->eventDate = $eventDate;
         return $this;
     }
 
     /**
-     * Get seatID
-     *
-     * @return integer 
+     * @return \DateTime
      */
-    public function getSeatID()
+    public function getEventDate()
     {
-        return $this->seatID;
+        return $this->eventDate;
     }
 
     /**
-     * Set eventID
+     * @param string $eventName
      *
-     * @param integer $eventID
      * @return Ticket
      */
-    public function setEventID($eventID)
+    public function setEventName($eventName)
     {
-        $this->eventID = $eventID;
-    
+        $this->eventName = $eventName;
         return $this;
     }
 
     /**
-     * Get eventID
-     *
-     * @return integer 
+     * @return string
      */
-    public function getEventID()
+    public function getEventName()
     {
-        return $this->eventID;
+        return $this->eventName;
     }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\EventSeat $eventSeat
+     *
+     * @return Ticket
+     */
+    public function setEventSeat($eventSeat)
+    {
+        $this->eventSeat = $eventSeat;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\EventSeat
+     */
+    public function getEventSeat()
+    {
+        return $this->eventSeat;
+    }
+
+    /**
+     * @param float $price
+     *
+     * @return Ticket
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param string $seatName
+     *
+     * @return Ticket
+     */
+    public function setSeatName($seatName)
+    {
+        $this->seatName = $seatName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeatName()
+    {
+        return $this->seatName;
+    }
+
+    /**
+     * @param string $serialNumber
+     *
+     * @return Ticket
+     */
+    public function setSerialNumber($serialNumber)
+    {
+        $this->serialNumber = $serialNumber;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSerialNumber()
+    {
+        return $this->serialNumber;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\TicketOrder $ticketOrder
+     *
+     * @return Ticket
+     */
+    public function setTicketOrder($ticketOrder)
+    {
+        $this->ticketOrder = $ticketOrder;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\TicketOrder
+     */
+    public function getTicketOrder()
+    {
+        return $this->ticketOrder;
+    }
+
+
 }

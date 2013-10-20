@@ -49,7 +49,11 @@ class Seat
      */
     private $section;
 
-
+    /**
+     * @var \Encore\CustomerBundle\Entity\EventSeat
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSeat", mappedBy="eventSection")
+     */
+    private $eventSeats;
     /**
      * Get id
      *
@@ -58,6 +62,24 @@ class Seat
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\EventSeat $eventSeats
+     * @return EventSection
+     */
+    public function setEventSeats($eventSeats)
+    {
+        $this->eventSeats = $eventSeats;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\EventSeat
+     */
+    public function getEventSeats()
+    {
+        return $this->eventSeats;
     }
 
     /**
@@ -131,10 +153,12 @@ class Seat
 
     /**
      * @param \Encore\CustomerBundle\Entity\Section $section
+     * @return Seat
      */
     public function setSection($section)
     {
         $this->section = $section;
+        return $this;
     }
 
     /**

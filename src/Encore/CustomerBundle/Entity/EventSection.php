@@ -22,18 +22,24 @@ class EventSection
     protected $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="eventID", type="integer")
+     * @var \Encore\CustomerBundle\Entity\Event
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Event", inversedBy="eventSections")
+     * @ORM\JoinColumn(name="eventID", referencedColumnName="id", nullable=false)
      */
-    protected $eventID;
+    private $event;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="sectionID", type="integer")
+     * @var \Encore\CustomerBundle\Entity\Section
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Section", inversedBy="eventSections")
+     * @ORM\JoinColumn(name="sectionID", referencedColumnName="id", nullable=false)
      */
-    protected $sectionID;
+    private $section;
+
+    /**
+     * @var \Encore\CustomerBundle\Entity\EventSeat
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSeat", mappedBy="eventSection")
+     */
+    private $eventSeats;
 
     /**
      * @var float
@@ -68,51 +74,62 @@ class EventSection
     }
 
     /**
-     * Set eventID
+     * @param \Encore\CustomerBundle\Entity\Event $event
      *
-     * @param integer $eventID
      * @return EventSection
      */
-    public function setEventID($eventID)
+    public function setEvent($event)
     {
-        $this->eventID = $eventID;
-    
+        $this->event = $event;
+
         return $this;
     }
 
     /**
-     * Get eventID
-     *
-     * @return integer 
+     * @return \Encore\CustomerBundle\Entity\Event
      */
-    public function getEventID()
+    public function getEvent()
     {
-        return $this->eventID;
+        return $this->event;
     }
 
     /**
-     * Set sectionID
+     * @param \Encore\CustomerBundle\Entity\Section $section
      *
-     * @param integer $sectionID
      * @return EventSection
      */
-    public function setSectionID($sectionID)
+    public function setSection($section)
     {
-        $this->sectionID = $sectionID;
-    
+        $this->section = $section;
+
         return $this;
     }
 
     /**
-     * Get sectionID
-     *
-     * @return integer 
+     * @return \Encore\CustomerBundle\Entity\Section
      */
-    public function getSectionID()
+    public function getSection()
     {
-        return $this->sectionID;
+        return $this->section;
     }
 
+    /**
+     * @param \Encore\CustomerBundle\Entity\EventSeat $eventSeats
+     * @return EventSection
+     */
+    public function setEventSeats($eventSeats)
+    {
+        $this->eventSeats = $eventSeats;
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\EventSeat
+     */
+    public function getEventSeats()
+    {
+        return $this->eventSeats;
+    }
     /**
      * Set price
      *
