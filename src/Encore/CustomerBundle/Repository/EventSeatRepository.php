@@ -1,6 +1,6 @@
 <?php
 
-namespace Encore\CustomerBundle\Entity;
+namespace Encore\CustomerBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
