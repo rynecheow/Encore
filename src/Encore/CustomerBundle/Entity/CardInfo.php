@@ -36,13 +36,6 @@ class CardInfo
     protected $cardNum;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="secureNum", type="string", length=10)
-     */
-    protected $secureNum;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="expireAt", type="datetime")
@@ -127,29 +120,6 @@ class CardInfo
     public function getCardNum()
     {
         return $this->cardNum;
-    }
-
-    /**
-     * Set secureNum
-     *
-     * @param string $secureNum
-     * @return CardInfo
-     */
-    public function setSecureNum($secureNum)
-    {
-        $this->secureNum = $secureNum;
-    
-        return $this;
-    }
-
-    /**
-     * Get secureNum
-     *
-     * @return string 
-     */
-    public function getSecureNum()
-    {
-        return $this->secureNum;
     }
 
     /**
