@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new Encore\CustomerBundle\EncoreCustomerBundle(),
             new Encore\MerchantBundle\EncoreMerchantBundle(),
             new FOS\FacebookBundle\FOSFacebookBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

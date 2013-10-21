@@ -2,7 +2,7 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
+    database_name:     Encore
     database_user:     root
     database_password: ~
 
@@ -13,3 +13,6 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    uglifycss:          /path/to/bin/uglifycss
+    uglifyjs:           /path/to/bin/uglifyjs

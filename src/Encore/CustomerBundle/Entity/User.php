@@ -5,12 +5,11 @@ namespace Encore\CustomerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use FOS\UserBundle\Model\User as BaseUser;
-
 /**
  * User
  *
- * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Table(name="User")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -28,165 +27,40 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=199)
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=199)
-     */
-    private $email;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="enabled", type="boolean")
-     */
-    private $enabled;
+    protected $id;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="deactivatedAt", type="datetime")
+     * @ORM\Column(name="deactivatedAt", type="datetime", nullable=true)
      */
-    private $deactivatedAt;
+    protected $deactivatedAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="bannedAt", type="datetime")
      */
-    private $bannedAt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salt", type="string", length=199)
-     */
-    private $salt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=199)
-     */
-    private $password;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="lastLogin", type="datetime")
-     */
-    private $lastLogin;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="roles", type="array")
-     */
-    private $roles;
+    protected $bannedAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="signedUpAt", type="datetime")
      */
-    private $signedUpAt;
+    protected $signedUpAt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="mobileNumber", type="string", length=199)
+     * @var \Encore\CustomerBundle\Entity\Customer
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\Customer", mappedBy="user");
      */
-    private $mobileNumber;
-
+    private $customer;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var \Encore\CustomerBundle\Entity\Merchant
+     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\Merchant", mappedBy="user");
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set enabled
-     *
-     * @param boolean $enabled
-     * @return User
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-    
-        return $this;
-    }
-
-    /**
-     * Get enabled
-     *
-     * @return boolean 
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-
+    private $merchant;
     /**
      * Set deactivatedAt
      *
@@ -234,98 +108,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set lastLogin
-     *
-     * @param \DateTime $lastLogin
-     * @return User
-     */
-    public function setLastLogin(\DateTime $lastLogin = null)
-    {
-        $this->lastLogin = $lastLogin;
-    
-        return $this;
-    }
-
-    /**
-     * Get lastLogin
-     *
-     * @return \DateTime 
-     */
-    public function getLastLogin()
-    {
-        return $this->lastLogin;
-    }
-
-    /**
-     * Set roles
-     *
-     * @param array $roles
-     * @return User
-     */
-    public function setRoles(array $roles)
-    {
-        $this->roles = $roles;
-    
-        return $this;
-    }
-
-    /**
-     * Get roles
-     *
-     * @return array 
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    /**
      * Set signedUpAt
      *
      * @param \DateTime $signedUpAt
@@ -348,26 +130,4 @@ class User extends BaseUser
         return $this->signedUpAt;
     }
 
-    /**
-     * Set mobileNumber
-     *
-     * @param string $mobileNumber
-     * @return User
-     */
-    public function setMobileNumber($mobileNumber)
-    {
-        $this->mobileNumber = $mobileNumber;
-    
-        return $this;
-    }
-
-    /**
-     * Get mobileNumber
-     *
-     * @return string 
-     */
-    public function getMobileNumber()
-    {
-        return $this->mobileNumber;
-    }
 }

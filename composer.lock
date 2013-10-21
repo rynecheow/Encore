@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a727bb2cbf71bff772da4bb8fef1c97d",
+    "hash": "7950b8e994217415a5d75dae35615e9a",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -920,12 +920,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "8be0c33"
+                "reference": "f9ea1de0698e3055c9916e88c19f42e28844ef61"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f9ea1de0698e3055c9916e88c19f42e28844ef61",
-                "reference": "8be0c33",
+                "reference": "f9ea1de0698e3055c9916e88c19f42e28844ef61",
                 "shasum": ""
             },
             "require": {
@@ -980,7 +980,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-05-25 09:54:39"
+            "time": "2013-10-09 22:58:46"
         },
         {
             "name": "guzzle/parser",
@@ -1125,6 +1125,17 @@
                 "sql"
             ],
             "time": "2013-04-26 18:42:52"
+        },
+        {
+            "name": "jquery/jquery",
+            "version": "2.0.3",
+            "dist": {
+                "type": "file",
+                "url": "http://code.jquery.com/jquery-2.0.3.js",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
         },
         {
             "name": "knplabs/doctrine-behaviors",
@@ -1729,6 +1740,47 @@
                 "minification"
             ],
             "time": "2013-07-19 00:03:27"
+        },
+        {
+            "name": "leafo/lessphp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafo/lessphp.git",
+                "reference": "bc4f33b4bfc889018ebe53611050729641b82dc6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/bc4f33b4bfc889018ebe53611050729641b82dc6",
+                "reference": "bc4f33b4bfc889018ebe53611050729641b82dc6",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.4.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lessc.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Leaf Corcoran",
+                    "email": "leafot@gmail.com",
+                    "homepage": "http://leafo.net"
+                }
+            ],
+            "description": "lessphp is a compiler for LESS written in PHP.",
+            "homepage": "http://leafo.net/lessphp/",
+            "time": "2013-10-17 16:23:00"
         },
         {
             "name": "monolog/monolog",
@@ -2500,16 +2552,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.14.0",
+            "version": "v1.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "224fc55635d544a2ec8edb3592be18db5a093f59"
+                "reference": "8873d7593ad7c120004f177c0fd01459b383c9cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/224fc55635d544a2ec8edb3592be18db5a093f59",
-                "reference": "224fc55635d544a2ec8edb3592be18db5a093f59",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/8873d7593ad7c120004f177c0fd01459b383c9cb",
+                "reference": "8873d7593ad7c120004f177c0fd01459b383c9cb",
                 "shasum": ""
             },
             "require": {
@@ -2545,7 +2597,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-10-03 06:41:20"
+            "time": "2013-10-15 19:17:38"
         },
         {
             "name": "twitter/bootstrap",
@@ -2582,12 +2634,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "8ffac1c63f34124f693b93889fa32f4036eb241b"
+                "reference": "dfc0dc9a3f6258c878768218fe49cc092ea8a8d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/8ffac1c63f34124f693b93889fa32f4036eb241b",
-                "reference": "8ffac1c63f34124f693b93889fa32f4036eb241b",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/dfc0dc9a3f6258c878768218fe49cc092ea8a8d1",
+                "reference": "dfc0dc9a3f6258c878768218fe49cc092ea8a8d1",
                 "shasum": ""
             },
             "require": {
@@ -2629,7 +2681,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2013-10-10 22:08:39"
+            "time": "2013-10-16 14:26:38"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -2981,12 +3033,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1c26eb5524ad40afe6475af9414bd1f1b01eceaf"
+                "reference": "052a1ccf7152c94a585f9399badcc9c0c507f8b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1c26eb5524ad40afe6475af9414bd1f1b01eceaf",
-                "reference": "1c26eb5524ad40afe6475af9414bd1f1b01eceaf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/052a1ccf7152c94a585f9399badcc9c0c507f8b3",
+                "reference": "052a1ccf7152c94a585f9399badcc9c0c507f8b3",
                 "shasum": ""
             },
             "require": {
@@ -3050,7 +3102,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-10-04 20:47:21"
+            "time": "2013-10-18 09:39:20"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3273,6 +3325,7 @@
         "knplabs/gaufrette": 20,
         "knplabs/knp-gaufrette-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
+        "leafo/lessphp": 20,
         "doctrine/data-fixtures": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "phpunit/php-code-coverage": 20,

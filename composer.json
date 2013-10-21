@@ -55,7 +55,10 @@
         "facebook/php-sdk": "v3.2.2",
 
         "friendsofsymfony/facebook-bundle": "1.2.1",
-        "friendsofsymfony/user-bundle": "dev-master#8be0c33"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+
+        "leafo/lessphp": "dev-master",
+        "jquery/jquery": "2.0.3"
     },
     "require-dev": {
         "doctrine/data-fixtures": "1.0.*@dev",
