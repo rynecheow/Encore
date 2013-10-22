@@ -70,14 +70,14 @@ class User extends BaseUser
     public function setDeactivatedAt($deactivatedAt)
     {
         $this->deactivatedAt = $deactivatedAt;
-    
+
         return $this;
     }
 
     /**
      * Get deactivatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeactivatedAt()
     {
@@ -93,14 +93,14 @@ class User extends BaseUser
     public function setBannedAt($bannedAt)
     {
         $this->bannedAt = $bannedAt;
-    
+
         return $this;
     }
 
     /**
      * Get bannedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getBannedAt()
     {
@@ -116,18 +116,57 @@ class User extends BaseUser
     public function setSignedUpAt($signedUpAt)
     {
         $this->signedUpAt = $signedUpAt;
-    
+
         return $this;
     }
 
     /**
      * Get signedUpAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getSignedUpAt()
     {
         return $this->signedUpAt;
     }
+    
+    /**
+     * @param \Encore\CustomerBundle\Entity\Customer $customer
+     *
+     * @return User
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
 
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\Merchant $merchant
+     *
+     * @return User
+     */
+    public function setMerchant($merchant)
+    {
+        $this->merchant = $merchant;
+
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Merchant
+     */
+    public function getMerchant()
+    {
+        return $this->merchant;
+    }
 }
