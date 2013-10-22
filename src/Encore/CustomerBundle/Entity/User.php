@@ -129,7 +129,7 @@ class User extends BaseUser
     {
         return $this->signedUpAt;
     }
-    
+
     /**
      * @param \Encore\CustomerBundle\Entity\Customer $customer
      *
