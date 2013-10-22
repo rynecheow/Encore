@@ -40,13 +40,6 @@ class BaseController extends Controller{
     protected $authenticatedUser;
 
     /**
-     * The Facebook object.
-     *
-     * @var \Facebook
-     */
-    protected $facebook;
-
-    /**
      * The Doctrine entity manager.
      *
      * @var EntityManager
@@ -59,7 +52,8 @@ class BaseController extends Controller{
      * (non-PHPdoc)
      * @see Symfony\Component\DependencyInjection.ContainerAware::setContainer()
      */
-    public function setContainer(ContainerInterface $container = null) {
+    public function setContainer(ContainerInterface $container = null)
+    {
         parent::setContainer($container);
         $this->setCommons();
     }
@@ -67,17 +61,17 @@ class BaseController extends Controller{
     /**
      * Run common functions and set common variables.
      */
-    private function setCommons() {
+    private function setCommons()
+    {
         $this->request = $this->getRequest();
         $this->session = $this->request->getSession();
         $this->em = $this->getDoctrine()->getManager();
         $this->authenticatedUser = $this->getAuthenticatedUser();
-        $this->facebook = $this->get('facebook');
 
         /*
          * Add global variables to Twig.
          */
-        $this->get('twig')->addGlobal('authenticated_user', $this->loggedInUser);
+        $this->get('twig')->addGlobal('authenticated_user', $this->authenticatedUser);
         $this->get('twig')->addGlobal('current_route', $this->request->attributes->get('_route'));
     }
 
@@ -86,7 +80,8 @@ class BaseController extends Controller{
      *
      * @return boolean Decision of whether a user is logged in.
      */
-    public function isLoggedIn() {
+    public function isLoggedIn()
+    {
         return ($this->authenticatedUser != null);
     }
 

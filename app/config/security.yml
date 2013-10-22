@@ -1,10 +1,24 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
+        Encore\CustomerBundle\Entity\User:
+            algorithm:  bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_NORMAL:      ROLE_USER
+        ROLE_ADMIN:
+            - ROLE_USER
+            - ROLE_ADMIN_USER
+        ROLE_MERCHANT:
+            - ROLE_ADMIN
+        ROLE_EDITOR:
+            - ROLE_ADMIN
+            - ROLE_MERCHANT
+        ROLE_SUPER_ADMIN:
+            - ROLE_EDITOR
+            - ROLE_ADMIN_USER_ROLES
+            - ROLE_ADMIN_MERCHANT
+            - ROLE_ALLOWED_TO_SWITCH
 
     providers:
         in_memory:
@@ -14,19 +28,76 @@ security:
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
         fos_userbundle:
-            id: fos_user.user_provider.username_email
+            id: fos_user.user_manager
 
     firewalls:
-        main:
-            pattern: ^/
+        dev:
+                pattern:  ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+        customer:
+            pattern: "%encore.route_prefix.customer%/.*"
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
-            logout:       true
+                login_path:                         "%encore.route_prefix.customer%/login"
+                use_forward:                        false
+                check_path:                         "%encore.route_prefix.customer%/login_check"
+                failure_path:                       "%encore.route_prefix.customer%/login"
+                use_referer:                        true
+                remember_me:                        true
+                default_target_path:                "%encore.route_prefix.customer%/"
+                always_use_default_target_path:     false
+                username_parameter:                 _username
+                password_parameter:                 _password
+            context:    encore_auth
+            logout:
+                path:                             "%encore.route_prefix.customer%/logout"
+                target:                           "%encore.route_prefix.customer%/"
             anonymous:    true
-
+            remember_me:
+                key:                                "encore_remember_me"
+                always_remember_me:                 false
+                lifetime:                           31536000
+                path:                               "%encore.route_prefix.customer%/"
+                domain:                             ~
+        merchant:
+            pattern: "%encore.route_prefix.customer%/.*"
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path:                         "%encore.route_prefix.merchant%/login"
+                use_forward:                        false
+                check_path:                         "%encore.route_prefix.merchant%/login_check"
+                failure_path:                       "%encore.route_prefix.merchant%/login"
+                use_referer:                        true
+                remember_me:                        true
+                default_target_path:                "%encore.route_prefix.merchant%/"
+                always_use_default_target_path:     false
+                username_parameter:                 _username
+                password_parameter:                 _password
+            context:    encore_auth
+            logout:
+                path:                             "%encore.route_prefix.merchant%/logout"
+                target:                           "%encore.route_prefix.merchant%/"
+            anonymous:    true
+            remember_me:
+                key:                                "encore_remember_me"
+                always_remember_me:                 false
+                lifetime:                           31536000
+                path:                               "%encore.route_prefix.merchant%/"
+                domain:                             ~
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: "^%encore.route_prefix.customer%/login$", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%encore.route_prefix.customer%/logout$", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%encore.route_prefix.customer%/login-check$", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%encore.route_prefix.customer%/forgot-password$", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%encore.route_prefix.customer%/reset-password$", role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: "^%encore.route_prefix.merchant%/login$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_NORMAL] }
+        - { path: "^%encore.route_prefix.merchant%/logout$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER] }
+        - { path: "^%encore.route_prefix.merchant%/login-check$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_NORMAL] }
+        - { path: "^%encore.route_prefix.merchant%", roles: [ROLE_MERCHANT] }
+
+
+        - { path: "^%encore.route_prefix.customer%", host: "%encore.host.customer%", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%encore.route_prefix.merchant%", host: "%encore.host.merchant%", roles: [ROLE_ADMIN] }
