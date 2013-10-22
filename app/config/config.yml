@@ -3,8 +3,8 @@ imports:
     - { resource: security.yml }
 
 framework:
-    #esi:             ~
-    #translator:      { fallback: %locale% }
+    esi:             { enabled: true }
+    translator:      { fallback: %locale% }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -13,11 +13,14 @@ framework:
     csrf_protection: ~
     validation:      { enable_annotations: true }
     templating:
-        engines: ['twig']
-        #assets_version: SomeVersionScheme
+        engines: [ "twig" ]
+        assets_base_urls:
+            http: [ "http://%encore.host.customer%/" ]
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        cookie_lifetime:    2592000
+        cookie_domain:      "%encore.host.customer%"
     fragments:       ~
     http_method_override: true
 
@@ -28,6 +31,8 @@ twig:
 
 # Assetic Configuration
 assetic:
+    read_from:      %kernel.root_dir%/Resources/
+    write_to:       %kernel.root_dir%/../web/
     filters:
         cssrewrite: ~
         lessphp:
@@ -43,6 +48,22 @@ assetic:
         uglifycss:
             bin: %uglifycss%
     assets:
+        encore_css:
+            inputs:
+                - css/encore/libs/*.css
+                - css/encore.css
+            filters:
+                - lessphp
+                - cssrewrite
+                - uglifycss
+            output: css/encore.css
+
+        encore_js:
+            inputs:
+              - js/encore/encore.js
+            filters:
+                - uglifyjs2
+            output: js/encore.min.js
         bootstrap_css:
             inputs:
                 - %kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less
