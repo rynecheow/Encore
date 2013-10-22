@@ -1,6 +1,6 @@
 encore_merchant:
     resource: "@EncoreMerchantBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /merchant
 
 encore_customer:
     resource: "@EncoreCustomerBundle/Resources/config/routing.yml"

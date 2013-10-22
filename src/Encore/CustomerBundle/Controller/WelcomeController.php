@@ -2,9 +2,8 @@
 
 namespace Encore\CustomerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class WelcomeController extends Controller
+class WelcomeController extends BaseController
 {
     public function indexAction()
     {
