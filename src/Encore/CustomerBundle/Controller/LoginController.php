@@ -2,13 +2,9 @@
 
 namespace Encore\CustomerBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-
-class LoginController extends Controller{
+class LoginController extends BaseController{
 
     public function indexAction(){
-        return new Response("<h1>Login</h1>");
+        return $this->render("EncoreCustomerBundle:Login:index.html.twig");
     }
 } 

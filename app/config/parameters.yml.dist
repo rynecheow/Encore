@@ -1,4 +1,11 @@
 parameters:
+    encore.route_prefix.merchant: "/merchant"
+    encore.route_prefix.customer: ""
+    encore.host.customer: encore.com
+    encore.host.merchant: merchant.encore.com
+    encore.currency: MYR
+    encore.timezone: Asia/Kuala_Lumpur
+
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
@@ -14,5 +21,5 @@ parameters:
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    uglifycss:          /path/to/bin/uglifycss
-    uglifyjs:           /path/to/bin/uglifyjs
+    uglifycss:          /usr/local/bin/uglifycss
+    uglifyjs:           /usr/local/bin/uglifyjs
