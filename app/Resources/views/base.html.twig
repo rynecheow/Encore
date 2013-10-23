@@ -3,11 +3,19 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <!-- Bootstrap -->
+            <link href="{{ asset('/css/encore.css') }}" rel="stylesheet" />
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('/js/jquery.min.js') }}" ></script>
+            <script src="{{ asset('/js/bootstrap.min.js') }}" ></script>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
     </body>
 </html>
