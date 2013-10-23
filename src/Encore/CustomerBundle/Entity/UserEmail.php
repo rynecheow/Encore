@@ -3,7 +3,7 @@
 namespace Encore\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * UserEmail
  *
@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserEmail
 {
+    use ORMBehaviors\Timestampable\Timestampable;
     /**
      * @var integer
      *
