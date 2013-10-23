@@ -5,3 +5,8 @@ services:
 #    encore_customer.example:
 #        class: %encore_customer.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+     encore.user_manager:
+        class: Encore\CustomerBundle\Services\EncoreUserManager
+        arguments:
+          - @doctrine.orm.entity_manager
+          - @security.context

@@ -43,7 +43,7 @@ class TicketOrder
     private $secureCardNumber;
 
     /**
-     * @var \Encore\CustomerBundle\Entity\Ticket
+     * @var \Encore\CustomerBundle\Entity\Ticket[]
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Ticket", mappedBy="ticketOrder")
      */
     private $tickets;
@@ -84,7 +84,7 @@ class TicketOrder
     }
 
     /**
-     * @param \Encore\CustomerBundle\Entity\Ticket $tickets
+     * @param \Encore\CustomerBundle\Entity\Ticket[] $tickets
      * @return TicketOrder
      */
     public function setTickets($tickets)
@@ -93,7 +93,7 @@ class TicketOrder
     }
 
     /**
-     * @return \Encore\CustomerBundle\Entity\Ticket
+     * @return \Encore\CustomerBundle\Entity\Ticket[]
      */
     public function getTickets()
     {
