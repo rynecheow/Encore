@@ -61,6 +61,15 @@ class User extends BaseUser
      * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\Merchant", mappedBy="user");
      */
     private $merchant;
+
+
+    /**
+     * @var \Encore\CustomerBundle\Entity\UserEmail[]
+     *
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\UserEmail", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    private $emails;
+
     /**
      * Set deactivatedAt
      *
@@ -168,5 +177,21 @@ class User extends BaseUser
     public function getMerchant()
     {
         return $this->merchant;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\UserEmail[] $emails
+     */
+    public function setEmails($emails)
+    {
+        $this->emails = $emails;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\UserEmail[]
+     */
+    public function getEmails()
+    {
+        return $this->emails;
     }
 }
