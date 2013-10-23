@@ -2,23 +2,29 @@
 
 namespace Encore\CustomerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use FOS\UserBundle\Model\User as BaseUser;
 /**
  * User
  *
- * @ORM\Table(name="User")
+ * @ORM\Table(name="User",
+ * uniqueConstraints={@ORM\UniqueConstraint(name="idx_unq_username", columns={"username"})})
  * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
     use ORMBehaviors\Timestampable\Timestampable;
 
-    const ROLE_MERCHANT = 'ROLE_MERCHANT';
-    const ROLE_FACEBOOK = 'ROLE_FACEBOOK';
     const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_ADMIN_USER = 'ROLE_ADMIN_USER';
+    const ROLE_ADMIN_USER_ROLES = 'ROLE_ADMIN_USER_ROLES';
+    const ROLE_EDITOR = 'ROLE_EDITOR';
+    const ROLE_FACEBOOK = 'ROLE_FACEBOOK';
     const ROLE_NORMAL = 'ROLE_NORMAL';
+    const ROLE_ADMIN_MERCHANT = 'ROLE_ADMIN_MERCHANT';
+    const ROLE_MERCHANT= 'ROLE_MERCHANT';
 
     /**
      * @var integer
@@ -69,6 +75,22 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\UserEmail", mappedBy="user", fetch="EXTRA_LAZY")
      */
     private $emails;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->emails = new ArrayCollection();
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set deactivatedAt
