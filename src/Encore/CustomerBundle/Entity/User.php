@@ -9,8 +9,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 /**
  * User
  *
- * @ORM\Table(name="User",
- * uniqueConstraints={@ORM\UniqueConstraint(name="idx_unq_username", columns={"username"})})
+ * @ORM\Table(name="User")
  * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\UserRepository")
  */
 class User extends BaseUser
@@ -34,27 +33,6 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="deactivatedAt", type="datetime", nullable=true)
-     */
-    protected $deactivatedAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="bannedAt", type="datetime")
-     */
-    protected $bannedAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="signedUpAt", type="datetime")
-     */
-    protected $signedUpAt;
 
     /**
      * @var \Encore\CustomerBundle\Entity\Customer
@@ -90,75 +68,6 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set deactivatedAt
-     *
-     * @param \DateTime $deactivatedAt
-     * @return User
-     */
-    public function setDeactivatedAt($deactivatedAt)
-    {
-        $this->deactivatedAt = $deactivatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get deactivatedAt
-     *
-     * @return \DateTime
-     */
-    public function getDeactivatedAt()
-    {
-        return $this->deactivatedAt;
-    }
-
-    /**
-     * Set bannedAt
-     *
-     * @param \DateTime $bannedAt
-     * @return User
-     */
-    public function setBannedAt($bannedAt)
-    {
-        $this->bannedAt = $bannedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get bannedAt
-     *
-     * @return \DateTime
-     */
-    public function getBannedAt()
-    {
-        return $this->bannedAt;
-    }
-
-    /**
-     * Set signedUpAt
-     *
-     * @param \DateTime $signedUpAt
-     * @return User
-     */
-    public function setSignedUpAt($signedUpAt)
-    {
-        $this->signedUpAt = $signedUpAt;
-
-        return $this;
-    }
-
-    /**
-     * Get signedUpAt
-     *
-     * @return \DateTime
-     */
-    public function getSignedUpAt()
-    {
-        return $this->signedUpAt;
     }
 
     /**

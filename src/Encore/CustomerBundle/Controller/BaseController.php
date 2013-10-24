@@ -92,6 +92,6 @@ class BaseController extends Controller{
      */
     private function getAuthenticatedUser()
     {
-        return $this->container->get('encore.user_manager')->getAuthenticatedUser();
+        return $this->container->get('fos.user_manager')->getAuthenticatedUser();
     }
 }
