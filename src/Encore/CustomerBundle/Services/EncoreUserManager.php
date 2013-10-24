@@ -42,7 +42,7 @@ class EncoreUserManager {
      */
     public function checkEmailAvailability($email)
     {
-        $userEmailRepo = $this->em->getRepository('EncoreCustomerBundle:User');
+        $userEmailRepo = $this->em->getRepository('EncoreCustomerBundle:UserEmail');
         $matchedUserEmails = $userEmailRepo->findBy(array('email' => $email));
 
         return count($matchedUserEmails) == 0;
