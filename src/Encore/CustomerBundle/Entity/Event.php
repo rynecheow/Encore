@@ -93,7 +93,7 @@ class Event
     private $creator;
 
     /**
-     * @var \Encore\CustomerBundle\Entity\EventSection
+     * @var \Encore\CustomerBundle\Entity\EventSection[]
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSection", mappedBy="event")
      */
 
@@ -130,18 +130,15 @@ class Event
 
 
     /**
-     * @param mixed $eventSections
-     *
-     * @return Event
+     * @param \Encore\CustomerBundle\Entity\EventSection[] $eventSections
      */
     public function setEventSections($eventSections)
     {
         $this->eventSections = $eventSections;
-        return $this;
     }
 
     /**
-     * @return mixed
+     * @return \Encore\CustomerBundle\Entity\EventSection[]
      */
     public function getEventSections()
     {

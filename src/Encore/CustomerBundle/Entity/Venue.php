@@ -44,7 +44,7 @@ class Venue
 
 
     /**
-     * @var \Encore\CustomerBundle\Entity\Section
+     * @var \Encore\CustomerBundle\Entity\Section[]
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Section", mappedBy="venue")
      */
 
@@ -80,7 +80,7 @@ class Venue
     }
 
     /**
-     * @param \Encore\CustomerBundle\Entity\Section $sections
+     * @param \Encore\CustomerBundle\Entity\Section[] $sections
      * @return Venue
      */
     public function setSections($sections)
@@ -90,7 +90,7 @@ class Venue
     }
 
     /**
-     * @return \Encore\CustomerBundle\Entity\Section
+     * @return \Encore\CustomerBundle\Entity\Section[]
      */
     public function getSections()
     {
