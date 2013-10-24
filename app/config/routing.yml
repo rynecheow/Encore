@@ -1,10 +1,14 @@
 encore_merchant:
     resource: "@EncoreMerchantBundle/Resources/config/routing.yml"
-    prefix:   /merchant
+    host:     "%encore.host%"
+    prefix:   "%encore.route_prefix.merchant%"
 
-encore_customer:
+encore:
     resource: "@EncoreCustomerBundle/Resources/config/routing.yml"
-    prefix:   /
+    host:       "%encore.host%"
+    prefix:     "%encore.route_prefix.customer%"
+    options:
+        expose: true
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
