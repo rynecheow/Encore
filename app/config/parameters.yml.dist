@@ -10,9 +10,10 @@ parameters:
     database_driver:                pdo_mysql
     database_host:                  127.0.0.1
     database_port:                  ~
-    database_name:                  Encore
+    database_name:                  encore_db
     database_user:                  root
     database_password:              ~
+    database_path:                  ~
 
     mailer_transport:               smtp
     mailer_host:                    127.0.0.1
@@ -20,7 +21,7 @@ parameters:
     mailer_password:                ~
 
     locale:                         en
-    secret:                         ThisTokenIsNotSoSecretChangeIt
+    secret:                         91d02f1310225c04bb518d10bb88c444a6
 
     uglifycss:                      /usr/local/bin/uglifycss
     uglifyjs:                       /usr/local/bin/uglifyjs
