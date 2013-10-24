@@ -107,4 +107,4 @@ security:
         - { path: "^%encore.route_prefix.merchant%", roles: [ROLE_MERCHANT] }
 
         - { path: "^%encore.route_prefix.customer%", host: "%encore.host%", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^%encore.route_prefix.merchant%", host: "%encore.host%", roles: [ROLE_ADMIN] }
+        - { path: "^%encore.route_prefix.merchant%", host: "%encore.host%", role: IS_AUTHENTICATED_ANONYMOUSLY }
