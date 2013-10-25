@@ -41,7 +41,6 @@
 
         "braincrafted/bootstrap-bundle": "dev-master",
         "twitter/bootstrap": "2.3.*",
-        "react/react": "0.3.*",
 
         "knplabs/knp-components": "1.1.2",
         "knplabs/knp-paginator-bundle": "v2.3",
@@ -58,7 +57,9 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
 
         "leafo/lessphp": "dev-master",
-        "jquery/jquery": "2.0.3"
+        "jquery/jquery": "2.0.3",
+        "cboden/ratchet": "dev-master"
+
     },
     "require-dev": {
         "doctrine/data-fixtures": "1.0.*@dev",
