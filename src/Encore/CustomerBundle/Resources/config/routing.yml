@@ -2,6 +2,9 @@ encore_customer_welcome:
   pattern:  /
   defaults: { _controller: EncoreCustomerBundle:Welcome:index }
 
+encore_registration_success:
+  pattern:  /completeinformation
+  defaults: {_controller: EncoreCustomerBundle:RegistrationSuccess:show }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
