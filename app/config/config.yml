@@ -51,6 +51,7 @@ assetic:
         encore_css:
             inputs:
                 - css/encore/libs/*.css
+                - css/font.css
                 - css/encore.css
             filters:
                 - lessphp
