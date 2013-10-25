@@ -1,3 +1,22 @@
-<div id="header">
-    <h1>This is Header</h1>
-</div>
+{% if user %}
+    {% set USER = user %}
+{% else %}
+    {% set USER = '' %}
+{% endif %}
+
+{% block javascripts %}
+    <script src="{{ asset('/js/classie.min.js') }}" ></script>
+    <script src="{{ asset('/js/modernizr.min.js') }}" ></script>
+{% endblock javascripts %}
+<header>
+    <nav id="bt-menu" class="bt-menu">
+        <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
+        <ul>
+            <li><a href="#" class="bt-icon icon-zoom">Location</a></li>
+            <li><a href="#" class="bt-icon icon-refresh">Categories</a></li>
+            <li><a href="#" class="bt-icon icon-lock">Date</a></li>
+            <li><a href="#" class="bt-icon icon-speaker">About Us</a></li>
+            <li><a href="#" class="bt-icon icon-star">My Account</a></li>
+        </ul>
+    </nav>
+</header>

@@ -484,21 +484,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "1a7f58d7639cf65b8fcae56fd9a8f4e42a41a27c"
+                "reference": "65bdcc9510c77c02f548e8da425826422ee4becf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/1a7f58d7639cf65b8fcae56fd9a8f4e42a41a27c",
-                "reference": "1a7f58d7639cf65b8fcae56fd9a8f4e42a41a27c",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/65bdcc9510c77c02f548e8da425826422ee4becf",
+                "reference": "65bdcc9510c77c02f548e8da425826422ee4becf",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "~1.0",
-                "doctrine/migrations": "*",
+                "doctrine/migrations": "~1.0@dev",
                 "php": ">=5.3.2",
                 "symfony/framework-bundle": "~2.1"
             },
             "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Bundle\\MigrationsBundle": ""
@@ -529,7 +534,7 @@
                 "migrations",
                 "schema"
             ],
-            "time": "2013-10-02 14:42:48"
+            "time": "2013-10-24 10:22:11"
         },
         {
             "name": "doctrine/inflector",

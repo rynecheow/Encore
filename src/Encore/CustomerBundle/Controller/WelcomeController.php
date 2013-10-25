@@ -2,11 +2,11 @@
 
 namespace Encore\CustomerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-class WelcomeController extends Controller
+
+class WelcomeController extends BaseController
 {
     public function indexAction()
     {
-        return $this->render('EncoreCustomerBundle:Welcome:index.html.twig');
+        return $this->render('EncoreCustomerBundle:Welcome:index.html.twig',array('user' => ''));
     }
 }
