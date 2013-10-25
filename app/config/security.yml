@@ -1,8 +1,14 @@
+services:
+        encore.customer.request_matcher:
+            class: Symfony\Component\HttpFoundation\RequestMatcher
+            arguments: [ "%encore.route_prefix.customer%", "%encore.host%" ]
+        encore.merchant.request_matcher:
+            class: Symfony\Component\HttpFoundation\RequestMatcher
+            arguments: [ "%encore.route_prefix.merchant%", "%encore.host%" ]
+
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
-        Encore\CustomerBundle\Entity\User:
-            algorithm:  bcrypt
+        Encore\CustomerBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_NORMAL:      ROLE_USER
@@ -36,6 +42,7 @@ security:
                 security: false
         customer:
             pattern: "%encore.route_prefix.customer%/.*"
+            request_matcher: encore.customer.request_matcher
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -62,6 +69,7 @@ security:
                 domain:                             ~
         merchant:
             pattern: "%encore.route_prefix.customer%/.*"
+            request_matcher: encore.merchant.request_matcher
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -98,6 +106,5 @@ security:
         - { path: "^%encore.route_prefix.merchant%/login-check$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_NORMAL] }
         - { path: "^%encore.route_prefix.merchant%", roles: [ROLE_MERCHANT] }
 
-
-        - { path: "^%encore.route_prefix.customer%", host: "%encore.host.customer%", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^%encore.route_prefix.merchant%", host: "%encore.host.merchant%", roles: [ROLE_ADMIN] }
+        - { path: "^%encore.route_prefix.customer%", host: "%encore.host%", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^%encore.route_prefix.merchant%", host: "%encore.host%", role: IS_AUTHENTICATED_ANONYMOUSLY }

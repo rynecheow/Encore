@@ -1,25 +1,27 @@
 parameters:
-    encore.route_prefix.merchant: "/merchant"
-    encore.route_prefix.customer: ""
-    encore.host.customer: encore.com
-    encore.host.merchant: merchant.encore.com
-    encore.currency: MYR
-    encore.timezone: Asia/Kuala_Lumpur
+    encore.host:                    localhost
 
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     Encore
-    database_user:     root
-    database_password: ~
+    encore.route_prefix.customer:   ""
+    encore.route_prefix.merchant:   "/merchant"
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
+    encore.currency:                MYR
+    encore.timezone:                Asia/Kuala_Lumpur
 
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    database_driver:                pdo_mysql
+    database_host:                  127.0.0.1
+    database_port:                  ~
+    database_name:                  encore_db
+    database_user:                  root
+    database_password:              ~
+    database_path:                  ~
 
-    uglifycss:          /usr/local/bin/uglifycss
-    uglifyjs:           /usr/local/bin/uglifyjs
+    mailer_transport:               smtp
+    mailer_host:                    127.0.0.1
+    mailer_user:                    ~
+    mailer_password:                ~
+
+    locale:                         en
+    secret:                         91d02f1310225c04bb518d10bb88c444a6
+
+    uglifycss:                      /usr/local/bin/uglifycss
+    uglifyjs:                       /usr/local/bin/uglifyjs

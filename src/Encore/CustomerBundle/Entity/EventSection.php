@@ -36,7 +36,7 @@ class EventSection
     private $section;
 
     /**
-     * @var \Encore\CustomerBundle\Entity\EventSeat
+     * @var \Encore\CustomerBundle\Entity\EventSeat[]
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSeat", mappedBy="eventSection")
      */
     private $eventSeats;
@@ -114,7 +114,7 @@ class EventSection
     }
 
     /**
-     * @param \Encore\CustomerBundle\Entity\EventSeat $eventSeats
+     * @param \Encore\CustomerBundle\Entity\EventSeat[] $eventSeats
      * @return EventSection
      */
     public function setEventSeats($eventSeats)
@@ -124,7 +124,7 @@ class EventSection
     }
 
     /**
-     * @return \Encore\CustomerBundle\Entity\EventSeat
+     * @return \Encore\CustomerBundle\Entity\EventSeat[]
      */
     public function getEventSeats()
     {

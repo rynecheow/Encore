@@ -2,6 +2,7 @@
 
 namespace Encore\CustomerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -15,10 +16,14 @@ class User extends BaseUser
 {
     use ORMBehaviors\Timestampable\Timestampable;
 
-    const ROLE_MERCHANT = 'ROLE_MERCHANT';
-    const ROLE_FACEBOOK = 'ROLE_FACEBOOK';
     const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_ADMIN_USER = 'ROLE_ADMIN_USER';
+    const ROLE_ADMIN_USER_ROLES = 'ROLE_ADMIN_USER_ROLES';
+    const ROLE_EDITOR = 'ROLE_EDITOR';
+    const ROLE_FACEBOOK = 'ROLE_FACEBOOK';
     const ROLE_NORMAL = 'ROLE_NORMAL';
+    const ROLE_ADMIN_MERCHANT = 'ROLE_ADMIN_MERCHANT';
+    const ROLE_MERCHANT= 'ROLE_MERCHANT';
 
     /**
      * @var integer
@@ -28,27 +33,6 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="deactivatedAt", type="datetime", nullable=true)
-     */
-    protected $deactivatedAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="bannedAt", type="datetime")
-     */
-    protected $bannedAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="signedUpAt", type="datetime")
-     */
-    protected $signedUpAt;
 
     /**
      * @var \Encore\CustomerBundle\Entity\Customer
@@ -61,73 +45,84 @@ class User extends BaseUser
      * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\Merchant", mappedBy="user");
      */
     private $merchant;
+
+
     /**
-     * Set deactivatedAt
+     * @var \Encore\CustomerBundle\Entity\UserEmail[]
      *
-     * @param \DateTime $deactivatedAt
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\UserEmail", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    private $emails;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->emails = new ArrayCollection();
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\Customer $customer
+     *
      * @return User
      */
-    public function setDeactivatedAt($deactivatedAt)
+    public function setCustomer($customer)
     {
-        $this->deactivatedAt = $deactivatedAt;
-    
+        $this->customer = $customer;
+
         return $this;
     }
 
     /**
-     * Get deactivatedAt
-     *
-     * @return \DateTime 
+     * @return \Encore\CustomerBundle\Entity\Customer
      */
-    public function getDeactivatedAt()
+    public function getCustomer()
     {
-        return $this->deactivatedAt;
+        return $this->customer;
     }
 
     /**
-     * Set bannedAt
+     * @param \Encore\CustomerBundle\Entity\Merchant $merchant
      *
-     * @param \DateTime $bannedAt
      * @return User
      */
-    public function setBannedAt($bannedAt)
+    public function setMerchant($merchant)
     {
-        $this->bannedAt = $bannedAt;
-    
+        $this->merchant = $merchant;
+
         return $this;
     }
 
     /**
-     * Get bannedAt
-     *
-     * @return \DateTime 
+     * @return \Encore\CustomerBundle\Entity\Merchant
      */
-    public function getBannedAt()
+    public function getMerchant()
     {
-        return $this->bannedAt;
+        return $this->merchant;
     }
 
     /**
-     * Set signedUpAt
-     *
-     * @param \DateTime $signedUpAt
-     * @return User
+     * @param \Encore\CustomerBundle\Entity\UserEmail[] $emails
      */
-    public function setSignedUpAt($signedUpAt)
+    public function setEmails($emails)
     {
-        $this->signedUpAt = $signedUpAt;
-    
-        return $this;
+        $this->emails = $emails;
     }
 
     /**
-     * Get signedUpAt
-     *
-     * @return \DateTime 
+     * @return \Encore\CustomerBundle\Entity\UserEmail[]
      */
-    public function getSignedUpAt()
+    public function getEmails()
     {
-        return $this->signedUpAt;
+        return $this->emails;
     }
-
 }
