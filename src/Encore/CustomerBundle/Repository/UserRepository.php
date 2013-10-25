@@ -52,8 +52,8 @@ class UserRepository extends EntityRepository
     public function findUserByEmail($email)
     {
         return $this->getEntityManager()->createQuery(" SELECT user
-                                                        FROM AprojectsCorpickBundle:User user,
-                                                        AprojectsCorpickBundle:UserEmail userEmail
+                                                        FROM EncoreCustomerBundle:User user,
+                                                        EncoreCustomerBundle:UserEmail userEmail
                                                         WHERE user.id = userEmail.user
                                                         AND userEmail.email = :email")
             ->setParameters(array('email'=>$email))

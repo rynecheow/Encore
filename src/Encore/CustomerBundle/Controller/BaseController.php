@@ -2,6 +2,8 @@
 
 namespace Encore\CustomerBundle\Controller;
 
+use Encore\CustomerBundle\Entity\Customer;
+use Encore\CustomerBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -94,4 +96,6 @@ class BaseController extends Controller{
     {
         return $this->container->get('fos.user_manager')->getAuthenticatedUser();
     }
+
+
 }
