@@ -57,8 +57,7 @@ class AuthenticationController extends BaseController{
         );
 
         $user->setRoles($array_role);
-        $user->setSignedUpAt($now);
-        $user->setEnabled(true);
+        $user->setEnabled(false);
         //PASSWORD PART
         $fosUserManager = $this->get('fos_user.user_manager');
         $user->setPlainPassword($params['password']);
@@ -71,19 +70,8 @@ class AuthenticationController extends BaseController{
         $user->setPrimaryEmail($user_email);
         //end create user email
 
-        $customer = new Customer();
-        $customer->setUser($user);
-        $customer->setFirstName($params['first_name']);
-        $customer->setLastName($params['last_name']);
-        $user->setCustomer($customer);
-
-        $user_email = $user->getPrimaryEmail();
-        $customer = $user->getCustomer();
-
         $this->em->persist($user);
         $this->em->persist($user_email);
-        $this->em->persist( $customer );
-
         $this->em->flush();
 
         $user->setUsername($user->getUserName() . '_' . $user->getId());
