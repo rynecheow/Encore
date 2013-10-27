@@ -64,19 +64,6 @@ assetic:
             filters:
                 - uglifyjs2
             output: js/encore.min.js
-        cassie_js:
-            inputs:
-              - js/lib/classie.js
-            filters:
-                - uglifyjs2
-            output: js/classie.min.js
-        modernizr_js:
-            inputs:
-              - js/lib/modernizr.custom.js
-            filters:
-                - uglifyjs2
-            output: js/modernizr.min.js
-
         bootstrap_css:
             inputs:
                 - %kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less
