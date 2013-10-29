@@ -52,7 +52,7 @@ assetic:
             inputs:
                 - css/encore/libs/*.css
                 - css/font.css
-                - css/encore.css
+                - css/encore.less
             filters:
                 - lessphp
                 - cssrewrite

@@ -15,7 +15,10 @@
     </head>
     <body>
         {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
-        {% block body %}{% endblock %}
+        <div class="content">`
+            {% block content %}{% endblock %}
+        </div>
+
         {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
     </body>
 </html>
