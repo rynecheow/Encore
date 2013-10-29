@@ -5,7 +5,9 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <!-- Bootstrap -->
+            <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/encore.css') }}" rel="stylesheet" />
+
         {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('/js/jquery.min.js') }}" ></script>
@@ -15,7 +17,7 @@
     </head>
     <body>
         {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
-        <div class="content">`
+        <div class="content">
             {% block content %}{% endblock %}
         </div>
 
