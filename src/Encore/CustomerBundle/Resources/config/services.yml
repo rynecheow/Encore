@@ -10,3 +10,8 @@ services:
         arguments:
           - @doctrine.orm.entity_manager
           - @security.context
+     encore.registration_success:
+        class: Encore\CustomerBundle\EventListener\RegistrationSuccessListener
+        arguments: [@router]
+        tags:
+          - { name: kernel.event_subscriber }
