@@ -31,7 +31,7 @@ twig:
 
 # Assetic Configuration
 assetic:
-    read_from:      %kernel.root_dir%/Resources/
+    read_from:      %kernel.root_dir%/Resources/public/
     write_to:       %kernel.root_dir%/../web/
     assets:
         encore_css:
