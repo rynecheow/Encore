@@ -1,7 +1,40 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Welcome To Encore.{% endblock %}
- {% block body %}
-     <h1>Welcome page.</h1>
-     <p>qeqweq</p>
+
+{% block title %}Welcome{% endblock %}
+
+ {% block content %}
+     <div id="myCarousel" class="carousel slide">
+         <ol class="carousel-indicators">
+             <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+             <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+             <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+         </ol>
+         <div class="carousel-inner">
+             <div class="item">
+                 <a><img src="{{ asset('img/test1.jpg') }}" alt=""></a>
+                 <div class="carousel-caption">
+                     <h4>First Thumbnail label</h4>
+                     <p>First description</p>
+                 </div>
+             </div>
+             <div class="item">
+                 <a><img src="{{ asset('img/test2.jpg') }}"   alt=""></a>
+                 <div class="carousel-caption">
+                     <h4>Second Thumbnail label</h4>
+                     <p>Second description</p>
+                 </div>
+             </div>
+             <div class="item active">
+                 <a><img src="{{ asset('img/test3.jpg') }}"  alt=""></a>
+
+                 <div class="carousel-caption">
+                     <h4>Third Thumbnail label</h4>
+                     <p>Third description</p>
+                 </div>
+             </div>
+         </div>
+         <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+         <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+     </div>
  {% endblock %}
