@@ -1,26 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <!-- Bootstrap -->
-            <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" />
-            <link href="{{ asset('/css/encore.css') }}" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <!-- Bootstrap -->
+        <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('/css/encore.css') }}" rel="stylesheet"/>
 
-        {% endblock %}
-        {% block javascripts %}
-            <script src="{{ asset('/js/jquery.min.js') }}" ></script>
-            <script src="{{ asset('/js/bootstrap.min.js') }}" ></script>
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
-        <div class="content">
-            {% block content %}{% endblock %}
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('/js/encore.min.js') }}"></script>
+        <script src="{{ asset('/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+<div class="st-container st-effect-3">
+    <nav class="st-menu st-effect-3" id="menu-3" >
+        {{ include('EncoreCustomerBundle:Authentication:loginForm.html.twig') }}
+    </nav>
+
+    <div class="st-pusher">
+        <div class="st-content">
+            <div class="st-content-inner">
+                {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
+
+
+                <div class="content">
+                    {% block content %}{% endblock %}
+                </div>
+                <div>
+
+                    <button id = 'effect' >Push</button>
+                </div>
+                {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
+                <script>
+                    (function(){
+                        "use strict";
+
+                            var container = $('.st-container');
+                            var bodyFn = function () {
+                                $('.st-pusher').on('click',function()
+                                {
+                                    if(container.hasClass('st-menu-open'))
+                                    {
+                                        container.removeClass('st-menu-open');
+                                        container.off("click",bodyFn);
+                                    }
+                                });
+                            };
+                            $("#effect").on("click", function (e) {
+                                console.log("Got In Function");
+                                e.stopPropagation();
+                                container.addClass("st-menu-open");
+                                container.on("click",bodyFn);
+                            });
+                    }());
+
+                </script>
+            </div>
         </div>
+    </div>
+</div>
 
-        {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
-    </body>
+</body>
 </html>
