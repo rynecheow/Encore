@@ -3,6 +3,10 @@
 
 {% block title %}Welcome{% endblock %}
 
+{% block require_js %}
+    require(["encore/home/security-pusher"]);
+{% endblock require_js %}
+
 {% block content %}
     <div id="myCarousel" class="carousel slide">
         <ol class="carousel-indicators">
@@ -52,26 +56,4 @@
 
         <button id='effect'>Push</button>
     </div>
-
-    <script>
-        (function () {
-            "use strict";
-
-            var container = $('.st-container');
-            var bodyFn = function () {
-                $('.st-pusher').on('click', function () {
-                    if (container.hasClass('st-menu-open')) {
-                        container.removeClass('st-menu-open');
-                        container.off("click", bodyFn);
-                    }
-                });
-            };
-            $("#effect").on("click", function (e) {
-                console.log("Got In Function");
-                e.stopPropagation();
-                container.addClass("st-menu-open");
-                container.on("click", bodyFn);
-            });
-        }());
-    </script>
 {% endblock %}
