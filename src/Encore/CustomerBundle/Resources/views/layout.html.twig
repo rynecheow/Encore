@@ -1,5 +1,58 @@
-{% extends '::base.html.twig' %}
+<!DOCTYPE html>
+<html>
 
-{% block content %}
-    {{ block('fos_user_content') }}
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Encore! - {% block title %}{% endblock %}</title>
+
+    {% javascripts "@encore_js" %}
+    <script>
+        var jsUrl = '{{ asset("bundles/encorecustomer/js") }}';
+        var environment = '{{ app.environment }}';
+    </script>
+    <script data-main="{{ asset('js/encore.min') }}" src="{{ asset('bundles/encorecustomer/js/libs/require.js') }}"></script>
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+    {% endjavascripts %}
+
+    {% block stylesheets %}
+        <!-- Bootstrap -->
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/encore.css') }}" rel="stylesheet" />{% endblock %} {% block javascripts %}
+    {% endblock %}
+
+    <script>
+        require(['encore.min'], function(){
+            {% block require_js %}
+            {% endblock %}
+        });
+
+    </script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body>
+<div class="st-container st-effect-3">
+    <nav class="st-menu st-effect-3" id="menu-3">
+        {{ include('EncoreCustomerBundle:Authentication:loginForm.html.twig') }}
+    </nav>
+
+    <div class="st-pusher">
+        <div class="st-content">
+            <div class="st-content-inner">
+                {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
+                <div class="content">
+                    <h1>DDSDDSDS</h1>
+                    {% block content %} {{ block('fos_user_content') }} {% endblock %} {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
