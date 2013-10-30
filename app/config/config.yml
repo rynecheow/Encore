@@ -31,48 +31,24 @@ twig:
 
 # Assetic Configuration
 assetic:
-    read_from:      %kernel.root_dir%/Resources/
+    read_from:      %kernel.root_dir%/Resources/public/
     write_to:       %kernel.root_dir%/../web/
-    filters:
-        cssrewrite: ~
-        lessphp:
-            apply_to: "\.less$"
-            # Formatter options: compressed, lessjs, classic
-            formatter: "classic"
-            preserve_comments: true
-            presets:
-                my_variable: "#000"
-        uglifyjs2:
-            # the path to the uglifyjs executable
-            bin: %uglifyjs%
-        uglifycss:
-            bin: %uglifycss%
     assets:
         encore_css:
             inputs:
                 - css/libs/*.css
                 - css/encore/font.css
                 - css/encore/encore.less
-            filters:
-                - lessphp
-                - cssrewrite
-                - uglifycss
             output: css/encore.css
         encore_js:
             inputs:
               - js/encore/encore.js
               - js/sidebar/*.js
-            filters:
-                - uglifyjs2
             output: js/encore.min.js
         bootstrap_css:
             inputs:
                 - %kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less
                 - %kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less
-            filters:
-                - lessphp
-                - cssrewrite
-                - uglifycss
             output: css/bootstrap.css
         bootstrap_js:
             inputs:
@@ -89,15 +65,29 @@ assetic:
                 - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-tab.js
                 - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-typeahead.js
                 - %kernel.root_dir%/../vendor/twitter/bootstrap/js/bootstrap-affix.js
-            filters:
-                - uglifyjs2
             output: js/bootstrap.min.js
         jquery:
             inputs:
                 - %kernel.root_dir%/../vendor/jquery/jquery/jquery-2.0.3.js
-            filters:
-                - uglifyjs2
             output: js/jquery.min.js
+    filters:
+        lessphp:
+            apply_to: \.less$
+            # Formatter options: compressed, lessjs, classic
+            formatter: "classic"
+            preserve_comments: true
+            presets:
+                my_variable: "#000"
+        cssrewrite: 
+            apply_to: \.css$
+        uglifyjs2:
+            bin: %uglifyjs%
+            apply_to: \.js$
+        uglifycss:
+            bin: %uglifycss%
+            apply_to: \.css$
+    variables:
+        env: [dev, prod]
 
 # Doctrine Configuration
 doctrine:
