@@ -1,40 +1,77 @@
-{% extends '::base.html.twig' %}
+{% extends 'EncoreCustomerBundle::layout.html.twig' %}
 
 
 {% block title %}Welcome{% endblock %}
 
- {% block content %}
-     <div id="myCarousel" class="carousel slide">
-         <ol class="carousel-indicators">
-             <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-             <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-             <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-         </ol>
-         <div class="carousel-inner">
-             <div class="item">
-                 <a><img src="{{ asset('img/test1.jpg') }}" alt=""></a>
-                 <div class="carousel-caption">
-                     <h4>First Thumbnail label</h4>
-                     <p>First description</p>
-                 </div>
-             </div>
-             <div class="item">
-                 <a><img src="{{ asset('img/test2.jpg') }}"   alt=""></a>
-                 <div class="carousel-caption">
-                     <h4>Second Thumbnail label</h4>
-                     <p>Second description</p>
-                 </div>
-             </div>
-             <div class="item active">
-                 <a><img src="{{ asset('img/test3.jpg') }}"  alt=""></a>
+{% block content %}
+    <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+            <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item">
+                <a>
+                    <img src="{{ asset('img/test1.jpg') }}" alt="">
+                </a>
 
-                 <div class="carousel-caption">
-                     <h4>Third Thumbnail label</h4>
-                     <p>Third description</p>
-                 </div>
-             </div>
-         </div>
-         <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-         <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-     </div>
- {% endblock %}
+                <div class="carousel-caption">
+                    <h4>First Thumbnail label</h4>
+
+                    <p>First description</p>
+                </div>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="{{ asset('img/test2.jpg') }}" alt="">
+                </a>
+
+                <div class="carousel-caption">
+                    <h4>Second Thumbnail label</h4>
+
+                    <p>Second description</p>
+                </div>
+            </div>
+            <div class="item active">
+                <a>
+                    <img src="{{ asset('img/test3.jpg') }}" alt="">
+                </a>
+
+                <div class="carousel-caption">
+                    <h4>Third Thumbnail label</h4>
+
+                    <p>Third description</p>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+    </div>
+    <div>
+
+        <button id='effect'>Push</button>
+    </div>
+
+    <script>
+        (function () {
+            "use strict";
+
+            var container = $('.st-container');
+            var bodyFn = function () {
+                $('.st-pusher').on('click', function () {
+                    if (container.hasClass('st-menu-open')) {
+                        container.removeClass('st-menu-open');
+                        container.off("click", bodyFn);
+                    }
+                });
+            };
+            $("#effect").on("click", function (e) {
+                console.log("Got In Function");
+                e.stopPropagation();
+                container.addClass("st-menu-open");
+                container.on("click", bodyFn);
+            });
+        }());
+    </script>
+{% endblock %}
