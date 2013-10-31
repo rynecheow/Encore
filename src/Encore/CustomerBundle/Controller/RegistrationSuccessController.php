@@ -2,11 +2,11 @@
 
 namespace Encore\CustomerBundle\Controller;
 
-
 use Encore\CustomerBundle\Entity\Customer;
 
 class RegistrationSuccessController extends BaseController
 {
+
     public function showAction()
     {
         return $this->render("EncoreCustomerBundle:Registration:information.html.twig");
@@ -32,39 +32,40 @@ class RegistrationSuccessController extends BaseController
                     }
                 }
             }
-        }
-
-        else
-        {
+        } else {
             return $this->render("EncoreCustomerBundle:Security:login.html.twig");
         }
     }
 
     /**
      * @param $params
+     *
      * @return array
      */
     private function createCustomer($params)
     {
-        $user = $this->getAuthenticatedUser();
-        $customer = new Customer();
-        $customer->setUser($user);
-        $customer->setFirstName($params["first_name"]);
-        $customer->setLastName($params["last_name"]);
-        $customer->setBirthDate($params["birth_date"]);
-        $customer->setContactNo($params["contact_no"]);
-        $customer->setAddress($params["address"]);
-        $customer->setCardInfo($params["card_info"]);
+        $user = $this->authenticatedUser;
+        if($user){
+            $customer = new Customer();
+            $customer->setUser($user);
+            $customer->setFirstName($params["first_name"]);
+            $customer->setLastName($params["last_name"]);
+            $customer->setBirthDate($params["birth_date"]);
+            $customer->setContactNo($params["contact_no"]);
+            $customer->setAddress($params["address"]);
+            $customer->setCardInfo($params["card_info"]);
 
-        $this->em->persist($customer);
-        $this->em->flush();
-        $user->setEnabled(true);
+            $this->em->persist($customer);
+            $this->em->flush();
+            $user->setEnabled(true);
+        }
 
         return array("status" => true, "customer" => $customer);
     }
 
     /**
      * @param $params
+     *
      * @return array
      */
     private function validateCustomerInfo($params)
