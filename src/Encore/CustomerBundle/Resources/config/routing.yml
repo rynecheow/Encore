@@ -6,6 +6,10 @@ encore_registration_success:
   pattern:  /completeinformation
   defaults: {_controller: EncoreCustomerBundle:RegistrationSuccess:show }
 
+encore_event:
+  pattern:  /event/{id}
+  defaults: {_controller: EncoreCustomerBundle:Event:show}
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
     # /login, /check, /logout
