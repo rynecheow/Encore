@@ -92,7 +92,7 @@ class BaseController extends Controller{
      *
      * @return User|null The currently logged in user Doctrine entity object.
      */
-    private function getAuthenticatedUser()
+    protected function getAuthenticatedUser()
     {
         return $this->container->get('encore.user_manager')->getAuthenticatedUser();
     }
