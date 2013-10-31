@@ -6,6 +6,30 @@ encore_registration_success:
   pattern:  /completeinformation
   defaults: {_controller: EncoreCustomerBundle:RegistrationSuccess:show }
 
+encore_about:
+  pattern:  /about
+  defaults: {_controller: EncoreCustomerBundle:Static:about}
+
+encore_contact:
+  pattern:  /contact
+  defaults: {_controller: EncoreCustomerBundle:Static:contact}
+
+encore_site:
+  pattern:  /sitemap
+  defaults: {_controller: EncoreCustomerBundle:Static:site}
+
+encore_privacy:
+  pattern:  /privacy
+  defaults: {_controller: EncoreCustomerBundle:Static:privacy}
+
+encore_purchaseTerms:
+  pattern:  /terms/purchase
+  defaults: {_controller: EncoreCustomerBundle:Static:purchaseTerms}
+
+encore_websiteTerms:
+  pattern:  /terms/encore
+  defaults: {_controller: EncoreCustomerBundle:Static:websiteTerms}
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
     # /login, /check, /logout
