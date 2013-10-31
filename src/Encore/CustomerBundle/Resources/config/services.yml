@@ -15,3 +15,7 @@ services:
         arguments: [@router]
         tags:
           - { name: kernel.event_subscriber }
+     encore.form.type.user_profile:
+        class: Encore\CustomerBundle\Form\Type\UserProfileType
+        tags:
+          - { name: form.type, alias: user_profile }
