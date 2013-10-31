@@ -1,10 +1,14 @@
 encore_customer_welcome:
-  pattern:  /
-  defaults: { _controller: EncoreCustomerBundle:Welcome:index }
+  resource: "@EncoreCustomerBundle/Controller/WelcomeController.php"
+  type:     annotation
 
 encore_registration_success:
   pattern:  /completeinformation
   defaults: {_controller: EncoreCustomerBundle:RegistrationSuccess:show }
+
+encore_event:
+  pattern:  /event/{id}
+  defaults: {_controller: EncoreCustomerBundle:Event:show}
 
 encore_about:
   pattern:  /about
@@ -42,5 +46,4 @@ fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
 
 fos_user_register:
-    resource: "@FOSUserBundle//Resources/config/routing/registration.xml"
-    prefix: /signup
+    resource: "@EncoreCustomerBundle/Resources/config/registration.xml"
