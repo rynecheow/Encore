@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sysadm
- * Date: 10/25/13
- * Time: 9:45 PM
- */
 
 namespace Encore\CustomerBundle\EventListener;
-
 
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
@@ -17,6 +10,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RegistrationSuccessListener implements EventSubscriberInterface
 {
+
     private $router;
 
     function __construct(UrlGeneratorInterface $router)
@@ -26,9 +20,7 @@ class RegistrationSuccessListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
-            FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess'
-        );
+        return [FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess'];
     }
 
     public function onRegistrationSuccess(FormEvent $event)
