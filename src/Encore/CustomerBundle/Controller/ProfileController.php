@@ -2,14 +2,34 @@
 
 namespace Encore\CustomerBundle\Controller;
 
-
 use Encore\CustomerBundle\Entity\Customer;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProfileController extends BaseController
 {
-    public function showAction()
+    public function showAction(Request $request)
     {
-        return $this->render("EncoreCustomerBundle:Registration:information.html.twig");
+        $user = $this->authenticatedUser;
+        $customer = new Customer();
+        $form = $this->createFormBuilder()
+            ->add('email','email')
+            ->add('firstName','text')
+            ->add('lastName','text')
+            ->add('birthDate','birthday')
+            ->add('contactNo','number')
+            ->add('address','textarea')
+            ->add('edit','submit')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            
+
+        }
+
+        return $this->render("EncoreCustomerBundle:User:profile.html.twig",
+                        array('form' => $form->createView()));
     }
 
     /**
@@ -46,7 +66,7 @@ class ProfileController extends BaseController
      */
     private function createCustomer($params)
     {
-        $user = $this->getAuthenticatedUser();
+        $user = $this->authenticatedUser;
         $customer = new Customer();
         $customer->setUser($user);
         $customer->setFirstName($params["first_name"]);
