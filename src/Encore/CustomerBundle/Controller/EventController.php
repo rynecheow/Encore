@@ -1,39 +1,35 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: LiHao
- * Date: 10/31/13
- * Time: 4:11 PM
- */
 
 namespace Encore\CustomerBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class EventController extends BaseController
 {
+
+    /**
+     * @Route("/event/{id}", name="encore_event", requirements={"id" = "\d+"})
+     */
     public function showAction($id)
     {
         $event = $this->em
-                 ->getRepository("EncoreCustomerBundle:Event")
-                 ->find($id);
+            ->getRepository("EncoreCustomerBundle:Event")
+            ->find($id);
 
-        if (!$event)
-        {
-            throw $this->createNotFoundException("No event found for id ".$id." WHYYYYY!");
+        if (!$event) {
+            throw $this->createNotFoundException("No event found for id " . $id . " WHYYYYY!");
         }
 
         $venue = $event->getVenue();
 
-        if (!$venue)
-        {
-            throw $this->createNotFoundException("No venue found for id ".$venue->getId()." WHYYYYY!");
+        if (!$venue) {
+            throw $this->createNotFoundException("No venue found for id " . $venue->getId() . " WHYYYYY!");
         }
 
         $merchant = $event->getCreator();
 
-        if (!$venue)
-        {
-            throw $this->createNotFoundException("No merchant found for id ".$merchant->getId()." WHYYYYY!");
+        if (!$venue) {
+            throw $this->createNotFoundException("No merchant found for id " . $merchant->getId() . " WHYYYYY!");
         }
 
         $params = [
