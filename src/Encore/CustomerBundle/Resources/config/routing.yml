@@ -8,8 +8,9 @@ encore_static:
   prefix:   /
 
 encore_customer_profile:
-  pattern:  /profile
-  defaults: {_controller: EncoreCustomerBundle:Profile:show }
+  resource:  "@EncoreCustomerBundle/Controller/ProfileController.php"
+  type:     annotation
+  prefix:   /
 
 encore_event:
   resource:  "@EncoreCustomerBundle/Controller/EventController.php"
