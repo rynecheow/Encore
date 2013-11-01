@@ -7,9 +7,10 @@ encore_static:
   type:     annotation
   prefix:   /
 
-encore_registration_success:
-  pattern:  /completeinformation
-  defaults: {_controller: EncoreCustomerBundle:RegistrationSuccess:show }
+encore_customer_profile:
+  resource:  "@EncoreCustomerBundle/Controller/ProfileController.php"
+  type:     annotation
+  prefix:   /
 
 encore_event:
   resource:  "@EncoreCustomerBundle/Controller/EventController.php"

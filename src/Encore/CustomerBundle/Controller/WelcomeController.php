@@ -9,7 +9,7 @@ class WelcomeController extends Controller
 {
 
     /**
-     * @Route("/")
+     * @Route("/", name="encore_home")
      */
     public function indexAction()
     {

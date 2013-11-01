@@ -10,28 +10,32 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManager;
+
 /**
  * Base controller.
  *
  * Base controller for EncoreCustomerBundle controllers.
  *
- * @author Ryne Cheow
+ * @author  Ryne Cheow
  * @version 1.0.0
- * @since version 1.00
+ * @since   version 1.00
  * created_at: 2013-10-12 12:00:00
  * updated_at:
  */
 
-class BaseController extends Controller{
+class BaseController extends Controller
+{
 
     /**
      * Request object
+     *
      * @var Request
      */
     protected $request;
 
     /**
      * Session object
+     *
      * @var Session
      */
     protected $session;
@@ -52,6 +56,7 @@ class BaseController extends Controller{
      * Set container to run custom functions when loading controller.
      *
      * (non-PHPdoc)
+     *
      * @see Symfony\Component\DependencyInjection.ContainerAware::setContainer()
      */
     public function setContainer(ContainerInterface $container = null)
@@ -96,6 +101,5 @@ class BaseController extends Controller{
     {
         return $this->container->get('encore.user_manager')->getAuthenticatedUser();
     }
-
 
 }
