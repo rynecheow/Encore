@@ -1,52 +1,46 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rynecheow
- * Date: 10/24/13
- * Time: 5:20 PM
- */
-
 namespace Encore\CustomerBundle\Controller;
 
 use Encore\CustomerBundle\Entity\Customer;
 use Encore\CustomerBundle\Entity\User;
 use Encore\CustomerBundle\Entity\UserEmail;
 
-class AuthenticationController extends BaseController{
-    public function signupAction() {
-        if($this->isLoggedIn())
-        {
-            return $this->redirect($this->generateUrl( 'home' ));
+class AuthenticationController extends BaseController
+{
+
+    public function signupAction()
+    {
+        if ($this->isLoggedIn()) {
+            return $this->redirect($this->generateUrl('home'));
         }
         $request = $this->getRequest();
         if ($request->getMethod() === "POST") {
-            if ( $request->request->get( 'signup-data' ) ) {
-                $params = $request->request->get( 'signup-data' );
+            if ($request->request->get('signup-data')) {
+                $params = $request->request->get('signup-data');
                 $invalid = $this->validateSignupParameters($params);
-                if($invalid)
-                {
+                if ($invalid) {
                     return $invalid;
                 }
                 $success = $this->createCustomerUser($params);
 
-                if($success['status'] == 'success')
-                {
-                    if(!$success['message'])
-                    {
-                        return array('status'=>'success','responseData'=>$success['data']);
+                if ($success['status'] == 'success') {
+                    if (!$success['message']) {
+                        return array('status' => 'success', 'responseData' => $success['data']);
                     }
                 }
+
                 return $success;
-            }
-            // validateEmail
+            } // validateEmail
             elseif ($request->request->get('email')) {
-                return $this->validateEmail( $request->request->get('email') );
+                return $this->validateEmail($request->request->get('email'));
             }
         }
+
         return [];
     }
 
-    private function createCustomerUser($params) {
+    private function createCustomerUser($params)
+    {
         $now = new \DateTime();
         $userManager = $this->get('encore.user_manager');
         $user = new User();
@@ -77,28 +71,30 @@ class AuthenticationController extends BaseController{
         $user->setUsername($user->getUserName() . '_' . $user->getId());
         $this->em->flush();
 
-        $return  = array(
+        $return = array(
             'status' => 'success',
             'data' => array(
                 'id' => $user->getId(),
-                'email'=> $params['email']
+                'email' => $params['email']
             ),
         );
+
         return $return;
     }
 
-    private function validateEmail($email) {
+    private function validateEmail($email)
+    {
 
         $status = 'success';
         $msg = 'OK';
-        $email_exists = $this->em->getRepository( 'EncoreUserBundle:UserEmail' )->findBy( array( 'email' => $email ));
+        $email_exists = $this->em->getRepository('EncoreUserBundle:UserEmail')->findBy(array('email' => $email));
 
         if (count($email_exists)) {
             $status = 'error';
             $msg = 'Email belongs to another user';
         }
 
-        $result = array('status' => $status, 'message'=>$msg);
+        $result = array('status' => $status, 'message' => $msg);
 
         return $result;
     }
@@ -107,22 +103,17 @@ class AuthenticationController extends BaseController{
     {
         $error = array();
 
-        if(!isset($params['email']) || str_replace(" ","",$params['email']) == "")
-        {
+        if (!isset($params['email']) || str_replace(" ", "", $params['email']) == "") {
             $error['status'] = 'fail';
             $error['message'] = 'Email is required.';
-        }
-        else
-        {
+        } else {
             $email_check = $this->validateEmail($params['email']);
-            if($email_check['status'] == 'error')
-            {
+            if ($email_check['status'] == 'error') {
                 $error = $email_check;
             }
         }
 
-        if(!isset($params['password']) || str_replace(" ","",$params['password']) == "")
-        {
+        if (!isset($params['password']) || str_replace(" ", "", $params['password']) == "") {
             $error['status'] = 'fail';
             $error['message'] = 'Password is required.';
         }
