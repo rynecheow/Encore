@@ -3,12 +3,15 @@
 namespace Encore\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Event
  *
  * @ORM\Table(name="Event")
  * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\EventRepository")
+ *
+ * @Vich\Uploadable
  */
 class Event
 {
@@ -45,7 +48,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     protected $description;
 
@@ -99,6 +102,20 @@ class Event
 
     private $eventSections;
 
+    /**
+     * @var \Encore\CustomerBundle\Entity\EventPhoto[]
+     *
+     * @ORM\OneToMany(targetEntity="\Encore\CustomerBundle\Entity\EventPhoto", mappedBy="event", cascade={"persist"})
+     */
+    private $photos;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="photo_sequence", type="array", nullable=true)
+     */
+    private $photoSequence = [];
+    
     /**
      * Get id
      *
@@ -346,4 +363,68 @@ class Event
     {
         return $this->totalTickets;
     }
+
+    /**
+     * Add photo
+     *
+     * @param \Encore\CustomerBundle\Entity\EventPhoto $photo
+     * @return Event
+     */
+    public function addPhoto(EventPhoto $photo)
+    {
+        $this->photos[] = $photo;
+        $this->photoSequence[] = $photo->getId();
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \Encore\CustomerBundle\Entity\EventPhoto $photo
+     */
+    public function removePhoto(EventPhoto $photo)
+    {
+        foreach($this->photoSequence as $key => $photoId) {
+            if ($photoId == $photo->getId()) {
+                unset($this->photoSequence[$key]);
+                break;
+            }
+        }
+        $this->photos->removeElement($photo);
+
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set photoSequence
+     *
+     * @param array $photoSequence
+     * @return Event
+     */
+    public function setPhotoSequence(array $photoSequence)
+    {
+        $this->photoSequence = $photoSequence;
+
+        return $this;
+    }
+
+    /**
+     * Get photoSequence
+     *
+     * @return array
+     */
+    public function getPhotoSequence()
+    {
+        return $this->photoSequence;
+    }
+
 }

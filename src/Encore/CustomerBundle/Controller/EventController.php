@@ -3,6 +3,7 @@
 namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Encore\CustomerBundle\Entity\Event;
 
 class EventController extends BaseController
 {
@@ -11,7 +12,8 @@ class EventController extends BaseController
      * @Route("/events", name="encore_events")
      *
      */
-    public function indexAction(){
+    public function indexAction()
+    {
         //TODO: Show events listings
     }
 
@@ -59,14 +61,16 @@ class EventController extends BaseController
     /**
      * @Route("/events/{id}/purchase/", name="envore_event_ticket_purchase", requirement={"id" = "\d+"})
      */
-    public function purchaseAction($id){
+    public function purchaseAction($id)
+    {
         //TODO handle purchase event action
     }
 
     /**
      * @Route("/events/{id}/purchase/summary", name="envore_event_ticket_purchase", requirement={"id" = "\d+"})
      */
-    public function purchaseSummaryAction($id){
+    public function purchaseSummaryAction($id)
+    {
         //TODO handle purchase summary event action
     }
 } 
