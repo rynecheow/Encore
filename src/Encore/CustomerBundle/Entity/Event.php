@@ -40,6 +40,13 @@ class Event
     protected $name;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $featuredAt;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="type", type="integer")
@@ -125,6 +132,22 @@ class Event
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \DateTime $featuredAt
+     */
+    public function setFeaturedAt($featuredAt)
+    {
+        $this->featuredAt = $featuredAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getFeaturedAt()
+    {
+        return $this->featuredAt;
     }
 
     /**

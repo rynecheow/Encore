@@ -2,17 +2,26 @@
 
 namespace Encore\CustomerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class HomeController extends Controller
+/**
+ * @Route("/")
+ */
+class HomeController extends BaseController
 {
 
     /**
-     * @Route("/", name="encore_home")
+     * @Route("", name="encore_home", options={"expose"=true})
+     * @Method({"GET"})
      */
     public function indexAction()
     {
-        return $this->render('EncoreCustomerBundle:Home:index.html.twig');
+        $eventManager = $this->get('encore.event_manager');
+        $featuredEvents = $eventManager->getFeaturedEvents(4);
+
+        $param = [
+            'featured_event' => $featuredEvents,
+        ];
+        return $this->render('EncoreCustomerBundle:Home:index.html.twig', $param);
     }
 }
