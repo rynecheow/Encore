@@ -3,7 +3,7 @@ parameters:
 
     encore.route_prefix.customer:   ""
     encore.route_prefix.merchant:   "/merchant"
-
+    encore.port:                    8000
     encore.currency:                MYR
     encore.timezone:                Asia/Kuala_Lumpur
 
