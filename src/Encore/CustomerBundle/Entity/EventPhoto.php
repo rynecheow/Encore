@@ -5,6 +5,7 @@ namespace Encore\CustomerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+
 /**
  * EventPhoto
  *
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class EventPhoto
 {
+
     /**
      * @var integer
      *
@@ -25,14 +27,14 @@ class EventPhoto
     /**
      * @var string
      *
-     * @ORM\Column(name="imagePath", type="text")
+     * @ORM\Column(name="imagePath", type="text", nullable="false")
      */
     private $imagePath;
 
     /**
      * @var File $image
      *
-     * @Vich\UploadableField(mapping="product", fileNameProperty="imagePath")
+     * @Vich\UploadableField(mapping="product", fileNameProperty="imagePath", nullable="false")
      */
     private $image;
 
@@ -58,10 +60,11 @@ class EventPhoto
             $this->id = null;
         }
     }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -72,19 +75,20 @@ class EventPhoto
      * Set imagePath
      *
      * @param string $imagePath
+     *
      * @return EventPhoto
      */
     public function setImagePath($imagePath)
     {
         $this->imagePath = $imagePath;
-    
+
         return $this;
     }
 
     /**
      * Get imagePath
      *
-     * @return string 
+     * @return string
      */
     public function getImagePath()
     {
@@ -95,6 +99,7 @@ class EventPhoto
      * Set image
      *
      * @param File $image
+     *
      * @return EventPhoto
      */
     public function setImage(File $image)
@@ -123,19 +128,20 @@ class EventPhoto
      * Set caption
      *
      * @param string $caption
+     *
      * @return EventPhoto
      */
     public function setCaption($caption)
     {
         $this->caption = $caption;
-    
+
         return $this;
     }
 
     /**
      * Get caption
      *
-     * @return string 
+     * @return string
      */
     public function getCaption()
     {
@@ -146,6 +152,7 @@ class EventPhoto
      * Set product
      *
      * @param \Encore\CustomerBundle\Entity\Event $product
+     *
      * @return EventPhoto
      */
     public function setEvent(Event $product)
