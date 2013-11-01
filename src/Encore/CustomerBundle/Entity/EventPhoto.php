@@ -5,6 +5,7 @@ namespace Encore\CustomerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * EventPhoto
@@ -14,7 +15,6 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class EventPhoto
 {
-
     /**
      * @var integer
      *
@@ -27,14 +27,17 @@ class EventPhoto
     /**
      * @var string
      *
-     * @ORM\Column(name="imagePath", type="text", nullable="false")
+     * @ORM\Column(name="imagePath", type="text", nullable=false)
      */
     private $imagePath;
 
     /**
      * @var File $image
-     *
-     * @Vich\UploadableField(mapping="product", fileNameProperty="imagePath", nullable="false")
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg"}
+     * )
+     * @Vich\UploadableField(mapping="product", fileNameProperty="imagePath")
      */
     private $image;
 
@@ -60,7 +63,6 @@ class EventPhoto
             $this->id = null;
         }
     }
-
     /**
      * Get id
      *
@@ -75,7 +77,6 @@ class EventPhoto
      * Set imagePath
      *
      * @param string $imagePath
-     *
      * @return EventPhoto
      */
     public function setImagePath($imagePath)
@@ -99,7 +100,6 @@ class EventPhoto
      * Set image
      *
      * @param File $image
-     *
      * @return EventPhoto
      */
     public function setImage(File $image)
@@ -128,7 +128,6 @@ class EventPhoto
      * Set caption
      *
      * @param string $caption
-     *
      * @return EventPhoto
      */
     public function setCaption($caption)
@@ -152,7 +151,6 @@ class EventPhoto
      * Set product
      *
      * @param \Encore\CustomerBundle\Entity\Event $product
-     *
      * @return EventPhoto
      */
     public function setEvent(Event $product)
