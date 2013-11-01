@@ -54,6 +54,12 @@ class ProfileController extends BaseController
     }
 
     /**
+     * @Route("/profile/edit/{id}
+     */
+    public function editAction(){
+
+    }
+    /**
      * @return array
      */
     //TODO: combine this function with the function above
