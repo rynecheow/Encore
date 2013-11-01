@@ -25,7 +25,7 @@ class RegistrationSuccessListener implements EventSubscriberInterface
 
     public function onRegistrationSuccess(FormEvent $event)
     {
-        $url = $this->router->generate("encore_registration_success");
+        $url = $this->router->generate("encore_customer_profile");
         $event->setResponse(new RedirectResponse($url));
     }
 } 

@@ -1,3 +1,133 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+   CSS Reset Start
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* End Of Reset CSS */
 .content {
   width: 100%;
   height: auto;
@@ -30,9 +160,9 @@ body {
 .item img {
   min-width: 1280px;
   width: 100%;
-  height: 600px;
+  height: 720px;
 }
-header {
+.header {
   width: 100%;
   height: 80px;
   top: 0px;
@@ -40,7 +170,7 @@ header {
   position: fixed;
   z-index: 1000;
 }
-footer {
+.footer {
   width: 100%;
   height: 10%;
   margin-top: -20px;
@@ -52,26 +182,90 @@ footer {
   clear: both;
   font-family: "domine";
 }
-footer img {
+.footer img {
   width: 100px;
   height: 41px;
 }
-footer a {
+.footer a {
   text-decoration: none;
   color: #d4d4d4;
 }
-footer li {
+.footer li {
   display: inline-block;
 }
-footer li a:hover {
+.footer li a:hover {
   text-decoration: underline;
   color: #e3e3e3;
 }
-footer li a:visited {
+.footer li a:visited {
   text-decoration: none;
   color: #d4d4d4;
 }
-footer li a:link {
+.footer li a:link {
   text-decoration: none;
   color: #d4d4d4;
+}
+.privacy {
+  width: 60%;
+  margin: 0 auto;
+}
+.privacy h3,
+.privacy p,
+.privacy a {
+  color: white;
+  text-align: justify;
+  line-height: 1.5em ;
+}
+.privacy a {
+  color: darkred;
+  text-align: justify;
+  line-height: 1.5em ;
+}
+.purchaseTC {
+  width: 60%;
+  margin: 0 auto;
+}
+.purchaseTC h3,
+.purchaseTC p,
+.purchaseTC a {
+  color: white;
+  text-align: justify;
+  line-height: 1.5em ;
+}
+.purchaseTC a {
+  color: darkred;
+  text-align: justify;
+  line-height: 1.5em ;
+}
+.websiteTC {
+  width: 60%;
+  margin: 0 auto;
+}
+.websiteTC h3,
+.websiteTC p,
+.websiteTC a {
+  color: white;
+  text-align: justify;
+  line-height: 1.5em ;
+}
+.websiteTC a {
+  color: darkred;
+  text-align: justify;
+  line-height: 1.5em ;
+}
+.about {
+  width: 60%;
+  margin: 0 auto;
+}
+.about h3,
+.about p,
+.about a {
+  color: white;
+  text-align: justify;
+  line-height: 1.5em ;
+}
+.about a {
+  color: darkred;
+  text-align: justify;
+  line-height: 1.5em ;
 }

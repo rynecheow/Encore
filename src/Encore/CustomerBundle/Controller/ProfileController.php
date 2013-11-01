@@ -2,83 +2,131 @@
 
 namespace Encore\CustomerBundle\Controller;
 
-use FOS\UserBundle\Controller\ProfileController as BaseProfileController;
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Encore\CustomerBundle\Entity\Customer;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Encore\CustomerBundle\Entity\User;
 
-class ProfileController extends BaseProfileController{
-    /**
-     * Show the user
-     */
-    public function showAction()
-    {
-        $user = $this->container->get('security.context')->getToken()->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.'.$this->container->getParameter('fos_user.template.engine'), array('user' => $user));
-    }
+class ProfileController extends BaseController
+{
 
     /**
-     * Edit the user
+     * @Route("/signup/complete-profile", name="encore_complete_profile")
      */
-    public function editAction(Request $request)
+    public function completeInformationAction(Request $request)
     {
-        $user = $this->container->get('security.context')->getToken()->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
+        // Only display form if user is logged in and not completed profile
+        if ($this->isLoggedIn()) {
 
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
+            $user = $this->authenticatedUser;
+            if (!($user->isEnabled())) {
+                $user = $this->authenticatedUser;
+                $customer = new Customer();
+                $form = $this->createFormBuilder()
+                    ->add('email', 'email')
+                    ->add('firstName', 'text')
+                    ->add('lastName', 'text')
+                    ->add('birthDate', 'birthday')
+                    ->add('contactNo', 'number')
+                    ->add('address', 'textarea')
+                    ->add('edit', 'submit')
+                    ->getForm();
 
-        $event = new GetResponseUserEvent($user, $request);
-        $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
-
-        if (null !== $event->getResponse()) {
-            return $event->getResponse();
-        }
-
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->container->get('fos_user.profile.form.factory');
-
-        $form = $formFactory->createForm();
-        $form->setData($user);
-
-        if ('POST' === $request->getMethod()) {
-            $form->bind($request);
-
-            if ($form->isValid()) {
-                /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-                $userManager = $this->container->get('fos_user.user_manager');
-
-                $event = new FormEvent($form, $request);
-                $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
-
-                $userManager->updateUser($user);
-
-                if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('fos_user_profile_show');
-                    $response = new RedirectResponse($url);
+                $form->handleRequest($request);
+                //TODO: server side validation
+                if ($form->isValid()) {
+                    $data = $form->getData();
+                    //TODO: handle data
                 }
 
-                $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-
-                return $response;
+                return $this->render(
+                    "EncoreCustomerBundle:User:profile.html.twig",
+                    array('form' => $form->createView())
+                );
             }
+
+            return $this->redirect($this->generateUrl('encore_home'));
         }
 
-        return $this->container->get('templating')->renderResponse(
-            'FOSUserBundle:Profile:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
-            array('form' => $form->createView())
-        );
+        return $this->redirect($this->generateUrl('encore_login'));
+
     }
-}
+
+    /**
+     * @return array
+     */
+    //TODO: combine this function with the function above
+    public function completeInfoAction()
+    {
+        if ($this->isLoggedIn()) {
+            $request = $this->getRequest();
+
+            if (($request->getMethod() === "POST") && ($request->request->get("customer-information"))) {
+                //TODO: REDIRECT USER to COMPLETE INFORMATION
+                $params = $request->request->get("customer-information");
+                $validate = $this->validateCustomerInfo($params);
+
+                if ($validate["status"]) {
+                    $success = $this->createCustomer($params);
+
+                    if ($success["status"]) {
+                        return $success["customer"];
+                    }
+                }
+            }
+        } else {
+            return $this->render("EncoreCustomerBundle:Security:login.html.twig");
+        }
+    }
+
+    /**
+     * @param $params
+     *
+     * @return array
+     */
+    private function createCustomer($params)
+    {
+        $user = $this->authenticatedUser;
+        $customer = new Customer();
+        $customer->setUser($user)
+            ->setFirstName($params["first_name"])
+            ->setLastName($params["last_name"])
+            ->setBirthDate($params["birth_date"])
+            ->setContactNo($params["contact_no"])
+            ->setAddress($params["address"])
+            ->setCardInfo($params["card_info"]);
+
+        $this->em->persist($customer);
+        $this->em->flush();
+        $user->setEnabled(true);
+
+        return array("status" => true, "customer" => $customer);
+    }
+
+    /**
+     * @param $params
+     *
+     * @return array
+     */
+    private function validateCustomerInfo($params)
+    {
+        $error = ["status" => true, "message" => ""];
+        $entities = array("first_name", "last_name", "birth_date", "contact_no", "address");
+        $count = count($entities);
+        $i = 0;
+
+        while ($i < $count) {
+            if (!isset($params[$entities[$i]])) {
+                $error["status"] = false;
+                $error["message"] = $entities[$i] . " is required.";
+
+                return $error;
+            }
+
+            $i++;
+        }
+
+        return $error;
+    }
+} 
