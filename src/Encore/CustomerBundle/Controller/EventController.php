@@ -59,7 +59,7 @@ class EventController extends BaseController
     }
 
     /**
-     * @Route("/events/{id}/purchase/", name="envore_event_ticket_purchase", requirement={"id" = "\d+"})
+     * @Route("/events/{id}/purchase/", name="envore_event_ticket_purchase", requirements={"id" = "\d+"})
      */
     public function purchaseAction($id)
     {
@@ -67,7 +67,7 @@ class EventController extends BaseController
     }
 
     /**
-     * @Route("/events/{id}/purchase/summary", name="envore_event_ticket_purchase", requirement={"id" = "\d+"})
+     * @Route("/events/{id}/purchase/summary", name="envore_event_ticket_purchase", requirements={"id" = "\d+"})
      */
     public function purchaseSummaryAction($id)
     {
