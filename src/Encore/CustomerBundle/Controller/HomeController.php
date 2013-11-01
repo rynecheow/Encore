@@ -3,7 +3,7 @@
 namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
  * @Route("/")
  */
@@ -18,6 +18,8 @@ class HomeController extends BaseController
     {
         $eventManager = $this->get('encore.event_manager');
         $featuredEvents = $eventManager->getFeaturedEvents(3);
+        $newEvents = $eventManager->getNewEvents(10);
+
 
         $param = [
             'featured_events' => $featuredEvents,
