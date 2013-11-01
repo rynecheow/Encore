@@ -37,17 +37,17 @@
 
 <body>
 <div class="st-container st-effect-3">
-    <nav class="st-menu st-effect-3" id="menu-3">
-        {{ include('EncoreCustomerBundle:Authentication:loginForm.html.twig') }}
-    </nav>
-
     <div class="st-pusher">
+        <nav class="st-menu st-effect-3" id="menu-3">
+            {{ include('EncoreCustomerBundle:Authentication:loginForm.html.twig') }}
+        </nav>
         <div class="st-content">
             <div class="st-content-inner">
                 {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
                 <div class="content">
-                    {% block content %} {{ block('fos_user_content') }} {% endblock %} {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
+                    {% block content %} {{ block('fos_user_content') }} {% endblock %}
                 </div>
+                {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
             </div>
         </div>
     </div>

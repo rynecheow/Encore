@@ -128,6 +128,7 @@ fos_user:
     firewall_name: encore_auth
     user_class: Encore\CustomerBundle\Entity\User
 
+
 bc_bootstrap:
     less_filter: lessphp
     assets_dir:  %kernel.root_dir%/../vendor/twitter/bootstrap
