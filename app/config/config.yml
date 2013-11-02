@@ -37,9 +37,9 @@ assetic:
     assets:
         encore_css:
             inputs:
-                - css/libs/*.css
                 - css/encore/font.css
                 - css/encore/encore.less
+                - css/libs/*.css
             output: css/encore.css
         encore_js:
             inputs:
