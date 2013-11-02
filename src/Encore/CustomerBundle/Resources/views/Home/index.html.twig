@@ -5,54 +5,60 @@
 
 {% block require_js %}
     require(["encore/home/security-pusher",
-             "encore/sticky-header"]);
+    "encore/sticky-header"]);
 {% endblock require_js %}
 
 {% block content %}
     <div id="myCarousel" class="carousel slide">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-            <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="item">
-                <a>
-                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}" alt="">
-                </a>
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+    </ol>
+    <section class="home-content">
+        <article class="home-featured">
+            <h2 class="spread-headline">
+                Featured Events
+            </h2>
+            <div class="carousel-inner">
+                <div class="item">
+                    <a>
+                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}" alt="">
+                    </a>
 
-                <div class="carousel-caption">
-                    <h4>First Thumbnail label</h4>
+                    <div class="carousel-caption">
+                        <h4>First Thumbnail label</h4>
 
-                    <p>First description</p>
+                        <p>First description</p>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <a>
-                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt="">
-                </a>
+                <div class="item">
+                    <a>
+                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt="">
+                    </a>
 
-                <div class="carousel-caption">
-                    <h4>Second Thumbnail label</h4>
+                    <div class="carousel-caption">
+                        <h4>Second Thumbnail label</h4>
 
-                    <p>Second description</p>
+                        <p>Second description</p>
+                    </div>
                 </div>
-            </div>
-            <div class="item active">
-                <a>
-                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt="">
-                </a>
+                <div class="item active">
+                    <a>
+                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt="">
+                    </a>
 
-                <div class="carousel-caption">
-                    <h4>Third Thumbnail label</h4>
+                    <div class="carousel-caption">
+                        <h4>Third Thumbnail label</h4>
 
-                    <p>Third description</p>
+                        <p>Third description</p>
+                    </div>
                 </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
             </div>
-        </div>
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-    </div>
+        </article>
+    </section>
     <div>
         <button id='effect'>Push</button>
     </div>
