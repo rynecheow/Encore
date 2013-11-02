@@ -3,66 +3,8 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "1b6acbcd59199957cb6cc0d7dc909980",
+    "hash": "e1b1978fa5259b4bb51dac99d6a3bafa",
     "packages": [
-        {
-            "name": "braincrafted/bootstrap-bundle",
-            "version": "dev-master",
-            "target-dir": "Bc/Bundle/BootstrapBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/braincrafted/bootstrap-bundle.git",
-                "reference": "c086ff70f6746ae4290ba50a68b6ab159925ceaa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/braincrafted/bootstrap-bundle/zipball/c086ff70f6746ae4290ba50a68b6ab159925ceaa",
-                "reference": "c086ff70f6746ae4290ba50a68b6ab159925ceaa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "instaclick/php-code-sniffer": "dev-master",
-                "instaclick/symfony2-coding-standard": "dev-master",
-                "knplabs/knp-markdown-bundle": "dev-master",
-                "knplabs/knp-menu": "dev-master",
-                "knplabs/knp-menu-bundle": "dev-master",
-                "knplabs/knp-paginator-bundle": "dev-master",
-                "nikic/php-parser": "dev-master",
-                "phpmd/phpmd": "1.4.*"
-            },
-            "suggest": {
-                "knplabs/knp-menu": "Required to use KnpMenuBundle.",
-                "knplabs/knp-menu-bundle": "BraincraftedBootstrapBundle styles the menus provided by KnpMenuBundle.",
-                "knplabs/knp-paginator-bundle": "BraincraftedBootstrapBundle styles the pagination provided by KnpPaginatorBundle.",
-                "twbs/bootstrap": "Twitter Bootstrap provides the assets (images, CSS and JS)"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Bc\\Bundle\\BootstrapBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Florian Eckerstorfer",
-                    "email": "florian@eckerstorfer.co",
-                    "homepage": "http://florianeckerstorfer.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Twitter Bootstrap for Symfony2",
-            "keywords": [
-                "bootstrap"
-            ],
-            "time": "2013-07-28 21:51:00"
-        },
         {
             "name": "cboden/ratchet",
             "version": "dev-master",
@@ -226,8 +168,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -291,7 +232,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan H. Wage",
+                    "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/"
                 },
@@ -639,7 +580,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1343,17 +1284,6 @@
                 "sql"
             ],
             "time": "2013-04-26 18:42:52"
-        },
-        {
-            "name": "jquery/jquery",
-            "version": "2.0.3",
-            "dist": {
-                "type": "file",
-                "url": "http://code.jquery.com/jquery-2.0.3.js",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library"
         },
         {
             "name": "knplabs/doctrine-behaviors",
@@ -2818,33 +2748,6 @@
             "time": "2013-10-30 08:20:53"
         },
         {
-            "name": "twitter/bootstrap",
-            "version": "v2.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "b4c4072679943773a7582daa63f545ba818fa627"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/b4c4072679943773a7582daa63f545ba818fa627",
-                "reference": "b4c4072679943773a7582daa63f545ba818fa627",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "Sleek, intuitive, and powerful front-end framework for faster and easier web development.",
-            "homepage": "http://twbs.github.com/bootstrap/",
-            "keywords": [
-                "bootstrap",
-                "css"
-            ],
-            "time": "2013-07-27 06:36:38"
-        },
-        {
             "name": "vich/uploader-bundle",
             "version": "v0.9.0",
             "target-dir": "Vich/UploaderBundle",
@@ -3594,7 +3497,6 @@
     "stability-flags": {
         "doctrine/doctrine-migrations-bundle": 20,
         "doctrine/migrations": 20,
-        "braincrafted/bootstrap-bundle": 20,
         "knplabs/knp-snappy-bundle": 20,
         "knplabs/knp-menu": 20,
         "knplabs/knp-menu-bundle": 20,

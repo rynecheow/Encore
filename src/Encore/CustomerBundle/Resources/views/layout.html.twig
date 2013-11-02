@@ -12,23 +12,24 @@
         var jsUrl = '{{ asset("bundles/encorecustomer/js") }}';
         var environment = '{{ app.environment }}';
     </script>
-    <script data-main="{{ asset('js/encore.min') }}" src="{{ asset('bundles/encorecustomer/js/libs/require.js') }}"></script>
+    <script data-main="{{ asset('js/encore.min') }}" src="{{ asset('bundles/encorecustomer/js/libs/require-jquery.min.js') }}"></script>
     <script>
-        require(['encore.min','jquery'], function($){
+        require(['encore.min'], function(){
             {% block require_js %}
             {% endblock %}
         });
 
     </script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     {% endjavascripts %}
 
     {% block stylesheets %}
-        <!-- Bootstrap -->
-        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
         <link href="{{ asset('css/encore.css') }}" rel="stylesheet" />
-        <link href="{{ asset('css/animate-custom.css') }}" rel="stylesheet" />{% endblock %} {% block javascripts %}
+        <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap-responsive.min.css') }}" rel="stylesheet" />
+    {% endblock %}
+
+    {% block javascripts %}
     {% endblock %}
 
 
