@@ -24,14 +24,6 @@ class StaticController extends BaseController
     }
 
     /**
-     * @Route("/sitemap", name="encore_sitemap")
-     */
-    public function siteAction()
-    {
-        return $this->render("EncoreCustomerBundle:Static:site-map.html.twig");
-    }
-
-    /**
      * @Route("/terms", name="encore_terms_purchase")
      */
     public function purchaseTermsAction()
