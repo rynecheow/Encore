@@ -24,40 +24,49 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol, ul {
   list-style: none;
 }
+
 blockquote, q {
   quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 /* End Of Reset CSS */
 
 .content {
-  width:100%;
-  height:auto;
-  margin-top:80px;
+  width: 100%;
+  height: auto;
+  margin-top: 52px;
   background: #262626;
 }
+
 body {
   background: #262626;
 }
+
 .signIn-form {
   max-width: 300px;
   padding: 19px 29px 29px;
@@ -65,12 +74,14 @@ body {
   background-color: #fff;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
-.signIn-form .signIn-heading,.signIn-form .checkbox {
+
+.signIn-form .signIn-heading, .signIn-form .checkbox {
   margin-bottom: 10px;
 }
-.signIn-form input[type="text"],.signIn-form input[type="password"] {
+
+.signIn-form input[type="text"], .signIn-form input[type="password"] {
   font-size: 16px;
   height: auto;
   margin-bottom: 15px;
@@ -79,32 +90,37 @@ body {
 
 .item {
   img {
-    min-width: 1280px;
-    width:100%;
-    height: 720px;
+    left: 100%;
+    z-index: 1;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat no-repeat;
   }
 }
+
 .header {
-  width:100%;
-  height:80px;
-  top:0px;
+  width: 100%;
+  height: 52px;
+  margin: 0 auto;
+  box-shadow: 1px 2px 5px #000000;
+  top: 0px;
   background: #222222;
   position: fixed;
   z-index: 1000;
 }
 
 .footer {
-  width:100%;
-  height:10%;
-  margin-top:-20px; /* As Bootstrap div has set margin */
-  position:relative;
+  width: 100%;
+  height: 10%;
+  margin-top: -20px; /* As Bootstrap div has set margin */
+  position: relative;
   background: #1c1c1c;
   text-align: center;
   font-size: 10px;
   clear: both;
   font-family: "domine";
   img {
-    width:100px;
+    width: 100px;
     height: 41px;
   }
   a {
@@ -131,15 +147,15 @@ body {
 .privacy {
   width: 60%;
   margin: 0 auto;
-  h3 ,p ,a{
+  h3, p, a {
     color: white;
     text-align: justify;
-    line-height: 1.5em ;
+    line-height: 1.5em;
   }
-  a{
+  a {
     color: darkred;
     text-align: justify;
-    line-height: 1.5em ;
+    line-height: 1.5em;
   }
 
 }
@@ -147,15 +163,15 @@ body {
 .purchaseTC {
   width: 60%;
   margin: 0 auto;
-  h3 ,p ,a{
+  h3, p, a {
     color: white;
     text-align: justify;
-    line-height: 1.5em ;
+    line-height: 1.5em;
   }
-  a{
+  a {
     color: darkred;
     text-align: justify;
-    line-height: 1.5em ;
+    line-height: 1.5em;
   }
 
 }
@@ -163,34 +179,73 @@ body {
 .websiteTC {
   width: 60%;
   margin: 0 auto;
-  h3 ,p ,a{
+  h3, p, a {
     color: white;
     text-align: justify;
-    line-height: 1.5em ;
+    line-height: 1.5em;
   }
-  a{
+  a {
     color: darkred;
     text-align: justify;
-    line-height: 1.5em ;
+    line-height: 1.5em;
   }
 
 }
 
-.about{
+.about {
   width: 60%;
   margin: 0 auto;
-  h3 ,p ,a{
+  h3, p, a {
     color: white;
     text-align: justify;
-    line-height: 1.5em ;
+    line-height: 1.5em;
   }
-  a{
+  a {
     color: darkred;
     text-align: justify;
-    line-height: 1.5em ;
+    line-height: 1.5em;
   }
 }
 
-
+.home-content{
+  .home-featured{
+    .spread-headline{
+      -webkit-font-smoothing: antialiased;
+      color: rgb(255, 255, 255);
+      display: block;
+      font-family: Alegreya SC;
+      font-size: 18px;
+      font-weight: normal;
+      height: 18px;
+      letter-spacing: 34.560001373291016px;
+      line-height: 18px;
+      margin-bottom: 0px;
+      margin-left: 17px;
+      margin-right: 17px;
+      margin-top: 0px;
+      max-width: 1106px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 0px;
+      position: relative;
+      text-align: center;
+      text-indent: 34px;
+      text-transform: uppercase;
+      width: 1106px;
+      z-index: 3;
+    }
+    .carousel-inner{
+      z-index: 2;
+      margin-bottom: 0px;
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+}
 
 
