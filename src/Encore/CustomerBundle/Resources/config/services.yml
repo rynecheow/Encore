@@ -15,6 +15,10 @@ services:
         arguments: [@router]
         tags:
           - { name: kernel.event_subscriber }
+     encore.event_manager:
+        class: Encore\CustomerBundle\Model\EventManager
+        arguments:
+          - @doctrine.orm.entity_manager
      encore.form.type.user_profile:
         class: Encore\CustomerBundle\Form\Type\UserProfileType
         tags:

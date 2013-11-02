@@ -3,15 +3,19 @@
 namespace Encore\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Event
  *
  * @ORM\Table(name="Event")
  * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\EventRepository")
+ *
+ * @Vich\Uploadable
  */
 class Event
 {
+
     /**
      * @var integer
      *
@@ -36,6 +40,13 @@ class Event
     protected $name;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $featuredAt;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="type", type="integer")
@@ -45,7 +56,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     protected $description;
 
@@ -100,13 +111,43 @@ class Event
     private $eventSections;
 
     /**
+     * @var \Encore\CustomerBundle\Entity\EventPhoto[]
+     *
+     * @ORM\OneToMany(targetEntity="\Encore\CustomerBundle\Entity\EventPhoto", mappedBy="event", cascade={"persist"})
+     */
+    private $photos;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="photo_sequence", type="array", nullable=true)
+     */
+    private $photoSequence = [];
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \DateTime $featuredAt
+     */
+    public function setFeaturedAt($featuredAt)
+    {
+        $this->featuredAt = $featuredAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getFeaturedAt()
+    {
+        return $this->featuredAt;
     }
 
     /**
@@ -117,6 +158,7 @@ class Event
     public function setCreator($creator)
     {
         $this->creator = $creator;
+
         return $this;
     }
 
@@ -127,7 +169,6 @@ class Event
     {
         return $this->creator;
     }
-
 
     /**
      * @param \Encore\CustomerBundle\Entity\EventSection[] $eventSections
@@ -147,11 +188,13 @@ class Event
 
     /**
      * @param \Encore\CustomerBundle\Entity\Venue $venue
+     *
      * @return Event
      */
     public function setVenue($venue)
     {
         $this->venue = $venue;
+
         return $this;
     }
 
@@ -167,19 +210,20 @@ class Event
      * Set name
      *
      * @param string $name
+     *
      * @return Event
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -190,19 +234,20 @@ class Event
      * Set type
      *
      * @param integer $type
+     *
      * @return Event
      */
     public function setType($type)
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
     /**
      * Get type
      *
-     * @return integer 
+     * @return integer
      */
     public function getType()
     {
@@ -213,19 +258,20 @@ class Event
      * Set description
      *
      * @param string $description
+     *
      * @return Event
      */
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -236,19 +282,20 @@ class Event
      * Set createAt
      *
      * @param \DateTime $createAt
+     *
      * @return Event
      */
     public function setCreateAt($createAt)
     {
         $this->createAt = $createAt;
-    
+
         return $this;
     }
 
     /**
      * Get createAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreateAt()
     {
@@ -259,19 +306,20 @@ class Event
      * Set saleStart
      *
      * @param \DateTime $saleStart
+     *
      * @return Event
      */
     public function setSaleStart($saleStart)
     {
         $this->saleStart = $saleStart;
-    
+
         return $this;
     }
 
     /**
      * Get saleStart
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getSaleStart()
     {
@@ -282,19 +330,20 @@ class Event
      * Set saleEnd
      *
      * @param \DateTime $saleEnd
+     *
      * @return Event
      */
     public function setSaleEnd($saleEnd)
     {
         $this->saleEnd = $saleEnd;
-    
+
         return $this;
     }
 
     /**
      * Get saleEnd
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getSaleEnd()
     {
@@ -305,12 +354,13 @@ class Event
      * Set heldDates
      *
      * @param \array $heldDate
+     *
      * @return Event
      */
     public function setHeldDates($heldDate)
     {
         $this->heldDates = $heldDate;
-    
+
         return $this;
     }
 
@@ -328,22 +378,90 @@ class Event
      * Set totalTickets
      *
      * @param integer $totalTickets
+     *
      * @return Event
      */
     public function setTotalTickets($totalTickets)
     {
         $this->totalTickets = $totalTickets;
-    
+
         return $this;
     }
 
     /**
      * Get totalTickets
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalTickets()
     {
         return $this->totalTickets;
     }
+
+    /**
+     * Add photo
+     *
+     * @param \Encore\CustomerBundle\Entity\EventPhoto $photo
+     *
+     * @return Event
+     */
+    public function addPhoto(EventPhoto $photo)
+    {
+        $this->photos[] = $photo;
+        $this->photoSequence[] = $photo->getId();
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \Encore\CustomerBundle\Entity\EventPhoto $photo
+     */
+    public function removePhoto(EventPhoto $photo)
+    {
+        foreach ($this->photoSequence as $key => $photoId) {
+            if ($photoId == $photo->getId()) {
+                unset($this->photoSequence[$key]);
+                break;
+            }
+        }
+        $this->photos->removeElement($photo);
+
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set photoSequence
+     *
+     * @param array $photoSequence
+     *
+     * @return Event
+     */
+    public function setPhotoSequence(array $photoSequence)
+    {
+        $this->photoSequence = $photoSequence;
+
+        return $this;
+    }
+
+    /**
+     * Get photoSequence
+     *
+     * @return array
+     */
+    public function getPhotoSequence()
+    {
+        return $this->photoSequence;
+    }
+
 }

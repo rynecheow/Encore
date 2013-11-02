@@ -1,0 +1,29 @@
+# <parameters>
+parameters:
+  # Base URI prefix
+  encore.uri_prefix.imgurl:
+      "http://%encore.host%:%encore.port%"
+
+  # URI prefixes
+  encore.uri_prefix.event:
+      "%encore.uri_prefix.imgurl%/images/data/events"
+  encore.uri_prefix.user:
+      "%encore.uri_prefix.imgurl%/images/data/user-avatar"
+# </parameters>
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        event_image:
+            uri_prefix: encore.uri_prefix.event
+            upload_destination: %kernel.root_dir%/../web/images/data/events
+            namer: encore.file_namer.uuid_namer
+            delete_on_remove: false
+            delete_on_update: false
+            inject_on_load: false
+        user_image:
+            uri_prefix: encore.uri_prefix.user:
+            upload_destination: %kernel.root_dir%/../web/images/data/user-avatar
+            delete_on_remove: false
+            delete_on_update: false
+            inject_on_load: false

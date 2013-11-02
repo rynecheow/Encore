@@ -54,7 +54,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/profile/edit/{id}
+     * @Route("/profile/edit/{id}", name="encore_edit_profile", requirements={"id" = "\d+"})
      */
     public function editAction(){
 
