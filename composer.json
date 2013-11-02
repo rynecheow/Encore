@@ -58,7 +58,8 @@
 
         "leafo/lessphp": "dev-master",
         "jquery/jquery": "2.0.3",
-        "cboden/ratchet": "dev-master"
+        "cboden/ratchet": "dev-master",
+        "vich/uploader-bundle": "v0.9.0"
 
     },
     "require-dev": {

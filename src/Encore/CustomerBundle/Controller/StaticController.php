@@ -4,48 +4,54 @@ namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-
-class StaticController extends BaseController{
+class StaticController extends BaseController
+{
 
     /**
      * @Route("/about", name="encore_about")
      */
-    public function aboutAction(){
+    public function aboutAction()
+    {
         return $this->render("EncoreCustomerBundle:Navigation:about-us.html.twig");
     }
 
     /**
      * @Route("/contact", name="encore_contact")
      */
-    public function contactAction(){
+    public function contactAction()
+    {
         return $this->render("EncoreCustomerBundle:Navigation:contact-us.html.twig");
     }
 
     /**
      * @Route("/sitemap", name="encore_sitemap")
      */
-    public function siteAction(){
+    public function siteAction()
+    {
         return $this->render("EncoreCustomerBundle:Navigation:site-map.html.twig");
     }
 
     /**
      * @Route("/terms/purchase", name="encore_terms_purchase")
      */
-    public function purchaseTermsAction(){
+    public function purchaseTermsAction()
+    {
         return $this->render("EncoreCustomerBundle:Navigation:purchase-terms.html.twig");
     }
 
     /**
      * @Route("/terms/encore", name="encore_terms_encore")
      */
-    public function websiteTermsAction(){
+    public function websiteTermsAction()
+    {
         return $this->render("EncoreCustomerBundle:Navigation:website-terms.html.twig");
     }
 
     /**
      * @Route("/privacy", name="encore_privacy")
      */
-    public function privacyAction(){
+    public function privacyAction()
+    {
         return $this->render("EncoreCustomerBundle:Navigation:privacy.html.twig");
     }
 }
