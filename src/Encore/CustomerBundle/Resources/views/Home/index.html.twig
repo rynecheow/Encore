@@ -4,49 +4,9 @@
 {% block title %}Welcome{% endblock %}
 
 {% block require_js %}
-    require(["encore/home/security-pusher",
-    "encore/sticky-header"]);
 {% endblock require_js %}
 
 {% block content %}
-    <div class="menu">
-        <ul class="main-nav">
-            <li class="grid1">
-                <a href="javascript:void(0);">
-                    <div class="animated-line animated"><div></div></div>
-                    <span>grid one</span>
-                </a>
-            </li>
-            <li class="grid2">
-                <a href="javascript:void(0);">
-                    <div class="animated-line animated"><div></div></div>
-                    <span>grid two</span>
-                </a>
-            </li>
-            <li class="grid3">
-                <a href="javascript:void(0);">
-                    <div class="animated-line animated"><div></div></div>
-                    <span>grid three</span>
-                </a>
-            </li>
-            <li class="grid4">
-                <a href="javascript:void(0);">
-                    <div class="animated-line animated"><div></div></div>
-                    <span>grid four</span>
-                </a>
-            </li>
-            <li class="grid5">
-                <a href="javascript:void(0);">
-                    <div class="animated-line animated"><div></div></div>
-                    <span>grid five</span>
-                </a>
-            </li>
-        </ul>
-
-    </div>
-
-
-
     <div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class=""></li>
@@ -58,6 +18,7 @@
             <h2 class="spread-headline">
                 Featured Events
             </h2>
+
             <div class="carousel-inner">
                 <div class="item">
                     <a>
@@ -97,8 +58,4 @@
             </div>
         </article>
     </section>
-    <div>
-
-        <button id='effect'>Push</button>
-    </div>
 {% endblock %}

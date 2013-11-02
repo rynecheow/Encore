@@ -6,19 +6,6 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "jquery/jquery",
-                "version": "2.0.3",
-                "dist": {
-                    "url": "http://code.jquery.com/jquery-2.0.3.js",
-                    "type": "file"
-                }
-            }
-        }
-    ],
     "require": {
         "php": ">=5.5",
         "symfony/symfony": "2.3.*",
@@ -39,9 +26,6 @@
 
         "incenteev/composer-parameter-handler": "~2.0",
 
-        "braincrafted/bootstrap-bundle": "dev-master",
-        "twitter/bootstrap": "2.3.*",
-
         "knplabs/knp-components": "1.1.2",
         "knplabs/knp-paginator-bundle": "v2.3",
         "knplabs/knp-snappy-bundle": "dev-master",
@@ -57,7 +41,6 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
 
         "leafo/lessphp": "dev-master",
-        "jquery/jquery": "2.0.3",
         "cboden/ratchet": "dev-master",
         "vich/uploader-bundle": "v0.9.0"
 
