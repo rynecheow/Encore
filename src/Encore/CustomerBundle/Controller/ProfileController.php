@@ -19,7 +19,6 @@ class ProfileController extends BaseController
     {
         // Only display form if user is logged in and not completed profile
         if ($this->isLoggedIn()) {
-
             $user = $this->authenticatedUser;
             if (!($user->isEnabled())) {
 
@@ -55,7 +54,7 @@ class ProfileController extends BaseController
             return $this->redirect($this->generateUrl('encore_home'));
         }
         // Invalid Access via url
-        return $this->redirect($this->generateUrl('encore_login'));
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
 
     }
 
