@@ -1,11 +1,15 @@
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
 
+{% block require_js %}
+    require(["libs/parsley.min"]);
+{% endblock require_js %}
 
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-{{ form(form) }}
 
-
+<form method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+</form>
 
 {% endblock %}
