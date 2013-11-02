@@ -13,8 +13,13 @@
         var environment = '{{ app.environment }}';
     </script>
     <script data-main="{{ asset('js/encore.min') }}" src="{{ asset('bundles/encorecustomer/js/libs/require.js') }}"></script>
+    <script>
+        require(['encore.min','jquery'], function($){
+            {% block require_js %}
+            {% endblock %}
+        });
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    </script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     {% endjavascripts %}
@@ -26,13 +31,7 @@
         <link href="{{ asset('css/animate-custom.css') }}" rel="stylesheet" />{% endblock %} {% block javascripts %}
     {% endblock %}
 
-    <script>
-        require(['encore.min'], function(){
-            {% block require_js %}
-            {% endblock %}
-        });
 
-    </script>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 
@@ -46,7 +45,7 @@
             <div class="st-content-inner">
                 {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
                 <div class="content">
-                    {% block content %}  {% endblock %}
+                    {% block content %} {{ block('fos_user_content') }} {% endblock %}
                 </div>
                 {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
             </div>

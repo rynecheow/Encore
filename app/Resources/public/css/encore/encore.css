@@ -1,0 +1,365 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+   CSS Reset Start
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* End Of Reset CSS */
+.content {
+  width: 100%;
+  height: auto;
+  margin-top: 52px;
+  background: #262626;
+}
+body {
+  background: #262626;
+}
+.signIn-form {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.signIn-form .signIn-heading,
+.signIn-form .checkbox {
+  margin-bottom: 10px;
+}
+.signIn-form input[type="text"],
+.signIn-form input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
+.item img {
+  left: 100%;
+  z-index: 1;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat no-repeat;
+}
+.header {
+  width: 100%;
+  height: 52px;
+  margin: 0 auto;
+  box-shadow: 1px 2px 5px #000000;
+  top: 0px;
+  background: #222222;
+  position: fixed;
+  z-index: 1000;
+}
+.footer {
+  width: 100%;
+  height: 10%;
+  margin-top: -20px;
+  /* As Bootstrap div has set margin */
+  position: relative;
+  background: #1c1c1c;
+  text-align: center;
+  font-size: 10px;
+  clear: both;
+  font-family: "domine";
+}
+.footer img {
+  width: 100px;
+  height: 41px;
+}
+.footer a {
+  text-decoration: none;
+  color: #d4d4d4;
+}
+.footer li {
+  display: inline-block;
+}
+.footer li a:hover {
+  text-decoration: underline;
+  color: #e3e3e3;
+}
+.footer li a:visited {
+  text-decoration: none;
+  color: #d4d4d4;
+}
+.footer li a:link {
+  text-decoration: none;
+  color: #d4d4d4;
+}
+.privacy {
+  width: 60%;
+  margin: 0 auto;
+}
+.privacy h3,
+.privacy p,
+.privacy a {
+  color: white;
+  text-align: justify;
+  line-height: 1.5em;
+}
+.privacy a {
+  color: darkred;
+  text-align: justify;
+  line-height: 1.5em;
+}
+.purchaseTC {
+  width: 60%;
+  margin: 0 auto;
+}
+.purchaseTC h3,
+.purchaseTC p,
+.purchaseTC a {
+  color: white;
+  text-align: justify;
+  line-height: 1.5em;
+}
+.purchaseTC a {
+  color: darkred;
+  text-align: justify;
+  line-height: 1.5em;
+}
+.websiteTC {
+  width: 60%;
+  margin: 0 auto;
+}
+.websiteTC h3,
+.websiteTC p,
+.websiteTC a {
+  color: white;
+  text-align: justify;
+  line-height: 1.5em;
+}
+.websiteTC a {
+  color: darkred;
+  text-align: justify;
+  line-height: 1.5em;
+}
+.about {
+  width: 60%;
+  margin: 0 auto;
+}
+.about h3,
+.about p,
+.about a {
+  color: white;
+  text-align: justify;
+  line-height: 1.5em;
+}
+.about a {
+  color: darkred;
+  text-align: justify;
+  line-height: 1.5em;
+}
+.home-content .home-featured .spread-headline {
+  -webkit-font-smoothing: antialiased;
+  color: #ffffff;
+  display: block;
+  font-family: Alegreya SC;
+  font-size: 18px;
+  font-weight: normal;
+  height: 18px;
+  letter-spacing: 34.560001373291016px;
+  line-height: 18px;
+  margin-bottom: 0px;
+  margin-left: 17px;
+  margin-right: 17px;
+  margin-top: 0px;
+  max-width: 1106px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  position: relative;
+  text-align: center;
+  text-indent: 34px;
+  text-transform: uppercase;
+  width: 1106px;
+  z-index: 3;
+}
+.home-content .home-featured .carousel-inner {
+  z-index: 2;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+#effect {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  z-index: 10000;
+}
+/** The wrapper that will contain our two forms **/
+#wrapper {
+  width: 60%;
+  right: 0px;
+  min-height: 560px;
+  margin: 0px auto;
+  width: 500px;
+  position: relative;
+}
+#register {
+  z-index: 21;
+  opacity: 0;
+}
+#login {
+  z-index: 22;
+}
+#toregister:target ~ #wrapper #register,
+#tologin:target ~ #wrapper #login {
+  z-index: 22;
+  -webkit-animation-name: fadeInLeft;
+  -moz-animation-name: fadeInLeft;
+  -ms-animation-name: fadeInLeft;
+  -o-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+  -webkit-animation-delay: .1s;
+  -moz-animation-delay: .1s;
+  -o-animation-delay: .1s;
+  -ms-animation-delay: .1s;
+  animation-delay: .1s;
+}
+/** the actual animation, credit where due : http://daneden.me/animate/ ***/
+.animate {
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 0.5s;
+  -moz-animation-timing-function: ease;
+  -moz-animation-fill-mode: both;
+  -o-animation-duration: 0.5s;
+  -o-animation-timing-function: ease;
+  -o-animation-fill-mode: both;
+  -ms-animation-duration: 0.5s;
+  -ms-animation-timing-function: ease;
+  -ms-animation-fill-mode: both;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+}
