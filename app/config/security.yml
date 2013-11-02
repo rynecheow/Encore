@@ -51,7 +51,6 @@ security:
                 check_path:                         "%encore.route_prefix.customer%/login_check"
                 failure_path:                       "%encore.route_prefix.customer%/login"
                 use_referer:                        true
-                remember_me:                        true
                 default_target_path:                "%encore.route_prefix.customer%/"
                 always_use_default_target_path:     false
                 username_parameter:                 _username
@@ -61,12 +60,6 @@ security:
                 path:                             "%encore.route_prefix.customer%/logout"
                 target:                           "%encore.route_prefix.customer%/"
             anonymous:    true
-            remember_me:
-                key:                                "encore_remember_me"
-                always_remember_me:                 false
-                lifetime:                           31536000
-                path:                               "%encore.route_prefix.customer%/"
-                domain:                             ~
         merchant:
             pattern: "%encore.route_prefix.customer%/.*"
             request_matcher: encore.merchant.request_matcher

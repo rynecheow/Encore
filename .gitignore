@@ -70,3 +70,4 @@ interdiff*.txt
 ######################
 /nbproject/
 /.idea/
+/app/Resources/public/css/encore/encore.css
