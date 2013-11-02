@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 
 <head>
     <meta charset="utf-8">
@@ -12,47 +12,55 @@
         var jsUrl = '{{ asset("bundles/encorecustomer/js") }}';
         var environment = '{{ app.environment }}';
     </script>
-    <script data-main="{{ asset('js/encore.min') }}" src="{{ asset('bundles/encorecustomer/js/libs/require-jquery.min.js') }}"></script>
+    <script data-main="{{ asset('js/encore.min') }}"
+            src="{{ asset('bundles/encorecustomer/js/libs/require-jquery.min.js') }}"></script>
     <script>
-        require(['encore.min'], function(){
+        require(['encore.min'], function () {
+            require(['encore/custom-navigation']);
             {% block require_js %}
             {% endblock %}
         });
-
     </script>
 
     {% endjavascripts %}
 
     {% block stylesheets %}
-        <link href="{{ asset('css/encore.css') }}" rel="stylesheet" />
-        <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap-responsive.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap-responsive.min.css') }}"
+              rel="stylesheet"/>
+        <link href="{{ asset('bundles/encorecustomer/css/libs/codrops/animated-border.css') }}"
+              rel="stylesheet"/>
     {% endblock %}
 
     {% block javascripts %}
     {% endblock %}
 
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 
 <body>
-<div class="st-container st-effect-3">
-    <div class="st-pusher">
-        <nav class="st-menu st-effect-3" id="menu-3">
-            {{ include('EncoreCustomerBundle:Authentication:loginForm.html.twig') }}
-        </nav>
-        <div class="st-content">
-            <div class="st-content-inner">
-                {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
-                <div class="content">
-                    {% block content %} {{ block('fos_user_content') }} {% endblock %}
-                </div>
-                {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
-            </div>
-        </div>
-    </div>
-</div>
-</body>
+<nav id="bt-menu" class="bt-menu">
+    <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
+    <ul>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="."><img src="bundles/encorecustomer/images/logo/logo-white.png" style="vertical-align: middle"/></a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms/purchase">Terms</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+</nav>
+<div class="content">
 
+    {% block content %}
+        {{ block('fos_user_content') }}
+    {% endblock %}
+</div>
+
+</body>
+{% javascripts %}
+
+{% endjavascripts %}
 </html>
