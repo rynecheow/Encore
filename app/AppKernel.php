@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new Encore\MerchantBundle\EncoreMerchantBundle(),
             new FOS\FacebookBundle\FOSFacebookBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
         );

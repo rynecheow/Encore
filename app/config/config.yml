@@ -102,9 +102,3 @@ fos_user:
     db_driver: orm
     firewall_name: encore_auth
     user_class: Encore\CustomerBundle\Entity\User
-
-
-bc_bootstrap:
-    less_filter: lessphp
-    assets_dir:  %kernel.root_dir%/../vendor/twitter/bootstrap
-    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-2.0.3.js
