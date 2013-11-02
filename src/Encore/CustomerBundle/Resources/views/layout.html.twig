@@ -25,12 +25,12 @@
     {% endjavascripts %}
 
     {% block stylesheets %}
-        <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
         <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap-responsive.min.css') }}"
               rel="stylesheet"/>
         <link href="{{ asset('bundles/encorecustomer/css/libs/codrops/animated-border.css') }}"
               rel="stylesheet"/>
+        <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
     {% endblock %}
 
     {% block javascripts %}
@@ -46,14 +46,13 @@
     <ul>
         <li><a href="/login">Login</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="."><img src="bundles/encorecustomer/images/logo/logo-white.png" style="vertical-align: middle"/></a></li>
+        <li><a href="/"><img src="bundles/encorecustomer/images/logo/logo-white.png" style="vertical-align: middle"/></a></li>
         <li><a href="/privacy">Privacy</a></li>
-        <li><a href="/terms/purchase">Terms</a></li>
+        <li><a href="/terms">Terms</a></li>
         <li><a href="/contact">Contact</a></li>
     </ul>
 </nav>
-<div class="content">
-
+<div class="wrapper">
     {% block content %}
         {{ block('fos_user_content') }}
     {% endblock %}
