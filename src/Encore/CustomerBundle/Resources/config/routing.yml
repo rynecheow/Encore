@@ -7,7 +7,12 @@ encore_static:
   type:     annotation
   prefix:   /
 
-encore_customer_profile:
+encore_complete_profile:
+  resource:  "@EncoreCustomerBundle/Controller/ProfileController.php"
+  type:     annotation
+  prefix:   /
+
+encore_edit_profile:
   resource:  "@EncoreCustomerBundle/Controller/ProfileController.php"
   type:     annotation
   prefix:   /
