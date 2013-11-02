@@ -71,7 +71,7 @@ class EncoreUserManager {
      */
     private function isAuthenticated()
     {
-        return ($this->sc->isGranted('ROLE_FACEBOOK') || $this->sc->isGranted('ROLE_NORMAL'));
+        return ($this->sc->isGranted('ROLE_USER') || $this->sc->isGranted('ROLE_ADMIN'));
     }
 
     /**
@@ -81,6 +81,7 @@ class EncoreUserManager {
      */
     public function getAuthenticatedUser()
     {
+
         if ($this->isAuthenticated()) {
             if (null === $token = $this->sc->getToken()) {
                 return null;
@@ -89,13 +90,11 @@ class EncoreUserManager {
             if (!is_object($user = $token->getUser())) {
                 return null;
             }
-
             $token = null;
 
             $user = $this->em
                 ->getRepository('EncoreCustomerBundle:User')
                 ->find($user->getId());
-
             return $user;
         }
 
