@@ -5,7 +5,8 @@ require.config({
         jquery: 'libs/jquery.min',
         'jquery-ui': 'libs/jquery-ui',
         'backbone.d': 'libs/backbone-min',
-        parsley: 'libs/parsley.min'
+        parsley: 'libs/parsley.min',
+        'bootstrap': 'libs/bootstrap.min'
     },
     urlArgs: 'bust=' + (new Date()).getTime()
 });
