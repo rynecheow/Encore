@@ -25,3 +25,10 @@
     font-weight: 400;
     src: local('Domine'), local('Domine-Regular'), url(http://themes.googleusercontent.com/static/fonts/domine/v1/pAB7vaxH_MyxaONhFl0NvevvDin1pK8aKteLpeZ5c0A.woff) format('woff');
 }
+
+@font-face {
+    font-family: 'Alegreya SC';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Alegreya SC'), local('AlegreyaSC-Regular'), url(http://themes.googleusercontent.com/static/fonts/alegreyasc/v3/-74JUGs8W14C5cCBFRS307rIa-7acMAeDBVuclsi6Gc.woff) format('woff');
+}
