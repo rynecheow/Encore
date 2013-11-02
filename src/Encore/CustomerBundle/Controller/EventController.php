@@ -3,14 +3,24 @@
 namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Encore\CustomerBundle\Entity\Event;
 
 class EventController extends BaseController
 {
 
     /**
-     * @Route("/event/{id}", name="encore_event", requirements={"id" = "\d+"})
+     * @Route("/events", name="encore_events")
+     *
      */
-    public function showAction($id)
+    public function indexAction()
+    {
+        //TODO: Show events listings
+    }
+
+    /**
+     * @Route("/events/{id}", name="encore_event_details", requirements={"id" = "\d+"})
+     */
+    public function detailAction($id)
     {
         $event = $this->em
             ->getRepository("EncoreCustomerBundle:Event")
@@ -46,5 +56,21 @@ class EventController extends BaseController
         ];
 
         return $this->render("EncoreCustomerBundle:Events:event.html.twig", $params);
+    }
+
+    /**
+     * @Route("/events/{id}/purchase/", name="envore_event_ticket_purchase", requirements={"id" = "\d+"})
+     */
+    public function purchaseAction($id)
+    {
+        //TODO handle purchase event action
+    }
+
+    /**
+     * @Route("/events/{id}/purchase/summary", name="envore_event_ticket_purchase", requirements={"id" = "\d+"})
+     */
+    public function purchaseSummaryAction($id)
+    {
+        //TODO handle purchase summary event action
     }
 } 

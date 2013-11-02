@@ -1,5 +1,5 @@
 encore_customer_welcome:
-  resource: "@EncoreCustomerBundle/Controller/WelcomeController.php"
+  resource: "@EncoreCustomerBundle/Controller/HomeController.php"
   type:     annotation
 
 encore_static:
