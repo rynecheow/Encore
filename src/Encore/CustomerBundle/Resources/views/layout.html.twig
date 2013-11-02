@@ -22,7 +22,8 @@
     {% block stylesheets %}
         <!-- Bootstrap -->
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
-        <link href="{{ asset('css/encore.css') }}" rel="stylesheet" />{% endblock %} {% block javascripts %}
+        <link href="{{ asset('css/encore.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/animate-custom.css') }}" rel="stylesheet" />{% endblock %} {% block javascripts %}
     {% endblock %}
 
     <script>
@@ -45,7 +46,7 @@
             <div class="st-content-inner">
                 {{ include('EncoreCustomerBundle:Header:header.html.twig') }}
                 <div class="content">
-                    {% block content %} {{ block('fos_user_content') }} {% endblock %}
+                    {% block content %}  {% endblock %}
                 </div>
                 {{ include('EncoreCustomerBundle:Footer:footer.html.twig') }}
             </div>
