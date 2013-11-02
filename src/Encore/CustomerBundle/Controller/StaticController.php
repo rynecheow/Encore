@@ -12,7 +12,7 @@ class StaticController extends BaseController
      */
     public function aboutAction()
     {
-        return $this->render("EncoreCustomerBundle:Navigation:about-us.html.twig");
+        return $this->render("EncoreCustomerBundle:Static:about-us.html.twig");
     }
 
     /**
@@ -20,31 +20,15 @@ class StaticController extends BaseController
      */
     public function contactAction()
     {
-        return $this->render("EncoreCustomerBundle:Navigation:contact-us.html.twig");
+        return $this->render("EncoreCustomerBundle:Static:contact-us.html.twig");
     }
 
     /**
-     * @Route("/sitemap", name="encore_sitemap")
-     */
-    public function siteAction()
-    {
-        return $this->render("EncoreCustomerBundle:Navigation:site-map.html.twig");
-    }
-
-    /**
-     * @Route("/terms/purchase", name="encore_terms_purchase")
+     * @Route("/terms", name="encore_terms_purchase")
      */
     public function purchaseTermsAction()
     {
-        return $this->render("EncoreCustomerBundle:Navigation:purchase-terms.html.twig");
-    }
-
-    /**
-     * @Route("/terms/encore", name="encore_terms_encore")
-     */
-    public function websiteTermsAction()
-    {
-        return $this->render("EncoreCustomerBundle:Navigation:website-terms.html.twig");
+        return $this->render("EncoreCustomerBundle:Static:purchase-terms.html.twig");
     }
 
     /**
@@ -52,6 +36,6 @@ class StaticController extends BaseController
      */
     public function privacyAction()
     {
-        return $this->render("EncoreCustomerBundle:Navigation:privacy.html.twig");
+        return $this->render("EncoreCustomerBundle:Static:privacy.html.twig");
     }
 }

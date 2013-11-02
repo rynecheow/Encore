@@ -56,15 +56,33 @@ table {
 
 /* End Of Reset CSS */
 
-.content {
-  width: 100%;
-  height: auto;
-  margin-top: 52px;
-  background: #262626;
+body {
+  background-color: #262626;
+  font-family: 'helveticaneue-light';
 }
 
-body {
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.wrapper {
+  width: 100%;
   background: #262626;
+  #static-logo{
+    margin: 0;
+    background: url('../../bundles/encorecustomer/images/logo/logo-color.png');
+    background-size: cover;
+    width: 287px;
+    height: 117px;
+    margin-left: 50px;
+    float: left;
+  }
+}
+
+nav {
+  z-index: 1000;
 }
 
 .signIn-form {
@@ -75,10 +93,42 @@ body {
   border: 1px solid #e5e5e5;
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-}
 
-.signIn-form .signIn-heading, .signIn-form .checkbox {
-  margin-bottom: 10px;
+  .signIn-heading {
+    font-family: 'Alegreya SC';
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    width: 260px;
+    margin-bottom: 25px;
+  }
+
+  .checkbox {
+    margin-bottom: 10px;
+  }
+
+  .submit {
+    display: block;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #d42750;
+    border-color: #d42852;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+
+  }
 }
 
 .signIn-form input[type="text"], .signIn-form input[type="password"] {
@@ -86,6 +136,72 @@ body {
   height: auto;
   margin-bottom: 15px;
   padding: 7px 9px;
+  width: 240px;
+}
+
+.signUp-form {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+
+  .signUp-heading {
+    font-family: 'Alegreya SC';
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    width: 260px;
+    margin-bottom: 25px;
+  }
+
+  .email {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+    width: 240px;
+  }
+  .username {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+    width: 240px;
+  }
+
+  .submit {
+    display: block;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #d42750;
+    border-color: #d42852;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+
+  }
+}
+
+.signUp-form .password input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+  width: 240px;
 }
 
 .item {
@@ -98,105 +214,68 @@ body {
   }
 }
 
-.header {
-  width: 100%;
-  height: 52px;
-  margin: 0 auto;
-  box-shadow: 1px 2px 5px #000000;
-  top: 0px;
-  background: #222222;
-  position: fixed;
-  z-index: 1000;
+//.header {
+//  width: 100%;
+//  height: 52px;
+//  margin: 0 auto;
+//  box-shadow: 1px 2px 5px #000000;
+//  top: 0px;
+//  background: #222222;
+//  position: fixed;
+//  z-index: 1000;
+//}
+
+.st-container-inner {
+  height: 100%;
+
 }
 
-.footer {
-  width: 100%;
-  height: 10%;
-  margin-top: -20px; /* As Bootstrap div has set margin */
-  position: relative;
-  background: #1c1c1c;
-  text-align: center;
-  font-size: 10px;
-  clear: both;
-  font-family: "domine";
-  img {
-    width: 100px;
-    height: 41px;
-  }
-  a {
-    text-decoration: none;
-    color: #d4d4d4;
-  }
-  li {
-    display: inline-block;
-    a:hover {
-      text-decoration: underline;
-      color: #e3e3e3;
-    }
-    a:visited {
-      text-decoration: none;
-      color: #d4d4d4;
-    }
-    a:link {
-      text-decoration: none;
-      color: #d4d4d4;
-    }
-  }
-}
+//.footer {
+//  width: 100%;
+//  height: 10%;
+//  margin-top: -20px; /* As Bootstrap div has set margin */
+//  position: fixed;
+//  bottom: 0;
+//  background: #1c1c1c;
+//  text-align: center;
+//  font-size: 10px;
+//  clear: both;
+//  font-family: "domine";
+//  img {
+//    width: 100px;
+//    height: 41px;
+//  }
+//  a {
+//    text-decoration: none;
+//    color: #d4d4d4;
+//  }
+//  li {
+//    display: inline-block;
+//    a:hover {
+//      text-decoration: underline;
+//      color: #e3e3e3;
+//    }
+//    a:visited {
+//      text-decoration: none;
+//      color: #d4d4d4;
+//    }
+//    a:link {
+//      text-decoration: none;
+//      color: #d4d4d4;
+//    }
+//  }
+//}
 
-.privacy {
+.static {
   width: 60%;
   margin: 0 auto;
+  border-radius: 50px;
+  background-color: #e0e0e0;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 55px 55px;
   h3, p, a {
-    color: white;
-    text-align: justify;
-    line-height: 1.5em;
-  }
-  a {
-    color: darkred;
-    text-align: justify;
-    line-height: 1.5em;
-  }
-
-}
-
-.purchaseTC {
-  width: 60%;
-  margin: 0 auto;
-  h3, p, a {
-    color: white;
-    text-align: justify;
-    line-height: 1.5em;
-  }
-  a {
-    color: darkred;
-    text-align: justify;
-    line-height: 1.5em;
-  }
-
-}
-
-.websiteTC {
-  width: 60%;
-  margin: 0 auto;
-  h3, p, a {
-    color: white;
-    text-align: justify;
-    line-height: 1.5em;
-  }
-  a {
-    color: darkred;
-    text-align: justify;
-    line-height: 1.5em;
-  }
-
-}
-
-.about {
-  width: 60%;
-  margin: 0 auto;
-  h3, p, a {
-    color: white;
+    color: #0d0d0d;
     text-align: justify;
     line-height: 1.5em;
   }
@@ -207,9 +286,9 @@ body {
   }
 }
 
-.home-content{
-  .home-featured{
-    .spread-headline{
+.home-content {
+  .home-featured {
+    .spread-headline {
       -webkit-font-smoothing: antialiased;
       color: rgb(255, 255, 255);
       display: block;
@@ -235,7 +314,7 @@ body {
       width: 1106px;
       z-index: 3;
     }
-    .carousel-inner{
+    .carousel-inner {
       z-index: 2;
       margin-bottom: 0px;
       margin-left: 0px;
@@ -249,65 +328,56 @@ body {
 }
 
 #effect {
-  position:fixed;
+  position: fixed;
   top: 5px;
   left: 5px;
   z-index: 10000;
 }
 
-/** The wrapper that will contain our two forms **/
-#wrapper{
-  width: 60%;
-  right: 0px;
-  min-height: 560px;
-  margin: 0px auto;
-  width: 500px;
-  position: relative;
+.menu {
+  .main-nav {
+    & > li {
+      position: absolute;
+      width: 150px;
+      z-index: 1;
+      a {
+        span {
+          display: block;
+          color: #fff;
+          font-size: .92em;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          padding-top: 15px;
+
+        }
+      }
+      .animated-line {
+        & > div {
+          width: 200px;
+        }
+      }
+
+      & > li.grid1 {
+        top: 0;
+        left: 20%;
+      }
+      & > li.grid2 {
+        top: 25%;
+        left: -8%;
+      }
+      & > li.grid3 {
+        top: 54%;
+        right: 0;
+      }
+      & > li.grid4 {
+        bottom: 5%;
+        left: 62%;
+      }
+      & > li.grid5 {
+        bottom: 20%;
+        left: 18%;
+      }
+    }
+  }
 }
 
-#register{
-  z-index: 21;
-  opacity: 0;
-}
-
-#login{
-  z-index: 22;
-}
-
-#toregister:target ~ #wrapper #register,
-#tologin:target ~ #wrapper #login{
-  z-index: 22;
-  -webkit-animation-name: fadeInLeft;
-  -moz-animation-name: fadeInLeft;
-  -ms-animation-name: fadeInLeft;
-  -o-animation-name: fadeInLeft;
-  animation-name: fadeInLeft;
-  -webkit-animation-delay: .1s;
-  -moz-animation-delay: .1s;
-  -o-animation-delay: .1s;
-  -ms-animation-delay: .1s;
-  animation-delay: .1s;
-}
-
-/** the actual animation, credit where due : http://daneden.me/animate/ ***/
-.animate{
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease;
-  -webkit-animation-fill-mode: both;
-
-  -moz-animation-duration: 0.5s;
-  -moz-animation-timing-function: ease;
-  -moz-animation-fill-mode: both;
-
-  -o-animation-duration: 0.5s;
-  -o-animation-timing-function: ease;
-  -o-animation-fill-mode: both;
-
-  -ms-animation-duration: 0.5s;
-  -ms-animation-timing-function: ease;
-  -ms-animation-fill-mode: both;
-
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-fill-mode: both;
-}

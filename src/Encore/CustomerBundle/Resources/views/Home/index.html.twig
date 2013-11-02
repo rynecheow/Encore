@@ -4,8 +4,6 @@
 {% block title %}Welcome{% endblock %}
 
 {% block require_js %}
-    require(["encore/home/security-pusher",
-    "encore/sticky-header"]);
 {% endblock require_js %}
 
 {% block content %}
@@ -20,6 +18,7 @@
             <h2 class="spread-headline">
                 Featured Events
             </h2>
+
             <div class="carousel-inner">
                 <div class="item">
                     <a>
@@ -59,7 +58,4 @@
             </div>
         </article>
     </section>
-    <div>
-        <button id='effect'>Push</button>
-    </div>
 {% endblock %}
