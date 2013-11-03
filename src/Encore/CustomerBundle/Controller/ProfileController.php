@@ -10,9 +10,6 @@ use Encore\CustomerBundle\Entity\User;
 
 class ProfileController extends BaseController
 {
-
-
-
     /**
      * Logged In User Editing Its Profile
      * @Route("/profile/edit/{id}", name="encore_edit_profile", requirements={"id" = "\d+"})
@@ -25,26 +22,32 @@ class ProfileController extends BaseController
                 $form = $this->createFormBuilder()
                     ->setAction('encore_edit_profile')
                     // Get First Email In Email Array
-                    ->add('email', 'email' , array(
-                        // HTML Attributes
-                        'attr' => array('value'=> $user->getEmails()[0],
-                            'disabled', '' ),
-                        'label' => 'Email :'
-                    ))
-                    ->add('firstName', 'text' , array('label' => 'First Name :'))
+                    ->add(
+                        'email',
+                        'email',
+                        array(
+                            // HTML Attributes
+                            'attr' => array(
+                                'value' => $user->getEmails()[0],
+                                'disabled',
+                                ''
+                            ),
+                            'label' => 'Email :'
+                        )
+                    )
+                    ->add('firstName', 'text', array('label' => 'First Name :'))
                     ->add('lastName', 'text', array('label' => 'Last Name :'))
                     ->add('birthDate', 'birthday', array('label' => 'Birth Date :'))
                     ->add('contactNo', 'number', array('label' => 'Contact No :'))
                     ->add('address', 'textarea', array('label' => 'Address :'))
-                    ->add('edit','submit')
+                    ->add('edit', 'submit')
                     ->getForm();
 
                 $form->handleRequest($request);
                 if ($form->isValid()) {
                     $data = $form->getData();
                     $valid = $this->editProfileAction($data);
-                    if($valid['status'])
-                    {
+                    if ($valid['status']) {
                         // show message indicate success?
 
                     }
@@ -59,6 +62,7 @@ class ProfileController extends BaseController
             // If Not Enabled
             return $this->redirect($this->generateUrl('encore_complete_profile'));
         }
+
         // Invalid Access via url
         return $this->redirect($this->generateUrl('encore_login'));
     }
@@ -67,6 +71,7 @@ class ProfileController extends BaseController
      * Edit Profile ( Logged in user)
      *
      * @param $data
+     *
      * @return array
      */
     private function editProfileAction($data)
@@ -77,9 +82,8 @@ class ProfileController extends BaseController
     /**
      *
      * @param $data
+     *
      * @return Response
      */
 
-
-
-} 
+}
