@@ -64,18 +64,17 @@ body {
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 .wrapper {
   width: 100%;
   background: #262626;
-  #static-logo{
+  #static-logo {
     margin: 0;
-    background: url('../../bundles/encorecustomer/images/logo/logo-color.png');
+    background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
     background-size: cover;
-    width: 287px;
-    height: 117px;
+    width: 265px;
+    height: 72px;
     margin-left: 50px;
     float: left;
   }
@@ -85,123 +84,143 @@ nav {
   z-index: 1000;
 }
 
-.signIn-form {
-  max-width: 300px;
-  padding: 19px 29px 29px;
-  margin: 0 auto 20px;
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+.signup-signin-logo {
+  background: url('../../bundles/encorecustomer/images/logo/logo-dark.svg');
+  background-size: cover;
+  width: 265px;
+  height: 72px;
+  margin: 17px 117px;
+  float: left;
+  cursor: pointer;
+}
 
-  .signIn-heading {
-    font-family: 'Alegreya SC';
-    font-size: 28px;
-    text-align: center;
-    letter-spacing: 10px;
-    text-transform: uppercase;
-    width: 260px;
-    margin-bottom: 25px;
+.signIn-container {
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+
+  .to_register {
+    margin-top: 10px;
+    p {
+      color: #9E9292;
+      font-size: 15pt;
+    }
   }
+  .signIn-form {
+    min-width: 400px;
+    min-height: 400px;
+    padding: 105px 100px 59px 72px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-top: 100px;
 
-  .checkbox {
-    margin-bottom: 10px;
-  }
+    h1.signIn-header {
+      font-family: 'Alegreya SC';
+      font-size: 32pt;
+      text-align: center;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      width: 350px;
+      margin-bottom: 30px;
+    }
 
-  .submit {
-    display: block;
-    width: 100%;
-    padding-right: 0;
-    padding-left: 0;
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.33;
-    border-radius: 6px;
-    color: #ffffff;
-    background-color: #d42750;
-    border-color: #d42852;
-    margin-bottom: 0;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
+    .checkbox {
+      margin-bottom: 10px;
+    }
 
+    .submit {
+      display: block;
+      width: 350px;
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.33;
+      border-radius: 6px;
+      color: #ffffff;
+      background-color: #d44877;
+      border-color: #d42852;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+
+    }
+
+    input[type="text"], input[type="password"] {
+      font-size: 14pt;
+      height: 40px;
+      margin-bottom: 15px;
+      padding: 7px 9px;
+      width: 350px;
+    }
   }
 }
 
-.signIn-form input[type="text"], .signIn-form input[type="password"] {
-  font-size: 16px;
-  height: auto;
-  margin-bottom: 15px;
-  padding: 7px 9px;
-  width: 240px;
-}
+.signUp-container {
+  width: 500px;
+  height: 700px;
+  margin: 0 auto;
 
-.signUp-form {
-  max-width: 300px;
-  padding: 19px 29px 29px;
-  margin: 0 auto 20px;
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-
-  .signUp-heading {
-    font-family: 'Alegreya SC';
-    font-size: 28px;
-    text-align: center;
-    letter-spacing: 10px;
-    text-transform: uppercase;
-    width: 260px;
-    margin-bottom: 25px;
+  .to_login {
+    margin-top: 10px;
+    p {
+      color: #9E9292;
+      font-size: 15pt;
+    }
   }
 
-  .email {
-    font-size: 16px;
-    height: auto;
-    margin-bottom: 15px;
-    padding: 7px 9px;
-    width: 240px;
-  }
-  .username {
-    font-size: 16px;
-    height: auto;
-    margin-bottom: 15px;
-    padding: 7px 9px;
-    width: 240px;
-  }
+  .signUp-form {
+    min-width: 500px;
+    max-height: 600px;
+    padding: 141px 69px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-top: 100px;
+    h1.signUp-header {
+      font-family: 'Alegreya SC';
+      font-size: 32pt;
+      text-align: center;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      width: 350px;
+      margin: -25px 0px 54px 0px
+    }
 
-  .submit {
-    display: block;
-    width: 100%;
-    padding-right: 0;
-    padding-left: 0;
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.33;
-    border-radius: 6px;
-    color: #ffffff;
-    background-color: #d42750;
-    border-color: #d42852;
-    margin-bottom: 0;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
+    .email, .username, .password {
+      font-size: 14pt;
+      height: 40px;
+      margin-bottom: 25px;
+      padding: 7px 9px;
+      width: 350px;
+    }
 
+    .submit {
+      display: block;
+      width: 350px;
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.33;
+      border-radius: 6px;
+      color: #ffffff;
+      background-color: #d44877;
+      border-color: #d42852;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+    }
   }
-}
-
-.signUp-form .password input[type="password"] {
-  font-size: 16px;
-  height: auto;
-  margin-bottom: 15px;
-  padding: 7px 9px;
-  width: 240px;
 }
 
 .item {
@@ -213,58 +232,6 @@ nav {
     background-repeat: no-repeat no-repeat;
   }
 }
-
-//.header {
-//  width: 100%;
-//  height: 52px;
-//  margin: 0 auto;
-//  box-shadow: 1px 2px 5px #000000;
-//  top: 0px;
-//  background: #222222;
-//  position: fixed;
-//  z-index: 1000;
-//}
-
-.st-container-inner {
-  height: 100%;
-
-}
-
-//.footer {
-//  width: 100%;
-//  height: 10%;
-//  margin-top: -20px; /* As Bootstrap div has set margin */
-//  position: fixed;
-//  bottom: 0;
-//  background: #1c1c1c;
-//  text-align: center;
-//  font-size: 10px;
-//  clear: both;
-//  font-family: "domine";
-//  img {
-//    width: 100px;
-//    height: 41px;
-//  }
-//  a {
-//    text-decoration: none;
-//    color: #d4d4d4;
-//  }
-//  li {
-//    display: inline-block;
-//    a:hover {
-//      text-decoration: underline;
-//      color: #e3e3e3;
-//    }
-//    a:visited {
-//      text-decoration: none;
-//      color: #d4d4d4;
-//    }
-//    a:link {
-//      text-decoration: none;
-//      color: #d4d4d4;
-//    }
-//  }
-//}
 
 .static {
   width: 60%;
