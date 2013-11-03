@@ -1,2 +1,12 @@
-<p>Hello</p>
-{{ EVENT_NAME }}
+{% for photos in EVENT_PHOTOS %}
+    <img src="{{ photos }}">
+{% endfor %}
+<p>Event: {{ EVENT_NAME }}</p>
+<p>Event Type: {{ EVENT_TYPE }}</p>
+<p>Description: {{ EVENT_DESC }}</p>
+<p>Held Date: {{ EVENT_HELD_DATES }}</p>
+<p>Venue: {{ VENUE_NAME }}</p>
+<p>Location: {{ VENUE_LOCATE }}</p>
+<form autocomplete="on">
+    <a href="/purchase/1">Buy</a>
+</form>

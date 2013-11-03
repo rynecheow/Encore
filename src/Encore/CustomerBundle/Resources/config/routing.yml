@@ -21,6 +21,10 @@ encore_event:
   resource:  "@EncoreCustomerBundle/Controller/EventController.php"
   type:     annotation
 
+encore_seat_selection:
+  resource:  "@EncoreCustomerBundle/Controller/SeatSelectionController.php"
+  type:     annotation
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

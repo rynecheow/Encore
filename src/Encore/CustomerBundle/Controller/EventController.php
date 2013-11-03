@@ -30,6 +30,8 @@ class EventController extends BaseController
             throw $this->createNotFoundException("No event found for id " . $id . " WHYYYYY!");
         }
 
+        $heldDates = $event->getHeldDates();
+        $heldDates = $heldDates->format("Y-m-d H:i");
         $venue = $event->getVenue();
 
         if (!$venue) {
@@ -42,6 +44,20 @@ class EventController extends BaseController
             throw $this->createNotFoundException("No merchant found for id " . $merchant->getId() . " WHYYYYY!");
         }
 
+        $photos = $event->getPhotos();
+        $photoSequence = $event->getPhotoSequence();
+        $photoPath = [];
+        $photosNumber = count($photos);
+
+        foreach ($photoSequence as $photoId) {
+            for ($i=0; $i<$photosNumber; $i++)
+            {
+                if ($photoId == $photos[$i]->getId()) {
+                    $photoPath[] = $photos[$i]->getImagePath();
+                }
+            }
+        }
+
         $params = [
             "EVENT_NAME" => $event->getName(),
             "EVENT_TYPE" => $event->getType(),
@@ -49,8 +65,9 @@ class EventController extends BaseController
             "EVENT_CREATE_AT" => $event->getCreateAt(),
             "EVENT_SALE_START" => $event->getSaleStart(),
             "EVENT_SALE_END" => $event->getSaleEnd(),
-            "EVENT_HELD_DATES" => $event->getHeldDates(),
+            "EVENT_HELD_DATES" => $heldDates,
             "EVENT_TOTAL_TICKET" => $event->getTotalTickets(),
+            "EVENT_PHOTOS" =>$photoPath,
             "VENUE_NAME" => $venue->getName(),
             "VENUE_LOCATE" => $venue->getLocation()
         ];
