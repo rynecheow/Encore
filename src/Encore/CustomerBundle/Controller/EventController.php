@@ -20,11 +20,11 @@ class EventController extends BaseController
     /**
      * @Route("/events/{id}", name="encore_event_details", requirements={"id" = "\d+"})
      */
-    public function detailAction($id)
+    public function eventDetailAction($id)
     {
         $event = $this->em
             ->getRepository("EncoreCustomerBundle:Event")
-            ->find($id);
+            ->findOneBy($id);
 
         if (!$event) {
             throw $this->createNotFoundException("No event found for id " . $id . " WHYYYYY!");
@@ -43,16 +43,16 @@ class EventController extends BaseController
         }
 
         $params = [
-            "EVENT_NAME" => $event->getName(),
-            "EVENT_TYPE" => $event->getType(),
-            "EVENT_DESC" => $event->getDescription(),
-            "EVENT_CREATE_AT" => $event->getCreateAt(),
-            "EVENT_SALE_START" => $event->getSaleStart(),
-            "EVENT_SALE_END" => $event->getSaleEnd(),
-            "EVENT_HELD_DATES" => $event->getHeldDates(),
-            "EVENT_TOTAL_TICKET" => $event->getTotalTickets(),
-            "VENUE_NAME" => $venue->getName(),
-            "VENUE_LOCATE" => $venue->getLocation()
+            "event_name" => $event->getName(),
+            "event_type" => $event->getType(),
+            "event_description" => $event->getDescription(),
+            "event_created_at" => $event->getCreateAt(),
+            "event_sale_start" => $event->getSaleStart(),
+            "event_sale_end" => $event->getSaleEnd(),
+            "event_held_dates" => $event->getHeldDates(),
+            "event_total_tickets" => $event->getTotalTickets(),
+            "venue_name" => $venue->getName(),
+            "venue_location" => $venue->getLocation()
         ];
 
         return $this->render("EncoreCustomerBundle:Events:event.html.twig", $params);

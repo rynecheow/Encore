@@ -32,11 +32,6 @@
               rel="stylesheet"/>
         <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
     {% endblock %}
-
-    {% block javascripts %}
-    {% endblock %}
-
-
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 
@@ -46,7 +41,8 @@
     <ul>
         <li><a href="/login">Login</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/"><img src="bundles/encorecustomer/images/logo/logo-white.png" style="vertical-align: middle"/></a></li>
+        <li><a href="/"><img src="bundles/encorecustomer/images/logo/logo-white.png"
+                             style="vertical-align: middle"/></a></li>
         <li><a href="/privacy">Privacy</a></li>
         <li><a href="/terms">Terms</a></li>
         <li><a href="/contact">Contact</a></li>
@@ -59,7 +55,4 @@
 </div>
 
 </body>
-{% javascripts %}
-
-{% endjavascripts %}
 </html>
