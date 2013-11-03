@@ -7,13 +7,10 @@
         <h1 class="signUp-header">Sign Up</h1>
         {{ form_widget(form.email, { 'attr': {'class': 'email', 'placeholder': 'Email'} }) }}
         {{ form_widget(form.username, { 'attr': {'class': 'username', 'placeholder': 'Username'} }) }}
-        {#{{ form_widget(form.plainPassword, { 'attr': {'class': 'password'} }) }}#}
         {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'password', 'placeholder': 'Password'} }) }}
         {{ form_label(form.plainPassword.first, ' ') }}
         {{ form_label(form.plainPassword.second, ' ') }}
         {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'password', 'placeholder': 'Verify Password'} }) }}
-
-
         <div>
             <input class="submit" type="submit" value="{{ 'registration.submit'|trans }}"/>
         </div>
