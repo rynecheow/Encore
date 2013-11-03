@@ -18,20 +18,20 @@
         require(['encore.min'], function () {
             require(['encore/custom-navigation']);
             {% block require_js %}
-            {% endblock %}
+            {% endblock require_js %}
         });
     </script>
 
     {% endjavascripts %}
 
-    {% block stylesheets %}
-        <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
-        <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap-responsive.min.css') }}"
-              rel="stylesheet"/>
-        <link href="{{ asset('bundles/encorecustomer/css/libs/codrops/animated-border.css') }}"
-              rel="stylesheet"/>
-        <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
-    {% endblock %}
+    {% stylesheets "@encore_css" %}
+    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap-responsive.min.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('bundles/encorecustomer/css/libs/codrops/animated-border.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
+    {% endstylesheets %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 
@@ -41,8 +41,9 @@
     <ul>
         <li><a href="/login">Login</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/"><img src="bundles/encorecustomer/images/logo/logo-white.png"
-                             style="vertical-align: middle"/></a></li>
+        <li><a href="/"><img id="nav-logo" src="bundles/encorecustomer/images/logo/logo-white.svg"
+                             onmouseover="this.src = 'bundles/encorecustomer/images/logo/logo-color.svg'"
+                             onmouseout="this.src = 'bundles/encorecustomer/images/logo/logo-white.svg'"/></a></li>
         <li><a href="/privacy">Privacy</a></li>
         <li><a href="/terms">Terms</a></li>
         <li><a href="/contact">Contact</a></li>
@@ -51,8 +52,7 @@
 <div class="wrapper">
     {% block content %}
         {{ block('fos_user_content') }}
-    {% endblock %}
+    {% endblock content %}
 </div>
-
 </body>
 </html>
