@@ -11,37 +11,19 @@
 {% block content %}
     <div class="signUp-container">
         <div class="signup-signin-logo" onclick="location.href='/';"></div>
-        <form class="signUp-form" method="POST" action="{{ path('encore_signup') }}">
+        <form class="signUp-form" method="POST" action="{{ path('encore_signup') }}" {{ form_enctype(form) }}>
             <h1 class="signUp-header">Sign Up</h1>
             <fieldset>
-                <div class="single-field">
-                    <input type="email" name="email" class="signup-email" placeholder="Email Address"
-                           data-required="true" data-remote-method="POST"
-                           data-type="email" data-required-message="Please enter your email"
-                           data-type-email-message="Your email address is incorrect"/>
-                </div>
-                <div class="single-field">
-                    <input type="password" name="password" class="signup-password" placeholder="Password"
-                           data-required="true" data-minlength="6" data-required-message="Please enter your password"
-                           data-minlength-message="Short passwords are easy to guess. Try one with at least 8 characters."/>
-                </div>
-                <div class="single-field">
-                    <input id="signup-agreement" type="checkbox" name="signup-agreement" class="signup-agreement"
-                           data-required="true"
-                           data-error-message="In order to use our services, you must agree to Encore's Terms and Privacy."/>
-                    <label for="signup-agreement">I agree with Encore's
-                        <b>
-                            <a href="{{ path('encore_terms_purchase') }}" target="_blank">Terms</a>
-                        </b> &amp;
-                        <b>
-                            <a href="{{ path('encore_privacy') }}" target="_blank">Privacy</a>
-                        </b>
-                    </label>
-                </div>
+                {{ form(form) }}
+                <label for="form_agreement">I agree with Encore's
+                    <b>
+                        <a href="{{ path('encore_terms_purchase') }}" target="_blank">Terms</a>
+                    </b> &amp;
+                    <b>
+                        <a href="{{ path('encore_privacy') }}" target="_blank">Privacy</a>
+                    </b>
+                </label>
             </fieldset>
-            <div>
-                <input type="submit" class="submit" value="{{ error }}Create Account"></button>
-            </div>
         </form>
         <div class="to_login">
             <p>Already have an account? <a href="/login">Sign in here.</a></p>
