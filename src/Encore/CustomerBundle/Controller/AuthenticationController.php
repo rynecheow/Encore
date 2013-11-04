@@ -51,39 +51,25 @@ class AuthenticationController extends BaseController
         if ($this->isLoggedIn()) {
             $user = $this->authenticatedUser;
             if (!($user->isEnabled())) {
-
-                $form = $this->createFormBuilder()
-                    ->setAction('encore_complete_profile')
-                    // Get First Email In Email Array
-                    ->add(
-                        'email',
-                        'email',
-                        [
-                            // HTML Attributes
-                            'attr' => [
-                                'value' => $user->getEmails()[0]->getEmail(),
-                                'disabled',
-                                ''
-                            ],
-                            'label' => 'Email :'
-                        ]
-                    )
-                    ->add('firstName', 'text', ['label' => 'First Name :'])
-                    ->add('lastName', 'text', ['label' => 'Last Name :'])
-                    ->add('birthDate', 'birthday', ['label' => 'Birth Date :'])
-                    ->add('contactNo', 'number', ['label' => 'Contact No :'])
-                    ->add('address', 'textarea', ['label' => 'Address :'])
-                    ->add('edit', 'submit')
-                    ->getForm();
+                $form = $this->createCompleteProfileForm();
 
                 $form->handleRequest($request);
                 if ($form->isValid()) {
                     $data = $form->getData();
-                    $this->completeInformation($user, $data);
+                    $validate = $this->validateCustomerInfo($data);
+
+                    if ($validate["status"]) {
+                        $success = $this->createCustomer($user, $data);
+
+                        if ($success["status"]) {
+                            // Redirect To Home Page
+                            return $this->generateUrl("encore_home");
+                        }
+                    }
                 }
 
                 return $this->render(
-                    "EncoreCustomerBundle:User:profile.html.twig",
+                    "EncoreCustomerBundle:User:complete-information.html.twig",
                     ['form' => $form->createView()]
                 );
             }
@@ -94,30 +80,6 @@ class AuthenticationController extends BaseController
 
         // Invalid Access via url
         return $this->redirect($this->generateUrl('fos_user_security_login'));
-
-    }
-
-    private function completeInformation($user, $data)
-    {
-        if ($this->isLoggedIn()) {
-            $request = $this->getRequest();
-
-            if (($request->getMethod() === "POST") && ($request->request->get("encore_complete_profile"))) {
-                $validate = $this->validateCustomerInfo($data);
-
-                if ($validate["status"]) {
-                    $success = $this->createCustomer($user, $data);
-
-                    if ($success["status"]) {
-                        // Redirect To Home Page
-                        return $this->generateUrl("encore_customer_welcome");
-                    }
-
-                }
-            }
-        } else {
-            return $this->render("EncoreCustomerBundle:Security:login.html.twig");
-        }
     }
 
     /**
@@ -134,7 +96,8 @@ class AuthenticationController extends BaseController
             ->setLastName($params["lastName"])
             ->setBirthDate($params["birthDate"])
             ->setContactNo($params["contactNo"])
-            ->setAddress($params["address"]);
+            ->setAddress($params["address"])
+            ->setUsername($user->getUsername());
 
         $this->em->persist($customer);
         $this->em->flush();
@@ -241,6 +204,100 @@ class AuthenticationController extends BaseController
     }
 
     /**
+     * Complete Profile Form
+     *
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createCompleteProfileForm()
+    {
+        return $this->createFormBuilder()
+            ->setAction('encore_complete_profile')
+            ->add(
+                'firstName',
+                'text',
+                [
+                    'attr' => [
+                        'class' => 'complete-profile-fname',
+                        'placeholder' => 'First Name',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your first name.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'lastName',
+                'text',
+                [
+                    'attr' => [
+                        'class' => 'complete-profile-lname',
+                        'placeholder' => 'Last Name',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your last name.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'birthDate',
+                'birthday',
+                [
+                    'attr' => [
+                        'class' => 'complete-profile-birthday',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter select your birthday.',
+                    ],
+                    'label' => 'Date Of Birth',
+                    'empty_value' => ['year' => 'Year', 'month' => 'Month', 'day' => 'Day']
+                ]
+            )
+            ->add(
+                'contactNo',
+                'number',
+                [
+                    'attr' => [
+                        'class' => 'complete-profile-contactno',
+                        'placeholder' => 'Contact No.',
+                        'data-required' => 'true',
+                        'data-type' => 'digits',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your contact number.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'address',
+                'textarea',
+                [
+                    'attr' => [
+                        'class' => 'complete-profile-address',
+                        'placeholder' => 'Address',
+                        'data-required' => 'true',
+                        'data-rangelength' => '[20,200]',
+                        'data-trigger' => 'keyup',
+                        'data-required-message' => 'Please enter your address.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'complete registration',
+                'submit',
+                [
+                    'attr' => [
+                        'class' => 'submit',
+                        'value' => 'Complete registration'
+                    ]
+                ]
+            )
+            ->getForm();
+    }
+
+    /**
      * Sign Up Form
      *
      * @return \Symfony\Component\Form\Form
@@ -266,20 +323,6 @@ class AuthenticationController extends BaseController
                     'label' => false
                 ]
             )
-//            ->add(
-//                'username',
-//                'text',
-//                [
-//                    'attr' => [
-//                        'class' => 'signup-username',
-//                        'placeholder' => 'Username',
-//                        'data-required' => 'true',
-//                        'data-trigger' => 'change',
-//                        'data-required-message' => 'Please enter your username.',
-//                    ],
-//                    'label' => false
-//                ]
-//            )
             ->add(
                 'password',
                 'password',
