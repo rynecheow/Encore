@@ -1,0 +1,21 @@
+{# Created by rynecheow on 11/4/13. #}
+
+{% extends 'EncoreCustomerBundle::layout.html.twig' %}
+
+{% block require_js %}
+    require(["encore/authentication/complete-profile"]);
+{% endblock require_js %}
+
+{% block title %}Complete Profile{% endblock title %}
+
+{% block content %}
+    <div class="complete-profile-container">
+        <div class="signup-signin-logo" onclick="location.href='/';"></div>
+        <form class="complete-profile-form" method="post" {{ form_enctype(form) }}>
+            <h1 class="complete-profile-header">Complete Your Information</h1>
+            <fieldset>
+                {{ form(form) }}
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}
