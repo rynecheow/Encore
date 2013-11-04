@@ -31,5 +31,6 @@ fos_user_change_password:
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
 
-fos_user_register:
-    resource: "@EncoreCustomerBundle/Resources/config/fos/registration.xml"
+encore_authentication:
+  resource: "@EncoreCustomerBundle/Controller/AuthenticationController.php"
+  type:     annotation
