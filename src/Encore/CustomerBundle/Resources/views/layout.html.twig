@@ -32,6 +32,8 @@
           rel="stylesheet"/>
     <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
     {% endstylesheets %}
+    {% block css %}
+    {% endblock css %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 
@@ -40,13 +42,13 @@
     <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
     <ul>
         <li><a href="/login">Login</a></li>
-        <li><a href="/about">About</a></li>
+        <li><a href="/signup">Sign Up</a></li>
         <li><a href="/"><img id="nav-logo" src="bundles/encorecustomer/images/logo/logo-white.svg"
                              onmouseover="this.src = 'bundles/encorecustomer/images/logo/logo-color.svg'"
                              onmouseout="this.src = 'bundles/encorecustomer/images/logo/logo-white.svg'"/></a></li>
         <li><a href="/privacy">Privacy</a></li>
         <li><a href="/terms">Terms</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><a href="/about">About</a></li>
     </ul>
 </nav>
 <div class="wrapper">
