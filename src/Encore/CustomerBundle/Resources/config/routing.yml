@@ -22,7 +22,7 @@ encore_event:
   type:     annotation
 
 encore_seat_selection:
-  resource:  "@EncoreCustomerBundle/Controller/SeatSelectionController.php"
+  resource:  "@EncoreCustomerBundle/Controller/PurchaseController.php"
   type:     annotation
 
 fos_user_security:

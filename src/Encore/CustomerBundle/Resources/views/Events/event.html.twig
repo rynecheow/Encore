@@ -1,16 +1,16 @@
 {% extends "EncoreCustomerBundle::layout.html.twig" %}
 
-	{% block content %}
-    	{% for photos in event_photos %}
+{% block content %}
+    {% for photos in event_photos %}
     	<img src="{{ photos }}">
 	{% endfor %}
-	<p>Event: {{ event_nam }}</p>
-	<p>Event Type: {{ event_tyoe }}</p>
+	<p>Event: {{ event_name }}</p>
+	<p>Event Type: {{ event_type }}</p>
 	<p>Description: {{ event_description }}</p>
 	<p>Held Date: {{ event_held_dates }}</p>
 	<p>Venue: {{ venue_name }}</p>
 	<p>Location: {{ venue_location }}</p>
 	<form autocomplete="on">
-    	<a href="/purchase/1">Buy</a>
+    	<a href="/events/{{ event_id }}/purchase">Buy</a>
 	</form>
 {% endblock content %}

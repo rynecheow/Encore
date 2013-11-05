@@ -24,7 +24,7 @@ class EventController extends BaseController
     {
         $event = $this->em
             ->getRepository("EncoreCustomerBundle:Event")
-            ->findOneBy($id);
+            ->find($id);
 
         if (!$event) {
             throw $this->createNotFoundException("No event found for id " . $id . " WHYYYYY!");
@@ -59,13 +59,14 @@ class EventController extends BaseController
         }
 
         $params = [
+            "event_id" => $event->getId(),
             "event_name" => $event->getName(),
             "event_type" => $event->getType(),
             "event_description" => $event->getDescription(),
             "event_created_at" => $event->getCreateAt(),
             "event_sale_start" => $event->getSaleStart(),
             "event_sale_end" => $event->getSaleEnd(),
-            "event_held_dates" => $event->getHeldDates(),
+            "event_held_dates" => $heldDates,
             "event_total_tickets" => $event->getTotalTickets(),
 			"event_photos" =>$photoPath,
             "venue_name" => $venue->getName(),
