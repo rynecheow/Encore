@@ -1,0 +1,15 @@
+{% extends "EncoreCustomerBundle::layout.html.twig" %}
+
+{% block content %}
+    {{ event_held_dates }}
+    <br /><br />
+    <p>Section</p>
+    {% for sec in sections %}
+        <p>Name: {{ sec.name }}</p>
+        <p>Price: MYR {{ sec.price }}</p>
+        <p>Total Seat: {{ sec.total_seats }}</p>
+        <p>Total Sold: {{ sec.total_sold }}</p>
+        <p>Seat Available: {{ sec.seat_available }}</p>
+        <br />
+    {% endfor %}
+{% endblock content %}

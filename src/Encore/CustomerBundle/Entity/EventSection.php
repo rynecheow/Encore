@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * EventSection
  *
  * @ORM\Table(name="EventSection")
- * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Entity\EventSectionRepository")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\EventSectionRepository")
  */
 class EventSection
 {

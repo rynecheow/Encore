@@ -24,12 +24,14 @@ class EventController extends BaseController
     {
         $event = $this->em
             ->getRepository("EncoreCustomerBundle:Event")
-            ->findOneBy($id);
+            ->find($id);
 
         if (!$event) {
             throw $this->createNotFoundException("No event found for id " . $id . " WHYYYYY!");
         }
 
+        $heldDates = $event->getHeldDates();
+        $heldDates = $heldDates->format("Y-m-d H:i");
         $venue = $event->getVenue();
 
         if (!$venue) {
@@ -42,15 +44,31 @@ class EventController extends BaseController
             throw $this->createNotFoundException("No merchant found for id " . $merchant->getId() . " WHYYYYY!");
         }
 
+        $photos = $event->getPhotos();
+        $photoSequence = $event->getPhotoSequence();
+        $photoPath = [];
+        $photosNumber = count($photos);
+
+        foreach ($photoSequence as $photoId) {
+            for ($i=0; $i<$photosNumber; $i++)
+            {
+                if ($photoId == $photos[$i]->getId()) {
+                    $photoPath[] = $photos[$i]->getImagePath();
+                }
+            }
+        }
+
         $params = [
+            "event_id" => $event->getId(),
             "event_name" => $event->getName(),
             "event_type" => $event->getType(),
             "event_description" => $event->getDescription(),
             "event_created_at" => $event->getCreateAt(),
             "event_sale_start" => $event->getSaleStart(),
             "event_sale_end" => $event->getSaleEnd(),
-            "event_held_dates" => $event->getHeldDates(),
+            "event_held_dates" => $heldDates,
             "event_total_tickets" => $event->getTotalTickets(),
+			"event_photos" =>$photoPath,
             "venue_name" => $venue->getName(),
             "venue_location" => $venue->getLocation()
         ];
