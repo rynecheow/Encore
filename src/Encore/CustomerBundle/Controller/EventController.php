@@ -22,6 +22,9 @@ class EventController extends BaseController
      */
     public function eventDetailAction($id)
     {
+        /**
+         * @var $event \Encore\CustomerBundle\Entity\Event
+         */
         $event = $this->em
             ->getRepository("EncoreCustomerBundle:Event")
             ->find($id);
