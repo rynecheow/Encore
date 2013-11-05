@@ -301,10 +301,12 @@ nav {
   z-index: 10000;
 }
 
-.menu {
+.upper-home {
+  height: 100%;
+  min-height:100%;
   .main-nav {
-    & > li {
-      position: absolute;
+    li {
+      position: relative;
       width: 150px;
       z-index: 1;
       a {
@@ -319,32 +321,36 @@ nav {
         }
       }
       .animated-line {
-        & > div {
-          width: 200px;
-        }
+
+        width: 200px;
+
       }
 
-      & > li.grid1 {
-        top: 0;
-        left: 20%;
-      }
-      & > li.grid2 {
-        top: 25%;
-        left: -8%;
-      }
-      & > li.grid3 {
-        top: 54%;
-        right: 0;
-      }
-      & > li.grid4 {
-        bottom: 5%;
-        left: 62%;
-      }
-      & > li.grid5 {
-        bottom: 20%;
-        left: 18%;
-      }
+
+    }
+    .item-one {
+      top: 0;
+      left: 20%;
+    }
+    .item-two {
+      top: 25%;
+      left: 78%;
+    }
+    .item-three {
+      top: 54%;
+      right: 0;
+    }
+    .item-four {
+      bottom: 5%;
+      left: 62%;
+    }
+    .item-five {
+      bottom: 20%;
+      left: 18%;
     }
   }
 }
+
+
+
 
