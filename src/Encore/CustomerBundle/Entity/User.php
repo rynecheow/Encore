@@ -17,6 +17,7 @@ class User extends BaseUser
     use ORMBehaviors\Timestampable\Timestampable;
 
     const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_USER = 'ROLE_USER';
     const ROLE_ADMIN_USER = 'ROLE_ADMIN_USER';
     const ROLE_ADMIN_USER_ROLES = 'ROLE_ADMIN_USER_ROLES';
     const ROLE_EDITOR = 'ROLE_EDITOR';

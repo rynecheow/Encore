@@ -8,7 +8,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * UserEmail
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Entity\UserEmailRepository")
+ * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\UserEmailRepository")
  */
 class UserEmail
 {
