@@ -49,6 +49,9 @@ class AuthenticationController extends BaseController
     {
         // Only display form if user is logged in and not completed profile
         if ($this->isLoggedIn()) {
+            /**
+             * @var $user \Encore\CustomerBundle\Entity\User
+             */
             $user = $this->authenticatedUser;
             if (!($user->isEnabled())) {
                 $form = $this->createCompleteProfileForm();
@@ -63,7 +66,7 @@ class AuthenticationController extends BaseController
 
                         if ($success["status"]) {
                             // Redirect To Home Page
-                            return $this->generateUrl("encore_home");
+                            return $this->redirect($this->generateUrl("encore_home"));
                         }
                     }
                 }
@@ -83,7 +86,7 @@ class AuthenticationController extends BaseController
     }
 
     /**
-     * @param $user
+     * @param $user \Encore\CustomerBundle\Entity\User
      * @param $params
      *
      * @return array
@@ -194,11 +197,6 @@ class AuthenticationController extends BaseController
             $error['status'] = 'fail';
             $error['message'] = 'Password is required.';
         }
-
-//        if (!isset($params['username']) || str_replace(" ", "", $params['username']) == "") {
-//            $error['status'] = 'fail';
-//            $error['message'] = 'Username is required.';
-//        }
 
         return $error;
     }
@@ -357,16 +355,6 @@ class AuthenticationController extends BaseController
                 ]
             )
             ->add(
-                'register',
-                'submit',
-                [
-                    'attr' => [
-                        'class' => 'submit',
-                        'value' => 'Register'
-                    ]
-                ]
-            )
-            ->add(
                 'agreement',
                 'checkbox',
                 [
@@ -381,13 +369,25 @@ class AuthenticationController extends BaseController
                     'label' => false
                 ]
             )
-
+            ->add(
+                'register',
+                'submit',
+                [
+                    'attr' => [
+                        'class' => 'submit',
+                        'value' => 'Register'
+                    ]
+                ]
+            )
             ->getForm();
     }
 
     private function createUser($params)
     {
 //        $now = new \DateTime();
+        /**
+         * @var $userManager \Encore\CustomerBundle\Services\EncoreUserManager
+         */
         $userManager = $this->get('encore.user_manager');
 
         $user = new User();
@@ -416,7 +416,7 @@ class AuthenticationController extends BaseController
 
         $this->em->flush();
 
-        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+        $token = new UsernamePasswordToken($user, null, 'customer', $user->getRoles());
 
         $this->get('security.context')->setToken($token);
 
