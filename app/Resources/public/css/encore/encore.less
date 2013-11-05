@@ -73,8 +73,10 @@ html, body {
     margin: 0;
     background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
     background-size: cover;
-    width: 265px;
-    height: 72px;
+    min-width: 200px;
+    min-height: 55px;
+    width: auto;
+    height: auto;
     margin-left: 50px;
     float: left;
   }
@@ -306,16 +308,56 @@ nav {
   margin-top: 50px;
   margin-bottom: 50px;
   padding: 55px 55px;
-  h3, p, a {
+  font-size: 15px;
+  text-align: justify;
+
+  h3 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    text-align: left;
+    line-height: 2em;
+  }
+  p, a {
     color: #0d0d0d;
     text-align: justify;
     line-height: 1.5em;
   }
   a {
-    color: darkred;
+    font-weight: bold;
+    color: #262626;
     text-align: justify;
     line-height: 1.5em;
   }
+  ul {
+    list-style-type: circle;
+    li {
+      line-height: 1.5em;
+      margin-left: 3em;
+    }
+  }
+  ol {
+    list-style-type: upper-latin;
+    .title{
+      font-weight: bold;
+      line-height: 1.5em;
+      margin-left: 3em;
+
+    }
+
+    ul {
+      li {
+        line-height: 1.5em;
+        margin-left: 5em;
+      }
+    }
+
+    p {
+      line-height: 1.5em;
+      margin-left: 5em;
+    }
+  }
+
 }
 
 .home-content {
@@ -365,57 +407,6 @@ nav {
   left: 5px;
   z-index: 10000;
 }
-
-.upper-home {
-  height: 100%;
-  min-height:100%;
-  .main-nav {
-    li {
-      position: relative;
-      width: 150px;
-      z-index: 1;
-      a {
-        span {
-          display: block;
-          color: #fff;
-          font-size: .92em;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          padding-top: 15px;
-
-        }
-      }
-      .animated-line {
-
-        width: 200px;
-
-      }
-
-
-    }
-    .item-one {
-      top: 0;
-      left: 20%;
-    }
-    .item-two {
-      top: 25%;
-      left: 78%;
-    }
-    .item-three {
-      top: 54%;
-      right: 0;
-    }
-    .item-four {
-      bottom: 5%;
-      left: 62%;
-    }
-    .item-five {
-      bottom: 20%;
-      left: 18%;
-    }
-  }
-}
-
 
 
 
