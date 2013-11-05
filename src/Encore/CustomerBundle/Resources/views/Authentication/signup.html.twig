@@ -1,0 +1,32 @@
+{% extends 'EncoreCustomerBundle::layout.html.twig' %}
+
+{% block title %}
+    Sign up
+{% endblock title %}
+
+{% block require_js %}
+    require(["encore/authentication/signup"]);
+{% endblock require_js %}
+
+{% block content %}
+    <div class="signUp-container">
+        <div class="signup-signin-logo" onclick="location.href='/';"></div>
+        <form class="signUp-form" method="POST" action="{{ path('encore_signup') }}" {{ form_enctype(form) }}>
+            <h1 class="signUp-header">Sign Up</h1>
+            <fieldset>
+                {{ form(form) }}
+                <label for="form_agreement">I agree with Encore's
+                    <b>
+                        <a href="{{ path('encore_terms_purchase') }}" target="_blank">Terms</a>
+                    </b> &amp;
+                    <b>
+                        <a href="{{ path('encore_privacy') }}" target="_blank">Privacy</a>
+                    </b>
+                </label>
+            </fieldset>
+        </form>
+        <div class="to_login">
+            <p>Already have an account? <a href="/login">Sign in here.</a></p>
+        </div>
+    </div>
+{% endblock content %}
