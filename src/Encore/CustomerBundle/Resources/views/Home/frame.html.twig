@@ -1,0 +1,16 @@
+{% extends 'EncoreCustomerBundle::layout.html.twig' %}
+
+
+{% block title %}Welcome{% endblock title %}
+
+{% block require_js %}
+{% endblock require_js %}
+
+{% block content %}
+    <section class="home-content">
+        <article class="home-featured">
+            {% block slideshow %}
+            {% endblock slideshow %}
+        </article>
+    </section>
+{% endblock content %}
