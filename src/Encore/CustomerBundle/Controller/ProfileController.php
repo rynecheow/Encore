@@ -12,12 +12,16 @@ class ProfileController extends BaseController
 {
     /**
      * Logged In User Editing Its Profile
-     * @Route("/profile/edit/{id}", name="encore_edit_profile", requirements={"id" = "\d+"})
+     * @Route("/profile/edit", name="encore_edit_profile")
      */
-    public function editAction($request)
+    public function editAction()
     {
         if ($this->isLoggedIn()) {
+            /**
+             * @var $user User
+             */
             $user = $this->authenticatedUser;
+            $request = $this->getRequest();
             if (($user->isEnabled())) {
                 $form = $this->createFormBuilder()
                     ->setAction('encore_edit_profile')
@@ -25,28 +29,59 @@ class ProfileController extends BaseController
                     ->add(
                         'email',
                         'email',
-                        array(
+                        [
                             // HTML Attributes
-                            'attr' => array(
+                            'attr' => [
                                 'value' => $user->getEmails()[0],
                                 'disabled',
                                 ''
-                            ),
-                            'label' => 'Email :'
-                        )
+                            ],
+                            'label' => 'Email'
+                        ]
                     )
-                    ->add('firstName', 'text', array('label' => 'First Name :'))
-                    ->add('lastName', 'text', array('label' => 'Last Name :'))
-                    ->add('birthDate', 'birthday', array('label' => 'Birth Date :'))
-                    ->add('contactNo', 'number', array('label' => 'Contact No :'))
-                    ->add('address', 'textarea', array('label' => 'Address :'))
+                    ->add(
+                        'firstName',
+                        'text',
+                        [
+                            'label' => 'First Name'
+                        ]
+                    )
+                    ->add(
+                        'lastName',
+                        'text',
+                        [
+                            'label' => 'Last Name'
+                        ]
+                    )
+                    ->add(
+                        'birthDate',
+                        'birthday',
+                        [
+                            'label' => 'Birth Date'
+                        ]
+                    )
+                    ->add(
+                        'contactNo',
+                        'number',
+                        [
+                            'label' => 'Contact No :'
+                        ]
+                    )
+                    ->add(
+                        'address',
+                        'textarea',
+                        [
+                            'label' => 'Address'
+                        ]
+                    )
                     ->add('edit', 'submit')
                     ->getForm();
 
                 $form->handleRequest($request);
                 if ($form->isValid()) {
                     $data = $form->getData();
-                    $valid = $this->editProfileAction($data);
+                    $valid = []; //TODO VALIDATE DATA
+
                     if ($valid['status']) {
                         // show message indicate success?
 
@@ -54,7 +89,7 @@ class ProfileController extends BaseController
                 }
 
                 return $this->render(
-                    "EncoreCustomerBundle:User:profile.html.twig",
+                    "EncoreCustomerBundle:User:editProfile.html.twig",
                     array('form' => $form->createView())
                 );
             }
@@ -68,22 +103,10 @@ class ProfileController extends BaseController
     }
 
     /**
-     * Edit Profile ( Logged in user)
-     *
-     * @param $data
-     *
-     * @return array
+     * @Route("/profile/{username}", name="encore_view_profile")
      */
-    private function editProfileAction($data)
+    public function viewAction($username)
     {
-        //TODO Write $data posted by form into database and flush.
-        return array('status' => true);
-    }
-    /**
-     *
-     * @param $data
-     *
-     * @return Response
-     */
 
+    }
 }

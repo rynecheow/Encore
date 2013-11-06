@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e1b1978fa5259b4bb51dac99d6a3bafa",
+    "hash": "87da1a4f6b4f19082090fe1369243aa7",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -3213,12 +3213,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6f80902c719fd516a9890a851d4ddb2c6242b0a7"
+                "reference": "a4e55ae2a0eec58c8b000f05e27e4701f83904d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6f80902c719fd516a9890a851d4ddb2c6242b0a7",
-                "reference": "6f80902c719fd516a9890a851d4ddb2c6242b0a7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a4e55ae2a0eec58c8b000f05e27e4701f83904d7",
+                "reference": "a4e55ae2a0eec58c8b000f05e27e4701f83904d7",
                 "shasum": ""
             },
             "require": {
@@ -3282,7 +3282,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-11-05 09:40:45"
+            "time": "2013-11-06 09:20:44"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
