@@ -1,5 +1,8 @@
 {% extends "EncoreCustomerBundle::layout.html.twig" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('bundles/encorecustomer/css/libs/codrops/content-tab.css') }}"/>
+{% endblock css %}
 {% block content %}
 
     <div class="event-page">
@@ -14,7 +17,7 @@
         <div class="event-tab">
 
             <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked">
-            <label for="tab-1" class="tab-label-1">Synopsis</label>
+            <label for="tab-1" class="tab-label-1">Summary</label>
             <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2">
             <label for="tab-2" class="tab-label-2">Details</label>
             <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3">
@@ -25,7 +28,7 @@
             <div class="clear-shadow"></div>
             <div class="tab-content">
                 <div class="content-1">
-                    <h2>Synopsis</h2>
+                    <h2>Summary</h2>
 
                     <p>Content One Content One Content One Content One Content One Content One
                         Content One Content One Content One Content One Content One Content One
@@ -88,7 +91,7 @@
         </ul>
 
         <form autocomplete="on" action="/events/{{ event_id }}/purchase">
-            <button type="submit">Buy Now</button>
+            <button type="submit" class="submit">Buy Now</button>
         </form>
     </div>
 
