@@ -6,9 +6,10 @@
 {% block require_js %}
 {% endblock require_js %}
 
-{% block css %}
+{% stylesheets %}
+    {{ parent() }}
     <link type="text/css" href="{{ asset('bundles/encorecustomer/css/libs/codrops/caption-revealer.css') }}" rel="stylesheet"/>
-{% endblock css %}
+{% endstylesheets %}
 
 {% block content %}
     <section class="home-content">
