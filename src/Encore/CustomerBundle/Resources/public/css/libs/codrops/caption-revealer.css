@@ -2,7 +2,7 @@
 
 .grid {
     padding: 20px 20px 100px 20px;
-    max-width: 1300px;
+    /*max-width: 1300px;*/
     margin: 0 auto;
     list-style: none;
     text-align: center;
@@ -10,8 +10,8 @@
 
 .grid li {
     display: inline-block;
-    width: 440px;
-    margin: 0;
+    width: 500px;
+    margin: 55px 0px 0px 0px;
     padding: 20px;
     text-align: left;
     position: relative;
@@ -33,8 +33,8 @@
     top: 0;
     left: 0;
     padding: 20px;
-    background: #2c3f52;
-    color: #ed4e6e;
+    background: #262626;
+    color: #d44877;
 }
 
 .grid figcaption h3 {
@@ -52,16 +52,16 @@
     padding: 5px 10px;
     border-radius: 2px;
     display: inline-block;
-    background: #ed4e6e;
-    color: #fff;
+    background: #fff;
+    color: #d44877;
 }
 
 /* Caption Style*/
 .cs-style-2 figure img {
     z-index: 10;
-    -webkit-transition: -webkit-transform 0.4s;
-    -moz-transition: -moz-transform 0.4s;
-    transition: transform 0.4s;
+    -webkit-transition: -webkit-transform 0.2s;
+    -moz-transition: -moz-transform 0.2s;
+    transition: transform 0.2s;
 }
 
 .no-touch .cs-style-2 figure:hover img,
