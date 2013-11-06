@@ -193,15 +193,31 @@ nav {
       letter-spacing: 10px;
       text-transform: uppercase;
       width: 350px;
-      margin: -25px 0px 54px 0px
+      margin: -25px 0px 54px 0px;
+      margin-bottom: 25px;
     }
 
-    .signup-email, .signup-username, .signup-password {
+    .signup-email, {
       font-size: 14pt;
       height: 40px;
-      margin-bottom: 25px;
       padding: 7px 9px;
       width: 350px;
+    }
+    .signup-username, .signup-password {
+      font-size: 14pt;
+      height: 40px;
+      margin-top: 10px;
+      padding: 7px 9px;
+      width: 350px;
+    }
+
+    .checkbox {
+      margin-top: 10px;
+    }
+
+    .parsley-error-list {
+      font-size: 12px;
+      color: darkred;
     }
 
     .submit {
@@ -214,6 +230,7 @@ nav {
       color: #ffffff;
       background-color: #d44877;
       border-color: #d42852;
+      margin-top: 25px;
       margin-bottom: 0;
       text-align: center;
       white-space: nowrap;
@@ -232,6 +249,7 @@ nav {
   label {
     color: #262626;
     font-family: arial, sans-serif;
+    margin-top: 5px;
   }
   .complete-profile-form {
     max-height: 650px;
@@ -249,15 +267,24 @@ nav {
       text-align: center;
       text-transform: uppercase;
       width: 350px;
-      margin: -25px 0 33px 0
+      margin: -25px 0 33px 0;
+      margin-bottom: 15px;
     }
-    .complete-profile-fname, .complete-profile-lname, .complete-profile-contactno {
+    .complete-profile-fname, {
       font-size: 14pt;
       height: 40px;
-      margin-bottom: 25px;
+
       padding: 7px 9px;
       width: 350px;
     }
+    .complete-profile-lname, .complete-profile-contactno {
+      font-size: 14pt;
+      height: 40px;
+      margin-top: 10px;
+      padding: 7px 9px;
+      width: 350px;
+    }
+
     .complete-profile-address {
       font-size: 14pt;
       width: 350px;
@@ -265,8 +292,20 @@ nav {
     }
     #form_birthDate {
       select {
+        margin-bottom: 0px;
+        margin-top: 10px;
         width: 100px;
       }
+
+    }
+    #form_contactNo {
+      margin-bottom: 0px;
+      margin-top: 10px;
+    }
+
+    #form_address {
+      margin-bottom: 0px;
+      margin-top: 10px;
     }
     .submit {
       display: block;
@@ -286,6 +325,11 @@ nav {
       cursor: pointer;
       background-image: none;
       border: 1px solid transparent;
+    }
+
+    .parsley-error-list {
+      font-size: 12px;
+      color: darkred;
     }
   }
 }
@@ -338,7 +382,7 @@ nav {
   }
   ol {
     list-style-type: upper-latin;
-    .title{
+    .title {
       font-weight: bold;
       line-height: 1.5em;
       margin-left: 3em;
@@ -408,5 +452,106 @@ nav {
   z-index: 10000;
 }
 
+.event-page {
+  position: relative;
+  margin-top: 5%;
+  width: 100%;
+
+  .event-img {
+    margin-left: 30%;
+
+  }
+
+  .event-tab {
+    margin-top: 10%;
+    width: 100%;
+
+    input {
+      left: 0px;
+      top: 0px;
+      opacity: 0;
 
 
+      #tab-2 {
+        left: 120px;
+      }
+      #tab3 {
+        left: 240px;
+      }
+      #tab4 {
+        left: 360px;
+      }
+
+    }
+
+    label {
+      background: darkred;
+      font-size: 15px;
+      line-height: 40px;
+      height: 40px;
+      position: relative;
+      padding: 0 20px;
+      float: left;
+      display: block;
+      width: 150px;
+      color: #222222;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
+      border-radius: 3px 3px 0 0;
+      box-shadow: 2px 0 2px rgba(0, 0, 0, 0.1), -2px 0 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .clear-shadow {
+      clear: both;
+    }
+
+    .tab-content {
+      background: #fff;
+      position: relative;
+      width: 100%;
+      height: 200px;
+      box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 0 3px 3px 3px;
+      div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px 40px;
+        z-index: 1;
+        opacity: 0;
+
+      }
+
+    }
+
+    input.tab-selector-1:checked ~ .tab-content .content-1,
+    input.tab-selector-2:checked ~ .tab-content .content-2,
+    input.tab-selector-3:checked ~ .tab-content .content-3,
+    input.tab-selector-4:checked ~ .tab-content .content-4 {
+      z-index: 100;
+      opacity: 1;
+
+    }
+
+  }
+}
+
+.event-detail {
+  position: fixed;
+  width: 20%;
+  height: 30%;
+  top: 10%;
+  z-index: 100;
+  //margin-top: 25%;
+  //margin-right: 10%;
+  background-color: lightcoral;
+  color: black;
+  float: right;
+  right : 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
