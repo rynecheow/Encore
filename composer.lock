@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cboden/Ratchet.git",
-                "reference": "d756e0b507a5f3cdbf8c59dbb7baf68574dc7d58"
+                "reference": "9ab9894a671896a3e36c36af3ebd2738e8222c72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cboden/Ratchet/zipball/d756e0b507a5f3cdbf8c59dbb7baf68574dc7d58",
-                "reference": "d756e0b507a5f3cdbf8c59dbb7baf68574dc7d58",
+                "url": "https://api.github.com/repos/cboden/Ratchet/zipball/9ab9894a671896a3e36c36af3ebd2738e8222c72",
+                "reference": "9ab9894a671896a3e36c36af3ebd2738e8222c72",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "server",
                 "sockets"
             ],
-            "time": "2013-10-14 14:38:12"
+            "time": "2013-11-05 23:31:52"
         },
         {
             "name": "doctrine/annotations",
@@ -3213,12 +3213,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "84f5dfa26ac058d49ef7b0ab3314af6887e49ef0"
+                "reference": "6f80902c719fd516a9890a851d4ddb2c6242b0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/84f5dfa26ac058d49ef7b0ab3314af6887e49ef0",
-                "reference": "84f5dfa26ac058d49ef7b0ab3314af6887e49ef0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6f80902c719fd516a9890a851d4ddb2c6242b0a7",
+                "reference": "6f80902c719fd516a9890a851d4ddb2c6242b0a7",
                 "shasum": ""
             },
             "require": {
@@ -3282,7 +3282,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-11-04 09:04:55"
+            "time": "2013-11-05 09:40:45"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
