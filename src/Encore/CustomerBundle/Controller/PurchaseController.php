@@ -9,6 +9,8 @@
 namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PurchaseController extends BaseController
 {
@@ -34,18 +36,15 @@ class PurchaseController extends BaseController
         $totalSection = count($eventSection);
         $sectionsInfo = [];
 
-        for ($i=0; $i<$totalSection; $i++)
-        {
+        for ($i = 0; $i < $totalSection; $i++) {
             $price = $eventSection[$i]->getPrice();
             $totalSeats = $eventSection[$i]->getTotalSeats();
             $totalSold = $eventSection[$i]->getTotalSold();
             $seatAvailable = $totalSeats - $totalSold;
             $name = "";
 
-            for ($j=0; $j<$totalSection; $j++)
-            {
-                if ($eventSection[$i]->getSection()->getId() === $sections[$j]->getId())
-                {
+            for ($j = 0; $j < $totalSection; $j++) {
+                if ($eventSection[$i]->getSection()->getId() === $sections[$j]->getId()) {
                     $name = $sections[$j]->getName();
                 }
             }
@@ -65,5 +64,20 @@ class PurchaseController extends BaseController
         ];
 
         return $this->render("EncoreCustomerBundle:Events:purchase.html.twig", $params);
+    }
+
+    /**
+     * @Route("/thank-you", name="encore_thank_you")
+     *
+     */
+    public function thankYouAction(Request $request)
+    {
+        $data = [];
+        return $this->render(
+            "EncoreCustomerBundle:Purchase:index.html.twig",
+            [
+                'data' => $data
+            ]
+        );
     }
 } 

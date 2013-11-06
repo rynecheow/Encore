@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cboden/Ratchet.git",
-                "reference": "d756e0b507a5f3cdbf8c59dbb7baf68574dc7d58"
+                "reference": "9ab9894a671896a3e36c36af3ebd2738e8222c72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cboden/Ratchet/zipball/d756e0b507a5f3cdbf8c59dbb7baf68574dc7d58",
-                "reference": "d756e0b507a5f3cdbf8c59dbb7baf68574dc7d58",
+                "url": "https://api.github.com/repos/cboden/Ratchet/zipball/9ab9894a671896a3e36c36af3ebd2738e8222c72",
+                "reference": "9ab9894a671896a3e36c36af3ebd2738e8222c72",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "server",
                 "sockets"
             ],
-            "time": "2013-10-14 14:38:12"
+            "time": "2013-11-05 23:31:52"
         },
         {
             "name": "doctrine/annotations",
@@ -652,16 +652,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "90f5c393b907ca9b46e507def43735de959b77fc"
+                "reference": "0f5a110a1e6ae413e425912e6601643f91b069c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/90f5c393b907ca9b46e507def43735de959b77fc",
-                "reference": "90f5c393b907ca9b46e507def43735de959b77fc",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/0f5a110a1e6ae413e425912e6601643f91b069c1",
+                "reference": "0f5a110a1e6ae413e425912e6601643f91b069c1",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": ">=2.0,<2.5.x-dev",
+                "doctrine/dbal": "~2.0",
                 "php": ">=5.3.2"
             },
             "require-dev": {
@@ -690,7 +690,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Benjamin Eberlei",
@@ -703,7 +704,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2013-10-23 14:44:19"
+            "time": "2013-11-03 20:54:43"
         },
         {
             "name": "doctrine/orm",
@@ -1483,12 +1484,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpGaufretteBundle.git",
-                "reference": "c01f131f7cd9fcd09a338007ba98716925e18279"
+                "reference": "9e70925730eb06eff9ebf24bf2062613b45a6dcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/c01f131f7cd9fcd09a338007ba98716925e18279",
-                "reference": "c01f131f7cd9fcd09a338007ba98716925e18279",
+                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/9e70925730eb06eff9ebf24bf2062613b45a6dcb",
+                "reference": "9e70925730eb06eff9ebf24bf2062613b45a6dcb",
                 "shasum": ""
             },
             "require": {
@@ -1534,7 +1535,7 @@
                 "filesystem",
                 "media"
             ],
-            "time": "2013-10-07 13:36:41"
+            "time": "2013-11-04 08:31:06"
         },
         {
             "name": "knplabs/knp-menu",
@@ -3212,12 +3213,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "5efcfe5bb670fcfaf072c5567f7b7ec7b8e06956"
+                "reference": "6f80902c719fd516a9890a851d4ddb2c6242b0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5efcfe5bb670fcfaf072c5567f7b7ec7b8e06956",
-                "reference": "5efcfe5bb670fcfaf072c5567f7b7ec7b8e06956",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6f80902c719fd516a9890a851d4ddb2c6242b0a7",
+                "reference": "6f80902c719fd516a9890a851d4ddb2c6242b0a7",
                 "shasum": ""
             },
             "require": {
@@ -3281,7 +3282,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-10-30 07:57:43"
+            "time": "2013-11-05 09:40:45"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

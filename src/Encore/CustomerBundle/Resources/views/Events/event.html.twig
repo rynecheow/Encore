@@ -1,16 +1,98 @@
 {% extends "EncoreCustomerBundle::layout.html.twig" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('bundles/encorecustomer/css/libs/codrops/content-tab.css') }}"/>
+{% endblock css %}
 {% block content %}
-    {% for photos in event_photos %}
-    	<img src="{{ photos }}">
-	{% endfor %}
-	<p>Event: {{ event_name }}</p>
-	<p>Event Type: {{ event_type }}</p>
-	<p>Description: {{ event_description }}</p>
-	<p>Held Date: {{ event_held_dates }}</p>
-	<p>Venue: {{ venue_name }}</p>
-	<p>Location: {{ venue_location }}</p>
-	<form autocomplete="on">
-    	<a href="/events/{{ event_id }}/purchase">Buy</a>
-	</form>
+
+    <div class="event-page">
+        {% for photos in event_photos %}
+            <div class="event-img">
+                <img src="{{ photos }}">
+            </div>
+
+        {% endfor %}
+
+
+        <div class="event-tab">
+
+            <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked">
+            <label for="tab-1" class="tab-label-1">Summary</label>
+            <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2">
+            <label for="tab-2" class="tab-label-2">Details</label>
+            <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3">
+            <label for="tab-3" class="tab-label-3">Discounts</label>
+            <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4">
+            <label for="tab-4" class="tab-label-4">Other</label>
+
+            <div class="clear-shadow"></div>
+            <div class="tab-content">
+                <div class="content-1">
+                    <h2>Summary</h2>
+
+                    <p>Content One Content One Content One Content One Content One Content One
+                        Content One Content One Content One Content One Content One Content One
+                        Content One Content One Content One Content One Content One Content One
+                        Content One Content One Content One Content One Content One Content One
+                        Content One Content One Content One Content One Content One Content One
+                    </p>
+                </div>
+                <div class="content-2">
+                    <h2>Details</h2>
+
+                    <p>
+                        Content Two Content TwoContent TwoContent TwoContent TwoContent TwoContent Two
+                        Content TwoContent TwoContent TwoContent TwoContent TwoContent TwoContent Two
+                        Content TwoContent TwoContent TwoContent TwoContent TwoContent TwoContent Two
+                        Content TwoContent TwoContent TwoContent TwoContent TwoContent TwoContent Two
+                        Content TwoContent TwoContent TwoContent TwoContent TwoContent TwoContent Two
+                    </p>
+                </div>
+                <div class="content-3">
+                    <h2>Discounts</h2>
+
+                    <p>
+                        Content Three Content ThreeContent ThreeContent ThreeContent ThreeContent Three
+                        Content ThreeContent ThreeContent ThreeContent ThreeContent ThreeContent Three
+                        Content ThreeContent ThreeContent ThreeContent ThreeContent ThreeContent Three
+                        Content ThreeContent ThreeContent ThreeContent ThreeContent ThreeContent Three
+                        Content ThreeContent ThreeContent ThreeContent ThreeContent ThreeContent Three
+                    </p>
+                </div>
+                <div class="content-4">
+                    <h2>Other</h2>
+
+                    <p>
+                        Content Four Content FourContent FourContent FourContent FourContent FourContent Four
+                        Content FourContent FourContent FourContent FourContent FourContent FourContent Four
+                        Content FourContent FourContent FourContent FourContent FourContent FourContent Four
+                        Content FourContent FourContent FourContent FourContent FourContent FourContent Four
+                        Content FourContent FourContent FourContent FourContent FourContent FourContent Four
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="event-detail">
+        <ul>
+            <li>Event: {{ event_name }}</li>
+
+            <li>Event Type: {{ event_type }}</li>
+
+            <li>Description: {{ event_description }}</li>
+
+            <li>Held Date: {{ event_held_dates }}</li>
+
+            <li>Venue: {{ venue_name }}</li>
+
+            <p>Location: {{ venue_location }}</p>
+        </ul>
+
+        <form autocomplete="on" action="/events/{{ event_id }}/purchase">
+            <button type="submit" class="submit">Buy Now</button>
+        </form>
+    </div>
+
 {% endblock content %}
