@@ -17,7 +17,6 @@ class EventManager {
         $this->em = $em;
 
         $this->eventRepo = $this->em->getRepository('EncoreCustomerBundle:Event');
-//        $this->eventCategoryRepo = $this->em->getRepository('EncoreCustomerBundle:EventCategory');
     }
 
 

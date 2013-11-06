@@ -14,7 +14,7 @@ class SecurityController extends BaseSecurityController
         $sc = $this->container->get('security.context');
 
         if ($sc->isGranted('ROLE_USER') || $sc->isGranted('ROLE_ADMIN')) {
-            $url = $this->container->get('router')->generate('home');
+            $url = $this->container->get('router')->generate('encore_home');
             return new RedirectResponse($url);
         }
 
