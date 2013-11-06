@@ -1,0 +1,24 @@
+{% extends 'EncoreCustomerBundle::layout.html.twig' %}
+
+
+{% block title %}Welcome{% endblock title %}
+
+{% block require_js %}
+{% endblock require_js %}
+
+{% block css %}
+    <link type="text/css" href="{{ asset('bundles/encorecustomer/css/libs/codrops/caption-revealer.css') }}" rel="stylesheet"/>
+{% endblock css %}
+
+{% block content %}
+    <section class="home-content">
+        <article class="home-featured">
+            {% block slideshow %}
+            {% endblock slideshow %}
+        </article>
+        <article class="home-new">
+            {% block new_events %}
+            {% endblock new_events %}
+        </article>
+    </section>
+{% endblock content %}

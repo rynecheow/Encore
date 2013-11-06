@@ -7,7 +7,8 @@ require.config({
         'backbone.d': 'libs/backbone-min',
         parsley: 'libs/parsley.min',
         'bootstrap': 'libs/bootstrap.min',
-        'codrop-modernizr' : 'libs/codrops/modernizr.custom'
+        codrops: 'libs/codrops',
+        'prototype': 'libs/prototype'
     },
     urlArgs: 'bust=' + (new Date()).getTime()
 });
