@@ -361,6 +361,24 @@ nav {
 
 }
 
+h2.spread-headline {
+  font-family: elena-web-basic, georgia;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 1.2em;
+  color: rgb(255, 255, 255);
+  font-size: 1.4em;
+  margin: 0px auto;
+  min-width: 1100px;
+  text-indent: 34px;
+  padding-top: 60px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+  position: absolute;
+  z-index: 3;
+}
+
 .home-content {
   .home-featured {
     min-height: 850px;
@@ -369,23 +387,7 @@ nav {
     top: 0px;
     width: 100%;
     overflow: hidden;
-    .spread-headline {
-      font-family: elena-web-basic, georgia;
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      letter-spacing: 1.2em;
-      color: rgb(255, 255, 255);
-      font-size: 1.125em;
-      margin: 0px auto;
-      min-width: 1100px;
-      text-indent: 34px;
-      padding-top: 60px;
-      text-align: center;
-      text-transform: uppercase;
-      width: 100%;
-      position: absolute;
-      z-index: 3;
-    }
+
 
     .carousel-inner {
       z-index: 2;
@@ -397,6 +399,19 @@ nav {
       padding-bottom: 0px;
       padding-left: 0px;
       padding-right: 0px;
+    }
+  }
+  .home-new{
+    width: 100%;
+    .home-new-events{
+        height: 700px;
+        max-height: 700px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        position: relative;
+      .spread-headline {
+        color: #000;
+      }
     }
   }
 }

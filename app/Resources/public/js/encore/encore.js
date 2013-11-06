@@ -7,7 +7,7 @@ require.config({
         'backbone.d': 'libs/backbone-min',
         parsley: 'libs/parsley.min',
         'bootstrap': 'libs/bootstrap.min',
-        codrops : 'libs/codrops',
+        codrops: 'libs/codrops',
         'prototype': 'libs/prototype'
     },
     urlArgs: 'bust=' + (new Date()).getTime()
