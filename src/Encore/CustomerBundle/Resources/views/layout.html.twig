@@ -44,18 +44,19 @@
     <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
     <ul>
         {% if not anonymous %}
-            <li><a href="/logout">Logout</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+            <li><a href="{{ path('encore_view_profile', {'username': app.user.username }) }}">Profile</a></li>
         {% else %}
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+            <li><a href="{{ path('encore_signup') }}">Sign Up</a></li>
         {% endif %}
-        <li><a href="/"><img id="nav-logo" src="bundles/encorecustomer/images/logo/logo-white.svg"
-                             onmouseover="this.src = 'bundles/encorecustomer/images/logo/logo-color.svg'"
-                             onmouseout="this.src = 'bundles/encorecustomer/images/logo/logo-white.svg'"/></a></li>
-        <li><a href="/privacy">Privacy</a></li>
-        <li><a href="/terms">Terms</a></li>
-        <li><a href="/about">About</a></li>
+        <li><a href="{{ path('encore_home') }}"><img id="nav-logo" src="{{ asset('bundles/encorecustomer/images/logo/logo-white.svg') }}"
+                             onmouseover="this.src = {{ asset('bundles/encorecustomer/images/logo/logo-color.svg') }}"
+                             onmouseout="this.src = {{ asset('bundles/encorecustomer/images/logo/logo-white.svg') }}"/></a>
+        </li>
+        <li><a href="{{ path('encore_privacy') }}">Privacy</a></li>
+        <li><a href="{{ path('encore_terms_purchase') }}">Terms</a></li>
+        <li><a href="{{ path('encore_about') }}">About</a></li>
     </ul>
 </nav>
 <div class="wrapper">
