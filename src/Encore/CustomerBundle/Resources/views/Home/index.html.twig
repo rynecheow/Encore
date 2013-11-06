@@ -1,64 +1,112 @@
-{% extends 'EncoreCustomerBundle::layout.html.twig' %}
+{# Created by rynecheow on 11/5/13. #}
 
+{% extends 'EncoreCustomerBundle:Home:frame.html.twig' %}
 
-{% block title %}Welcome{% endblock %}
-
-{% block require_js %}
-{% endblock require_js %}
-
-{% block content %}
-
-
+{% block slideshow %}
     <div id="myCarousel" class="carousel slide">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-        <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-    </ol>
-    <section class="home-content">
+        <h2 class="spread-headline">
+            Featured Events
+        </h2>
 
-        <article class="home-featured">
-            <h2 class="spread-headline">
-                Featured Events
-            </h2>
+        <div class="carousel-inner">
+            <div class="item active">
+                <a>
+                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/gdayx-malaysia.jpg') }}" alt=""/>
+                </a>
+                <div class="carousel-caption">
+                    <h4>First Thumbnail label</h4>
 
-            <div class="carousel-inner">
-                <div class="item">
-                    <a>
-                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}" alt="">
-                    </a>
-
-                    <div class="carousel-caption">
-                        <h4>First Thumbnail label</h4>
-
-                        <p>First description</p>
-                    </div>
+                    <p>First description</p>
                 </div>
-                <div class="item">
-                    <a>
-                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt="">
-                    </a>
-
-                    <div class="carousel-caption">
-                        <h4>Second Thumbnail label</h4>
-
-                        <p>Second description</p>
-                    </div>
-                </div>
-                <div class="item active">
-                    <a>
-                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt="">
-                    </a>
-
-                    <div class="carousel-caption">
-                        <h4>Third Thumbnail label</h4>
-
-                        <p>Third description</p>
-                    </div>
-                </div>
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
             </div>
-        </article>
-    </section>
-{% endblock %}
+            <div class="item">
+                <a>
+                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}" alt=""/>
+                </a>
+
+                <div class="carousel-caption">
+                    <h4>Second Thumbnail label</h4>
+
+                    <p>Second description</p>
+                </div>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt=""/>
+                </a>
+
+                <div class="carousel-caption">
+                    <h4>Third Thumbnail label</h4>
+
+                    <p>Third description</p>
+                </div>
+            </div>
+            <div class="item">
+                <a>
+                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt=""/>
+                </a>
+
+                <div class="carousel-caption">
+                    <h4>Fourth Thumbnail label</h4>
+
+                    <p>Fourth description</p>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+        </div>
+    </div>
+{% endblock slideshow %}
+
+{% block new_events %}
+    <div id="encore_new_events" class="home-new-events">
+        <h2 class="spread-headline">
+            New Events
+        </h2>
+
+        <div class="revealer">
+            <ul class="grid cs-style-2">
+                <li>
+                    <figure>
+                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/gdayx-malaysia.jpg') }}" alt="img04">
+                        <figcaption>
+                            <h3>gDayx Malaysia</h3>
+                            <span>31st November 2013</span>
+                            <a href="">Take a look</a>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}" alt="img01">
+                        <figcaption>
+                            <h3>Lady Gaga</h3>
+                            <span>12th December 2013</span>
+                            <a href="">Take a look</a>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt="img02">
+                        <figcaption>
+                            <h3>May Day - 2014 World Tour</h3>
+                            <span>4th November 2013</span>
+                            <a href="">Take a look</a>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt="img05">
+                        <figcaption>
+                            <h3>Girls Generation - G-Star RAW</h3>
+                            <span>20th January 2014</span>
+                            <a href="">Take a look</a>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock new_events %}
