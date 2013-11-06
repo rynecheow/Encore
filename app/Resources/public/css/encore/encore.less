@@ -67,10 +67,23 @@ html, body {
   padding: 0;
 }
 
-::-webkit-input-placeholder { font-family: elena-web-basic, georgia; }
-::-moz-placeholder { font-family: elena-web-basic, georgia; } /* firefox 19+ */
-:-ms-input-placeholder { font-family: elena-web-basic, georgia; } /* ie */
-input:-moz-placeholder { font-family: elena-web-basic, georgia; }
+::-webkit-input-placeholder {
+  font-family: elena-web-basic, georgia;
+}
+
+::-moz-placeholder {
+  font-family: elena-web-basic, georgia;
+}
+
+/* firefox 19+ */
+:-ms-input-placeholder {
+  font-family: elena-web-basic, georgia;
+}
+
+/* ie */
+input:-moz-placeholder {
+  font-family: elena-web-basic, georgia;
+}
 
 /*Main wrapper*/
 .wrapper {
@@ -521,4 +534,50 @@ nav {
     border: 1px solid transparent;
   }
 
+}
+
+.thank-you-upper{
+  margin-bottom: 10%;
+
+}
+.thank-you-main {
+  margin-left: 10%;
+  width: 80%;
+  background-color: #ffffff;
+  padding: 20px 20px 20px 20px;
+  border-radius: 10px;
+  .thank-you-heading {
+    text-align: center;
+    h2 {
+      font-size: 26px;
+    }
+
+  }
+
+  .ticket-information {
+    width: 50%;
+    background-color: #262626;
+    color: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 25%;
+    text-align: justify;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+
+    li{
+      margin-left: 30%;
+    }
+  }
+  h3 {
+    text-align: center;
+    font-size: 18px;
+  }
+  .thank-you-redirect{
+    margin-top: 20px;
+    text-align: right;
+    p , a{
+      font-size: 13.5px;
+    }
+  }
 }

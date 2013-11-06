@@ -3,5 +3,29 @@
 {% extends 'EncoreCustomerBundle:Purchase:thankyou.html.twig' %}
 
 {% block tycontainer %}
+    <div class="thank-you-upper"></div>
+    <div class="thank-you-main">
+        <div class="thank-you-heading">
+            <h2>Thank You For Purchasing These Ticket.</h2>
+        </div>
+        <div class="ticket-information">
+            <ul>
+                <li>Event : Concert One</li>
+                <li>Held Date : 13 November 2013</li>
+                <li>Vanue : Bukit Jalil Stadium</li>
+                <li>Location : Bukit Jalil</li>
+            </ul>
+        </div>
 
+
+        <h3>Your E-Ticket Will Be Sent To Your Email.</h3>
+
+        <div class="thank-you-redirect">
+            <p>Please click <a href="#">here</a> to see more concert.</p>
+        </div>
+
+    </div>
+
+
+    <div class="thank-you-lower"></div>
 {% endblock tycontainer %}
