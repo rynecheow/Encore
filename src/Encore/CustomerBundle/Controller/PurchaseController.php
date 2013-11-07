@@ -80,4 +80,12 @@ class PurchaseController extends BaseController
             ]
         );
     }
+
+    /**
+     * @Route("/seat-selection")
+     */
+    public function selectSeatAction()
+    {
+        return $this->render("EncoreCustomerBundle:Events:seat-selection.html.twig");
+    }
 } 
