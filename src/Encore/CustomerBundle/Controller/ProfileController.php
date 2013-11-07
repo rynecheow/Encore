@@ -8,16 +8,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Encore\CustomerBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProfileController extends BaseController
 {
     /**
      * Logged In User Editing Its Profile
-     * @Route("/profile/{id}/edit", name="encore_edit_profile")
+     *
+     * @Route("/profile/{userId}/edit", name="encore_edit_profile")
+     * @ParamConverter("user", class="EncoreCustomerBundle:User", options={"id" = "userId"})
      * @Method({"GET","POST"})
      */
-    public function editAction(Request $request)
+    public function editAction(User $user)
     {
+        $request = $this->getRequest();
         if ($this->isLoggedIn()) {
             if (!$this->authorizeRequest($request)) {
                 return $this->redirect(
@@ -33,7 +37,7 @@ class ProfileController extends BaseController
             /**
              * @var $user User
              */
-            $user = $this->authenticatedUser;
+//            $user = $this->authenticatedUser;
 //            $request = $this->getRequest();
             if (($user->isEnabled())) {
                 $editProfileForm = $this->createEditProfileForm();
