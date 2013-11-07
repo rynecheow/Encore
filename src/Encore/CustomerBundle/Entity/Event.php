@@ -82,7 +82,7 @@ class Event
     protected $saleEnd;
 
     /**
-     * @var \array
+     * @var \DateTime[]
      *
      * @ORM\Column(name="heldDates", type="datetime")
      */
@@ -353,7 +353,7 @@ class Event
     /**
      * Set heldDates
      *
-     * @param \array $heldDate
+     * @param \DateTime[] $heldDate
      *
      * @return Event
      */
@@ -367,7 +367,7 @@ class Event
     /**
      * Get heldDates
      *
-     * @return \array
+     * @return \DateTime[]
      */
     public function getHeldDates()
     {
