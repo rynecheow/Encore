@@ -84,7 +84,24 @@ class ProfileController extends BaseController
      */
     public function viewAction()
     {
-        return $this->render("EncoreCustomerBundle:User:profile.twig");
+        return $this->render(
+            "EncoreCustomerBundle:User:profile.html.twig",
+            [
+                'username' => 'kokhong'
+                ,
+                'email' => 'kokhong200gmail.com'
+                ,
+                'firstname' => 'Kok Hong'
+                ,
+                'lastname' => 'Choo'
+                ,
+                'birthdate' => '1991-08-26'
+                ,
+                'contactno' => '0123456789'
+                ,
+                'address' => 'ADDRESS THING adasdasdsadasdsadsadasdasdasdasdasdasd'
+            ]
+        );
     }
 
     /**
