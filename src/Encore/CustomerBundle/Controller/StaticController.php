@@ -16,14 +16,6 @@ class StaticController extends BaseController
     }
 
     /**
-     * @Route("/contact", name="encore_contact")
-     */
-    public function contactAction()
-    {
-        return $this->render("EncoreCustomerBundle:Static:contact-us.html.twig");
-    }
-
-    /**
      * @Route("/terms", name="encore_terms_purchase")
      */
     public function purchaseTermsAction()

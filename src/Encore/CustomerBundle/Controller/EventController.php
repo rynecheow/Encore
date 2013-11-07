@@ -5,6 +5,8 @@ namespace Encore\CustomerBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Encore\CustomerBundle\Entity\Event;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 class EventController extends BaseController
 {
 
@@ -18,7 +20,8 @@ class EventController extends BaseController
     }
 
     /**
-     * @Route("/events/{id}", name="encore_event_details", requirements={"id" = "\d+"})
+     * @Route("/events/{eventId}", name="encore_event_details")
+     * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
      */
     public function eventDetailAction($id)
     {
