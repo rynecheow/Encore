@@ -18,7 +18,8 @@ class EventController extends BaseController
     }
 
     /**
-     * @Route("/events/{id}", name="encore_event_details", requirements={"id" = "\d+"})
+     * @Route("/events/{id}", name="encore_event_details")
+     * @ParamConverter("event")
      */
     public function eventDetailAction($id)
     {
