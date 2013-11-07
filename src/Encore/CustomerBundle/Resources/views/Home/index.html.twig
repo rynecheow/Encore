@@ -6,25 +6,24 @@
     <h2 class="spread-headline">
         Featured Events
     </h2>
-    <div id="slides" style="display:none;">
 
-        <a>
+    <div class="carousel-inner" id="slides" style="display:none;">
+
+        <a class="item">
             <img src="{{ asset('bundles/encorecustomer/images/featured-cover/gdayx-malaysia.jpg') }}" alt=""/>
         </a>
 
-        <a>
+        <a class="item">
             <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}" alt=""/>
         </a>
-
-
-        <a>
+        <a class="item">
             <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt=""/>
         </a>
-
-        <a>
+        <a class="item">
             <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt=""/>
         </a>
-
+        <a class="slidesjs-next slidesjs-navigation slider-next" href="#" title="Next"> > </a>
+        <a class="slidesjs-previous slidesjs-navigation slider-previous" href="#" title="Previous"> < </a>
     </div>
 {% endblock slideshow %}
 

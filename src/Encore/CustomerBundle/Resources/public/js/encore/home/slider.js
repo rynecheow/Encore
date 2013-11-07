@@ -3,10 +3,6 @@ require(['domReady'],
         domReady(
             function () {
                 $(function () {
-                        var homeFeatured = $('.home-featured'),
-                            width = homeFeatured.width(),
-                            height = homeFeatured.height();
-
                         $('#slides').slidesjs(
                             {
                                 navigation: {
@@ -20,7 +16,7 @@ require(['domReady'],
                                     auto: true,
                                     pauseOnHover : true,
                                     restartDelay: 2500,
-                                    interval: 5000,
+                                    interval: 6000,
                                     swap: false,
                                     effect: "slide"
                                 }
