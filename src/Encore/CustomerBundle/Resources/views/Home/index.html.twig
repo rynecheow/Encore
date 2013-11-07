@@ -3,58 +3,28 @@
 {% extends 'EncoreCustomerBundle:Home:frame.html.twig' %}
 
 {% block slideshow %}
-    <div id="myCarousel" class="carousel slide">
-        <h2 class="spread-headline">
-            Featured Events
-        </h2>
+    <h2 class="spread-headline">
+        Featured Events
+    </h2>
+    <div id="slides" style="display:none;">
 
-        <div class="carousel-inner">
-            <div class="item active">
-                <a>
-                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/gdayx-malaysia.jpg') }}" alt=""/>
-                </a>
-                <div class="carousel-caption">
-                    <h4>First Thumbnail label</h4>
+        <a>
+            <img src="{{ asset('bundles/encorecustomer/images/featured-cover/gdayx-malaysia.jpg') }}" alt=""/>
+        </a>
 
-                    <p>First description</p>
-                </div>
-            </div>
-            <div class="item">
-                <a>
-                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}" alt=""/>
-                </a>
+        <a>
+            <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}" alt=""/>
+        </a>
 
-                <div class="carousel-caption">
-                    <h4>Second Thumbnail label</h4>
 
-                    <p>Second description</p>
-                </div>
-            </div>
-            <div class="item">
-                <a>
-                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt=""/>
-                </a>
+        <a>
+            <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt=""/>
+        </a>
 
-                <div class="carousel-caption">
-                    <h4>Third Thumbnail label</h4>
+        <a>
+            <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt=""/>
+        </a>
 
-                    <p>Third description</p>
-                </div>
-            </div>
-            <div class="item">
-                <a>
-                    <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt=""/>
-                </a>
-
-                <div class="carousel-caption">
-                    <h4>Fourth Thumbnail label</h4>
-
-                    <p>Fourth description</p>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-        </div>
     </div>
 {% endblock slideshow %}
 
