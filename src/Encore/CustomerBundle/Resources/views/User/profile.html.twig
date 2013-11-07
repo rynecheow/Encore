@@ -3,10 +3,16 @@
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
 
 {% block content %}
-<div style="margin:10% 10%; height:800px; background: #f5f5f5;">
-    <p class="profile-title" style="color:#9cceff;font-size:1.7em" >
+<div class="profile-wrap">
+    <div class="logo-wrap">
+        <a><img class="edit-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/edit-gray.svg') }}"></a>
+        <a><img class="view-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/view-gray.svg') }}"></a>
+        <a><img class="history-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/purchase-gray.svg') }}"></a>
+    </div>
+    <p class="profile-title">
         Your Username:
     </p>
+    <hr class="side" style="border: solid #ddd; border-width: 1px 0 0;  margin: 22px 10% 21px; height: 0; width:80%">
     {{ username }}
     {{ firstname }}
     {{ lastname }}
