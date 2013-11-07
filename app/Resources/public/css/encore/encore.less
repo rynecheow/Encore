@@ -58,8 +58,8 @@ table {
 
 /* Variables */
 @darkMain : #262626;
-@lightMain: #e0e0e0;
-@lightSecondary: #e5e5e5;
+@lightMain: #e5e5e5;
+@lightSecondary: #e0e0e0;
 @lightChoc: #a99d9d;
 @pinkMain: #d44877;
 @pinkSecondary: #d42852;
@@ -117,6 +117,8 @@ html, body {
     height: auto;
     margin-left: 50px;
     float: left;
+    position: fixed;
+    cursor: pointer;
   }
 }
 
@@ -171,7 +173,17 @@ nav {
     top: 0px;
     width: 100%;
     overflow: hidden;
-
+    #main-logo {
+      background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
+      top: 35px;
+      left: 35px;
+      margin: 0 auto;
+      width: 150px;
+      height: 41px;
+      position: fixed;
+      z-index: 11;
+      background-size: cover;
+    }
     .carousel-inner {
       z-index: 2;
       position: relative;
@@ -535,10 +547,11 @@ nav {
 
 }
 
-.thank-you-upper{
+.thank-you-upper {
   margin-bottom: 10%;
 
 }
+
 .thank-you-main {
   margin-left: 10%;
   width: 80%;
@@ -564,7 +577,7 @@ nav {
     padding: 10px 10px 10px 10px;
     border-radius: 5px;
 
-    li{
+    li {
       margin-left: 30%;
     }
   }
@@ -572,10 +585,10 @@ nav {
     text-align: center;
     font-size: 18px;
   }
-  .thank-you-redirect{
+  .thank-you-redirect {
     margin-top: 20px;
     text-align: right;
-    p , a{
+    p, a {
       font-size: 13.5px;
     }
   }
