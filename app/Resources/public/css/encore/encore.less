@@ -142,7 +142,6 @@ nav {
     left: 100%;
     width: 100%;
     height: auto;
-    z-index: 1;
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat no-repeat;
@@ -164,7 +163,7 @@ nav {
     text-transform: uppercase;
     width: 100%;
     position: absolute;
-    z-index: 3;
+    z-index: 11;
 
   }
   .home-featured {
@@ -173,6 +172,18 @@ nav {
     top: 0px;
     width: 100%;
     overflow: hidden;
+
+    a.slider-previous {
+      position: absolute;
+      top: 35%;
+      left: 5%;
+      z-index: 11;
+      text-decoration: none;
+      color: white;
+      font-size: 4.5em;
+      font-family: "Euphemia UCAS";
+      transition: top 0.3s, left 0.3s;
+      -webkit-transition: top 0.3s, left 0.3s;
     #main-logo {
       background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
       top: 35px;
@@ -195,6 +206,31 @@ nav {
       padding-left: 0px;
       padding-right: 0px;
     }
+
+    a.slider-previous:hover {
+      top:36%;
+      left: 6%;
+    }
+
+    a.slider-next {
+      position: absolute;
+      top: 35%;
+      right: 5%;
+      z-index: 11;
+      text-decoration: none;
+      color: white;
+      font-size: 4.5em;
+      font-family: "Euphemia UCAS";
+      transition: top 0.3s, right 0.3s;
+      -webkit-transition: top 0.3s, right 0.3s;
+    }
+
+    a.slider-next:hover {
+      top: 36%;
+      right: 6%;
+    }
+
+
   }
   .home-new {
     width: 100%;
