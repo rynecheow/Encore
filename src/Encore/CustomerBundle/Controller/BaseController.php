@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManager;
-
 /**
  * Base controller.
  *
@@ -42,6 +41,8 @@ class BaseController extends Controller
 
     /**
      * Current logged in authenticated user
+     *
+     * @var User
      */
     protected $authenticatedUser;
 
@@ -102,4 +103,16 @@ class BaseController extends Controller
         return $this->container->get('encore.user_manager')->getAuthenticatedUser();
     }
 
+
+    /**
+     * Simple notification flash message
+     */
+    protected function pushFlashMessage($status, $message)
+    {
+        $this->getRequest()->getSession()->getFlashBag()->add($status, $message);
+    }
+
+    protected function gotoHome(){
+        return $this->redirect($this->generateUrl('encore_home'));
+    }
 }
