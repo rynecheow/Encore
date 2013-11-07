@@ -45,7 +45,7 @@
     <ul>
         {% if not anonymous %}
             <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
-            <li><a href="{{ path('encore_view_profile', {'username': app.user.username }) }}">Profile</a></li>
+            <li><a href="{{ path('encore_view_profile', {'id': app.user.id }) }}">Profile</a></li>
         {% else %}
             <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
             <li><a href="{{ path('encore_signup') }}">Sign Up</a></li>
