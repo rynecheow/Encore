@@ -8,7 +8,7 @@ services:
 
 security:
     encoders:
-        Encore\CustomerBundle\Entity\User: sha512
+        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         ROLE_NORMAL:      ROLE_USER
@@ -34,7 +34,7 @@ security:
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
         fos_userbundle:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username_email
 
     firewalls:
         dev:
