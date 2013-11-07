@@ -56,9 +56,45 @@ table {
 
 /* End Of Reset CSS */
 
+/* Variables */
+@darkMain : #262626;
+@lightMain: #e5e5e5;
+@lightSecondary: #e0e0e0;
+@lightChoc: #a99d9d;
+@pinkMain: #d44877;
+@pinkSecondary: #d42852;
+@mainFont: elena-web-basic, georgia;
+@translucent : 0 1px 2px rgba(0, 0, 0, 0.05);
+@errorRedMain : #8b232a;
+/* Functions */
+.list-style-main (@size: 1.5em) {
+  line-height: @size;
+  margin-left: @size * 2;
+}
+
+.placeholder-font () {
+  ::-webkit-input-placeholder {
+    font-family: @mainFont, georgia;
+  }
+
+  ::-moz-placeholder {
+    font-family: @mainFont, georgia;
+  }
+
+  /* firefox 19+ */
+  :-ms-input-placeholder {
+    font-family: @mainFont, georgia;
+  }
+
+  /* ie */
+  input:-moz-placeholder {
+    font-family: @mainFont, georgia;
+  }
+}
+
 body {
-  background-color: #262626;
-  font-family: elena-web-basic, georgia;
+  background-color: @darkMain;
+  font-family: @mainFont;
   line-height: 1.2;
 }
 
@@ -67,15 +103,10 @@ html, body {
   padding: 0;
 }
 
-::-webkit-input-placeholder { font-family: elena-web-basic, georgia; }
-::-moz-placeholder { font-family: elena-web-basic, georgia; } /* firefox 19+ */
-:-ms-input-placeholder { font-family: elena-web-basic, georgia; } /* ie */
-input:-moz-placeholder { font-family: elena-web-basic, georgia; }
-
 /*Main wrapper*/
 .wrapper {
   width: 100%;
-  background: #262626;
+  background: @darkMain;
   #static-logo {
     margin: 0;
     background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
@@ -86,6 +117,8 @@ input:-moz-placeholder { font-family: elena-web-basic, georgia; }
     height: auto;
     margin-left: 50px;
     float: left;
+    position: fixed;
+    cursor: pointer;
   }
 }
 
@@ -109,7 +142,6 @@ nav {
     left: 100%;
     width: 100%;
     height: auto;
-    z-index: 1;
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat no-repeat;
@@ -119,11 +151,10 @@ nav {
 /*Home page*/
 .home-content {
   h2.spread-headline {
-    font-family: elena-web-basic, georgia;
-    font-weight: 400;
+    font-family: @mainFont;
     -webkit-font-smoothing: antialiased;
     letter-spacing: 1.2em;
-    color: #fff;
+    color: @lightMain;
     font-size: 1.4em;
     margin: 0px auto;
     text-indent: 34px;
@@ -132,7 +163,7 @@ nav {
     text-transform: uppercase;
     width: 100%;
     position: absolute;
-    z-index: 3;
+    z-index: 11;
 
   }
   .home-featured {
@@ -142,6 +173,28 @@ nav {
     width: 100%;
     overflow: hidden;
 
+    a.slider-previous {
+      position: absolute;
+      top: 35%;
+      left: 5%;
+      z-index: 11;
+      text-decoration: none;
+      color: white;
+      font-size: 4.5em;
+      font-family: "Euphemia UCAS";
+      transition: top 0.3s, left 0.3s;
+      -webkit-transition: top 0.3s, left 0.3s;
+    #main-logo {
+      background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
+      top: 35px;
+      left: 35px;
+      margin: 0 auto;
+      width: 150px;
+      height: 41px;
+      position: fixed;
+      z-index: 11;
+      background-size: cover;
+    }
     .carousel-inner {
       z-index: 2;
       position: relative;
@@ -153,15 +206,40 @@ nav {
       padding-left: 0px;
       padding-right: 0px;
     }
+
+    a.slider-previous:hover {
+      top:36%;
+      left: 6%;
+    }
+
+    a.slider-next {
+      position: absolute;
+      top: 35%;
+      right: 5%;
+      z-index: 11;
+      text-decoration: none;
+      color: white;
+      font-size: 4.5em;
+      font-family: "Euphemia UCAS";
+      transition: top 0.3s, right 0.3s;
+      -webkit-transition: top 0.3s, right 0.3s;
+    }
+
+    a.slider-next:hover {
+      top: 36%;
+      right: 6%;
+    }
+
+
   }
   .home-new {
     width: 100%;
     .home-new-events {
       overflow: hidden;
-      background-color: #f5f5f5;
+      background-color: @lightMain;
       position: relative;
       .spread-headline {
-        color: #000;
+        color: @darkMain
       }
       .revealer {
         margin-top: 100px;
@@ -170,13 +248,12 @@ nav {
   }
 }
 
-/*Home page*/
 /*Static pages*/
 .static {
   width: 60%;
   margin: 0 auto;
   border-radius: 50px;
-  background-color: #e0e0e0;
+  background-color: @lightMain;
   margin-top: 50px;
   margin-bottom: 50px;
   padding: 55px 55px;
@@ -186,47 +263,32 @@ nav {
   h3 {
     font-size: 28px;
     font-weight: bold;
-    color: #000000;
+    color: @darkMain;
     text-align: left;
     line-height: 2em;
   }
+
   p, a {
-    color: #0d0d0d;
-    text-align: justify;
+    color: @darkMain;
     line-height: 1.5em;
   }
+
   a {
     font-weight: bold;
-    color: #262626;
-    text-align: justify;
-    line-height: 1.5em;
   }
+
   ul {
     list-style-type: circle;
-    li {
-      line-height: 1.5em;
-      margin-left: 3em;
-    }
   }
+
+  ul li, ol.title, li, p {
+    .list-style-main;
+  }
+
   ol {
     list-style-type: upper-latin;
     .title {
       font-weight: bold;
-      line-height: 1.5em;
-      margin-left: 3em;
-
-    }
-
-    ul {
-      li {
-        line-height: 1.5em;
-        margin-left: 5em;
-      }
-    }
-
-    p {
-      line-height: 1.5em;
-      margin-left: 5em;
     }
   }
 
@@ -234,6 +296,7 @@ nav {
 
 /*Sign in page*/
 .signIn-container {
+  .placeholder-font;
   width: 500px;
   height: 500px;
   margin: 0 auto;
@@ -241,7 +304,7 @@ nav {
   .to_register {
     margin-top: 10px;
     p {
-      color: #9E9292;
+      color: @lightChoc;
       font-size: 15pt;
     }
   }
@@ -250,8 +313,8 @@ nav {
     min-height: 400px;
     padding: 105px 100px 59px 72px;
     margin: 0 auto;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
+    background-color: @lightMain;
+    border: 1px solid @lightSecondary;
     border-radius: 5px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     margin-top: 100px;
@@ -277,9 +340,9 @@ nav {
       font-size: 18px;
       line-height: 1.33;
       border-radius: 6px;
-      color: #ffffff;
-      background-color: #d44877;
-      border-color: #d42852;
+      color: @lightMain;
+      background-color: @pinkMain;
+      border-color: @pinkSecondary;
       margin-bottom: 0;
       text-align: center;
       white-space: nowrap;
@@ -287,7 +350,6 @@ nav {
       cursor: pointer;
       background-image: none;
       border: 1px solid transparent;
-
     }
 
     input[type="text"], input[type="password"] {
@@ -302,6 +364,7 @@ nav {
 
 /*Sign up page*/
 .signUp-container {
+  .placeholder-font;
   width: 500px;
   height: 700px;
   margin: 0 auto;
@@ -319,10 +382,10 @@ nav {
     max-height: 550px;
     padding: 141px 69px;
     margin: 0 auto;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
+    background-color: @lightMain;
+    border: 1px solid @lightSecondary;
     border-radius: 5px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: @translucent;
     margin-top: 100px;
     h1.signUp-header {
       font-size: 32pt;
@@ -354,7 +417,7 @@ nav {
 
     .parsley-error-list {
       font-size: 12px;
-      color: darkred;
+      color: @errorRedMain;
     }
 
     .submit {
@@ -364,9 +427,9 @@ nav {
       font-size: 18px;
       line-height: 1.33;
       border-radius: 6px;
-      color: #ffffff;
-      background-color: #d44877;
-      border-color: #d42852;
+      color: @lightMain;
+      background-color: @pinkMain;
+      border-color: @pinkSecondary;
       margin-top: 25px;
       margin-bottom: 0;
       text-align: center;
@@ -384,6 +447,7 @@ nav {
   width: 500px;
   height: 650px;
   margin: 0 auto;
+  .placeholder-font;
   label {
     color: #262626;
     font-family: arial, sans-serif;
@@ -394,10 +458,10 @@ nav {
     max-width: 500px;
     padding: 141px 69px;
     margin: 0 auto;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
+    background-color: @lightMain;
+    border: 1px solid @lightSecondary;
     border-radius: 5px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: @translucent;
     margin-top: 100px;
     h1.complete-profile-header {
       font-size: 16pt;
@@ -429,19 +493,16 @@ nav {
     }
     #form_birthDate {
       select {
-        margin-bottom: 0px;
         margin-top: 10px;
         width: 100px;
       }
 
     }
     #form_contactNo {
-      margin-bottom: 0px;
       margin-top: 10px;
     }
 
     #form_address {
-      margin-bottom: 0px;
       margin-top: 10px;
     }
     .submit {
@@ -451,22 +512,21 @@ nav {
       font-size: 18px;
       line-height: 1.33;
       border-radius: 6px;
-      color: #ffffff;
-      background-color: #d44877;
-      border-color: #d42852;
+      color: @lightMain;
+      background-color: @pinkMain;
+      border-color: @pinkSecondary;
       margin-top: 20px;
-      margin-bottom: 0;
       text-align: center;
       white-space: nowrap;
       vertical-align: middle;
       cursor: pointer;
       background-image: none;
-      border: 1px solid transparent;
+      border: @translucent;
     }
 
     .parsley-error-list {
       font-size: 12px;
-      color: darkred;
+      color: @errorRedMain;
     }
   }
 }
@@ -490,11 +550,11 @@ nav {
   //margin-top: 25%;
   //margin-right: 10%;
   padding: 20px 20px 20px 20px;
-  background-color: #ffffff;
-  color: #262626;
+  background-color: @lightMain;
+  color: @darkMain;
   float: right;
   right: 20px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid @lightSecondary;
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   font-size: 13px;
@@ -508,9 +568,9 @@ nav {
     font-size: 18px;
     line-height: 1.33;
     border-radius: 6px;
-    color: #ffffff;
-    background-color: #d44877;
-    border-color: #d42852;
+    color: @lightMain;
+    background-color: @pinkMain;
+    border-color: @pinkSecondary;
     margin-top: 15px;
     margin-bottom: 0;
     text-align: center;
@@ -521,4 +581,51 @@ nav {
     border: 1px solid transparent;
   }
 
+}
+
+.thank-you-upper {
+  margin-bottom: 10%;
+
+}
+
+.thank-you-main {
+  margin-left: 10%;
+  width: 80%;
+  background-color: @lightMain;
+  padding: 20px 20px 20px 20px;
+  border-radius: 10px;
+  .thank-you-heading {
+    text-align: center;
+    h2 {
+      font-size: 26px;
+    }
+
+  }
+
+  .ticket-information {
+    width: 50%;
+    background-color: @darkMain;
+    color: @lightMain;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 25%;
+    text-align: justify;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+
+    li {
+      margin-left: 30%;
+    }
+  }
+  h3 {
+    text-align: center;
+    font-size: 18px;
+  }
+  .thank-you-redirect {
+    margin-top: 20px;
+    text-align: right;
+    p, a {
+      font-size: 13.5px;
+    }
+  }
 }
