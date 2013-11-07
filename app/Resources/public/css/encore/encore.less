@@ -107,20 +107,23 @@ html, body {
 .wrapper {
   width: 100%;
   background: @darkMain;
-  #static-logo {
-    margin: 0;
-    background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
-    background-size: cover;
-    min-width: 200px;
-    min-height: 55px;
-    width: auto;
-    height: auto;
-    margin-left: 50px;
-    float: left;
-    position: fixed;
-    cursor: pointer;
-  }
+
 }
+
+#static-logo {
+  margin: 0;
+  background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
+  background-size: cover;
+  min-width: 200px;
+  min-height: 55px;
+  width: auto;
+  height: auto;
+  margin-left: 50px;
+  float: left;
+  position: fixed;
+  cursor: pointer;
+}
+
 
 nav {
   z-index: 100;
@@ -618,3 +621,46 @@ nav {
     }
   }
 }
+
+/*Error page*/
+
+.error-main {
+  width: 60%;
+  background: #e0e0e0;
+  margin-top: 10%;
+  margin-left: 15%;
+  text-align: center;
+  padding: 55px 55px;
+  border-radius: 50px;
+
+  h1 {
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: 25px;
+  }
+
+  span {
+    color: #8b232a;
+
+  }
+
+  a {
+    text-decoration: none;
+    color: #3d80ff;
+  }
+
+  a:hover {
+    color: #262626;
+  }
+
+  a:checked {
+    color: #3d80ff;
+
+  }
+
+}
+
