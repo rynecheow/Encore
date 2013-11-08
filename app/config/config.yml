@@ -41,10 +41,19 @@ assetic:
                - css/encore/encore.less
                - css/encore/seat-selection.less
             output: css/encore.css
+        encore_merchant_css:
+            inputs:
+               - css/fonts/*.css
+               - css/merchant/encore.less
+            output: css/encore_merchant.css
         encore_js:
             inputs:
               - js/encore/encore.js
             output: js/encore.min.js
+        encore_merchant_js:
+            inputs:
+              - js/merchant/encore.js
+            output: js/encore_merchant.min.js
     filters:
         lessphp:
             apply_to: \.less$

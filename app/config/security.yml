@@ -1,10 +1,14 @@
-services:
-        encore.customer.request_matcher:
-            class: Symfony\Component\HttpFoundation\RequestMatcher
-            arguments: [ "%encore.route_prefix.customer%", "%encore.host%" ]
-        encore.merchant.request_matcher:
-            class: Symfony\Component\HttpFoundation\RequestMatcher
-            arguments: [ "%encore.route_prefix.merchant%", "%encore.host%" ]
+#services:
+#        encore.customer.request_matcher:
+#            class: Symfony\Component\HttpFoundation\RequestMatcher
+#            arguments: [ "%encore.route_prefix.customer%", "%encore.host%:%encore.port%" ]
+#        encore.merchant.request_matcher:
+#            class: Symfony\Component\HttpFoundation\RequestMatcher
+#            arguments: [ "%encore.route_prefix.merchant%", "%encore.host%:%encore.port%" ]
+
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
 
 security:
     encoders:
@@ -42,7 +46,7 @@ security:
                 security: false
         customer:
             pattern: "%encore.route_prefix.customer%/.*"
-            request_matcher: encore.customer.request_matcher
+#            request_matcher: encore.customer.request_matcher
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -61,8 +65,8 @@ security:
                 target:                           "%encore.route_prefix.customer%/"
             anonymous:    true
         merchant:
-            pattern: "%encore.route_prefix.customer%/.*"
-            request_matcher: encore.merchant.request_matcher
+            pattern: "^/merchant/.*"
+#            request_matcher: encore.merchant.request_matcher
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -71,7 +75,6 @@ security:
                 check_path:                         "%encore.route_prefix.merchant%/login_check"
                 failure_path:                       "%encore.route_prefix.merchant%/login"
                 use_referer:                        true
-                remember_me:                        true
                 default_target_path:                "%encore.route_prefix.merchant%/"
                 always_use_default_target_path:     false
                 username_parameter:                 _username
@@ -81,12 +84,6 @@ security:
                 path:                             "%encore.route_prefix.merchant%/logout"
                 target:                           "%encore.route_prefix.merchant%/"
             anonymous:    true
-            remember_me:
-                key:                                "encore_remember_me"
-                always_remember_me:                 false
-                lifetime:                           31536000
-                path:                               "%encore.route_prefix.merchant%/"
-                domain:                             ~
     access_control:
         - { path: "^%encore.route_prefix.customer%/login$", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "^%encore.route_prefix.customer%/logout$", role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -94,10 +91,10 @@ security:
         - { path: "^%encore.route_prefix.customer%/forgot-password$", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "^%encore.route_prefix.customer%/reset-password$", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: "^%encore.route_prefix.merchant%/login$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_NORMAL] }
+        - { path: "^%encore.route_prefix.merchant%/login$", roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { path: "^%encore.route_prefix.merchant%/logout$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER] }
-        - { path: "^%encore.route_prefix.merchant%/login-check$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_NORMAL] }
-        - { path: "^%encore.route_prefix.merchant%", roles: [ROLE_MERCHANT] }
+        - { path: "^%encore.route_prefix.merchant%/login-check$", roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: "^%encore.route_prefix.merchant%", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_MERCHANT] }
 
         - { path: "^%encore.route_prefix.customer%", host: "%encore.host%", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "^%encore.route_prefix.merchant%", host: "%encore.host%", role: IS_AUTHENTICATED_ANONYMOUSLY }
