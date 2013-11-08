@@ -63,7 +63,8 @@ class EventRepository extends EntityRepository
         return new Paginator($qb, true);
     }
 
-    public function createQueryBuilderWithJoins(){
+    public function createQueryBuilderWithJoins()
+    {
         $qb = $this->createQueryBuilder('event');
 
         return $qb;
