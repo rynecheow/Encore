@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\EventPhotoRepository")
+ * @Vich\Uploadable
  */
 class EventPhoto
 {
