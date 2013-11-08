@@ -51,7 +51,7 @@ class Merchant
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -65,6 +65,7 @@ class Merchant
     public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -83,6 +84,7 @@ class Merchant
     public function setEvents($events)
     {
         $this->events = $events;
+
         return $this;
     }
 
@@ -103,14 +105,14 @@ class Merchant
     public function setUsername($username)
     {
         $this->username = $username;
-    
+
         return $this;
     }
 
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -126,14 +128,14 @@ class Merchant
     public function setMerchantName($merchantName)
     {
         $this->merchantName = $merchantName;
-    
+
         return $this;
     }
 
     /**
      * Get merchantName
      *
-     * @return string 
+     * @return string
      */
     public function getMerchantName()
     {

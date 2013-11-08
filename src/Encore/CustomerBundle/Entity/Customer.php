@@ -86,7 +86,7 @@ class Customer
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -109,6 +109,7 @@ class Customer
     public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -135,6 +136,7 @@ class Customer
     public function setCardInfo($cardInfo)
     {
         $this->cardInfo = $cardInfo;
+
         return $this;
     }
 
@@ -155,14 +157,14 @@ class Customer
     public function setUsername($username)
     {
         $this->username = $username;
-    
+
         return $this;
     }
 
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -178,14 +180,14 @@ class Customer
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-    
+
         return $this;
     }
 
     /**
      * Get firstName
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -201,14 +203,14 @@ class Customer
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-    
+
         return $this;
     }
 
     /**
      * Get lastName
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
@@ -224,14 +226,14 @@ class Customer
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
-    
+
         return $this;
     }
 
     /**
      * Get birthDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getBirthDate()
     {
@@ -247,14 +249,14 @@ class Customer
     public function setContactNo($contactNo)
     {
         $this->contactNo = $contactNo;
-    
+
         return $this;
     }
 
     /**
      * Get contactNo
      *
-     * @return string 
+     * @return string
      */
     public function getContactNo()
     {
@@ -270,14 +272,14 @@ class Customer
     public function setAddress($address)
     {
         $this->address = $address;
-    
+
         return $this;
     }
 
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {

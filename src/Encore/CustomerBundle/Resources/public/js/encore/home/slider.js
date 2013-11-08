@@ -6,15 +6,15 @@ require(['domReady'],
                         $('#slides').slidesjs(
                             {
                                 navigation: {
-                                  active: false
+                                    active: false
                                 },
                                 pagination: {
-                                  active:false
+                                    active: false
                                 },
                                 play: {
                                     active: false,
                                     auto: true,
-                                    pauseOnHover : true,
+                                    pauseOnHover: true,
                                     restartDelay: 2500,
                                     interval: 6000,
                                     swap: false,
