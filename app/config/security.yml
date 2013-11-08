@@ -61,7 +61,7 @@ security:
                 target:                           "%encore.route_prefix.customer%/"
             anonymous:    true
         merchant:
-            pattern: "%encore.route_prefix.customer%/.*"
+            pattern: "^/merchant/.*"
             request_matcher: encore.merchant.request_matcher
             form_login:
                 provider: fos_userbundle
@@ -94,9 +94,9 @@ security:
         - { path: "^%encore.route_prefix.customer%/forgot-password$", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "^%encore.route_prefix.customer%/reset-password$", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: "^%encore.route_prefix.merchant%/login$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_NORMAL] }
+        - { path: "^%encore.route_prefix.merchant%/login$", roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { path: "^%encore.route_prefix.merchant%/logout$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER] }
-        - { path: "^%encore.route_prefix.merchant%/login-check$", roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_NORMAL] }
+        - { path: "^%encore.route_prefix.merchant%/login-check$", roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
         - { path: "^%encore.route_prefix.merchant%", roles: [ROLE_MERCHANT] }
 
         - { path: "^%encore.route_prefix.customer%", host: "%encore.host%", role: IS_AUTHENTICATED_ANONYMOUSLY }

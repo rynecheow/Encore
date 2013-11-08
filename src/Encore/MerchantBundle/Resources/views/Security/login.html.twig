@@ -1,4 +1,4 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "EncoreMerchantBundle::layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 {% block title %}
@@ -8,19 +8,15 @@
     <div class="signIn-container">
         <div class="merchant-signup-signin-logo" onclick="location.href='/';"></div>
         <form class="signIn-form" action="{{ path("encore_merchant_login_check") }}" method="post">
+            <h1 class="signIn-header">Sign In</h1>
 
             <div>
-                <section class="single-field">
-                    <input id="username" type="text" name="_username"
-                           value="{% if last_username is defined %} {{ last_username }} {% endif %}"
-                           placeholder="Account I.D." required="required"/>
-                </section>
-
-                <section class="single-field">
-                    <input id="password" type="password" name="_password" value="" placeholder="Password"
-                           required="required"/>
-                </section>
-                <button type="submit" class="login-button">Login</button>
+                <input id="username" type="text" name="_username"
+                       value="{% if last_username is defined %} {{ last_username }} {% endif %}"
+                       placeholder="Account I.D." required="required"/>
+                <input id="password" type="password" name="_password" value="" placeholder="Password"
+                       required="required"/>
+                <input type="submit" class="submit" value="Login"></button>
             </div>
         </form>
     </div>

@@ -40,6 +40,11 @@ assetic:
                - css/fonts/*.css
                - css/encore/encore.less
             output: css/encore.css
+        encore_merchant_css:
+            inputs:
+               - css/fonts/*.css
+               - css/merchant/encore.less
+            output: css/encore_merchant.css
         encore_js:
             inputs:
               - js/encore/encore.js

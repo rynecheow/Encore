@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width">
     <title>Encore! Merchant - {% block title %}{% endblock %}</title>
 
-    {% javascripts "@encore_js" %}
+    {% javascripts "@encore_merchant_js" %}
     <script>
         var jsUrl = '{{ asset("bundles/encoremerchant/js") }}';
         var environment = '{{ app.environment }}';
     </script>
     <script data-main="{{ asset('js/encore_merchant.min') }}"
-            src="{{ asset('bundles/encorecustomer/js/libs/require-jquery.min.js') }}"></script>
+            src="{{ asset('bundles/encoremerchant/js/libs/require-jquery.min.js') }}"></script>
     <script>
         require(['encore_merchant.min'], function () {
 //            require(['encore/custom-navigation']);
@@ -25,12 +25,12 @@
 
     {% endjavascripts %}
 
-    {% stylesheets "@encore_css" %}
-    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap-responsive.min.css') }}"
+    {% stylesheets "@encore_merchant_css" %}
+    <link href="{{ asset('bundles/encoremerchant/css/libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('bundles/encoremerchant/css/libs/bootstrap/bootstrap-responsive.min.css') }}"
           rel="stylesheet"/>
     {#<link href="{{ asset('bundles/encorecustomer/css/libs/codrops/animated-border.css') }}"  rel="stylesheet"/>#}
-    <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/encore_merchant.css') }}" rel="stylesheet"/>
     {% endstylesheets %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
@@ -40,24 +40,24 @@
 
 <body>
 {#<nav id="bt-menu" class="bt-menu">#}
-    {#<a href="#" class="bt-menu-trigger"><span>Menu</span></a>#}
-    {#<ul>#}
-        {#{% if not anonymous %}#}
-            {#<li><a href="{{ path('encore_merchant_logout') }}">Logout</a></li>#}
-            {#<li><a href="{{ path('encore_view_profile', {'id': app.user.id }) }}">Profile</a></li>#}
-        {#{% else %}#}
-            {#<li><a href="{{ path('encore_merchant_login') }}">Login</a></li>#}
-            {#<li><a href="{{ path('encore_signup') }}">Sign Up</a></li>#}
-        {#{% endif %}#}
-        {#<li><a href="{{ path('encore_home') }}"><img id="nav-logo"#}
-                                                     {#src="{{ asset('bundles/encorecustomer/images/logo/logo-white.svg') }}"#}
-                                                     {#onmouseover="this.src = {{ asset('bundles/encorecustomer/images/logo/logo-color.svg') }}"#}
-                                                     {#onmouseout="this.src = {{ asset('bundles/encorecustomer/images/logo/logo-white.svg') }}"/></a>#}
-        {#</li>#}
-        {#<li><a href="{{ path('encore_privacy') }}">Privacy</a></li>#}
-        {#<li><a href="{{ path('encore_terms_purchase') }}">Terms</a></li>#}
-        {#<li><a href="{{ path('encore_about') }}">About</a></li>#}
-    {#</ul>#}
+{#<a href="#" class="bt-menu-trigger"><span>Menu</span></a>#}
+{#<ul>#}
+{#{% if not anonymous %}#}
+{#<li><a href="{{ path('encore_merchant_logout') }}">Logout</a></li>#}
+{#<li><a href="{{ path('encore_view_profile', {'id': app.user.id }) }}">Profile</a></li>#}
+{#{% else %}#}
+{#<li><a href="{{ path('encore_merchant_login') }}">Login</a></li>#}
+{#<li><a href="{{ path('encore_signup') }}">Sign Up</a></li>#}
+{#{% endif %}#}
+{#<li><a href="{{ path('encore_home') }}"><img id="nav-logo"#}
+{#src="{{ asset('bundles/encorecustomer/images/logo/logo-white.svg') }}"#}
+{#onmouseover="this.src = {{ asset('bundles/encorecustomer/images/logo/logo-color.svg') }}"#}
+{#onmouseout="this.src = {{ asset('bundles/encorecustomer/images/logo/logo-white.svg') }}"/></a>#}
+{#</li>#}
+{#<li><a href="{{ path('encore_privacy') }}">Privacy</a></li>#}
+{#<li><a href="{{ path('encore_terms_purchase') }}">Terms</a></li>#}
+{#<li><a href="{{ path('encore_about') }}">About</a></li>#}
+{#</ul>#}
 {#</nav>#}
 <div class="wrapper">
     {% block content %}
