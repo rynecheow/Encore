@@ -44,6 +44,10 @@ assetic:
             inputs:
               - js/encore/encore.js
             output: js/encore.min.js
+        encore_merchant_js:
+            inputs:
+              - js/merchant/encore.js
+            output: js/encore_merchant.min.js
     filters:
         lessphp:
             apply_to: \.less$

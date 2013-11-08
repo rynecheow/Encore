@@ -4,34 +4,25 @@
 {% block title %}
     Sign in
 {% endblock title %}
-{% block fos_user_content %}
-    {% if error %}
-        <div>{{ error|trans }}</div>
-    {% endif %}
-
+{% block content %}
     <div class="signIn-container">
-        <div class="signup-signin-logo" onclick="location.href='/';"></div>
-        <form class="signIn-form" action="{{ path("fos_user_security_check") }}" method="post">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+        <div class="merchant-signup-signin-logo" onclick="location.href='/';"></div>
+        <form class="signIn-form" action="{{ path("encore_merchant_login_check") }}" method="post">
 
             <div>
-                <h1 class="signIn-header">Sign In - Merchant</h1>
-                <input class="username" placeholder="E-mail" type="text" id="username"
-                       name="_username" value="{{ last_username }}" required="required"/>
-            </div>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                <section class="single-field">
+                    <input id="username" type="text" name="_username"
+                           value="{% if last_username is defined %} {{ last_username }} {% endif %}"
+                           placeholder="Account I.D." required="required"/>
+                </section>
 
-            <div>
-                <input class="password" placeholder="Password" type="password"
-                       id="password" name="_password" required="required"/>
+                <section class="single-field">
+                    <input id="password" type="password" name="_password" value="" placeholder="Password"
+                           required="required"/>
+                </section>
+                <button type="submit" class="login-button">Login</button>
             </div>
-            <br/>
-            <input class="submit" type="submit" id="_submit" name="_submit"
-                   value="{{ 'security.login.submit'|trans }}"/>
         </form>
-        <div class="to_register">
-            <p>Not a member yet ? <a href="/signup">Join us!</a></p>
-        </div>
     </div>
 
-{% endblock fos_user_content %}
+{% endblock content %}
