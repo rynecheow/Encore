@@ -19,63 +19,66 @@ class ProfileController extends BaseController
      * @ParamConverter("user", class="EncoreCustomerBundle:User", options={"id" = "userId"})
      * @Method({"GET","POST"})
      */
-    public function editAction(User $user)
-    {
-        $request = $this->getRequest();
-        if ($this->isLoggedIn()) {
-            if (!$this->authorizeRequest($request)) {
-                return $this->redirect(
-                    $this->generateUrl(
-                        'encore_view_profile',
-                        [
-                            'id' => $request->attributes->get('id'),
-                        ]
-                    )
-                );
-            }
+    public function editAction(User $user){
+        return $this->render(
+               "EncoreCustomerBundle:User:editProfile.html.twig");
 
-            /**
-             * @var $user User
-             */
+//    {
+//        $request = $this->getRequest();
+//        if ($this->isLoggedIn()) {
+//            if (!$this->authorizeRequest($request)) {
+//                return $this->redirect(
+//                    $this->generateUrl(
+//                        'encore_view_profile',
+//                        [
+//                            'id' => $request->attributes->get('id'),
+//                        ]
+//                    )
+//                );
+//            }
+//
+//            /**
+//             * @var $user User
+//             */
 //            $user = $this->authenticatedUser;
 //            $request = $this->getRequest();
-            if (($user->isEnabled())) {
-                $editProfileForm = $this->createEditProfileForm();
-
-                if ($request->isMethod('POST')) {
-                    $editProfileForm->submit($request);
-                    if ($editProfileForm->isValid()) {
-                        $this->em->flush();
-
-                        if ($request->isXmlHttpRequest()) {
-                            return Response::create('', 204);
-                        }
-
-                        $this->pushFlashMessage('success', 'Profile saved');
-
-                        return $this->redirect(
-                            $this->generateUrl(
-                                'encore_view_profile',
-                                [
-                                    'id' => $request->attributes->get('id'),
-                                ]
-                            )
-                        );
-                    }
-                }
-
-                return $this->render(
-                    "EncoreCustomerBundle:User:editProfile.html.twig",
-                    array('form' => $editProfileForm->createView())
-                );
-            }
-
-            // If Not Enabled
-            return $this->redirect($this->generateUrl('encore_complete_profile'));
-        }
-
-        // Invalid Access via url
-        return $this->redirect($this->generateUrl('encore_login'));
+//            if (($user->isEnabled())) {
+//                $editProfileForm = $this->createEditProfileForm();
+//
+//                if ($request->isMethod('POST')) {
+//                    $editProfileForm->submit($request);
+//                    if ($editProfileForm->isValid()) {
+//                        $this->em->flush();
+//
+//                        if ($request->isXmlHttpRequest()) {
+//                            return Response::create('', 204);
+//                        }
+//
+//                        $this->pushFlashMessage('success', 'Profile saved');
+//
+//                        return $this->redirect(
+//                            $this->generateUrl(
+//                                'encore_view_profile',
+//                                [
+//                                    'id' => $request->attributes->get('id'),
+//                                ]
+//                            )
+//                        );
+//                    }
+//                }
+//
+//                return $this->render(
+//                    "EncoreCustomerBundle:User:editProfile.html.twig",
+//                    array('form' => $editProfileForm->createView())
+//                );
+//            }
+//
+//            // If Not Enabled
+//            return $this->redirect($this->generateUrl('encore_complete_profile'));
+//        }
+//
+//        // Invalid Access via url
+//        return $this->redirect($this->generateUrl('encore_login'));
     }
 
     /**
@@ -84,7 +87,29 @@ class ProfileController extends BaseController
      */
     public function viewAction()
     {
-        return $this->render("EncoreCustomerBundle:User:profile.twig");
+        if (!$this->isLoggedIn()) {
+
+            $this->pushFlashMessage('error', 'Unauthorized Access');
+            $this->gotoHome();
+        }
+        return $this->render(
+            "EncoreCustomerBundle:User:profile.html.twig",
+            [
+                'username' => 'kokhong'
+                ,
+                'email' => 'kokhong200gmail.com'
+                ,
+                'firstname' => 'Kok Hong'
+                ,
+                'lastname' => 'Choo'
+                ,
+                'birthdate' => '1991-08-26'
+                ,
+                'contactno' => '0123456789'
+                ,
+                'address' => 'ADDRESS THING adasdasdsadasdsadsadasdasdasdasdasdasd'
+            ]
+        );
     }
 
     /**
