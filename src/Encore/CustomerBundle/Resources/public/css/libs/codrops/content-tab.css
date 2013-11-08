@@ -2,20 +2,25 @@
     margin-top: 10%;
     width: 100%;
 }
+
 .event-tab input {
     left: 0px;
     top: 0px;
     opacity: 0;
 }
+
 .event-tab input #tab-2 {
     left: 120px;
 }
+
 .event-tab input #tab3 {
     left: 240px;
 }
+
 .event-tab input #tab4 {
     left: 360px;
 }
+
 .event-tab label {
     background: #a7264c;
     font-size: 15px;
@@ -35,6 +40,7 @@
     border-radius: 3px 3px 0 0;
     box-shadow: 2px 0 2px rgba(0, 0, 0, 0.1), -2px 0 2px rgba(0, 0, 0, 0.1);
 }
+
 .event-tab label:after {
     content: '';
     background: #fff;
@@ -45,6 +51,7 @@
     height: 8px;
     display: block;
 }
+
 .event-tab input:hover + label {
     background: #ff2753;
     top: -8px;
@@ -54,9 +61,11 @@
     -ms-transition: top linear 0.2s;
     transition: top linear 0.2s;
 }
+
 .event-tab input:hover + label:after {
     background: #ff2753;
 }
+
 .event-tab input:hover + label ~ .clear-shadow {
     top: -8px;
     -webkit-transition: top linear 0.2s;
@@ -65,12 +74,15 @@
     -ms-transition: top linear 0.2s;
     transition: top linear 0.2s;
 }
+
 .event-tab input:checked:hover + label {
     top: 0;
 }
+
 .event-tab input:checked:hover + label:after {
     background: #fff;
 }
+
 .event-tab input:checked:hover + label ~ .clear-shadow {
     top: 0;
     background: #fff;
@@ -80,6 +92,7 @@
     -ms-transition: none;
     transition: none;
 }
+
 .event-tab input:checked + label {
     background: #fff;
     z-index: 6;
@@ -89,9 +102,11 @@
     -ms-transition: top linear 0.2s;
     transition: top linear 0.2s;
 }
+
 .event-tab .clear-shadow {
     clear: both;
 }
+
 .event-tab .tab-content {
     background: #fff;
     position: relative;
@@ -100,11 +115,13 @@
     box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.1);
     border-radius: 0 3px 3px 3px;
 }
+
 .event-tab .tab-content h2 {
     font-size: 24px;
     margin-bottom: 10px;
     font-weight: bold;
 }
+
 .event-tab .tab-content div {
     position: absolute;
     top: 0;
@@ -113,9 +130,11 @@
     z-index: 1;
     opacity: 0;
 }
+
 .event-tab .tab-content div p {
     line-height: 1.5em;
 }
+
 .event-tab input.tab-selector-1:checked ~ .tab-content .content-1,
 .event-tab input.tab-selector-2:checked ~ .tab-content .content-2,
 .event-tab input.tab-selector-3:checked ~ .tab-content .content-3,

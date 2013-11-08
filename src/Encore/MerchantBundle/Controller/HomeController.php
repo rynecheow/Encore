@@ -11,12 +11,14 @@ namespace Encore\MerchantBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class HomeController extends BaseController {
+class HomeController extends BaseController
+{
 
     /**
      * @Route("/", name="encore_merchant_home")
      */
-    public function indexAction(){
+    public function indexAction()
+    {
         return $this->render("EncoreMerchantBundle:Home:index.html.twig");
     }
 

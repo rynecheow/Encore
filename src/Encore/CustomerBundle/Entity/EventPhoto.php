@@ -63,6 +63,7 @@ class EventPhoto
             $this->id = null;
         }
     }
+
     /**
      * Get id
      *

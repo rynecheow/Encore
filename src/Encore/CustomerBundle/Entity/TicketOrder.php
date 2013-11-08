@@ -72,6 +72,7 @@ class TicketOrder
     public function setCustomer($customer)
     {
         $this->customer = $customer;
+
         return $this;
     }
 

@@ -54,10 +54,11 @@ class Seat
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSeat", mappedBy="eventSection")
      */
     private $eventSeats;
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -71,6 +72,7 @@ class Seat
     public function setEventSeats($eventSeats)
     {
         $this->eventSeats = $eventSeats;
+
         return $this;
     }
 
@@ -91,14 +93,14 @@ class Seat
     public function setRow($row)
     {
         $this->row = $row;
-    
+
         return $this;
     }
 
     /**
      * Get row
      *
-     * @return string 
+     * @return string
      */
     public function getRow()
     {
@@ -114,14 +116,14 @@ class Seat
     public function setCol($col)
     {
         $this->col = $col;
-    
+
         return $this;
     }
 
     /**
      * Get col
      *
-     * @return string 
+     * @return string
      */
     public function getCol()
     {
@@ -137,14 +139,14 @@ class Seat
     public function setSeatName($seatName)
     {
         $this->seatName = $seatName;
-    
+
         return $this;
     }
 
     /**
      * Get seatName
      *
-     * @return string 
+     * @return string
      */
     public function getSeatName()
     {
@@ -158,6 +160,7 @@ class Seat
     public function setSection($section)
     {
         $this->section = $section;
+
         return $this;
     }
 

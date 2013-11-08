@@ -66,7 +66,7 @@ class EventSection
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -120,6 +120,7 @@ class EventSection
     public function setEventSeats($eventSeats)
     {
         $this->eventSeats = $eventSeats;
+
         return $this;
     }
 
@@ -130,6 +131,7 @@ class EventSection
     {
         return $this->eventSeats;
     }
+
     /**
      * Set price
      *
@@ -139,14 +141,14 @@ class EventSection
     public function setPrice($price)
     {
         $this->price = $price;
-    
+
         return $this;
     }
 
     /**
      * Get price
      *
-     * @return float 
+     * @return float
      */
     public function getPrice()
     {
@@ -162,14 +164,14 @@ class EventSection
     public function setTotalSeats($totalSeats)
     {
         $this->totalSeats = $totalSeats;
-    
+
         return $this;
     }
 
     /**
      * Get totalSeats
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalSeats()
     {
@@ -185,14 +187,14 @@ class EventSection
     public function setTotalSold($totalSold)
     {
         $this->totalSold = $totalSold;
-    
+
         return $this;
     }
 
     /**
      * Get totalSold
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalSold()
     {

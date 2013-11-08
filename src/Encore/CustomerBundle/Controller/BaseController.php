@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManager;
+
 /**
  * Base controller.
  *
@@ -31,21 +32,18 @@ class BaseController extends Controller
      * @var Request
      */
     protected $request;
-
     /**
      * Session object
      *
      * @var Session
      */
     protected $session;
-
     /**
      * Current logged in authenticated user
      *
      * @var User
      */
     protected $authenticatedUser;
-
     /**
      * The Doctrine entity manager.
      *
@@ -84,6 +82,16 @@ class BaseController extends Controller
     }
 
     /**
+     * Get the currently logged in user Doctrine entity object.
+     *
+     * @return User|null The currently logged in user Doctrine entity object.
+     */
+    private function getAuthenticatedUser()
+    {
+        return $this->container->get('encore.user_manager')->getAuthenticatedUser();
+    }
+
+    /**
      * Check if a user is logged in.
      *
      * @return boolean Decision of whether a user is logged in.
@@ -94,17 +102,6 @@ class BaseController extends Controller
     }
 
     /**
-     * Get the currently logged in user Doctrine entity object.
-     *
-     * @return User|null The currently logged in user Doctrine entity object.
-     */
-    private function getAuthenticatedUser()
-    {
-        return $this->container->get('encore.user_manager')->getAuthenticatedUser();
-    }
-
-
-    /**
      * Simple notification flash message
      */
     protected function pushFlashMessage($status, $message)
@@ -112,7 +109,8 @@ class BaseController extends Controller
         $this->getRequest()->getSession()->getFlashBag()->add($status, $message);
     }
 
-    protected function gotoHome(){
+    protected function gotoHome()
+    {
         return $this->redirect($this->generateUrl('encore_home'));
     }
 }

@@ -51,7 +51,7 @@ class CardInfo
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -65,6 +65,7 @@ class CardInfo
     public function setOwner($owner)
     {
         $this->owner = $owner;
+
         return $this;
     }
 
@@ -85,14 +86,14 @@ class CardInfo
     public function setType($type)
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
     /**
      * Get type
      *
-     * @return integer 
+     * @return integer
      */
     public function getType()
     {
@@ -108,14 +109,14 @@ class CardInfo
     public function setCardNum($cardNum)
     {
         $this->cardNum = $cardNum;
-    
+
         return $this;
     }
 
     /**
      * Get cardNum
      *
-     * @return string 
+     * @return string
      */
     public function getCardNum()
     {
@@ -131,14 +132,14 @@ class CardInfo
     public function setExpireAt($expireAt)
     {
         $this->expireAt = $expireAt;
-    
+
         return $this;
     }
 
     /**
      * Get expireAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getExpireAt()
     {
