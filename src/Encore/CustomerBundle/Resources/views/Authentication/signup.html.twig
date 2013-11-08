@@ -18,15 +18,15 @@
                 {{ form_widget(form.password) }}
                 {{ form_widget(form.verifyPassword) }}
                 <div class="checkbox">
-                {{ form_widget(form.agreement) }}
-                <label id="form_agreement_label" for="form_agreement">I agree with Encore's
-                    <b>
-                        <a href="{{ path('encore_terms_purchase') }}" target="_blank">Terms</a>
-                    </b> &amp;
-                    <b>
-                        <a href="{{ path('encore_privacy') }}" target="_blank">Privacy</a>
-                    </b>
-                </label>
+                    {{ form_widget(form.agreement) }}
+                    <label id="form_agreement_label" for="form_agreement">I agree with Encore's
+                        <b>
+                            <a href="{{ path('encore_terms_purchase') }}" target="_blank">Terms</a>
+                        </b> &amp;
+                        <b>
+                            <a href="{{ path('encore_privacy') }}" target="_blank">Privacy</a>
+                        </b>
+                    </label>
                 </div>
                 {{ form_widget(form.register) }}
                 {{ form_rest(form) }}

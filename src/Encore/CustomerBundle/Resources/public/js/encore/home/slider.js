@@ -6,10 +6,10 @@ require(['domReady'],
                         $('#slides').slidesjs(
                             {
                                 navigation: {
-                                  active: false
+                                    active: false
                                 },
                                 pagination: {
-                                  active:false
+                                    active: false
                                 },
                                 play: {
                                     active: false,

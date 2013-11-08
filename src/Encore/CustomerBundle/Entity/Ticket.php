@@ -69,6 +69,7 @@ class Ticket
      * @ORM\JoinColumn(name="ticketOrderID", referencedColumnName="id", nullable=false)
      */
     private $ticketOrder;
+
     /**
      * Get id
      *
@@ -87,6 +88,7 @@ class Ticket
     public function setEventDate($eventDate)
     {
         $this->eventDate = $eventDate;
+
         return $this;
     }
 
@@ -106,6 +108,7 @@ class Ticket
     public function setEventName($eventName)
     {
         $this->eventName = $eventName;
+
         return $this;
     }
 
@@ -125,6 +128,7 @@ class Ticket
     public function setEventSeat($eventSeat)
     {
         $this->eventSeat = $eventSeat;
+
         return $this;
     }
 
@@ -144,6 +148,7 @@ class Ticket
     public function setPrice($price)
     {
         $this->price = $price;
+
         return $this;
     }
 
@@ -163,6 +168,7 @@ class Ticket
     public function setSeatName($seatName)
     {
         $this->seatName = $seatName;
+
         return $this;
     }
 
@@ -182,6 +188,7 @@ class Ticket
     public function setSerialNumber($serialNumber)
     {
         $this->serialNumber = $serialNumber;
+
         return $this;
     }
 
@@ -201,6 +208,7 @@ class Ticket
     public function setTicketOrder($ticketOrder)
     {
         $this->ticketOrder = $ticketOrder;
+
         return $this;
     }
 

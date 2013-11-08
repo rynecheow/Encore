@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use FOS\UserBundle\Model\User as BaseUser;
+
 /**
  * User
  *
@@ -24,7 +25,7 @@ class User extends BaseUser
     const ROLE_FACEBOOK = 'ROLE_FACEBOOK';
     const ROLE_NORMAL = 'ROLE_NORMAL';
     const ROLE_ADMIN_MERCHANT = 'ROLE_ADMIN_MERCHANT';
-    const ROLE_MERCHANT= 'ROLE_MERCHANT';
+    const ROLE_MERCHANT = 'ROLE_MERCHANT';
 
     /**
      * @var integer

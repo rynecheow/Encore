@@ -13,7 +13,8 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\SecurityContext;
 use Encore\CustomerBundle\Entity\UserEmail;
 
-class EncoreUserManager {
+class EncoreUserManager
+{
     /**
      * @var EntityManager
      */
@@ -25,7 +26,7 @@ class EncoreUserManager {
     private $sc;
 
     /**
-     * @param EntityManager   $em The Doctrine entity manager.
+     * @param EntityManager $em The Doctrine entity manager.
      * @param SecurityContext $sc The Symfony security context.
      */
     public function __construct(EntityManager $em, SecurityContext $sc)
@@ -95,6 +96,7 @@ class EncoreUserManager {
             $user = $this->em
                 ->getRepository('EncoreCustomerBundle:User')
                 ->find($user->getId());
+
             return $user;
         }
 
@@ -106,7 +108,8 @@ class EncoreUserManager {
      *
      * @return boolean Decision of whether a user is logged in.
      */
-    public function isLoggedIn() {
+    public function isLoggedIn()
+    {
         return ($this->getAuthenticatedUser() != null);
     }
 
