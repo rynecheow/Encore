@@ -70,4 +70,8 @@ interdiff*.txt
 ######################
 /nbproject/
 /.idea/
+
+# Watcher generated files #
+#####################
 /app/Resources/public/css/encore/*.css
+/app/Resources/public/css/merchant/*.css
