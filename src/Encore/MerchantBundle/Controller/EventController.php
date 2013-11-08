@@ -37,6 +37,7 @@ class EventController extends BaseController
             ->setSaleEnd($params["event_sale_end"])
             ->setHeldDates($params["event_held_dates"])
             ->setTotalTickets($params["event_total_tickets"]);
+
 //        $newEvent->set
 
         return $this->render("EncoreMerchantBundle::Events:add-event.html.twig");

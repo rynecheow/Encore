@@ -39,7 +39,7 @@ class Section
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -54,6 +54,7 @@ class Section
     public function setVenue($venue)
     {
         $this->venue = $venue;
+
         return $this;
     }
 
@@ -74,14 +75,14 @@ class Section
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {

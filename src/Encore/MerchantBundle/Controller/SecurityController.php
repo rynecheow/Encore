@@ -15,6 +15,7 @@ class SecurityController extends BaseSecurityController
 
         if ($sc->isGranted('ROLE_MERCHANT')) {
             $url = $this->container->get('router')->generate('encore_merchant_home');
+
             return new RedirectResponse($url);
         }
 
