@@ -27,11 +27,11 @@ class PurchaseController extends BaseController
 
         $eventSection = $this->em
             ->getRepository("EncoreCustomerBundle:EventSection")
-            ->findByevent($id);
+            ->findByEvent($id);
 
         $sections = $this->em
             ->getRepository("EncoreCustomerBundle:Section")
-            ->findByvenue($event->getVenue());
+            ->findByVenue($event->getVenue());
 
         $totalSection = count($eventSection);
         $sectionsInfo = [];
@@ -72,7 +72,7 @@ class PurchaseController extends BaseController
      */
     public function thankYouAction(Request $request)
     {
-        $data = [];
+        $data = []; //Todo return a ticket data
         return $this->render(
             "EncoreCustomerBundle:Purchase:index.html.twig",
             [
@@ -88,4 +88,4 @@ class PurchaseController extends BaseController
     {
         return $this->render("EncoreCustomerBundle:Events:seat-selection.html.twig");
     }
-} 
+}

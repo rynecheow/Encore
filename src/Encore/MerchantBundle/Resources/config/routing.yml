@@ -1,3 +1,11 @@
-encore_merchant_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: EncoreMerchantBundle:Default:index }
+encore_merchant_welcome:
+  resource: "@EncoreMerchantBundle/Controller/HomeController.php"
+  type:     annotation
+
+encore_merchant_event:
+  resource:  "@EncoreMerchantBundle/Controller/EventController.php"
+  type:     annotation
+
+encore_merchant_login:
+  resource:  "@EncoreMerchantBundle/Controller/SecurityController.php"
+  type:     annotation

@@ -23,19 +23,8 @@ class EventController extends BaseController
      * @Route("/events/{eventId}", name="encore_event_details")
      * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
      */
-    public function eventDetailAction($id)
+    public function eventDetailAction(Event $event)
     {
-        /**
-         * @var $event \Encore\CustomerBundle\Entity\Event
-         */
-        $event = $this->em
-            ->getRepository("EncoreCustomerBundle:Event")
-            ->find($id);
-
-        if (!$event) {
-            throw $this->createNotFoundException("No event found for id " . $id . " WHYYYYY!");
-        }
-
         $heldDates = $event->getHeldDates();
         $heldDates = $heldDates->format("Y-m-d H:i");
         $venue = $event->getVenue();
@@ -56,8 +45,7 @@ class EventController extends BaseController
         $photosNumber = count($photos);
 
         foreach ($photoSequence as $photoId) {
-            for ($i=0; $i<$photosNumber; $i++)
-            {
+            for ($i = 0; $i < $photosNumber; $i++) {
                 if ($photoId == $photos[$i]->getId()) {
                     $photoPath[] = $photos[$i]->getImagePath();
                 }
@@ -74,27 +62,11 @@ class EventController extends BaseController
             "event_sale_end" => $event->getSaleEnd(),
             "event_held_dates" => $heldDates,
             "event_total_tickets" => $event->getTotalTickets(),
-			"event_photos" =>$photoPath,
+            "event_photos" => $photoPath,
             "venue_name" => $venue->getName(),
             "venue_location" => $venue->getLocation()
         ];
 
         return $this->render("EncoreCustomerBundle:Events:event.html.twig", $params);
-    }
-
-    /**
-     * @Route("/events/{id}/purchase/", name="envore_event_ticket_purchase", requirements={"id" = "\d+"})
-     */
-    public function purchaseAction($id)
-    {
-        //TODO handle purchase event action
-    }
-
-    /**
-     * @Route("/events/{id}/purchase/summary", name="envore_event_ticket_purchase", requirements={"id" = "\d+"})
-     */
-    public function purchaseSummaryAction($id)
-    {
-        //TODO handle purchase summary event action
     }
 } 
