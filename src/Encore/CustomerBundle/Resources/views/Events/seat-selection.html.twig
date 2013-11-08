@@ -1,0 +1,8 @@
+{% extends "EncoreCustomerBundle::layout.html.twig" %}
+
+{% block require_js %}
+    require(['encore/purchase/seat-selection']);
+{% endblock require_js %}
+{% block content %}
+    <input type="button" value="reset" id="resetButton" />
+{% endblock content %}
