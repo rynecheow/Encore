@@ -1,10 +1,10 @@
 services:
         encore.customer.request_matcher:
             class: Symfony\Component\HttpFoundation\RequestMatcher
-            arguments: [ "%encore.route_prefix.customer%", "%encore.host%" ]
+            arguments: [ "%encore.route_prefix.customer%", "%encore.host%:%encore.port%" ]
         encore.merchant.request_matcher:
             class: Symfony\Component\HttpFoundation\RequestMatcher
-            arguments: [ "%encore.route_prefix.merchant%", "%encore.host%" ]
+            arguments: [ "%encore.route_prefix.merchant%", "%encore.host%:%encore.port%" ]
 
 security:
     encoders:
@@ -61,7 +61,7 @@ security:
                 target:                           "%encore.route_prefix.customer%/"
             anonymous:    true
         merchant:
-            pattern: "^/merchant/.*"
+            pattern: "/merchant/.*"
             request_matcher: encore.merchant.request_matcher
             form_login:
                 provider: fos_userbundle
