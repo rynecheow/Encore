@@ -3,21 +3,67 @@
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
 
 {% block content %}
-<div class="profile-wrap">
-    <div class="logo-wrap">
-        <a><img class="edit-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/edit-gray.svg') }}"></a>
-        <a><img class="view-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/view-gray.svg') }}"></a>
-        <a><img class="history-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/purchase-gray.svg') }}"></a>
+    <div class="profile-wrap">
+        <div class="logo-wrap">
+            <a><img class="edit-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/edit-gray.svg') }}"></a>
+            <a><img class="view-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/view-gray.svg') }}"></a>
+            <a><img class="history-profile"
+                    src="{{ asset('bundles/encorecustomer/images/logo/profile/purchase-gray.svg') }}"></a>
+        </div>
+        <div class="content-wrap">
+            <p class="">
+
+            </p>
+            <p class="profile-title">
+                Username
+            </p>
+
+            <p>
+                {{ username }}
+            </p>
+            <hr class="side" style="">
+            <p class="profile-title">
+                First Name
+            </p>
+
+            <p>
+                {{ firstname }}
+            </p>
+            <hr>
+
+            <p class="profile-title">
+                Last Name
+            </p>
+
+            <p>
+                {{ firstname }}
+            </p>
+            <hr>
+
+            <p class="profile-title">
+                Birth Date
+            </p>
+
+            <p>
+                {{ birthdate }}
+            </p>
+            <hr>
+            <p class="profile-title">
+                Contact No
+            </p>
+
+            <p>
+                {{ contactno }}
+            </p>
+            <hr>
+
+            <p class="profile-title">
+                Address
+            </p>
+
+            <p>
+                {{ address }}
+            </p>
+        </div>
     </div>
-    <p class="profile-title">
-        Your Username:
-    </p>
-    <hr class="side" style="border: solid #ddd; border-width: 1px 0 0;  margin: 22px 10% 21px; height: 0; width:80%">
-    {{ username }}
-    {{ firstname }}
-    {{ lastname }}
-    {{ birthdate }}
-    {{ contactno }}
-    {{ address }}
-</div>
 {% endblock content %}

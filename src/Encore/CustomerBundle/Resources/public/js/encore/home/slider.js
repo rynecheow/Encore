@@ -15,8 +15,8 @@ require(['domReady'],
                                     active: false,
                                     auto: true,
                                     pauseOnHover : true,
-                                    restartDelay: 2500,
-                                    interval: 6000,
+                                    restartDelay: 10000,
+                                    interval: 10000,
                                     swap: false,
                                     effect: "slide"
                                 }
