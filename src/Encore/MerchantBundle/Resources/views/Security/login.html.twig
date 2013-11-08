@@ -6,7 +6,7 @@
 {% endblock title %}
 {% block content %}
     <div class="signIn-container">
-        <div class="merchant-signup-signin-logo" onclick="location.href='/';"></div>
+        <div class="merchant-signup-signin-logo" onclick="location.href='{{ path('encore_merchant_home') }}';"></div>
         <form class="signIn-form" action="{{ path("encore_merchant_login_check") }}" method="post">
             <h1 class="signIn-header">Sign In</h1>
 
