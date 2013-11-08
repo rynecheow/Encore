@@ -25,10 +25,6 @@ class EventController extends BaseController
      */
     public function eventDetailAction(Event $event)
     {
-        if (!$event) {
-            $this->gotoHome();
-        }
-
         $heldDates = $event->getHeldDates();
         $heldDates = $heldDates->format("Y-m-d H:i");
         $venue = $event->getVenue();
@@ -72,21 +68,5 @@ class EventController extends BaseController
         ];
 
         return $this->render("EncoreCustomerBundle:Events:event.html.twig", $params);
-    }
-
-    /**
-     * @Route("/events/{id}/purchase/", name="envore_event_ticket_purchase", requirements={"id" = "\d+"})
-     */
-    public function purchaseAction($id)
-    {
-        //TODO handle purchase event action
-    }
-
-    /**
-     * @Route("/events/{id}/purchase/summary", name="envore_event_ticket_purchase", requirements={"id" = "\d+"})
-     */
-    public function purchaseSummaryAction($id)
-    {
-        //TODO handle purchase summary event action
     }
 } 

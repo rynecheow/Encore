@@ -13,12 +13,12 @@ use Doctrine\ORM\EntityManager;
 /**
  * Base controller.
  *
- * Base controller for EncoreCustomerBundle controllers.
+ * Base controller for EncoreMerchantBundle controllers.
  *
  * @author  Ryne Cheow
  * @version 1.0.0
  * @since   version 1.00
- * created_at: 2013-10-12 12:00:00
+ * created_at: 2013-11-07 12:00:00
  * updated_at:
  */
 
@@ -113,7 +113,6 @@ class BaseController extends Controller
     }
 
     protected function gotoHome(){
-        //TODO: change home to merchant home
         return $this->redirect($this->generateUrl('encore_home'));
     }
 }

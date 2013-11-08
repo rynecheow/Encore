@@ -2,13 +2,35 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>An Error Occurred: {{ status_text }}</title>
+
+    {% stylesheets %}
+    <link href="{{ asset('css/encore.css') }}" rel="stylesheet"/>
+    {% endstylesheets %}
+
+    <style>
+
+
+        #static-logo {
+            top: 20px;
+            position: absolute;
+        }
+
+
+    </style>
 </head>
 <body>
-<h1>Oops! An Error Occurred</h1>
+<div id="static-logo" onclick="location.href='/';"></div>
+<div class="error-main">
+    <h1>Oops! An Error Occurred</h1>
 
-<h2>The server returned a "{{ status_code }} {{ status_text }}".</h2>
+    <h2>The server returned a "<span>{{ status_code }} {{ status_text }}</span>".</h2>
+
+    <p>Click <a href='/'>here</a> to go back to home page.</p>
+</div>
 </body>
 </html>
