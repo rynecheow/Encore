@@ -5,15 +5,30 @@
 {% block content %}
     <div class="profile-wrap">
         <div class="logo-wrap">
-            <a><img class="edit-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/edit-gray.svg') }}"></a>
-            <a><img class="view-profile" src="{{ asset('bundles/encorecustomer/images/logo/profile/view-gray.svg') }}"></a>
-            <a><img class="history-profile"
-                    src="{{ asset('bundles/encorecustomer/images/logo/profile/purchase-gray.svg') }}"></a>
+
+            <a class="view-hover" href="{{ path('encore_view_profile', {'id': app.user.id }) }}">
+                <div class="view-profile view-selected div-logo"></div>
+            </a>
+
+            <a class="edit-hover" href="{{ path('encore_edit_profile', {'userId':app.user.id}) }}">
+                <div class="edit-profile div-logo"></div>
+            </a>
+
+            <a class="history-hover" href="">
+                <div class="history-profile div-logo"></div>
+            </a>
+
         </div>
         <div class="content-wrap">
-            <p class="">
 
+            <p class="profile-big-title">
+                {{ username }}
             </p>
+
+            <br/>
+            <br/>
+            <br/>
+
             <p class="profile-title">
                 Username
             </p>
@@ -21,7 +36,16 @@
             <p>
                 {{ username }}
             </p>
-            <hr class="side" style="">
+            <hr>
+            <p class="profile-title">
+                Email
+            </p>
+
+
+            <p>
+                {{ email }}
+            </p>
+            <hr>
             <p class="profile-title">
                 First Name
             </p>

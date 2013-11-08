@@ -3,6 +3,11 @@
 {% extends 'EncoreCustomerBundle:Home:frame.html.twig' %}
 
 {% block slideshow %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     <div id="main-logo"></div>
     <h2 class="spread-headline">
         Featured Events
