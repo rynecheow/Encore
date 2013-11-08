@@ -17,20 +17,22 @@ class UserRepository extends EntityRepository
     /*  Get user based on slug
      *  $slug = id OR encore_username
      */
-    public function findUserBySlug($slug){
+    public function findUserBySlug($slug)
+    {
         return $this->getEntityManager()
-            ->createQuery(" SELECT user FROM EncoreCustomerBundle:User user
-                            WHERE user.id = :slug
-                            OR user.encore_username = :slug
-                            AND user.enabled = :enabled"
+            ->createQuery(
+                " SELECT user FROM EncoreCustomerBundle:User user
+                                            WHERE user.id = :slug
+                                            OR user.encore_username = :slug
+                                            AND user.enabled = :enabled"
             )
-            ->setParameters(array( 'slug' => $slug, 'enabled'=>1 ))
+            ->setParameters(array('slug' => $slug, 'enabled' => 1))
             ->getOneOrNullResult();
     }
 
-   /*  Get user based on facebook id
-    *  $facebook_uid = bigint
-    */
+    /*  Get user based on facebook id
+     *  $facebook_uid = bigint
+     */
 //    public function findUserByFacebookUid($facebook_uid)
 //    {
 //        return $this->getEntityManager()->createQuery(' SELECT user
@@ -51,12 +53,14 @@ class UserRepository extends EntityRepository
      */
     public function findUserByEmail($email)
     {
-        return $this->getEntityManager()->createQuery(" SELECT user
-                                                        FROM EncoreCustomerBundle:User user,
-                                                        EncoreCustomerBundle:UserEmail userEmail
-                                                        WHERE user.id = userEmail.user
-                                                        AND userEmail.email = :email")
-            ->setParameters(array('email'=>$email))
+        return $this->getEntityManager()->createQuery(
+            " SELECT user
+                                                                    FROM EncoreCustomerBundle:User user,
+                                                                    EncoreCustomerBundle:UserEmail userEmail
+                                                                    WHERE user.id = userEmail.user
+                                                                    AND userEmail.email = :email"
+        )
+            ->setParameters(array('email' => $email))
             ->getOneOrNullResult();
     }
 

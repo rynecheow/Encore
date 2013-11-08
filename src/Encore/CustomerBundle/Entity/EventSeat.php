@@ -51,7 +51,7 @@ class EventSeat
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -99,6 +99,7 @@ class EventSeat
     public function setTicket($ticket)
     {
         $this->ticket = $ticket;
+
         return $this;
     }
 
@@ -109,6 +110,7 @@ class EventSeat
     {
         return $this->ticket;
     }
+
     /**
      * Set status
      *
@@ -118,14 +120,14 @@ class EventSeat
     public function setStatus($status)
     {
         $this->status = $status;
-    
+
         return $this;
     }
 
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {

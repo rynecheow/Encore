@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManager;
+
 /**
  * Base controller.
  *
@@ -112,7 +113,8 @@ class BaseController extends Controller
         $this->getRequest()->getSession()->getFlashBag()->add($status, $message);
     }
 
-    protected function gotoHome(){
+    protected function gotoHome()
+    {
         return $this->redirect($this->generateUrl('encore_home'));
     }
 }

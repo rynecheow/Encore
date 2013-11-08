@@ -4,6 +4,7 @@ namespace Encore\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+
 /**
  * UserEmail
  *
@@ -13,6 +14,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 class UserEmail
 {
     use ORMBehaviors\Timestampable\Timestampable;
+
     /**
      * @var integer
      *
@@ -40,7 +42,7 @@ class UserEmail
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,14 +58,14 @@ class UserEmail
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
