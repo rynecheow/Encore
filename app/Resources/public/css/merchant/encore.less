@@ -1,0 +1,187 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+   CSS Reset Start
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* End Of Reset CSS */
+
+/* Variables */
+@darkMain : #262626;
+@lightMain: #e5e5e5;
+@lightSecondary: #e0e0e0;
+@lightChoc: #a99d9d;
+@greenMain: #d46235;
+@greenSecondary: #e8a159;
+@mainFont: elena-web-basic, georgia;
+@translucent : 0 1px 2px rgba(0, 0, 0, 0.05);
+@errorRedMain : #8b232a;
+/* Functions */
+.list-style-main (@size: 1.5em) {
+  line-height: @size;
+  margin-left: @size * 2;
+}
+
+.placeholder-font () {
+  ::-webkit-input-placeholder {
+    font-family: @mainFont, georgia;
+  }
+
+  ::-moz-placeholder {
+    font-family: @mainFont, georgia;
+  }
+
+  /* firefox 19+ */
+  :-ms-input-placeholder {
+    font-family: @mainFont, georgia;
+  }
+
+  /* ie */
+  input:-moz-placeholder {
+    font-family: @mainFont, georgia;
+  }
+}
+
+body {
+  background-color: @darkMain;
+  font-family: @mainFont;
+  line-height: 1.2;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/*Main wrapper*/
+.wrapper {
+  width: 100%;
+  background: @darkMain;
+}
+
+.merchant-signup-signin-logo {
+  background: url('../../bundles/encoremerchant/images/logo/logo-dark.svg');
+  background-size: cover;
+  width: 265px;
+  height: 72px;
+  margin: 29px 117px;
+  float: left;
+  cursor: pointer;
+}
+
+/*Sign in page*/
+.signIn-container {
+  .placeholder-font;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+
+  .to_register {
+    margin-top: 10px;
+    p {
+      color: @lightChoc;
+      font-size: 15pt;
+    }
+  }
+  .signIn-form {
+    padding: 131px 100px 59px 72px;
+    margin: 0 auto;
+    background-color: @lightMain;
+    border: 1px solid @lightSecondary;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-top: 200px;
+
+    h1.signIn-header {
+      font-family: 'elena-web-basic';
+      font-size: 32pt;
+      text-align: center;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      width: 350px;
+      margin-bottom: 12px;
+    }
+
+    .checkbox {
+      margin-bottom: 10px;
+    }
+
+    .submit {
+      display: block;
+      width: 370px;
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.33;
+      border-radius: 6px;
+      color: @lightMain;
+      background-color: @greenMain;
+      border-color: @greenMain;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+    }
+
+    input[type="text"], input[type="password"] {
+      font-size: 14pt;
+      height: 40px;
+      margin-bottom: 15px;
+      padding: 7px 9px;
+      width: 350px;
+    }
+  }
+}
+
