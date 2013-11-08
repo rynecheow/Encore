@@ -1,5 +1,9 @@
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
 
+{% block title %}
+    Advance search
+{% endblock title %}
+
 {% block stylesheets %}
     <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
 {% endblock stylesheets %}
@@ -82,6 +86,9 @@
 
         <div class="result-list">
             {% block result %}
+                {{ include(
+                    'EncoreCustomerBundle:Search:list-result.html.twig'
+                ) }}
             {% endblock result %}
         </div>
     </div>
