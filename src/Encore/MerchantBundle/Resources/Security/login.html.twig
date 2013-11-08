@@ -1,0 +1,37 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}
+    Sign in
+{% endblock title %}
+{% block fos_user_content %}
+    {% if error %}
+        <div>{{ error|trans }}</div>
+    {% endif %}
+
+    <div class="signIn-container">
+        <div class="signup-signin-logo" onclick="location.href='/';"></div>
+        <form class="signIn-form" action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+            <div>
+                <h1 class="signIn-header">Sign In - Merchant</h1>
+                <input class="username" placeholder="E-mail" type="text" id="username"
+                       name="_username" value="{{ last_username }}" required="required"/>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+            <div>
+                <input class="password" placeholder="Password" type="password"
+                       id="password" name="_password" required="required"/>
+            </div>
+            <br/>
+            <input class="submit" type="submit" id="_submit" name="_submit"
+                   value="{{ 'security.login.submit'|trans }}"/>
+        </form>
+        <div class="to_register">
+            <p>Not a member yet ? <a href="/signup">Join us!</a></p>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

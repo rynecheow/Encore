@@ -1,6 +1,6 @@
 <?php
 
-namespace Encore\CustomerBundle\Controller;
+namespace Encore\MerchantBundle\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,8 +13,8 @@ class SecurityController extends BaseSecurityController
     {
         $sc = $this->container->get('security.context');
 
-        if ($sc->isGranted('ROLE_CUSTOMER')) {
-            $url = $this->container->get('router')->generate('encore_home');
+        if ($sc->isGranted('ROLE_MERCHANT')) {
+            $url = $this->container->get('router')->generate('encore_merchant_home');
             return new RedirectResponse($url);
         }
 
