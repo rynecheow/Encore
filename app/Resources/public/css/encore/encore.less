@@ -124,11 +124,11 @@ html, body {
   cursor: pointer;
 }
 
-
 nav {
   z-index: 100;
 }
 
+1
 .signup-signin-logo {
   background: url('../../bundles/encorecustomer/images/logo/logo-dark.svg');
   background-size: cover;
@@ -575,6 +575,7 @@ nav {
 
 }
 
+/*Thank You Page*/
 .thank-you-upper {
   margin-bottom: 10%;
 
@@ -620,6 +621,127 @@ nav {
       font-size: 13.5px;
     }
   }
+}
+
+/* Profile Page */
+
+.profile-wrap {
+  margin: 0 auto;
+  width: 80%;
+  height: 900px;
+  background: #ffffff;
+  border-radius: 30px;
+
+  .logo-wrap {
+    margin: 0 auto;
+    margin-top: 10%;
+    width: 50%;
+    height: 20%;
+    a {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      cursor: pointer;
+      float: left;
+      margin: 5% 0px 0 12%
+
+    }
+    a:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+    /* Edit Profile Logo */
+    .div-logo {
+      width: 80px;
+      height: 80px;
+    }
+
+    .edit-profile {
+      background: url('../../bundles/encorecustomer/images/logo/profile/edit-gray.svg');
+      background-size: cover;
+    }
+
+    .edit-selected {
+      background: url('../../bundles/encorecustomer/images/logo/profile/edit-black.svg');
+      background-size: cover;
+    }
+    a.edit-hover:hover {
+      .edit-profile {
+        background: url('../../bundles/encorecustomer/images/logo/profile/edit-black.svg');
+        background-size: cover;
+      }
+    }
+
+    /*************************/
+
+    /* History Profile Logo */
+    .history-profile {
+
+      background: url('../../bundles/encorecustomer/images/logo/profile/purchase-gray.svg');
+      background-size: cover;
+    }
+
+    .history-selected {
+      background: url('../../bundles/encorecustomer/images/logo/profile/purchase-black.svg');
+      background-size: cover;
+    }
+
+    a.history-hover:hover {
+      .history-profile {
+        background: url('../../bundles/encorecustomer/images/logo/profile/purchase-black.svg');
+        background-size: cover;
+
+      }
+    }
+    /*************************/
+
+    /* View Profile Logo */
+    .view-profile {
+      background: url('../../bundles/encorecustomer/images/logo/profile/view-gray.svg');
+      background-size: cover;
+
+    }
+
+    .view-selected {
+      background: url('../../bundles/encorecustomer/images/logo/profile/view-black.svg');
+      background-size: cover;
+    }
+
+    a.view-hover:hover {
+      .view-profile {
+        background: url('../../bundles/encorecustomer/images/logo/profile/view-black.svg');
+        background-size: cover;
+      }
+
+    }
+
+    /***************************/
+
+  }
+
+  .profile-title {
+    color: #9cceff;
+    font-size: 1.2em;
+  }
+
+  .profile-big-title {
+    color: #9cceff;
+    font-size: 1.8em;
+  }
+
+  hr {
+    border: solid #ddd;
+    border-width: 2px 0 0;
+    height: 0;
+    width: 100%;
+    margin: 3% auto;
+  }
+
+  .content-wrap {
+    margin: 0 auto;
+    width: 78%;
+  }
+
 }
 
 /*Error page*/
