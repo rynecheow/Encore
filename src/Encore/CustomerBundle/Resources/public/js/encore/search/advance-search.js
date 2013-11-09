@@ -3,8 +3,7 @@ require(['domReady'],
         domReady(
             function () {
                 $(function () {
-                        $('#datepicker-from').datepicker();
-                        $('#datepicker-to').datepicker();
+                        $('input.datepicker').datepicker();
                     }
                 );
 
