@@ -128,7 +128,6 @@ nav {
   z-index: 100;
 }
 
-
 .signup-signin-logo {
   background: url('../../bundles/encorecustomer/images/logo/logo-dark.svg');
   background-size: cover;
@@ -978,27 +977,27 @@ nav {
     margin-bottom: 15px;
   }
   .payment-logo {
-      background: url('../../bundles/encorecustomer/images/logo/encore-secured.svg');
-      background-size: cover;
-      width: 265px;
-      height: 72px;
-      margin: 10px 100px;
-      float: right;
-    right:10%;
-      cursor: pointer;
+    background: url('../../bundles/encorecustomer/images/logo/encore-secured.svg');
+    background-size: cover;
+    width: 265px;
+    height: 72px;
+    margin: 10px 100px;
+    float: right;
+    right: 10%;
+    cursor: pointer;
     margin-bottom: 2em;
     position: absolute;
 
   }
   .payment-form {
     margin-top: 5em;
-    label{
+    label {
       width: 15em;
       float: left;
       text-align: left;
       margin-right: 1em;
       display: block;
-      cursor: auto ;
+      cursor: auto;
     }
     .payment-form-detail {
 
@@ -1024,14 +1023,14 @@ nav {
       border-bottom: 1.5px solid @darkMain;
       padding: 10px 10px;
 
-      a{
+      a {
         text-decoration: none;
         cursor: pointer;
       }
-      a:hover{
+      a:hover {
         text-decoration: none;
       }
-      a::selection{
+      a::selection {
         text-decoration: none;
       }
     }
@@ -1057,10 +1056,9 @@ nav {
         background-image: none;
         border: 1px solid transparent;
 
-
       }
 
-      .make-payment{
+      .make-payment {
         float: right;
       }
     }
@@ -1068,3 +1066,91 @@ nav {
   }
 }
 
+.summary-wrapper {
+  #static-logo {
+    position: absolute;
+    top: 20px;
+  }
+  .summary-main {
+    width: 80%;
+    border-radius: 50px;
+    margin-left: 10%;
+    margin-top: 7.5%;
+    background: @lightSecondary;
+    padding: 35px 35px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 2em;
+
+    h1 {
+      font-size: 45px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+    label {
+      width: 15em;
+      float: left;
+      text-align: left;
+      margin-right: 1em;
+      margin-left: 5%;
+      display: block;
+      cursor: auto;
+    }
+    .summary-order {
+      margin-bottom: 15px;
+      th {
+        font-weight: bold;
+        padding-right: 25px;
+
+      }
+
+      td {
+        padding-right: 10px;
+      }
+    }
+    .summary-login {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 25px;
+      margin-top: 25px;
+
+    }
+    .summary-personal-detail {
+      margin-bottom: 15px;
+
+    }
+    .summary-button {
+
+      margin-left: 20%;
+      margin-right: 20%;
+      button {
+        display: inline-block;
+        width: 10em;
+        padding: 5px 16px;
+        font-size: 14.5px;
+        line-height: 1.33;
+        border-radius: 6px;
+        color: @lightMain;
+        background-color: @pinkMain;
+        border-color: @pinkSecondary;
+        margin-top: 15px;
+        margin-bottom: 0;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+
+      }
+
+      .confirm {
+        float: right;
+      }
+    }
+  }
+}
