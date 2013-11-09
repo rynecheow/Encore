@@ -22,11 +22,11 @@ class EventSection
     protected $id;
 
     /**
-     * @var \Encore\CustomerBundle\Entity\Event
-     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Event", inversedBy="eventSections")
-     * @ORM\JoinColumn(name="eventID", referencedColumnName="id", nullable=false)
+     * @var \Encore\CustomerBundle\Entity\EventHolder
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\EventHolder", inversedBy="eventSections")
+     * @ORM\JoinColumn(name="eventHolderID", referencedColumnName="id", nullable=false)
      */
-    private $event;
+    private $eventHolder;
 
     /**
      * @var \Encore\CustomerBundle\Entity\Section
@@ -74,23 +74,23 @@ class EventSection
     }
 
     /**
-     * @param \Encore\CustomerBundle\Entity\Event $event
+     * @param \Encore\CustomerBundle\Entity\EventHolder $eventHolder
      *
      * @return EventSection
      */
-    public function setEvent($event)
+    public function setEventHolder($eventHolder)
     {
-        $this->event = $event;
+        $this->eventHolder = $eventHolder;
 
         return $this;
     }
 
     /**
-     * @return \Encore\CustomerBundle\Entity\Event
+     * @return \Encore\CustomerBundle\Entity\EventHolder
      */
-    public function getEvent()
+    public function getEventHolder()
     {
-        return $this->event;
+        return $this->eventHolder;
     }
 
     /**
