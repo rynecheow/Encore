@@ -48,7 +48,7 @@ class BaseController extends Controller
         parent::setContainer($container);
 
         $this->request = $this->getRequest();
-        $this->em = $container->get('doctrine')->getManager();
+        $this->em = $this->getDoctrine()->getManager();
 
         /*
          * Add global variables to Twig.

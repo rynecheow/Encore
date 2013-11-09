@@ -39,6 +39,7 @@ class HomeController extends BaseController
         if ($this->getLoggedInUser()) {
             return $this->redirect($this->generateUrl('encore_merchant_home'));
         }
+
         $session = $this->getRequest()->getSession();
         $loginError = $session->get(SecurityContext::AUTHENTICATION_ERROR);
 

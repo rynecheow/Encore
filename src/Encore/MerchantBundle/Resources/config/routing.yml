@@ -5,7 +5,3 @@ encore_merchant_welcome:
 encore_merchant_event:
   resource:  "@EncoreMerchantBundle/Controller/EventController.php"
   type:     annotation
-
-encore_merchant_login:
-  resource:  "@EncoreMerchantBundle/Controller/SecurityController.php"
-  type:     annotation
