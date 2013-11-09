@@ -1,24 +1,28 @@
-table.section tbody tr td
+table.seatTable tbody tr td
 {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
 
   div
   {
+    position: absolute;
     width: 20px;
     height: 20px;
   }
 }
 
-table.section
-{
-  margin-top: 50px;
-}-
-
-.empty{
+.empty {
   background: green;
 }
 
 .selected {
+  background: yellow;
+}
+
+.locked {
+  background: orange;
+}
+
+.sold {
   background: red;
 }
