@@ -266,6 +266,20 @@ class AuthenticationController extends BaseController
         return $this->createFormBuilder()
             ->setAction('encore_complete_profile')
             ->add(
+                'username',
+                'text',
+                [
+                    'attr' => [
+                        'class' => 'complete-profile-username',
+                        'placeholder' => 'Username',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your user name.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
                 'firstName',
                 'text',
                 [
@@ -391,8 +405,9 @@ class AuthenticationController extends BaseController
             ->setBirthDate($params["birthDate"])
             ->setContactNo($params["contactNo"])
             ->setAddress($params["address"])
-            ->setUsername($user->getUsername());
+            ->setUsername($params["username"]);
 
+        $user->setUsername($params["username"]);
         $this->em->persist($customer);
         $this->em->flush();
         $user->setEnabled(true);
@@ -411,15 +426,32 @@ class AuthenticationController extends BaseController
         if ($email = $this->getRequest()->get('email')) {
             $result = $this->validateEmail($email);
         }
-        $return = json_encode(
-            [
-                $result['status'] => $result['message'],
-            ]
-        );
-        $response = new Response();
-        $response->setStatusCode(200);
-        $response->setContent($return);
 
-        return $response;
+        if ($result) {
+            $response = [
+                "code" => $result["status"] === "error" ? 400 : 200,
+                "status" => $result["status"] === "error" ? false : true,
+            ];
+        }
+
+
+        return new Response(json_encode($response));
+
+    }
+
+    private function validateUsername($username)
+    {
+        $status = 'success';
+        $msg = 'OK';
+        $user_exist = $this->em->getRepository('EncoreCustomerBundle:User')->findUserBySlug($username);
+
+        if (count($user_exist)) {
+            $status = 'error';
+            $msg = 'Username belongs to another user';
+        }
+
+        $result = array('status' => $status, 'message' => $msg);
+
+        return $result;
     }
 } 

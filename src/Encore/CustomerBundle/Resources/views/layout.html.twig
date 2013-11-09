@@ -37,9 +37,20 @@
 
     {% block css %}
     {% endblock css %}
+
 </head>
 
 <body>
+{% for type, flashMessages in app.session.flashbag.all() %}
+    {% for flashMessage in flashMessages %}
+        <div class="notification-bar">
+            <div class="message-box {{ type }}">
+                {{ flashMessage }}
+                <span class="dismiss"></span>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
 <nav id="bt-menu" class="bt-menu">
     <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
     <ul>
