@@ -8,6 +8,7 @@
 
 namespace Encore\MerchantBundle\Controller;
 
+use Encore\CustomerBundle\Entity\EventHolder;
 use Encore\CustomerBundle\Entity\EventSeat;
 use Encore\CustomerBundle\Entity\EventSection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -47,37 +48,47 @@ class EventController extends BaseController
             $selectedVenueId = $createEventForm->get("venue")->getData();
             $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
                                   ->find($selectedVenueId);
-            $newEvent->setVenue($selectedVenue);
+            $newEvent->setVenue($selectedVenue)
+                     ->setPublish(false);
             $this->em->persist($newEvent);
             $this->em->flush();
-            $this->pushFlashMessage("Success", "Event has been created");
+            $heldDates = $createEventForm->get("heldDates")->getData();
 
-            $sections = $newEvent->getVenue()->getSections();
-
-            /**
-             * @var $section \Encore\CustomerBundle\Entity\Section
-             */
-            foreach ($sections as $section)
+            foreach ($heldDates as $heldDate)
             {
-                $seats = $section->getSeats();
-                $eventSectionPrice = $createEventForm->get($section->getName())->getData();
-                $eventSection = new EventSection();
-                $eventSection->setEvent($newEvent)
-                             ->setSection($section)
-                             ->setPrice($eventSectionPrice)
-                             ->setTotalSeats(count($seats))
-                             ->setTotalSold(0);
-                $this->em->persist($eventSection);
+                $eventHolder = new EventHolder();
+                $eventHolder->setHeldDate($heldDate)
+                            ->setEvent($newEvent);
+                $this->em->persist($eventHolder);
                 $this->em->flush();
 
-                foreach ($seats as $seat)
+                $sections = $newEvent->getVenue()->getSections();
+
+                /**
+                 * @var $section \Encore\CustomerBundle\Entity\Section
+                 */
+                foreach ($sections as $section)
                 {
-                    $eventSeat = new EventSeat();
-                    $eventSeat->setSeat($seat)
-                              ->setStatus(0)
-                              ->setEventSection($eventSection);
-                    $this->em->persist($eventSeat);
+                    $seats = $section->getSeats();
+                    $eventSectionPrice = $createEventForm->get($section->getName())->getData();
+                    $eventSection = new EventSection();
+                    $eventSection->setEventHolder($eventHolder)
+                        ->setSection($section)
+                        ->setPrice($eventSectionPrice)
+                        ->setTotalSeats(count($seats))
+                        ->setTotalSold(0);
+                    $this->em->persist($eventSection);
                     $this->em->flush();
+
+//                foreach ($seats as $seat)
+//                {
+//                    $eventSeat = new EventSeat();
+//                    $eventSeat->setSeat($seat)
+//                              ->setStatus(0)
+//                              ->setEventSection($eventSection);
+//                    $this->em->persist($eventSeat);
+//                    $this->em->flush();
+//                }
                 }
             }
 
@@ -108,19 +119,28 @@ class EventController extends BaseController
                 ->setDescription($params["event_description"])
                 ->setSaleStart($params["event_sale_start"])
                 ->setSaleEnd($params["event_sale_end"])
-                ->setHeldDates($params["event_held_dates"])
-                ->setTotalTickets($params["event_total_tickets"]);
+                ->setHeldDates($params["event_held_dates"]);
 
-            /**
-             * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
-             */
-            $selectedVenueId = $editEventForm->get("venue")->getData();
-
-            if ($selectedVenueId != $event->getVenue()->getId())
+            if (!$event->getPublish())
             {
-                $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
-                    ->find($selectedVenueId);
-                $event->setVenue($selectedVenue);
+                /**
+                 * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
+                 */
+                $selectedVenueId = $editEventForm->get("venue")->getData();
+
+                if ($selectedVenueId != $event->getVenue()->getId())
+                {
+                    $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
+                        ->find($selectedVenueId);
+                    $event->setVenue($selectedVenue);
+
+                    //TODO: edit held dates, remove previous eventSection.
+                }
+
+                else
+                {
+                    //TODO: add held dates, add eventSection.
+                }
             }
 
             return $this->render("EncoreMerchantBundle::Events:index.html.twig");
