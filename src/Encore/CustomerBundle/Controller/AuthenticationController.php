@@ -34,7 +34,8 @@ class AuthenticationController extends BaseController
                 }
                 $this->createUser($params);
 
-                return $this->redirect($this->generateUrl("encore_complete_profile"));
+                $response = [ "path" => $this->generateUrl("encore_complete_profile")];
+                return new Response(json_encode($response));
             }
         }
 

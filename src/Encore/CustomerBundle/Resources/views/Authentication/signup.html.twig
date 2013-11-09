@@ -17,7 +17,7 @@
             <h1 class="signUp-header">Sign Up</h1>
             <fieldset>
                 {{ form_widget(form.email) }}
-                <span class="parsley-error-list" id="invalid-email">Email Already Exists</span>
+                <span class="parsley-error-list" style="display:none;" id="invalid-email">Email Already Exists</span>
                 {{ form_widget(form.password) }}
                 {{ form_widget(form.verifyPassword) }}
                 <div class="checkbox">
@@ -44,36 +44,44 @@
 
     <script type="application/javascript">
         $(function (e) {
-                   $('.signUp-form').on("submit" , ajaxEmail);
-
-//                   $('.signup-email').on("blur", ajaxEmail);
+                    $('.signUp-form').on("submit", ajaxEmail);
 
 
                     function ajaxEmail(e) {
+                        e.preventDefault();
 
                         var email = $('.signup-email').val();
                         console.log(email);
-                        $.post('{{ path('encore_validate_email') }}',
+                        $.post(
+                                "{{ path('encore_validate_email') }}",
                                 { 'email': email },
                                 function (response) {
-                                    console.log("my object: %o", response);
-                                    if (response.code == 200 && response.status) {//dummy check
-//                                        $('.signUp-form').submit();
+//                                    console.log("my object: %o", response);
+                                    if (response.code == 200) {
+                                        console.log("trueeeee");
+                                        $.post(
+                                                "{{ path('encore_signup') }}",
+                                                $('.signUp-form').serialize(),
+                                                function (abc) {
+                                                    alert(abc.path);
+                                                    console.log("AAA");
+                                                    window.location.replace(abc.path);
+                                                },
+                                                "json"
+                                        );
+
+                                        $('#invalid-email').css('display', 'none');
                                         return true;
-                                    }
-                                    else {
-                                        e.preventDefault();
+                                    } else {
+                                        console.log("false");
+                                        $('#invalid-email').css('display', 'inline');
                                         return false;
-
                                     }
-
-                                }, "json");
+                                },
+                                "json"
+                        );
                     }
-
-
                 }
-
-
         );
 
 
