@@ -46,7 +46,7 @@ security:
                 security: false
         customer:
             pattern: "%encore.route_prefix.customer%/.*"
-#            request_matcher: encore.customer.request_matcher
+            request_matcher: encore.customer.request_matcher
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -66,7 +66,7 @@ security:
             anonymous:    true
         merchant:
             pattern: "%encore.route_prefix.customer%/.*"
-#            request_matcher: encore.merchant.request_matcher
+            request_matcher: encore.merchant.request_matcher
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
