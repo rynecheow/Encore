@@ -427,15 +427,16 @@ class AuthenticationController extends BaseController
             $result = $this->validateEmail($email);
         }
 
-        if($result)
+        if ($result) {
+            $response = [
+                "code" => $result["status"] === "error" ? 400 : 200,
+                "status" => $result["status"] === "error" ? false : true,
+            ];
+        }
 
-        $response = new Response();
-        $response = [
-            "code" => $result["message"] === "error" ? 400 : 200,
-            "status" => $result["message"] === "error" ? false : true,
-        ];
 
-        return json_encode($response);
+        return new Response(json_encode($response));
+
     }
 
     private function validateUsername($username)

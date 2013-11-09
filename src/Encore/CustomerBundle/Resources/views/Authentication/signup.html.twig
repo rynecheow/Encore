@@ -17,6 +17,7 @@
             <h1 class="signUp-header">Sign Up</h1>
             <fieldset>
                 {{ form_widget(form.email) }}
+                <span class="parsley-error-list" id="invalid-email">Email Already Exists</span>
                 {{ form_widget(form.password) }}
                 {{ form_widget(form.verifyPassword) }}
                 <div class="checkbox">
@@ -43,27 +44,33 @@
 
     <script type="application/javascript">
         $(function (e) {
+                   $('.signUp-form').on("submit" , ajaxEmail);
 
-
-                    $('.signup-email').on("click", ajaxEmail);
+//                   $('.signup-email').on("blur", ajaxEmail);
 
 
                     function ajaxEmail(e) {
+
+                        var email = $('.signup-email').val();
+                        console.log(email);
                         $.post('{{ path('encore_validate_email') }}',
-                                { 'email': e.target.value },
+                                { 'email': email },
                                 function (response) {
-                                    console.log("my object: %o", response)
+                                    console.log("my object: %o", response);
                                     if (response.code == 200 && response.status) {//dummy check
-                                        console.log(" success");
-                                        console.log("a" + response.message);
+//                                        $('.signUp-form').submit();
+                                        return true;
                                     }
                                     else {
-                                        console.log("not success");
-                                        console.log("b" + response.message);
+                                        e.preventDefault();
+                                        return false;
+
                                     }
 
                                 }, "json");
                     }
+
+
                 }
 
 
