@@ -1,8 +1,6 @@
 parameters:
-    encore.host:                    localhost
-
-    encore.route_prefix.customer:   ""
-    encore.route_prefix.merchant:   "/merchant"
+    encore.host.main:               www.encore.com
+    encore.host.merchant:           merchant.encore.com
     encore.port:                    8000
     encore.currency:                MYR
     encore.timezone:                Asia/Kuala_Lumpur
