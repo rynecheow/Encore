@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\EventPhotoRepository")
+ * @Vich\Uploadable
  */
 class EventPhoto
 {
@@ -37,14 +38,14 @@ class EventPhoto
      *     maxSize="1M",
      *     mimeTypes={"image/png", "image/jpeg"}
      * )
-     * @Vich\UploadableField(mapping="product", fileNameProperty="imagePath")
+     * @Vich\UploadableField(mapping="event", fileNameProperty="imagePath")
      */
     private $image;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="caption", type="text")
+     * @ORM\Column(name="caption", type="text" nullable=true)
      */
     private $caption;
 

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManager;
-
+use Encore\MerchantBundle\Helper\AuthenticationHelper;
 /**
  * Base controller.
  *
@@ -27,29 +27,11 @@ class BaseController extends Controller
 {
 
     /**
-     * Request object
-     *
      * @var Request
      */
     protected $request;
 
     /**
-     * Session object
-     *
-     * @var Session
-     */
-    protected $session;
-
-    /**
-     * Current logged in authenticated user
-     *
-     * @var User
-     */
-    protected $authenticatedUser;
-
-    /**
-     * The Doctrine entity manager.
-     *
      * @var EntityManager
      */
     protected $em;
@@ -64,46 +46,31 @@ class BaseController extends Controller
     public function setContainer(ContainerInterface $container = null)
     {
         parent::setContainer($container);
-        $this->setCommons();
-    }
 
-    /**
-     * Run common functions and set common variables.
-     */
-    private function setCommons()
-    {
         $this->request = $this->getRequest();
-        $this->session = $this->request->getSession();
-        $this->em = $this->getDoctrine()->getManager();
-        $this->authenticatedUser = $this->getAuthenticatedUser();
+        $this->em = $container->get('doctrine')->getManager();
 
         /*
          * Add global variables to Twig.
          */
-        $this->get('twig')->addGlobal('authenticated_user', $this->authenticatedUser);
-        $this->get('twig')->addGlobal('current_route', $this->request->attributes->get('_route'));
+        $this->get('twig')->addGlobal('currency', $this->container->getParameter('encore.currency'));
     }
+
 
     /**
-     * Check if a user is logged in.
+     * Gets the currently logged in user.
      *
-     * @return boolean Decision of whether a user is logged in.
+     * @return \Encore\CustomerBundle\Entity\User
      */
-    public function isLoggedIn()
+    protected function getLoggedInUser()
     {
-        return ($this->authenticatedUser != null);
-    }
+        /**
+         * @var $authenticationHelper AuthenticationHelper
+         */
+        $authenticationHelper = $this->container->get('encore_merchant.helper.authentication');
 
-    /**
-     * Get the currently logged in user Doctrine entity object.
-     *
-     * @return User|null The currently logged in user Doctrine entity object.
-     */
-    private function getAuthenticatedUser()
-    {
-        return $this->container->get('encore.user_manager')->getAuthenticatedUser();
+        return $authenticationHelper->getLoggedInUser();
     }
-
 
     /**
      * Simple notification flash message
@@ -113,8 +80,4 @@ class BaseController extends Controller
         $this->getRequest()->getSession()->getFlashBag()->add($status, $message);
     }
 
-    protected function gotoHome()
-    {
-        return $this->redirect($this->generateUrl('encore_home'));
-    }
 }

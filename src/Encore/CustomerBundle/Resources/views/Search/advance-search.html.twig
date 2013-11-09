@@ -14,9 +14,6 @@
 {% endblock css %}
 
 {% block content %}
-<script>
-
-</script>
     <div class="search-main">
         <div id="static-logo" onclick="location.href='/';"></div>
         <div class="search-setting">
@@ -28,7 +25,7 @@
 
 
                 <div class="form-group">
-                    <label for="location" class="col-sm-3 control-label">Location</label>
+                    <label for="location" class="col-sm-2 control-label">Location</label>
 
 
                     <select class="location" id="location">
@@ -39,17 +36,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="datepicker-from" class="col-sm-3 control-label">From</label>
+                    <label for="datepicker-from" class="col-sm-2 control-label">From</label>
 
                     <div class="col-sm-10">
                         <input class="datepicker" id="datepicker-from" placeholder="Starting Date">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="datepicker-to" class="col-sm-3 control-label">To</label>
+                    <label for="datepicker-to" class="col-sm-2 control-label">To</label>
 
                     <div class="col-sm-10">
-                        <input class="datepicker" id="datepicker-to" placeholder="End Date">
+                        <input type="date" id="datepicker-to" placeholder="End Date">
                     </div>
                 </div>
                 <div class="category">
@@ -89,7 +86,7 @@
         <div class="result-list">
             {% block result %}
                 {{ include(
-                    'EncoreCustomerBundle:Search:list-result.html.twig'
+                'EncoreCustomerBundle:Search:list-result.html.twig'
                 ) }}
             {% endblock result %}
         </div>

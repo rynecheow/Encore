@@ -16,12 +16,12 @@ framework:
     templating:
         engines: [ "twig" ]
         assets_base_urls:
-            http: [ "http://%encore.host%:%encore.port%/" ] # php server use port 8000
+            http: [ "http://%encore.host.main%:%encore.port%/" ] # php server use port 8000
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:
         cookie_lifetime:    2592000
-        cookie_domain:      "%encore.host%"
+        cookie_domain:      "%encore.host.main%"
     fragments:       ~
     http_method_override: true
 
@@ -39,11 +39,21 @@ assetic:
             inputs:
                - css/fonts/*.css
                - css/encore/encore.less
+               - css/encore/seat-selection.less
             output: css/encore.css
+        encore_merchant_css:
+            inputs:
+               - css/fonts/*.css
+               - css/merchant/encore.less
+            output: css/encore_merchant.css
         encore_js:
             inputs:
               - js/encore/encore.js
             output: js/encore.min.js
+        encore_merchant_js:
+            inputs:
+              - js/merchant/encore.js
+            output: js/encore_merchant.min.js
     filters:
         lessphp:
             apply_to: \.less$

@@ -2,7 +2,7 @@
 parameters:
   # Base URI prefix
   encore.uri_prefix.imgurl:
-      "http://%encore.host%:%encore.port%"
+      "http://%encore.host.main%:%encore.port%"
 
   # URI prefixes
   encore.uri_prefix.event:

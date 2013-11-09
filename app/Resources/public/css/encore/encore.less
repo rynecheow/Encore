@@ -124,11 +124,11 @@ html, body {
   cursor: pointer;
 }
 
-
 nav {
   z-index: 100;
 }
 
+1
 .signup-signin-logo {
   background: url('../../bundles/encorecustomer/images/logo/logo-dark.svg');
   background-size: cover;
@@ -575,6 +575,7 @@ nav {
 
 }
 
+/*Thank You Page*/
 .thank-you-upper {
   margin-bottom: 10%;
 
@@ -620,6 +621,127 @@ nav {
       font-size: 13.5px;
     }
   }
+}
+
+/* Profile Page */
+
+.profile-wrap {
+  margin: 0 auto;
+  width: 80%;
+  height: 900px;
+  background: #ffffff;
+  border-radius: 30px;
+
+  .logo-wrap {
+    margin: 0 auto;
+    margin-top: 10%;
+    width: 50%;
+    height: 20%;
+    a {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      cursor: pointer;
+      float: left;
+      margin: 5% 0px 0 12%
+
+    }
+    a:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+    /* Edit Profile Logo */
+    .div-logo {
+      width: 80px;
+      height: 80px;
+    }
+
+    .edit-profile {
+      background: url('../../bundles/encorecustomer/images/logo/profile/edit-gray.svg');
+      background-size: cover;
+    }
+
+    .edit-selected {
+      background: url('../../bundles/encorecustomer/images/logo/profile/edit-black.svg');
+      background-size: cover;
+    }
+    a.edit-hover:hover {
+      .edit-profile {
+        background: url('../../bundles/encorecustomer/images/logo/profile/edit-black.svg');
+        background-size: cover;
+      }
+    }
+
+    /*************************/
+
+    /* History Profile Logo */
+    .history-profile {
+
+      background: url('../../bundles/encorecustomer/images/logo/profile/purchase-gray.svg');
+      background-size: cover;
+    }
+
+    .history-selected {
+      background: url('../../bundles/encorecustomer/images/logo/profile/purchase-black.svg');
+      background-size: cover;
+    }
+
+    a.history-hover:hover {
+      .history-profile {
+        background: url('../../bundles/encorecustomer/images/logo/profile/purchase-black.svg');
+        background-size: cover;
+
+      }
+    }
+    /*************************/
+
+    /* View Profile Logo */
+    .view-profile {
+      background: url('../../bundles/encorecustomer/images/logo/profile/view-gray.svg');
+      background-size: cover;
+
+    }
+
+    .view-selected {
+      background: url('../../bundles/encorecustomer/images/logo/profile/view-black.svg');
+      background-size: cover;
+    }
+
+    a.view-hover:hover {
+      .view-profile {
+        background: url('../../bundles/encorecustomer/images/logo/profile/view-black.svg');
+        background-size: cover;
+      }
+
+    }
+
+    /***************************/
+
+  }
+
+  .profile-title {
+    color: #9cceff;
+    font-size: 1.2em;
+  }
+
+  .profile-big-title {
+    color: #9cceff;
+    font-size: 1.8em;
+  }
+
+  hr {
+    border: solid #ddd;
+    border-width: 2px 0 0;
+    height: 0;
+    width: 100%;
+    margin: 3% auto;
+  }
+
+  .content-wrap {
+    margin: 0 auto;
+    width: 78%;
+  }
+
 }
 
 /*Error page*/
@@ -672,10 +794,10 @@ nav {
     position: absolute;
     color: @lightSecondary;
     float: right;
-    right: 35%;
+    right: 25%;
     margin-top : 10%;
     h2{
-      font-size: 35px;
+      font-size: 28px;
     }
 
     .option-button{
@@ -700,7 +822,7 @@ nav {
 
       }
       .gallery{
-        margin-left: 75px;
+        margin-left: 50px;
       }
     }
 
@@ -713,7 +835,10 @@ nav {
     position: absolute;
   }
   .search-setting{
+<<<<<<< HEAD
     font-size: 13px;
+=======
+>>>>>>> d38d5a1d21a23e4950b8e03fa74878b6193a1693
     position: fixed;
     width: 200px;
     height: 450px;
@@ -722,7 +847,7 @@ nav {
     background-color: @lightSecondary;
     border-radius: 25px;
     padding: 25px 25px;
-
+    font-size: 13px;
     h2{
       font-size: 23px;
       text-align: center;
@@ -742,17 +867,17 @@ nav {
         width: 100%;
         height: 30px;
         text-align: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         border-radius: 6px;
       }
       .datepicker{
-        //margin-left: 20px;
+        //margin-left: 10px;
         width: 100px;
         text-align: center;
         border-radius: 6px;
       }
       .location{
-        //margin-left: 20px;
+        //margin-left: 10px;
         width: 100px;
       }
       .category{
@@ -779,7 +904,7 @@ nav {
         color: @lightMain;
         background-color: @pinkMain;
         border-color: @pinkSecondary;
-        margin-top: 10px;
+        margin-top: 15px;
         margin-bottom: 0;
         text-align: center;
         white-space: nowrap;
@@ -807,7 +932,7 @@ nav {
         text-align: left;
 
         th{
-          font-size: 26px;
+          font-size: 23px;
           font-weight: normal;
           padding: 10px 10px;
           border-bottom: 2px solid @lightSecondary;
