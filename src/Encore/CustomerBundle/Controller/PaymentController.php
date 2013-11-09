@@ -19,4 +19,11 @@ class PaymentController extends BaseController{
         return $this->render("EncoreCustomerBundle:Payment:payment-gateway.html.twig");
     }
 
+    /**
+     * @Route("/summary",name="encore_summary")
+     */
+    public function summaryAction(){
+        return $this->render("EncoreCustomerBundle:Payment:summary.html.twig");
+    }
+
 } 
