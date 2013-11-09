@@ -212,6 +212,83 @@ class EventController extends Controller
 
     private function createEventForm(Event $event, $allVenueLocation)
     {
-        // TODO: create form for event.
+        return $this->createFormBuilder()
+            ->setAction('encore_signup')
+            ->add(
+                'email',
+                'email',
+                [
+                    'attr' => [
+                        'class' => 'signup-email',
+                        'placeholder' => 'E-mail address',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-type' => 'email',
+                        'data-required-message' => 'Please enter your email.',
+                        'data-type-email-message' => 'Your email address is incorrect',
+                    ]
+                    ,
+                    'label' => false
+                ]
+            )
+            ->add(
+                'password',
+                'password',
+                [
+                    'attr' => [
+                        'class' => 'signup-password',
+                        'id' => 'sg-pw',
+                        'placeholder' => 'Password',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your password.',
+                        'data-minlength' => '8',
+                        'data-minlength-message' => 'Short passwords are easy to guess. Try one with at least 8 characters.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'verifyPassword',
+                'password',
+                [
+                    'attr' => [
+                        'class' => 'signup-password',
+                        'placeholder' => 'Verify Password',
+                        'data-trigger' => 'change',
+                        'data-equalto' => '#form_password',
+                        'data-equalto-message' => 'You passwords do not match.',
+                        'data-required' => 'true',
+                        'data-required-message' => 'Please verify your password.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'agreement',
+                'checkbox',
+                [
+                    'attr' => [
+                        'id' => 'signup-agreement',
+                        'class' => 'signup-agreement',
+                        'placeholder' => 'Verify Password',
+                        'data-trigger' => 'change',
+                        'data-required' => 'true',
+                        'data-required-message' => "In order to use our services, you must agree to Encore's Terms and Privacy.",
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'register',
+                'submit',
+                [
+                    'attr' => [
+                        'class' => 'submit',
+                        'value' => 'Register'
+                    ]
+                ]
+            )
+            ->getForm();
     }
 } 
