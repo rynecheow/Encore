@@ -1,0 +1,72 @@
+{% extends 'EncoreCustomerBundle::layout.html.twig' %}
+
+{% block title %}
+    Payment Gateway
+{% endblock title %}
+
+{% block content %}
+    <div class="payment-main">
+        <div class="payment-logo" onclick="location.href='/';">
+        </div>
+        <div class="payment-form">
+            <div class="payment-form-detail">
+                <h2>Payment Details</h2>
+
+                <p><label>Payment</label><span class="detail-result-payment">BRlCK "Encore"</span></p>
+
+                <p><label>Order ID</label><span class="detail-result-order">1</span></p>
+
+                <p><label>Description</label><span class="detail-result-description">Item</span></p>
+
+                <p><label>Total</label><span class="detail-result-total">RM 900</span></p>
+            </div>
+            <div class="payment-form-card-detail">
+                <h2>Card Details (As printed on your card)</h2>
+
+                <p><label>Card Number </label><span><input class="card-number" type="text"/></span></p>
+
+                <p><label>Card Holder </label><span><input class="card-holder" type="text"/></span></p>
+
+                <p><label>Expiry Date </label><span><select class="expiry-date-month">
+                            <option>month</option>
+                        </select><select class="expiry-date-year">
+                            <option>year</option>
+                        </select></span></p>
+                <p><label>Issue Number</label><span><input class="issue-number" type="text"/></span></p>
+
+                <p><label>Security Code</label><span><input class="security-code" type="text"/></span></p>
+            </div>
+            <div class="payment-form-billing-detail">
+                <h2>Billing Details (The address where your card statement is sent)</h2>
+
+                <p><label>Address</label><span><textarea class="address"></textarea></span></p>
+
+                <p><label>Post Code</label><span><input class="post-code" type="text"/></span></p>
+
+                <p><label>Phone Number</label><span><input class="phone-number" type="text"/></span></p>
+
+            </div>
+            <div class="payment-form-receipt-detail">
+                <h2>Receipt Details (An email receipt will be sent to this address)</h2>
+
+                <p><label>Email</label><span><input class="email" type="text"/></span></p>
+
+            </div>
+            <div class="payment-form-agreement">
+                <div class="checkbox">
+                    <input type="checkbox"/>
+
+                    <p>I have read adn agree to the terms and conditions of this payment and confirm that I understand I
+                        am using the service for the purchase of Ticket from Encore and that this payment will therefore
+                        appear as "Encore" on my card statement. <a>(Read Terms)</ a></p>
+                </div>
+            </div>
+            <div class="payment-form-button">
+                <button class="cancel">Cancel</button>
+                <button class="make-payment">Make Payment</button>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
