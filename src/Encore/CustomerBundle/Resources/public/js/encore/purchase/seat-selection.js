@@ -3,16 +3,16 @@ require(['domReady'],
         "use strict";
         domReady(
             function () {
-
                 var seatsMatrix = {
-                    col: 10,
-                    row: 5
+                    col: 50,
+                    row: 20
                 };
 
                 function tickDiv(target) {
                     if (target.hasClass("empty")) {
                         target.attr("class", "selected");
                     } else {
+                        target.attr("class", "empty");
                     }
                 }
 
@@ -172,7 +172,6 @@ require(['domReady'],
                         $("input[type='submit']").attr("disabled", "disabled");
                         $("input#resetButton").attr("disabled", "disabled");
                     }
-
                 });
 
                 $("#resetButton").click(function () {
@@ -183,7 +182,7 @@ require(['domReady'],
                     $("input#resetButton").attr("disabled", "disabled");
                 });
 
-                $("form").submit(function (e) {
+                $("form").submit(function () {
                     var form, selectedSeats, seatFlag;
                     form = $("form");
                     selectedSeats = $("table.seatTable tbody tr td div.selected");
@@ -230,7 +229,6 @@ require(['domReady'],
                     }
                 });
             }
-
         );
     }
-    );
+);
