@@ -29,6 +29,12 @@ class Section
     private $venue;
 
     /**
+     * @var \Encore\CustomerBundle\Entity\Seat[]
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Seat", mappedBy="section")
+     */
+    private $seats;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=200)
@@ -87,5 +93,24 @@ class Section
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\Seat[] $seats
+     * @return $this
+     */
+    public function setSeats($seats)
+    {
+        $this->seats = $seats;
+
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Seat[]
+     */
+    public function getSeats()
+    {
+        return $this->seats;
     }
 }
