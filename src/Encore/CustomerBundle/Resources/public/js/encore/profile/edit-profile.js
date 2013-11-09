@@ -1,6 +1,6 @@
 require(['parsley'], function () {
     "use strict";
-    var form = $('.signUp-container').find('.signUp-form');
+    var form = $('.profile-wrap').find('.edit-profile-form');
     form.parsley();
     form.submit(function (e) {
         if (!form.parsley('validate')) {
@@ -9,4 +9,3 @@ require(['parsley'], function () {
         }
     });
 });
-
