@@ -128,7 +128,6 @@ nav {
   z-index: 100;
 }
 
-1
 .signup-signin-logo {
   background: url('../../bundles/encorecustomer/images/logo/logo-dark.svg');
   background-size: cover;
@@ -292,6 +291,11 @@ nav {
   width: 500px;
   height: 500px;
   margin: 0 auto;
+
+  .parsley-error-list {
+    font-size: 12px;
+    color: @errorRedMain;
+  }
 
   .to_register {
     margin-top: 10px;
@@ -628,7 +632,7 @@ nav {
 .profile-wrap {
   margin: 0 auto;
   width: 80%;
-  height: 900px;
+  height: 1000px;
   background: #ffffff;
   border-radius: 30px;
 
@@ -740,6 +744,69 @@ nav {
   .content-wrap {
     margin: 0 auto;
     width: 78%;
+
+    /* profile edit */
+
+    .edit-address {
+      resize: none;
+      width: 300px;
+      height: 150px;
+      border-radius:10px;
+
+    }
+    .edit-text-box {
+      width:250px;
+      height:30px;
+      border-radius:10px;
+    }
+
+    .edit-bday {
+      width:250px;
+      height:30px;
+      border-radius:10px;
+    }
+    .edit-submit {
+      display: block;
+      width: 10%;
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.33;
+      border-radius: 6px;
+      color: @lightMain;
+      background-color: #59A4F1;
+      border-color: @pinkSecondary;
+      margin-top: 15px;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+    }
+
+    .parsley-error-list {
+      font-size: 0.9em;
+      color: @errorRedMain;
+    }
+
+    .inside-wrap {
+      position: relative;
+      margin: 0 auto;
+      background: yellow;
+      height: 1000px;
+
+    }
+
+    .required {
+      margin: 2% auto;
+    }
+
+    .class-label
+    {
+      font-size: 1.4em;
+      color: #9cceff;
+    }
   }
 
 }

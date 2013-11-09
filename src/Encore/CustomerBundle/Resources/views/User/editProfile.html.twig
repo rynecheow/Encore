@@ -1,7 +1,36 @@
-{# Created by sysadm on 11/6/13. #}
 
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
 
-{% block content %}
+{% block require_js %}
+    require(["encore/profile/edit-profile"]);
+{% endblock require_js %}
 
+{% block title %}Edit Profile {% endblock title %}
+
+{% block content %}
+    <div class="profile-wrap">
+        <div class="logo-wrap">
+            <a class="view-hover" href="{{ path('encore_view_profile', {'id': app.user.id }) }}">
+                <div class="view-profile  div-logo"></div>
+            </a>
+
+            <a class="edit-hover" href="{{ path('encore_edit_profile', {'userId':app.user.id}) }}">
+                <div class="edit-selected edit-profile div-logo"></div>
+            </a>
+
+            <a class="history-hover" href="">
+                <div class="history-profile div-logo"></div>
+            </a>
+
+        </div>
+        <div class="content-wrap">
+            <form class="edit-profile-form" method="post" {{ form_enctype(form) }}>
+                <fieldset>
+                    {{ form(form) }}
+
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
 {% endblock content %}

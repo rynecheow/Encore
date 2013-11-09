@@ -19,9 +19,14 @@ class ProfileController extends BaseController
      * @ParamConverter("user", class="EncoreCustomerBundle:User", options={"id" = "userId"})
      * @Method({"GET","POST"})
      */
-    public function editAction(User $user){
+    public function editAction(User $user)
+    {
+        $form = $this->createEditProfileForm();
+
         return $this->render(
-               "EncoreCustomerBundle:User:editProfile.html.twig");
+            "EncoreCustomerBundle:User:editProfile.html.twig",
+            ["form" => $form->createView()]
+        );
 
 //    {
 //        $request = $this->getRequest();
@@ -92,6 +97,7 @@ class ProfileController extends BaseController
             $this->pushFlashMessage('error', 'Unauthorized Access');
             $this->gotoHome();
         }
+
         return $this->render(
             "EncoreCustomerBundle:User:profile.html.twig",
             [
@@ -107,7 +113,7 @@ class ProfileController extends BaseController
                 ,
                 'contactno' => '0123456789'
                 ,
-                'address' => 'ADDRESS THING adasdasdsadasdsadsadasdasdasdasdasdasd'
+                'address' => 'ADDRESS THING Jalan Kuchai Lama 1/128b'
             ]
         );
     }
@@ -128,58 +134,126 @@ class ProfileController extends BaseController
 
     private function createEditProfileForm()
     {
+
+        // Dummy Data
+        $fname = 'Kok Hong';
+        $lname = 'Choo';
+        $bdate = '1991-08-26';
+        $contactno = '0123456789';
+        $address = 'ADDRESS THING Jalan Kuchai Lama 1/128b';
+
+        ////////////
         return $this->createFormBuilder()
             ->setAction('encore_edit_profile')
             // Get First Email In Email Array
             ->add(
-                'email',
-                'email',
-                [
-                    // HTML Attributes
-                    'attr' => [
-                        'value' => $this->authenticatedUser->getEmails()[0],
-                        'disabled',
-                        ''
-                    ],
-                    'label' => 'Email'
-                ]
-            )
-            ->add(
                 'firstName',
                 'text',
                 [
+                    'attr' => [
+                        'class' => 'edit-text-box',
+                        'placeholder' => $fname,
+                        'value' => $fname,
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your first name.',
+                    ],
                     'label' => 'First Name'
+                    ,
+                    'label_attr' => array(
+                        'class' => 'class-label'
+                    )
                 ]
             )
             ->add(
                 'lastName',
                 'text',
                 [
+                    'attr' => [
+                        'class' => 'edit-text-box',
+                        'placeholder' => $lname,
+                        'value' => $lname,
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your last name.',
+                    ],
                     'label' => 'Last Name'
+                    ,
+                    'label_attr' => array(
+                        'class' => 'class-label'
+                    )
+
                 ]
             )
             ->add(
                 'birthDate',
-                'birthday',
+                'text',
                 [
+                    'attr' => [
+                        'class' => 'edit-bday',
+                        'placeholder' => $bdate,
+                        'value' => $bdate,
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your birth date.',
+                    ],
                     'label' => 'Birth Date'
+                    ,
+                    'label_attr' => array(
+                        'class' => 'class-label'
+                    )
                 ]
             )
             ->add(
                 'contactNo',
                 'number',
                 [
-                    'label' => 'Contact No :'
+                    'attr' => [
+                        'class' => 'edit-text-box',
+                        'placeholder' => $contactno,
+                        'value' => $contactno,
+                        'data-required' => 'true',
+                        'data-type' => 'digits',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your contact number.',
+                    ],
+                    'label' => 'Contact No'
+                    ,
+                    'label_attr' => array(
+                        'class' => 'class-label'
+                    )
                 ]
             )
             ->add(
                 'address',
                 'textarea',
                 [
+                    'attr' => [
+                        'class' => 'edit-address',
+                        'placeholder' => $address,
+                        'value' => $address,
+                        'data-required' => 'true',
+                        'data-rangelength' => '[20,200]',
+                        'data-trigger' => 'keyup',
+                        'data-required-message' => 'Please enter your address.',
+
+                    ],
                     'label' => 'Address'
+                    ,
+                    'label_attr' => array(
+                        'class' => 'class-label'
+                    )
                 ]
             )
-            ->add('edit', 'submit')
+            ->add(
+                'edit',
+                'submit',
+                [
+                    'attr' => [
+                        'class' => 'edit-submit'
+                    ]
+                ]
+            )
             ->getForm();
     }
 }
