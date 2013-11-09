@@ -30,24 +30,15 @@ class EventController extends BaseController
      */
     public function addAction(Request $request)
     {
+        $allVenueLocations = $this->em->getRepository("EncoreCustomerBundle:Venue")
+                                  ->findAllLocation();
+        $venuesInfo = $this->getAllVenueInfo();
         $newEvent = new Event();
-        $createEventForm = $this->createEventForm($newEvent);
+        $createEventForm = $this->createEventForm($newEvent, $venuesInfo, $allVenueLocations);
         $createEventForm->handleRequest($request);
 
         if ($createEventForm->isValid())
         {
-//            $params = [];
-//            $params = $createEventForm->getData();
-//            $newEvent->setName($params["event_name"])
-//                ->setType($params["event_type"])
-//                ->setDescription($params["event_description"])
-//                ->setSaleStart($params["event_sale_start"])
-//                ->setSaleEnd($params["event_sale_end"])
-//                ->setHeldDates($params["event_held_dates"])
-//                ->setTotalTickets($params["event_total_tickets"]);
-
-            // TODO: Photo and photo sequence
-
             $this->em->persist($newEvent);
             $this->em->flush();
             $this->pushFlashMessage("Success", "Event has been created");
@@ -65,8 +56,11 @@ class EventController extends BaseController
      */
     public function editAction(Event $event)
     {
+        $allVenueLocations = $this->em->getRepository("EncoreCustomerBundle:Venue")
+            ->findAllLocation();
+        $venuesInfo = $this->getAllVenueInfo();
         $request = $this->getRequest();
-        $editEventForm = $this->createEventForm($event);
+        $editEventForm = $this->createEventForm($event, $venuesInfo, $allVenueLocations);
         $editEventForm->handleRequest($request);
 
         if ($editEventForm->isValid())
@@ -87,7 +81,46 @@ class EventController extends BaseController
         return $this->render("EncoreMerchantBundle::Events:edit-event.html.twig");
     }
 
-    private function createEventForm(Event $event)
+    private function getAllVenueInfo()
+    {
+        $allVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
+            ->findAll();
+        $venuesInfo = [];
+        $i = 0;
+
+        /**
+         * @var $venue \Encore\CustomerBundle\Entity\Venue
+         */
+        foreach ($allVenue as $venue)
+        {
+            $sections = $this->em->getRepository("EncoreCustomerBundle:Section")
+                ->findByVenue($venue);
+            $sectionsInfo = [];
+            $j = 0;
+
+            /**
+             * @var $section \Encore\CustomerBundle\Entity\Section
+             */
+            foreach ($sections as $section)
+            {
+                $sectionsInfo[$j] = [
+                    "id" => $section->getId(),
+                    "name" => $section->getName()
+                ];
+            }
+
+            $venuesInfo[$i] = [
+                "id" => $venue->getId(),
+                "name" => $venue->getName(),
+                "location" => $venue->getLocation(),
+                "sections" => $sectionsInfo
+            ];
+        }
+
+        return $venuesInfo;
+    }
+
+    private function createEventForm(Event $event, $venues, $allVenueLocation)
     {
         // TODO: create form for event.
     }
