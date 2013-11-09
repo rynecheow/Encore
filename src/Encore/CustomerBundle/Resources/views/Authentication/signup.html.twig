@@ -9,6 +9,8 @@
 {% endblock require_js %}
 
 {% block content %}
+
+
     <div class="signUp-container">
         <div class="signup-signin-logo" onclick="location.href='{{ path("encore_home") }}';"></div>
         <form class="signUp-form" method="POST" action="{{ path('encore_signup') }}" {{ form_enctype(form) }}>
@@ -36,4 +38,37 @@
             <p>Already have an account? <a href="/login">Sign in here.</a></p>
         </div>
     </div>
+
+
+
+    <script type="application/javascript">
+        $(function (e) {
+
+
+                    $('.signup-email').on("click", ajaxEmail);
+
+
+                    function ajaxEmail(e) {
+                        $.post('{{ path('encore_validate_email') }}',
+                                { 'email': e.target.value },
+                                function (response) {
+                                    console.log("my object: %o", response)
+                                    if (response.code == 200 && response.status) {//dummy check
+                                        console.log(" success");
+                                        console.log("a" + response.message);
+                                    }
+                                    else {
+                                        console.log("not success");
+                                        console.log("b" + response.message);
+                                    }
+
+                                }, "json");
+                    }
+                }
+
+
+        );
+
+
+    </script>
 {% endblock content %}

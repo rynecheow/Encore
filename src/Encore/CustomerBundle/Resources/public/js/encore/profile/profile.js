@@ -28,7 +28,6 @@ require(['domReady'],
                             e.preventDefault();
 
 
-
                             $(this).tab('show');
                         })
                     }

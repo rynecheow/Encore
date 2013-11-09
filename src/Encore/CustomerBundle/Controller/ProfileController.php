@@ -22,7 +22,6 @@ class ProfileController extends BaseController
     public function editAction(User $user)
     {
         $form = $this->createEditProfileForm();
-
         return $this->render(
             "EncoreCustomerBundle:User:editProfile.html.twig",
             ["form" => $form->createView()]
@@ -157,7 +156,6 @@ class ProfileController extends BaseController
                     'attr' => [
                         'class' => 'edit-text-box',
                         'placeholder' => $fname,
-                        'value' => $fname,
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your first name.',
@@ -167,6 +165,7 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
+                    ,'data' => $fname
                 ]
             )
             ->add(
@@ -176,7 +175,6 @@ class ProfileController extends BaseController
                     'attr' => [
                         'class' => 'edit-text-box',
                         'placeholder' => $lname,
-                        'value' => $lname,
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your last name.',
@@ -186,7 +184,7 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
-
+                    ,'data' => $lname
                 ]
             )
             ->add(
@@ -196,7 +194,6 @@ class ProfileController extends BaseController
                     'attr' => [
                         'class' => 'edit-bday',
                         'placeholder' => $bdate,
-                        'value' => $bdate,
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your birth date.',
@@ -206,6 +203,7 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
+                    ,'data' => $bdate
                 ]
             )
             ->add(
@@ -215,7 +213,6 @@ class ProfileController extends BaseController
                     'attr' => [
                         'class' => 'edit-text-box',
                         'placeholder' => $contactno,
-                        'value' => $contactno,
                         'data-required' => 'true',
                         'data-type' => 'digits',
                         'data-trigger' => 'change',
@@ -226,6 +223,7 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
+                    ,'data' => $contactno
                 ]
             )
             ->add(
@@ -235,7 +233,6 @@ class ProfileController extends BaseController
                     'attr' => [
                         'class' => 'edit-address',
                         'placeholder' => $address,
-                        'value' => $address,
                         'data-required' => 'true',
                         'data-rangelength' => '[20,200]',
                         'data-trigger' => 'keyup',
@@ -247,6 +244,7 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
+                    ,'data' => $address
                 ]
             )
             ->add(
