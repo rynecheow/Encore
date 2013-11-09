@@ -30,6 +30,8 @@ class HomeController extends Controller
     public function indexAction()
     {
         //Return analytics
+        //Return own events
+
         return $this->render("EncoreMerchantBundle:Home:index.html.twig");
     }
 
