@@ -43,10 +43,8 @@
 
 
     <script type="application/javascript">
-        $(function (e) {
+        $(function () {
                     $('.signUp-form').on("submit", ajaxEmail);
-
-
                     function ajaxEmail(e) {
                         e.preventDefault();
 
@@ -54,18 +52,16 @@
                         console.log(email);
                         $.post(
                                 "{{ path('encore_validate_email') }}",
-                                { 'email': email },
+                                {
+                                    'email': email
+                                },
                                 function (response) {
-//                                    console.log("my object: %o", response);
                                     if (response.code == 200) {
-                                        console.log("trueeeee");
                                         $.post(
                                                 "{{ path('encore_signup') }}",
                                                 $('.signUp-form').serialize(),
-                                                function (abc) {
-                                                    alert(abc.path);
-                                                    console.log("AAA");
-                                                    window.location.replace(abc.path);
+                                                function (response2) {
+                                                    window.location.replace(response2.path);
                                                 },
                                                 "json"
                                         );
@@ -73,7 +69,6 @@
                                         $('#invalid-email').css('display', 'none');
                                         return true;
                                     } else {
-                                        console.log("false");
                                         $('#invalid-email').css('display', 'inline');
                                         return false;
                                     }
@@ -83,7 +78,5 @@
                     }
                 }
         );
-
-
     </script>
 {% endblock content %}
