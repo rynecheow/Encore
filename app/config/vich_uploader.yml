@@ -22,7 +22,7 @@ vich_uploader:
             delete_on_update: false
             inject_on_load: false
         user_image:
-            uri_prefix: encore.uri_prefix.user:
+            uri_prefix: encore.uri_prefix.user
             upload_destination: %kernel.root_dir%/../web/images/data/user-avatar
             delete_on_remove: false
             delete_on_update: false

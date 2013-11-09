@@ -4,19 +4,23 @@
 {% block title %}
     Sign in
 {% endblock title %}
+
 {% block content %}
+    {% if error %}
+        <div>{{ loginError.message }}</div>
+    {% endif %}
     <div class="signIn-container">
         <div class="merchant-signup-signin-logo" onclick="location.href='{{ path('encore_merchant_home') }}';"></div>
-        <form class="signIn-form" action="{{ path("encore_merchant_login_check") }}" method="post">
+        <form id="login-form" class="signIn-form" action="{{ path("encore_merchant_login") }}" method="post">
             <h1 class="signIn-header">Sign In</h1>
 
             <div>
                 <input id="username" type="text" name="_username"
                        value="{% if last_username is defined %} {{ last_username }} {% endif %}"
-                       placeholder="Account I.D." required="required"/>
+                       placeholder="Merchant I.D." required="required"/>
                 <input id="password" type="password" name="_password" value="" placeholder="Password"
                        required="required"/>
-                <input type="submit" class="submit" value="Login"></button>
+                <button class="submit">Login</button>
             </div>
         </form>
     </div>

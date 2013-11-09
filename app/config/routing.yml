@@ -1,5 +1,5 @@
 encore_merchant:
-    resource: "@EncoreMerchantBundle/Resources/config/routing.yml"
+    resource: "@EncoreMerchantBundle/Controller"
     host:     "%encore.host.merchant%"
     prefix:   "%encore.route_prefix.merchant%"
 
