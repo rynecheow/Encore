@@ -45,7 +45,7 @@ class EventPhoto
     /**
      * @var string
      *
-     * @ORM\Column(name="caption", type="text" nullable=true)
+     * @ORM\Column(name="caption", type="text", nullable=true)
      */
     private $caption;
 
