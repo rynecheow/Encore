@@ -4,17 +4,19 @@
     Advance search
 {% endblock title %}
 
-{% block stylesheets %}
-    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/bootstrap.min.css') }}" rel="stylesheet"/>
-{% endblock stylesheets %}
-{% block content %}
-    <script>
-        $(function () {
-            $("#datepicker-from").datepicker();
-            $("#datepicker-to").datepicker();
-        });
-    </script>
+{% block require_js %}
+    require(["libs/bootstrap/bootstrap-datepicker"]);
+    require(["encore/search/advance-search"]);
+{% endblock require_js %}
 
+{% block css %}
+    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/datepicker.css') }}" rel="stylesheet"/>
+{% endblock css %}
+
+{% block content %}
+<script>
+
+</script>
     <div class="search-main">
         <div id="static-logo" onclick="location.href='/';"></div>
         <div class="search-setting">
