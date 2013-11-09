@@ -12,6 +12,16 @@ encore_advance_search:
   type:     annotation
   prefix:   /
 
+encore_payment:
+  resource:  "@EncoreCustomerBundle/Controller/PaymentController.php"
+  type:     annotation
+  prefix:   /
+
+encore_summary:
+  resource:  "@EncoreCustomerBundle/Controller/PaymentController.php"
+  type:     annotation
+  prefix:   /
+
 encore_complete_profile:
   resource:  "@EncoreCustomerBundle/Controller/ProfileController.php"
   type:     annotation
