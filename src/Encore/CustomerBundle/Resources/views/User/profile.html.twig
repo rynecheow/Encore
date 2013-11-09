@@ -1,16 +1,20 @@
 {# Created by rynecheow on 11/4/13. #}
 
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
-
+{% block require_js %}
+    require(["encore/profile/profile"]);
+    require(["encore/profile/edit-profile"]);
+{% endblock require_js %}
+{% block title %}View Profile{% endblock title %}
 {% block content %}
     <div class="profile-wrap">
         <div class="logo-wrap">
 
-            <a class="view-hover" href="{{ path('encore_view_profile', {'id': app.user.id }) }}">
+            <a class="view-hover" href="#view" data-toggle="tab">
                 <div class="view-profile view-selected div-logo"></div>
             </a>
 
-            <a class="edit-hover" href="{{ path('encore_edit_profile', {'userId':app.user.id}) }}">
+            <a class="edit-hover" href="#edit" data-toggle="tab">
                 <div class="edit-profile div-logo"></div>
             </a>
 
@@ -19,75 +23,87 @@
             </a>
 
         </div>
-        <div class="content-wrap">
+        <div class="tab-content">
+            <div class="content-wrap tab-pane active fade in" id="view">
 
-            <p class="profile-big-title">
-                {{ username }}
-            </p>
+                <p class="profile-big-title">
+                    {{ username }}
+                </p>
 
-            <br/>
-            <br/>
-            <br/>
+                <br/>
+                <br/>
 
-            <p class="profile-title">
-                Username
-            </p>
+                <hr>
+                <p class="profile-title">
+                    Username
+                </p>
 
-            <p>
-                {{ username }}
-            </p>
-            <hr>
-            <p class="profile-title">
-                Email
-            </p>
+                <p>
+                    {{ username }}
+                </p>
+                <hr>
+                <p class="profile-title">
+                    Email
+                </p>
 
 
-            <p>
-                {{ email }}
-            </p>
-            <hr>
-            <p class="profile-title">
-                First Name
-            </p>
+                <p>
+                    {{ email }}
+                </p>
+                <hr>
+                <p class="profile-title">
+                    First Name
+                </p>
 
-            <p>
-                {{ firstname }}
-            </p>
-            <hr>
+                <p>
+                    {{ firstname }}
+                </p>
+                <hr>
 
-            <p class="profile-title">
-                Last Name
-            </p>
+                <p class="profile-title">
+                    Last Name
+                </p>
 
-            <p>
-                {{ firstname }}
-            </p>
-            <hr>
+                <p>
+                    {{ firstname }}
+                </p>
+                <hr>
 
-            <p class="profile-title">
-                Birth Date
-            </p>
+                <p class="profile-title">
+                    Birth Date
+                </p>
 
-            <p>
-                {{ birthdate }}
-            </p>
-            <hr>
-            <p class="profile-title">
-                Contact No
-            </p>
+                <p>
+                    {{ birthdate }}
+                </p>
+                <hr>
+                <p class="profile-title">
+                    Contact No
+                </p>
 
-            <p>
-                {{ contactno }}
-            </p>
-            <hr>
+                <p>
+                    {{ contactno }}
+                </p>
+                <hr>
 
-            <p class="profile-title">
-                Address
-            </p>
+                <p class="profile-title">
+                    Address
+                </p>
 
-            <p>
-                {{ address }}
-            </p>
+                <p>
+                    {{ address }}
+                </p>
+            </div>
+            <div class="content-wrap tab-pane fade" id="edit">
+                <hr>
+                <form class="edit-profile-form" method="post" {{ form_enctype(form) }}>
+                    <fieldset>
+                        {{ form(form) }}
+
+                    </fieldset>
+                </form>
+            </div>
         </div>
+
     </div>
 {% endblock content %}

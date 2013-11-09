@@ -98,6 +98,8 @@ class ProfileController extends BaseController
             $this->gotoHome();
         }
 
+        $form = $this->createEditProfileForm();
+
         return $this->render(
             "EncoreCustomerBundle:User:profile.html.twig",
             [
@@ -114,6 +116,8 @@ class ProfileController extends BaseController
                 'contactno' => '0123456789'
                 ,
                 'address' => 'ADDRESS THING Jalan Kuchai Lama 1/128b'
+                ,
+                "form" => $form->createView()
             ]
         );
     }
