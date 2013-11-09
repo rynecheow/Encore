@@ -9,12 +9,15 @@
 {% endblock require_js %}
 
 {% block content %}
+
+
     <div class="signUp-container">
         <div class="signup-signin-logo" onclick="location.href='{{ path("encore_home") }}';"></div>
         <form class="signUp-form" method="POST" action="{{ path('encore_signup') }}" {{ form_enctype(form) }}>
             <h1 class="signUp-header">Sign Up</h1>
             <fieldset>
                 {{ form_widget(form.email) }}
+                <span class="parsley-error-list" id="invalid-email">Email Already Exists</span>
                 {{ form_widget(form.password) }}
                 {{ form_widget(form.verifyPassword) }}
                 <div class="checkbox">
@@ -36,4 +39,43 @@
             <p>Already have an account? <a href="/login">Sign in here.</a></p>
         </div>
     </div>
+
+
+
+    <script type="application/javascript">
+        $(function (e) {
+                   $('.signUp-form').on("submit" , ajaxEmail);
+
+//                   $('.signup-email').on("blur", ajaxEmail);
+
+
+                    function ajaxEmail(e) {
+
+                        var email = $('.signup-email').val();
+                        console.log(email);
+                        $.post('{{ path('encore_validate_email') }}',
+                                { 'email': email },
+                                function (response) {
+                                    console.log("my object: %o", response);
+                                    if (response.code == 200 && response.status) {//dummy check
+//                                        $('.signUp-form').submit();
+                                        return true;
+                                    }
+                                    else {
+                                        e.preventDefault();
+                                        return false;
+
+                                    }
+
+                                }, "json");
+                    }
+
+
+                }
+
+
+        );
+
+
+    </script>
 {% endblock content %}
