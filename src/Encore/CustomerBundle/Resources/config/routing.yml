@@ -7,6 +7,11 @@ encore_static:
   type:     annotation
   prefix:   /
 
+encore_advance_search:
+  resource:  "@EncoreCustomerBundle/Controller/SearchController.php"
+  type:     annotation
+  prefix:   /
+
 encore_complete_profile:
   resource:  "@EncoreCustomerBundle/Controller/ProfileController.php"
   type:     annotation
