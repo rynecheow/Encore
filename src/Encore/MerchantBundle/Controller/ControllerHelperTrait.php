@@ -1,29 +1,16 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: sysadm
+ * Date: 11/9/13
+ * Time: 1:41 PM
+ */
 
 namespace Encore\MerchantBundle\Controller;
 
-use Encore\CustomerBundle\Entity\Customer;
-use Encore\CustomerBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\ORM\EntityManager;
-use Encore\MerchantBundle\Helper\AuthenticationHelper;
-/**
- * Base controller.
- *
- * Base controller for EncoreMerchantBundle controllers.
- *
- * @author  Ryne Cheow
- * @version 1.0.0
- * @since   version 1.00
- * created_at: 2013-11-07 12:00:00
- * updated_at:
- */
 
-class BaseController extends Controller
+trait ControllerHelperTrait
 {
 
     /**
@@ -48,7 +35,7 @@ class BaseController extends Controller
         parent::setContainer($container);
 
         $this->request = $this->getRequest();
-        $this->em = $container->get('doctrine')->getManager();
+        $this->em = $this->getDoctrine()->getManager();
 
         /*
          * Add global variables to Twig.
@@ -79,5 +66,4 @@ class BaseController extends Controller
     {
         $this->getRequest()->getSession()->getFlashBag()->add($status, $message);
     }
-
 }

@@ -11,23 +11,28 @@ namespace Encore\MerchantBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * @Route("/")
  */
-class HomeController extends BaseController
+class HomeController extends Controller
 {
+    use ControllerHelperTrait;
 
     /**
      * @Route("/", name="encore_merchant_home")
      *
-     * @PreAuthorize("hasRole('ROLE_MERCHANT')")
+     *
      *
      */
+    //@PreAuthorize("hasRole('ROLE_MERCHANT')")
     public function indexAction()
     {
         //Return analytics
+        //Return own events
+
         return $this->render("EncoreMerchantBundle:Home:index.html.twig");
     }
 
@@ -39,8 +44,19 @@ class HomeController extends BaseController
         if ($this->getLoggedInUser()) {
             return $this->redirect($this->generateUrl('encore_merchant_home'));
         }
-        $session = $this->getRequest()->getSession();
+
+        $request = $this->getRequest();
+        $session = $request->getSession();
+
+        $params = $request->request->all();
+
         $loginError = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $loginError = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $loginError = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+        }
 
         // Set login error message.
         if ($loginError != null) {
@@ -52,7 +68,7 @@ class HomeController extends BaseController
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
 
-        return $this->render("EncoreMerchantBundle:Security:login.html.twig");
+        return $this->render("EncoreMerchantBundle:Security:login.html.twig", ['error' => $loginError]);
     }
 
     /**

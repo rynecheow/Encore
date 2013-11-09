@@ -2,7 +2,51 @@
 
 {% block require_js %}
     require(['encore/purchase/seat-selection']);
+    require(["libs/bootstrap/bootstrap-datepicker"]);
+    require(["encore/search/advance-search"]);
 {% endblock require_js %}
+
+{% block css %}
+    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/datepicker.css') }}" rel="stylesheet"/>
+{% endblock css %}
+
 {% block content %}
-    <input type="button" value="reset" id="resetButton" />
+    <form>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Date</label>
+
+            <div class="col-sm-10">
+                <input class="datepicker" id="datepicker-select" placeholder="Select Date" readonly="true">
+            </div>
+        </div>
+        <table class="seatTable">
+            <tbody>
+            {% for row in 0..5 %}
+                {% if row == 0 %}
+                    <tr>
+                        {% for col in 0..10 %}
+                            <td>
+                                {% if col != 0 %}
+                                    <div class="tableLabel">{{ col }}</div>
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+                <tr id="row{{ row }}">
+                    <td>
+                        <div class="tableLabel">{{ row + 1 }}</div>
+                    </td>
+                    {% for col in 0..9 %}
+                        <td>
+                            <div id="{{ row }}rowcol{{ col }}" class="empty">{{ col + 1 }}</div>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <input type="button" value="reset" id="resetButton" disabled="disabled"/>
+        <input type="submit" value="next" disabled="disabled"/>
+    </form>
 {% endblock content %}

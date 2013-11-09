@@ -124,6 +124,10 @@ html, body {
   cursor: pointer;
 }
 
+input[readonly]{
+  cursor: pointer;
+}
+
 nav {
   z-index: 100;
 }
@@ -292,6 +296,11 @@ nav {
   height: 500px;
   margin: 0 auto;
 
+  .parsley-error-list {
+    font-size: 12px;
+    color: @errorRedMain;
+  }
+
   .to_register {
     margin-top: 10px;
     p {
@@ -434,6 +443,7 @@ nav {
 }
 
 /*Complete profile page*/
+
 .complete-profile-container {
   width: 500px;
   height: 650px;
@@ -461,6 +471,12 @@ nav {
       width: 350px;
       margin: -25px 0 33px 0;
       margin-bottom: 15px;
+    }
+    .complete-profile-username {
+      font-size: 14pt;
+      height: 40px;
+      padding: 7px 9px;
+      width: 350px;
     }
     .complete-profile-fname, {
       font-size: 14pt;
@@ -625,17 +641,27 @@ nav {
 /* Profile Page */
 
 .profile-wrap {
+  #static-logo {
+    top: 20px;
+    position: absolute;
+  }
   margin: 0 auto;
-  width: 80%;
-  height: 900px;
+  width: 70%;
+//  min-height:1100px;
+  height: 100%;
   background: #ffffff;
   border-radius: 30px;
-
+  .tab-content {
+    width: 100%;
+    height:auto;
+    padding:5% 0;
+  }
   .logo-wrap {
     margin: 0 auto;
     margin-top: 10%;
     width: 50%;
     height: 20%;
+
     a {
       width: 80px;
       height: 80px;
@@ -720,6 +746,7 @@ nav {
 
   .profile-title {
     color: #9cceff;
+    margin: 1% auto;
     font-size: 1.2em;
   }
 
@@ -739,6 +766,60 @@ nav {
   .content-wrap {
     margin: 0 auto;
     width: 78%;
+
+    /* profile edit */
+
+    .edit-address {
+      resize: none;
+      width: 300px;
+      height: 150px;
+      border-radius: 10px;
+
+    }
+    .edit-text-box {
+      width: 250px;
+      height: 30px;
+      border-radius: 10px;
+    }
+
+    .edit-bday {
+      width: 250px;
+      height: 30px;
+      border-radius: 10px;
+    }
+    .edit-submit {
+      display: block;
+      width: 10%;
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.33;
+      border-radius: 6px;
+      color: @lightMain;
+      background-color: #59A4F1;
+      border-color: @pinkSecondary;
+      margin-top: 15px;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+    }
+
+    .parsley-error-list {
+      font-size: 0.9em;
+      color: @errorRedMain;
+    }
+
+    .required {
+      margin: 2% auto;
+    }
+
+    .class-label {
+      font-size: 1.4em;
+      color: #9cceff;
+    }
   }
 
 }
