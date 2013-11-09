@@ -16,12 +16,12 @@ framework:
     templating:
         engines: [ "twig" ]
         assets_base_urls:
-            http: [ "http://%encore.host%:%encore.port%/" ] # php server use port 8000
+            http: [ "http://%encore.host.main%:%encore.port%/" ] # php server use port 8000
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:
         cookie_lifetime:    2592000
-        cookie_domain:      "%encore.host%"
+        cookie_domain:      "%encore.host.main%"
     fragments:       ~
     http_method_override: true
 
