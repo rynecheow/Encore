@@ -11,13 +11,15 @@ namespace Encore\MerchantBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * @Route("/")
  */
-class HomeController extends BaseController
+class HomeController extends Controller
 {
+    use ControllerHelperTrait;
 
     /**
      * @Route("/", name="encore_merchant_home")

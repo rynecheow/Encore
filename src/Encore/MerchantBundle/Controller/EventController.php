@@ -12,10 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Encore\CustomerBundle\Entity\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class EventController extends BaseController
+class EventController extends Controller
 {
-
+    use ControllerHelperTrait;
     /**
      * @Route("/events", name="encore_merchant_events")
      */
