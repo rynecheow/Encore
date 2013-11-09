@@ -1,0 +1,72 @@
+{% extends 'EncoreCustomerBundle::layout.html.twig' %}
+
+{% block title %}
+    Summary
+{% endblock title %}
+
+{% block content %}
+    <div class="summary-wrapper">
+        <div id="static-logo" onclick="location.href='/';"></div>
+        <div class="summary-main">
+
+
+            <h1>Summary</h1>
+
+            <div class="summary-order">
+                <h2>Your Order</h2>
+
+                <p><label>Time & Date</label><span class="time-date">10:00 , 10 November 2013</span></p>
+
+                <p><label>Vanue</label><span class="vanue"></span>Bukit Jalil Stadium</p>
+
+                <p><label>Ticket Type & Quantity</label>
+                <span class="type-quantity">
+                    <table class="type-quantity-table">
+                        <tr>
+                            <th>Type</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>100</td>
+                            <td>RM 500</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>45</td>
+                            <td>RM 300</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>15</td>
+                            <td>RM 200</td>
+                        </tr>
+                    </table>
+                </span>
+                </p>
+                <p><label>Total Price</label><span class="price">RM 1000</span></p>
+            </div>
+            <div class="summary-login">Already a registered user? Click <a href="/login">here</a> to sign in.</div>
+            <div class="summary-personal-detail">
+                <h2>Personal Detail</h2>
+
+                <p><label>Name</label><span><input class=name" type="text"
+                                                   value="{% if name is defined %} {{ name }} {% endif %}"/></span></p>
+
+                <p><label>Email</label><span><input class="email" type="text"
+                                                    value="{% if email is defined %} {{ email }} {% endif %}"/></span>
+                </p>
+
+                <p><label>Phone</label><span><input class="phone" type="text"
+                                                    value="{% if phone is defined %} {{ phone }} {% endif %}"/></span>
+                </p>
+            </div>
+            <div class="summary-button">
+                <button class="cancel">Cancel</button>
+                <button class="confirm">Confirm</button>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
