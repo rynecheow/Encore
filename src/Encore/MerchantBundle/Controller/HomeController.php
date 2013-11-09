@@ -24,9 +24,10 @@ class HomeController extends Controller
     /**
      * @Route("/", name="encore_merchant_home")
      *
-     * @PreAuthorize("hasRole('ROLE_MERCHANT')")
+     *
      *
      */
+    //@PreAuthorize("hasRole('ROLE_MERCHANT')")
     public function indexAction()
     {
         //Return analytics
@@ -44,8 +45,18 @@ class HomeController extends Controller
             return $this->redirect($this->generateUrl('encore_merchant_home'));
         }
 
-        $session = $this->getRequest()->getSession();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+
+        $params = $request->request->all();
+
         $loginError = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $loginError = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $loginError = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+        }
 
         // Set login error message.
         if ($loginError != null) {
@@ -57,7 +68,7 @@ class HomeController extends Controller
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
 
-        return $this->render("EncoreMerchantBundle:Security:login.html.twig");
+        return $this->render("EncoreMerchantBundle:Security:login.html.twig", ['error' => $loginError]);
     }
 
     /**
