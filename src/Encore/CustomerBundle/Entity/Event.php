@@ -82,11 +82,10 @@ class Event
     protected $saleEnd;
 
     /**
-     * @var \DateTime[]
-     *
-     * @ORM\Column(name="heldDates", type="datetime")
+     * @var \Encore\CustomerBundle\Entity\EventHolder[]
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventHolder", mappedBy="event")
      */
-    protected $heldDates;
+    private $heldDates;
 
     /**
      * @var integer
@@ -94,6 +93,13 @@ class Event
      * @ORM\Column(name="totalTickets", type="integer")
      */
     protected $totalTickets;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="publish", type="boolean")
+     */
+    protected $publish;
 
     /**
      * @var \Encore\CustomerBundle\Entity\Merchant
@@ -351,30 +357,6 @@ class Event
     }
 
     /**
-     * Set heldDates
-     *
-     * @param \DateTime[] $heldDate
-     *
-     * @return Event
-     */
-    public function setHeldDates($heldDate)
-    {
-        $this->heldDates = $heldDate;
-
-        return $this;
-    }
-
-    /**
-     * Get heldDates
-     *
-     * @return \DateTime[]
-     */
-    public function getHeldDates()
-    {
-        return $this->heldDates;
-    }
-
-    /**
      * Set totalTickets
      *
      * @param integer $totalTickets
@@ -462,6 +444,44 @@ class Event
     public function getPhotoSequence()
     {
         return $this->photoSequence;
+    }
+
+    /**
+     * @param boolean $publish
+     * @return $this
+     */
+    public function setPublish($publish)
+    {
+        $this->publish = $publish;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getPublish()
+    {
+        return $this->publish;
+    }
+
+    /**
+     * @param \Encore\CustomerBundle\Entity\EventHolder[] $heldDates
+     * @return $this
+     */
+    public function setHeldDates($heldDates)
+    {
+        $this->heldDates = $heldDates;
+
+        return $this;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\EventHolder[]
+     */
+    public function getHeldDates()
+    {
+        return $this->heldDates;
     }
 
 }
