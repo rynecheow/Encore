@@ -15,7 +15,46 @@
             <h1 class="complete-profile-header">Complete Your Information</h1>
             <fieldset>
                 {{ form(form) }}
+                <span class="parsley-error-list" style="display:none;" id="invalid-username">User Name Exists</span>
             </fieldset>
         </form>
     </div>
+
+    <script type="application/javascript">
+        $(function () {
+                    $('.complete-profile-form').on("submit", ajaxUsername);
+                    function ajaxUsername(e) {
+                        e.preventDefault();
+
+                        var un = $('.complete-profile-username').val();
+                        console.log(un);
+                        $.post(
+                                "{{ path('encore_validate_username') }}",
+                                {
+                                    'username': un
+                                },
+                                function (response) {
+                                    if (response.code == 200) {
+                                        $.post(
+                                                "{{ path('encore_complete_profile') }}",
+                                                $('.complete-profile-form').serialize(),
+                                                function (response2) {
+                                                    window.location.replace(response2.path);
+                                                },
+                                                "json"
+                                        );
+
+                                        $('#invalid-email').css('display', 'none');
+                                        return true;
+                                    } else {
+                                        $('#invalid-email').css('display', 'inline');
+                                        return false;
+                                    }
+                                },
+                                "json"
+                        );
+                    }
+                }
+        );
+    </script>
 {% endblock content %}
