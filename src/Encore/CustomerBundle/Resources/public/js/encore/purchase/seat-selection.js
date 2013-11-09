@@ -3,11 +3,36 @@ require(['domReady'],
         "use strict";
         domReady(
             function () {
-
                 var seatsMatrix = {
-                    col: 10,
-                    row: 5
+                    col: 50,
+                    row: 20
                 };
+
+                initSeatsPlan(seatsMatrix);
+
+                function initSeatsPlan(matrix) {
+                    var i, j, parent, seatTable, seatRow, seatColumn;
+                    parent = $("body");
+                    seatTable = $(document.createElement('table')).attr({
+                        "class": "seatTable",
+                        "id": "section1"
+                    }).appendTo(parent);
+
+                    for (i = 0; i < matrix.row; i = i + 1) {
+                        seatRow = $(document.createElement('tr')).attr({
+                            "id": "row" + i
+                        }).appendTo(seatTable);
+
+                        for (j = 0; j < matrix.col; j = j + 1) {
+                            seatColumn = $(document.createElement('td')).appendTo(seatRow);
+
+                            $(document.createElement('div')).attr({
+                                "id": i + "row" + "col" + j,
+                                "class": "empty"
+                            }).on("click", detectEmptySeat).appendTo(seatColumn);
+                        }
+                    }
+                }
 
                 function tickDiv(e) {
                     if ($(e.target).hasClass("empty")) {
@@ -95,40 +120,14 @@ require(['domReady'],
                     }
                 }
 
-                function initSeatsPlan(matrix) {
-                    var i, j, parent, seatTable, seatRow, seatColumn;
-                    parent = $("body");
-                    seatTable = $('<table/>', {
-                        "class": "seatTable",
-                        "id": "section1"
-                    }).appendTo(parent);
 
-                    for (i = 0; i < matrix.row; i = i + 1) {
-                        seatRow = $('<tr/>', {
-                            "id": "row" + i
-                        }).appendTo(seatTable);
-
-                        for (j = 0; j < matrix.col; j = j + 1) {
-                            seatColumn = $('<td/>').appendTo(seatRow);
-
-                            $('<div/>', {
-                                "id": i + "row" + "col" + j,
-                                "class": "empty"
-                            }).on("click", detectEmptySeat).appendTo(seatColumn);
-                        }
-                    }
-                }
                 $("#resetButton").click(function () {
                     $("table.seatTable tbody tr td div.selected").each(function () {
                         $(this).attr("class", "empty");
                     });
                 });
-
-                $(function () {
-                    initSeatsPlan(seatsMatrix);
-                });
             }
 
         );
     }
-    );
+);
