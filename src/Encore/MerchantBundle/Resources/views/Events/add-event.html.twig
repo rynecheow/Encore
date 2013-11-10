@@ -1,20 +1,21 @@
 {% extends 'EncoreMerchantBundle::layout.html.twig' %}
-        {% block require_js %}
-            require(["encore/authentication/signup"]);
-        {% endblock require_js %}
+{% block css %}
+    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/datepicker.css') }}" rel="stylesheet"/>
+{% endblock css %}
+
+{% block require_js %}
+    require(["libs/bootstrap/bootstrap-datepicker"]);
+    require(["encore-merchant/events/create-event"]);
+{% endblock require_js %}
+
 {% block title %}Create An Event {% endblock title %}
 {% block content %}
     <div class="create-event-wrap">
             <div class="create-event-container">
-                <form class="craete-event-form" method="POST" action="{{ path('encore_merchant_add_event') }}" {{ form_enctype(form) }}>
+                <form class="create-event-form" method="POST" action="{{ path('encore_merchant_add_event') }}" {{ form_enctype(form) }}>
                     <h1 class="merchant-header">Create An Profile </h1>
                     <fieldset>
-                        {{ form_widget(form.event_name) }}
-                        {{ form_widget(form.evnt_type) }}
-                        {{ form_widget(form.event_description) }}
-                        {{ form_widget(form.event_sale_start) }}
-                        {{ form_widget(form.event_sale_end) }}
-                        {{ form_widget(form.event_held_dates) }}
+                        {{ form(form) }}
                         {{ form_rest(form) }}
                     </fieldset>
                 </form>

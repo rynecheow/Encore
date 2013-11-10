@@ -197,6 +197,7 @@ class ProfileController extends BaseController
                 [
                     'attr' => [
                         'class' => 'edit-bday datepicker',
+                        'placeholder' => $bdate,
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your birth date.',
