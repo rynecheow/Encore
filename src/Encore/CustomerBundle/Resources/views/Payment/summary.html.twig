@@ -1,4 +1,8 @@
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
+{% block require_js %}
+    require(["encore/payment/summary"]);
+
+{% endblock require_js %}
 
 {% block title %}
     Summary
@@ -48,25 +52,44 @@
                 <p><label>Total Price</label><span class="price">RM 1000</span></p>
             </div>
             <div class="summary-login">Already a registered user? Click <a href="/login">here</a> to sign in.</div>
-            <div class="summary-personal-detail">
-                <h2>Personal Detail</h2>
+            <form class="personal-detail-form" action="{{ path("encore_summary") }}" method="post">
+                <div class="summary-personal-detail">
+                    <h2>Personal Detail</h2>
 
-                <p><label>Name</label><span><input class=name" type="text"
-                                                   value="{% if name is defined %} {{ name }} {% endif %}"/></span></p>
+                    <p>
+                        <label>Name</label>
+                    <span>
+                        <input name="_name" class=name" type="text" data-required="true" data-trigger="change"
+                               data-required-message="Please enter Name"
+                               required="required"
+                               value="{% if name is defined %} {{ name }} {% endif %}"/></span></p>
 
-                <p><label>Email</label><span><input class="email" type="text"
-                                                    value="{% if email is defined %} {{ email }} {% endif %}"/></span>
-                </p>
+                    <p>
 
-                <p><label>Phone</label><span><input class="phone" type="text"
-                                                    value="{% if phone is defined %} {{ phone }} {% endif %}"/></span>
-                </p>
-            </div>
-            <div class="summary-button">
-                <button class="cancel">Cancel</button>
-                <button class="confirm">Confirm</button>
-            </div>
+                        <label>Email</label>
+                    <span>
+                        <input name="_email" class="email" type="text" data-type="email" data-required="true"
+                               data-trigger="change"
+                               data-required-message="Please enter email"
+                               required="required"
+                               value="{% if email is defined %} {{ email }} {% endif %}"/></span>
+                    </p>
 
+                    <p>
+                        <label>Phone</label>
+                    <span>
+                        <input name="_phone" class="phone" type="text" data-required="true" data-type="digits"
+                               data-trigger="change"
+                               data-required-message="Please enter Phone Number"
+                               required="required"
+                               value="{% if phone is defined %} {{ phone }} {% endif %}"/></span>
+                    </p>
+                </div>
+                <div class="summary-button">
+                    <button class="cancel">Cancel</button>
+                    <button class="confirm" type="submit">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 {% endblock content %}
