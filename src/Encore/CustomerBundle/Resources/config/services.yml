@@ -23,3 +23,10 @@ services:
         class: Encore\CustomerBundle\Form\Type\UserProfileType
         tags:
           - { name: form.type, alias: user_profile }
+
+     encore.encore_search:
+        class: Encore\CustomerBundle\Services\EncoreSearch
+        arguments:
+          - @doctrine.orm.entity_manager
+          - @request
+        scope:  request

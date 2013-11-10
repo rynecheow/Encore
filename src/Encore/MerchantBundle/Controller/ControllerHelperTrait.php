@@ -43,7 +43,6 @@ trait ControllerHelperTrait
         $this->get('twig')->addGlobal('currency', $this->container->getParameter('encore.currency'));
     }
 
-
     /**
      * Gets the currently logged in user.
      *

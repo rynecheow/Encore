@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProfileController extends BaseController
 {
+
     /**
      * Logged In User Editing Its Profile
      *
@@ -22,6 +23,7 @@ class ProfileController extends BaseController
     public function editAction(User $user)
     {
         $form = $this->createEditProfileForm();
+
         return $this->render(
             "EncoreCustomerBundle:User:editProfile.html.twig",
             ["form" => $form->createView()]
@@ -165,7 +167,8 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
-                    ,'data' => $fname
+                    ,
+                    'data' => $fname
                 ]
             )
             ->add(
@@ -184,7 +187,8 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
-                    ,'data' => $lname
+                    ,
+                    'data' => $lname
                 ]
             )
             ->add(
@@ -203,7 +207,8 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
-                    ,'data' => $bdate
+                    ,
+                    'data' => $bdate
                 ]
             )
             ->add(
@@ -223,7 +228,8 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
-                    ,'data' => $contactno
+                    ,
+                    'data' => $contactno
                 ]
             )
             ->add(
@@ -244,7 +250,8 @@ class ProfileController extends BaseController
                     'label_attr' => array(
                         'class' => 'class-label'
                     )
-                    ,'data' => $address
+                    ,
+                    'data' => $address
                 ]
             )
             ->add(
