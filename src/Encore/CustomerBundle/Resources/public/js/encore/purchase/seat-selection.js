@@ -3,11 +3,11 @@ require(['domReady'],
         "use strict";
         domReady(
             function () {
-                var seatsMatrix = {
-                    col: 50,
-                    row: 20
-                };
 
+                /**
+                 * Set empty/selected to selected seat
+                 * @param target
+                 */
                 function tickDiv(target) {
                     if (target.hasClass("empty")) {
                         target.attr("class", "selected");
@@ -16,6 +16,12 @@ require(['domReady'],
                     }
                 }
 
+                /**
+                 * Check if leave single gap space
+                 * @param next1
+                 * @param next2
+                 * @returns {boolean}
+                 */
                 function checkNext(next1, next2) {
                     if (next1.hasClass("empty")) {
                         return !next2.hasClass("selected");
@@ -148,6 +154,8 @@ require(['domReady'],
                 $("#resetButton").click(function () {
                     resetSeats();
                     $("#ticketQtyLabel").html(parseInt($("#ticketQtySelector").val(), 10) + " unselected ticket(s)");
+                    $("input:submit").attr("hidden", "hidden");
+                    $("#seatAllocComplete").attr("class", "incomplete");
                 });
 
                 /**
