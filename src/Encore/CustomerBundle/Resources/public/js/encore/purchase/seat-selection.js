@@ -122,8 +122,10 @@ require(['domReady'],
                     $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
                     if (difference > 0) {
                         $("input:submit").attr("hidden", "hidden");
+                        $("#seatAllocComplete").attr("class", "incomplete");
                     } else {
                         $("input:submit").removeAttr("hidden");
+                        $("#seatAllocComplete").attr("class", "complete");
                     }
                 });
 
@@ -159,6 +161,7 @@ require(['domReady'],
                     } else {
                         $("input:radio[name='timeGroup']").removeAttr("checked");
                         $("#selectTimeDiv").removeAttr("hidden");
+                        $("#datetimeComplete").attr("class", "incomplete");
                     }
                 }
 
@@ -170,9 +173,11 @@ require(['domReady'],
                     $("#sectionLabel").html("");
                     if (hideFlag) {
                         $("#selectSectionDiv").attr("hidden", "hidden");
+                        $("#datetimeComplete").attr("class", "incomplete");
                     } else {
                         $("input:radio[name='sectionGroup']").removeAttr("checked");
                         $("#selectSectionDiv").removeAttr("hidden");
+                        $("#datetimeComplete").attr("class", "complete");
                     }
                 }
 
@@ -184,9 +189,11 @@ require(['domReady'],
                     $("#ticketQtyLabel").html("");
                     if (hideFlag) {
                         $("#ticketQtyDiv").attr("hidden", "hidden");
+                        $("#sectionComplete").attr("class", "incomplete");
                     } else {
                         $("#ticketQtySelector").val(0);
                         $("#ticketQtyDiv").removeAttr("hidden");
+                        $("#sectionComplete").attr("class", "complete");
                     }
                 }
 
@@ -199,8 +206,11 @@ require(['domReady'],
                         resetSeats();
                         $("#seatAllocateDiv").attr("hidden", "hidden");
                         $("input:submit").attr("hidden", "hidden");
+                        $("#seatAllocComplete").attr("class", "incomplete");
+                        $("#ticketQtyComplete").attr("class", "incomplete");
                     } else {
                         $("#seatAllocateDiv").removeAttr("hidden");
+                        $("#ticketQtyComplete").attr("class", "complete");
                     }
                 }
 
@@ -211,8 +221,11 @@ require(['domReady'],
                 function hideSubmitButton(hideFlag) {
                     if (hideFlag) {
                         $("input:submit").attr("hidden", "hidden");
+                        $("#submitComplete").attr("class", "incomplete");
+                        $("#seatAllocComplete").attr("class", "incomplete");
                     } else {
                         $("input:submit").removeAttr("hidden");
+                        $("#seatAllocComplete").attr("class", "complete");
                     }
                 }
 
@@ -266,15 +279,20 @@ require(['domReady'],
                     if (value < selectedLength) {
                         parseInt($("#ticketQtySelector").val(selectedLength));
                         alert("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
+                    } else if (value === 0) {
+                        $("#ticketQtyLabel").html("");
+                        hideSubmitButton(true);
+                        hideSeatAllocateStep(true);
                     } else {
                         difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td div.selected").length;
                         $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
                         if (difference > 0) {
                             $("input:submit").attr("hidden", "hidden");
+                            $("#seatAllocComplete").attr("class", "incomplete");
                         } else {
                             $("input:submit").removeAttr("hidden");
+                            $("#seatAllocComplete").attr("class", "complete");
                         }
-                        $("#ticketQtyLabel").html(value + " unselected ticket(s)");
                     }
                 });
 

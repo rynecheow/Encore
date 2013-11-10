@@ -14,7 +14,6 @@
         <div class="seat-selection-wrap">
             <div id="selectDateDiv">
                 <label>Date:</label>
-                <!--<input class="datepicker" id="datepicker-select" placeholder="Select Date" readonly="true" type="text"/>-->
                 <select id="dateList">
                     {% set dateArray = ["11/12/2013", "11/13/2013", "11/15/2013"] %}
                     <option selected="selected">Select Date</option>
@@ -82,8 +81,11 @@
                     <tbody>
                     <tr>
                         <td>
+                            <!--<img id="eventComplete" class="complete" />-->
+                            <div id="eventComplete" class="complete"/>
+                        </td>
+                        <td>
                             <label>Event:</label>
-
                             <div>
                                 <label id="eventLabel"></label>
                             </div>
@@ -91,8 +93,11 @@
                     </tr>
                     <tr>
                         <td>
+                            <!--<img id="datetimeComplete" class="incomplete" />-->
+                            <div id="datetimeComplete" class="incomplete"/>
+                        </td>
+                        <td>
                             <label>Date & Time:</label>
-
                             <div>
                                 <label id="dateTimeLabel"></label>
                             </div>
@@ -100,8 +105,11 @@
                     </tr>
                     <tr>
                         <td>
+                            <!--<img id="sectionComplete" class="incomplete" />-->
+                            <div id="sectionComplete" class="incomplete"/>
+                        </td>
+                        <td>
                             <label>Section:</label>
-
                             <div>
                                 <label id="sectionLabel"></label>
                             </div>
@@ -109,8 +117,11 @@
                     </tr>
                     <tr>
                         <td>
+                            <!--<img id="ticketQtyComplete" class="incomplete" />-->
+                            <div id="ticketQtyComplete" class="incomplete"/>
+                        </td>
+                        <td>
                             <label>Ticket Quantity:</label>
-
                             <div>
                                 <label id="ticketQtyLabel"></label>
                             </div>
@@ -118,15 +129,18 @@
                     </tr>
                     <tr>
                         <td>
+                            <!--<img id="seatAllocComplete" class="incomplete" />-->
+                            <div id="seatAllocComplete" class="incomplete"/>
+                        </td>
+                        <td>
                             <label>Seat Allocation:</label>
-
                             <div>
                                 <label id="seatAllocationLabel"></label>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <input type="submit" value="next" hidden="hidden"/>
                         </td>
                     </tr>

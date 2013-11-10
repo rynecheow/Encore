@@ -1083,6 +1083,25 @@ nav {
     right: 25px;
     background: blueviolet;
     width: 300px;
+
+    table tbody tr {
+      td:nth-child(1) {
+        width: 30px;
+
+        div {
+          width: 20px;
+          height: 20px;
+        }
+
+        div.complete {
+          background: url('../../bundles/encorecustomer/images/seat-selection/complete.png');
+        }
+
+        div.incomplete {
+          background: url('../../bundles/encorecustomer/images/seat-selection/incomplete.png');
+        }
+      }
+    }
   }
 
   label {
