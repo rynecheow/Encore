@@ -1155,6 +1155,9 @@ nav {
     .payment-form-billing-detail {
       border-bottom: 1.5px solid @darkMain;
       padding: 10px 10px;
+      .address{
+        resize: none;
+      }
     }
     .payment-form-receipt-detail {
       border-bottom: 1.5px solid @darkMain;
@@ -1204,6 +1207,11 @@ nav {
       }
     }
 
+  }
+  .parsley-error-list {
+    font-size: 12px;
+    color: @errorRedMain;
+    margin-bottom: 5px;
   }
 }
 

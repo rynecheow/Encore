@@ -11,7 +11,7 @@
 
 {% block content %}
     <div class="payment-main">
-        <div class="payment-logo" onclick="location.href='{{ path('encore_home') }}';">
+        <div class="payment-logo">
         </div>
         <div class="payment-form">
             <div class="payment-form-detail">
@@ -55,7 +55,7 @@
                         </label>
                         <span>
                             <input name="_card-number" class="card-number" type="text"
-                                   data-required="true" data-trigger="change"
+                                   data-required="true" data-type="digits" data-trigger="change"
                                    data-required-message="Please enter card number"
                                    required="required"/>
                         </span>
@@ -97,7 +97,7 @@
                         </label>
                         <span>
                             <input name="_issue-number" class="issue-number" type="text"
-                                   data-required="true" data-trigger="change"
+                                   data-required="true" data-type="digits" data-trigger="change"
                                    data-required-message="Please enter Issue Number"
                                    required="required"/>
                         </span>
@@ -108,7 +108,10 @@
                             Security Code
                         </label>
                         <span>
-                            <input class="security-code" type="text"/>
+                            <input name="_security-code" class="security-code" type="text"
+                                   data-required="true" data-trigger="change"
+                                   data-max="3" data-type="digits" data-required-message="Please enter Security Code"
+                                   required="required"/>
                         </span>
                     </p>
                 </div>
@@ -120,7 +123,9 @@
                             Address
                         </label>
                         <span>
-                            <textarea class="address"></textarea>
+                            <textarea name="_address" class="address" data-required="true" data-trigger="change"
+                                      data-required-message="Please enter your address"
+                                      required="required"></textarea>
                         </span>
                     </p>
 
@@ -129,7 +134,10 @@
                             Post Code
                         </label>
                         <span>
-                            <input class="post-code" type="text"/>
+                            <input name="_post-code" class="post-code" type="text"
+                                   data-required="true" data-type="digits" data-trigger="change"
+                                   data-required-message="Please enter your post code"
+                                   required="required"/>
                         </span>
                     </p>
 
@@ -138,7 +146,10 @@
                             Phone Number
                         </label>
                         <span>
-                            <input class="phone-number" type="text"/>
+                            <input name="_phone-number" class="phone-number" type="text"
+                                   data-required="true" data-type="digits" data-trigger="change"
+                                   data-required-message="Please enter Phone Number"
+                                   required="required"/>
                         </span>
                     </p>
 
@@ -151,7 +162,7 @@
                             Email
                         </label>
                         <span>
-                            <input name="_email" class="email" type="text" data-required="true"
+                            <input name="_email" class="email" type="text" data-type="email" data-required="true"
                                    data-trigger="change"
                                    data-required-message="Please enter Issue Number"
                                    required="required"/>
@@ -161,7 +172,9 @@
                 </div>
                 <div class="payment-form-agreement">
                     <div class="checkbox">
-                        <input name="_terms" type="checkbox"/>
+                        <input name="_terms" type="checkbox" data-mincheck="1" data-required="true" data-trigger="change"
+                               data-required-message="Please agree the terms to continue"
+                               required="required"/>
 
                         <p>I have read adn agree to the terms and conditions of this payment and confirm that I
                             understand I
