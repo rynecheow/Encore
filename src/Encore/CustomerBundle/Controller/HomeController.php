@@ -4,6 +4,7 @@ namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Encore\CustomerBundle\Entity\Event;
 
 /**
  * @Route("/")
@@ -27,8 +28,11 @@ class HomeController extends BaseController
          * @var $eventManager \Encore\CustomerBundle\Model\EventManager
          */
         $eventManager = $this->get('encore.event_manager');
-        $featuredEvents = $eventManager->getFeaturedEvents(3);
-        $newEvents = $eventManager->getNewEvents(10);
+        $featured = $eventManager->getFeaturedEvents(1);
+        $featuredEvents = $this->trimEvents($featured);
+
+        $new = $eventManager->getNewEvents(10);
+        $newEvents = $this->trimEvents($new);
 
         $param = [
             'featured_events' => $featuredEvents,
@@ -36,5 +40,40 @@ class HomeController extends BaseController
         ];
 
         return $this->render('EncoreCustomerBundle:Home:index.html.twig', $param);
+    }
+
+    /**
+     * @param Event[] $events
+     * @return array|null
+     */
+    private function trimEvents($events)
+    {
+        if (isset($events) && $events != null) {
+            $trimmedEvents = [];
+            foreach ($events as $event) {
+                $photos = $event->getPhotos();
+                if($photos){
+                    foreach ($photos as $photo) {
+                        // first photo only
+                        array_push(
+                            $trimmedEvents,
+                            [
+                                "id" => $event->getId(),
+                                "name" => $event->getName(),
+                                "description" => $event->getDescription(),
+                                "photo" => $photo->getImagePath()
+                            ]
+                        );
+                        break;
+                    }
+                }else{
+                    return null;
+                }
+            }
+
+            return $trimmedEvents;
+        }
+
+        return null;
     }
 }
