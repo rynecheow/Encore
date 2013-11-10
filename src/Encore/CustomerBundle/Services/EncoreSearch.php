@@ -18,12 +18,10 @@ class EncoreSearch
      * @var EntityManager
      */
     private $em;
-
     /**
      * @var Request
      */
     private $request;
-
     /**
      * @var int
      */
@@ -62,8 +60,32 @@ class EncoreSearch
             $bef_count = microtime(true);
 
             if (strpos($search_results['query'], "@") > 0) {
+                $search_results = $this->em->createQuery(
+                    <<<SQL
+                                    SELECT *
+                FROM EncoreCustomerBundle:Event event ,
+                EncoreCustomerBundle:EventHolder event_holder,
+                EncoreCustomerBundle:Venue venue
+                JOIN event.venue venue
+                JOIN event.eventHolders event_holders
 
+                WHERE event.name = :qname
+                AND event.venue = :qvenue
+                AND event.heldDates BETWEEN :qfromdate AND :qtodate
+SQL
+                )->setParameters(
+                        [
+                            'qname' => $qparams["event-name"],
+                            'qvenue' => $qparams["event-venue"],
+                            'qfromdate' => $qparams["event-from"],
+                            'qtodate' => $qparams["event-to"]
+                        ]
+                    )
+                    ->setMaxResults(1)
+                    ->getResult();
             }
+
+
         }
     }
 } 
