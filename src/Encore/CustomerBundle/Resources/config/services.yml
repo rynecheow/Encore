@@ -30,3 +30,6 @@ services:
           - @doctrine.orm.entity_manager
           - @request
         scope:  request
+
+     encore.file_namer.uuid_namer:
+        class: Encore\CustomerBundle\VichUploader\Naming\UuidNamer
