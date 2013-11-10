@@ -1,71 +1,181 @@
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
 
+{% block require_js %}
+    require(["encore/payment/payment"]);
+
+{% endblock require_js %}
+
 {% block title %}
     Payment Gateway
 {% endblock title %}
 
 {% block content %}
     <div class="payment-main">
-        <div class="payment-logo" onclick="location.href='/';">
+        <div class="payment-logo" onclick="location.href='{{ path('encore_home') }}';">
         </div>
         <div class="payment-form">
             <div class="payment-form-detail">
+
                 <h2>Payment Details</h2>
 
-                <p><label>Payment</label><span class="detail-result-payment">BRlCK "Encore"</span></p>
+                <p>
+                    <label>
+                        Payment
+                    </label>
+                    <span class="detail-result-payment">BRlCK "Encore"</span>
+                </p>
 
-                <p><label>Order ID</label><span class="detail-result-order">1</span></p>
+                <p>
+                    <label>
+                        Order ID
+                    </label>
+                    <span class="detail-result-order">1
+                    </span>
+                </p>
 
-                <p><label>Description</label><span class="detail-result-description">Item</span></p>
+                <p>
+                    <label>
+                        Description
+                    </label>
+
+                    <span class="detail-result-description">Item
+                    </span>
+                </p>
 
                 <p><label>Total</label><span class="detail-result-total">RM 900</span></p>
             </div>
-            <div class="payment-form-card-detail">
-                <h2>Card Details (As printed on your card)</h2>
+            <form action="{{ path("encore_payment") }}" method="post" class="fill-form">
+                <div class="payment-form-card-detail">
 
-                <p><label>Card Number </label><span><input class="card-number" type="text"/></span></p>
+                    <h2>Card Details (As printed on your card)</h2>
 
-                <p><label>Card Holder </label><span><input class="card-holder" type="text"/></span></p>
+                    <p>
+                        <label>
+                            Card Number
+                        </label>
+                        <span>
+                            <input name="_card-number" class="card-number" type="text"
+                                   data-required="true" data-trigger="change"
+                                   data-required-message="Please enter card number"
+                                   required="required"/>
+                        </span>
+                    </p>
 
-                <p><label>Expiry Date </label><span><select class="expiry-date-month">
-                            <option>month</option>
-                        </select><select class="expiry-date-year">
-                            <option>year</option>
-                        </select></span></p>
-                <p><label>Issue Number</label><span><input class="issue-number" type="text"/></span></p>
+                    <p>
+                        <label>
+                            Card Holder
+                        </label>
+                        <span>
+                            <input name="_card-holder" class="card-holder" type="text"
+                                   data-required="true" data-trigger="change"
+                                   data-required-message="Please enter card holder"
+                                   required="required"/>
+                        </span>
+                    </p>
 
-                <p><label>Security Code</label><span><input class="security-code" type="text"/></span></p>
-            </div>
-            <div class="payment-form-billing-detail">
-                <h2>Billing Details (The address where your card statement is sent)</h2>
+                    <p>
+                        <label>
+                            Expiry Date
+                        </label>
+                        <span>
+                            <select name="_expiry-date-month" class="expiry-date-month"
+                                    data-required="true" data-trigger="change"
+                                    data-required-message="Please select expiry month"
+                                    required="required">
+                                <option>month</option>
+                            </select>
+                            <select name="_expiry-date-year" class="expiry-date-year" data-required="true"
+                                    data-trigger="change" data-required-message="Please select expiry year"
+                                    required="required">
+                                <option>year</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p>
+                        <label>
+                            Issue Number
+                        </label>
+                        <span>
+                            <input name="_issue-number" class="issue-number" type="text"
+                                   data-required="true" data-trigger="change"
+                                   data-required-message="Please enter Issue Number"
+                                   required="required"/>
+                        </span>
+                    </p>
 
-                <p><label>Address</label><span><textarea class="address"></textarea></span></p>
-
-                <p><label>Post Code</label><span><input class="post-code" type="text"/></span></p>
-
-                <p><label>Phone Number</label><span><input class="phone-number" type="text"/></span></p>
-
-            </div>
-            <div class="payment-form-receipt-detail">
-                <h2>Receipt Details (An email receipt will be sent to this address)</h2>
-
-                <p><label>Email</label><span><input class="email" type="text"/></span></p>
-
-            </div>
-            <div class="payment-form-agreement">
-                <div class="checkbox">
-                    <input type="checkbox"/>
-
-                    <p>I have read adn agree to the terms and conditions of this payment and confirm that I understand I
-                        am using the service for the purchase of Ticket from Encore and that this payment will therefore
-                        appear as "Encore" on my card statement. <a>(Read Terms)</ a></p>
+                    <p>
+                        <label>
+                            Security Code
+                        </label>
+                        <span>
+                            <input class="security-code" type="text"/>
+                        </span>
+                    </p>
                 </div>
-            </div>
-            <div class="payment-form-button">
-                <button class="cancel">Cancel</button>
-                <button class="make-payment">Make Payment</button>
+                <div class="payment-form-billing-detail">
+                    <h2>Billing Details (The address where your card statement is sent)</h2>
 
-            </div>
+                    <p>
+                        <label>
+                            Address
+                        </label>
+                        <span>
+                            <textarea class="address"></textarea>
+                        </span>
+                    </p>
+
+                    <p>
+                        <label>
+                            Post Code
+                        </label>
+                        <span>
+                            <input class="post-code" type="text"/>
+                        </span>
+                    </p>
+
+                    <p>
+                        <label>
+                            Phone Number
+                        </label>
+                        <span>
+                            <input class="phone-number" type="text"/>
+                        </span>
+                    </p>
+
+                </div>
+                <div class="payment-form-receipt-detail">
+                    <h2>Receipt Details (An email receipt will be sent to this address)</h2>
+
+                    <p>
+                        <label>
+                            Email
+                        </label>
+                        <span>
+                            <input name="_email" class="email" type="text" data-required="true"
+                                   data-trigger="change"
+                                   data-required-message="Please enter Issue Number"
+                                   required="required"/>
+                        </span>
+                    </p>
+
+                </div>
+                <div class="payment-form-agreement">
+                    <div class="checkbox">
+                        <input name="_terms" type="checkbox"/>
+
+                        <p>I have read adn agree to the terms and conditions of this payment and confirm that I
+                            understand I
+                            am using the service for the purchase of Ticket from Encore and that this payment will
+                            therefore
+                            appear as "Encore" on my card statement. <a>(Read Terms)</a></p>
+                    </div>
+                </div>
+                <div class="payment-form-button">
+                    <button class="cancel">Cancel</button>
+                    <button type="submit" class="make-payment">Make Payment</button>
+
+                </div>
+            </form>
         </div>
 
     </div>
