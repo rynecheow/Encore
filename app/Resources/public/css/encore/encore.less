@@ -1093,6 +1093,30 @@ nav {
     right: 25px;
     background: blueviolet;
     width: 300px;
+
+    table tbody tr {
+      td:nth-child(1) {
+        width: 30px;
+
+        div {
+          width: 20px;
+          height: 20px;
+        }
+
+        /*
+         * Remove uncommented line and uncomment commented lines when images have been included to project
+         */
+        div.complete {
+          //background: url('../../bundles/encorecustomer/images/seat-selection/complete.png');
+          background: green;
+        }
+
+        div.incomplete {
+          //background: url('../../bundles/encorecustomer/images/seat-selection/incomplete.png');
+          backgroud: red;
+        }
+      }
+    }
   }
 
   label {
@@ -1155,6 +1179,9 @@ nav {
     .payment-form-billing-detail {
       border-bottom: 1.5px solid @darkMain;
       padding: 10px 10px;
+      .address {
+        resize: none;
+      }
     }
     .payment-form-receipt-detail {
       border-bottom: 1.5px solid @darkMain;
@@ -1204,6 +1231,11 @@ nav {
       }
     }
 
+  }
+  .parsley-error-list {
+    font-size: 12px;
+    color: @errorRedMain;
+    margin-bottom: 5px;
   }
 }
 
@@ -1294,5 +1326,12 @@ nav {
         float: right;
       }
     }
+    .parsley-error-list {
+      font-size: 12px;
+      color: @errorRedMain;
+      margin-bottom: 5px;
+      margin-left: 5%;
+    }
   }
+
 }
