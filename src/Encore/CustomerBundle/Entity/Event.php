@@ -85,14 +85,7 @@ class Event
      * @var \Encore\CustomerBundle\Entity\EventHolder[]
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventHolder", mappedBy="event")
      */
-    private $heldDates;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="totalTickets", type="integer")
-     */
-    protected $totalTickets;
+    private $eventHolders;
 
     /**
      * @var boolean
@@ -108,13 +101,6 @@ class Event
      */
 
     private $creator;
-
-    /**
-     * @var \Encore\CustomerBundle\Entity\EventSection[]
-     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSection", mappedBy="event")
-     */
-
-    private $eventSections;
 
     /**
      * @var \Encore\CustomerBundle\Entity\EventPhoto[]
@@ -174,22 +160,6 @@ class Event
     public function getCreator()
     {
         return $this->creator;
-    }
-
-    /**
-     * @param \Encore\CustomerBundle\Entity\EventSection[] $eventSections
-     */
-    public function setEventSections($eventSections)
-    {
-        $this->eventSections = $eventSections;
-    }
-
-    /**
-     * @return \Encore\CustomerBundle\Entity\EventSection[]
-     */
-    public function getEventSections()
-    {
-        return $this->eventSections;
     }
 
     /**
@@ -371,16 +341,6 @@ class Event
     }
 
     /**
-     * Get totalTickets
-     *
-     * @return integer
-     */
-    public function getTotalTickets()
-    {
-        return $this->totalTickets;
-    }
-
-    /**
      * Add photo
      *
      * @param \Encore\CustomerBundle\Entity\EventPhoto $photo
@@ -415,7 +375,7 @@ class Event
     /**
      * Get photos
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Encore\CustomerBundle\Entity\EventPhoto[]
      */
     public function getPhotos()
     {
@@ -467,13 +427,13 @@ class Event
     }
 
     /**
-     * @param \Encore\CustomerBundle\Entity\EventHolder[] $heldDates
+     * @param \Encore\CustomerBundle\Entity\EventHolder[] $eventHolders
      *
      * @return $this
      */
-    public function setHeldDates($heldDates)
+    public function setEventHolders($eventHolders)
     {
-        $this->heldDates = $heldDates;
+        $this->eventHolders = $eventHolders;
 
         return $this;
     }
@@ -481,9 +441,9 @@ class Event
     /**
      * @return \Encore\CustomerBundle\Entity\EventHolder[]
      */
-    public function getHeldDates()
+    public function getEventHolders()
     {
-        return $this->heldDates;
+        return $this->eventHolders;
     }
 
 }
