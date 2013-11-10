@@ -14,7 +14,7 @@ require(['domReady'],
                                 play: {
                                     active: false,
                                     auto: true,
-                                    pauseOnHover : true,
+                                    pauseOnHover: true,
                                     restartDelay: 10000,
                                     interval: 10000,
                                     swap: false,

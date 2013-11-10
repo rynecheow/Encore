@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Ticket
 {
+
     /**
      * @var integer
      *
@@ -219,6 +220,5 @@ class Ticket
     {
         return $this->ticketOrder;
     }
-
 
 }

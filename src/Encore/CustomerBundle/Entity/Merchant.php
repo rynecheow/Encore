@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Merchant
 {
+
     /**
      * @var integer
      *
@@ -60,6 +61,7 @@ class Merchant
 
     /**
      * @param \Encore\CustomerBundle\Entity\User $user
+     *
      * @return Merchant
      */
     public function setUser($user)
@@ -79,6 +81,7 @@ class Merchant
 
     /**
      * @param \Encore\CustomerBundle\Entity\Event $events
+     *
      * @return Merchant
      */
     public function setEvents($events)
@@ -100,6 +103,7 @@ class Merchant
      * Set username
      *
      * @param string $username
+     *
      * @return Merchant
      */
     public function setUsername($username)
@@ -123,6 +127,7 @@ class Merchant
      * Set merchantName
      *
      * @param string $merchantName
+     *
      * @return Merchant
      */
     public function setMerchantName($merchantName)
