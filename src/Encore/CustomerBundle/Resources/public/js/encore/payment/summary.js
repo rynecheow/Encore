@@ -3,7 +3,7 @@
  */
 require(['parsley'], function () {
         "use strict";
-        var form = $('.payment-form').find('.fill-form');
+        var form = $('.summary-main').find('.personal-detail-form');
         form.parsley();
         form.submit(function (e) {
                 if (!form.parsley('validate')) {
