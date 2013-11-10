@@ -11,15 +11,39 @@ namespace Encore\MerchantBundle\Controller;
 use Encore\CustomerBundle\Entity\Event;
 use Encore\CustomerBundle\Entity\EventPhoto;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class EventPhotoController
+class EventPhotoController extends Controller
 {
 
     use ControllerHelperTrait;
 
     /**
-     * @Route("/events/add／photo", name="encore_merchant_add_event_photo")
+     * @Route("/events/add/photo", name="encore_merchant_add_event_photo")
      */
+    public function testAction()
+    {
+        $request = $this->getRequest();
+        $eventPhoto = new EventPhoto();
+        $form = $this->createFormBuilder($eventPhoto)
+                     ->add('image', 'file')
+                     ->add('save', 'submit')
+                     ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $this->em->persist($eventPhoto);
+            $this->em->flush();
+        }
+
+        return $this->render("EncoreMerchantBundle:Events:add-event-photo.html.twig", array(
+                "form" =>$form->createView()
+            ));
+    }
+
+
     public function addPhotosAction(Event $event)
     {
         $photos = [];
