@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CardInfo
 {
+
     /**
      * @var integer
      *
@@ -60,6 +61,7 @@ class CardInfo
 
     /**
      * @param \Encore\CustomerBundle\Entity\Customer $owner
+     *
      * @return CardInfo
      */
     public function setOwner($owner)
@@ -81,6 +83,7 @@ class CardInfo
      * Set type
      *
      * @param integer $type
+     *
      * @return CardInfo
      */
     public function setType($type)
@@ -104,6 +107,7 @@ class CardInfo
      * Set cardNum
      *
      * @param string $cardNum
+     *
      * @return CardInfo
      */
     public function setCardNum($cardNum)
@@ -127,6 +131,7 @@ class CardInfo
      * Set expireAt
      *
      * @param \DateTime $expireAt
+     *
      * @return CardInfo
      */
     public function setExpireAt($expireAt)

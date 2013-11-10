@@ -10,7 +10,9 @@ namespace Encore\CustomerBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
-class EncoreSearch {
+
+class EncoreSearch
+{
 
     /**
      * @var EntityManager
@@ -27,31 +29,33 @@ class EncoreSearch {
      */
     private $limit;
 
-    public function __construct(EntityManager $em, Request $req){
+    public function __construct(EntityManager $em, Request $req)
+    {
         $this->em = $em;
         $this->request = $req;
         $this->limit = 100;
     }
 
-    public function performFullSearch($qparams = []){
+    public function performFullSearch($qparams = [])
+    {
         $bef = microtime(true);
         $events = [];
         $search_results = [];
         $user_id = $qparams['user_id'];
 
-        if(isset($qparams['q'])){
+        if (isset($qparams['q'])) {
             $search_results['query'] = $qparams['q'];
 
             // Default type is 'events'
-            if(isset($qparams['type'])){
+            if (isset($qparams['type'])) {
                 $type = $qparams['type'];
-            }else{
+            } else {
                 $type = "events";
             }
 
-            if(isset($qparams['limit'])){
+            if (isset($qparams['limit'])) {
                 $limit = $qparams['limit'];
-            }else{
+            } else {
                 $limit = 16;
             }
 

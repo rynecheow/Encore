@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TicketOrder
 {
+
     /**
      * @var integer
      *
@@ -67,6 +68,7 @@ class TicketOrder
 
     /**
      * @param \Encore\CustomerBundle\Entity\Customer $customer
+     *
      * @return TicketOrder
      */
     public function setCustomer($customer)
@@ -86,6 +88,7 @@ class TicketOrder
 
     /**
      * @param \Encore\CustomerBundle\Entity\Ticket[] $tickets
+     *
      * @return TicketOrder
      */
     public function setTickets($tickets)
@@ -105,6 +108,7 @@ class TicketOrder
      * Set purchaseDate
      *
      * @param \DateTime $purchaseDate
+     *
      * @return TicketOrder
      */
     public function setPurchaseDate($purchaseDate)
@@ -128,6 +132,7 @@ class TicketOrder
      * Set totalPaid
      *
      * @param float $totalPaid
+     *
      * @return TicketOrder
      */
     public function setTotalPaid($totalPaid)
@@ -151,6 +156,7 @@ class TicketOrder
      * Set secureCardNumber
      *
      * @param \stdClass $billingInfo
+     *
      * @return TicketOrder
      */
     public function setSecureCardNumber($billingInfo)

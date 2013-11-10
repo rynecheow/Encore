@@ -10,13 +10,15 @@ namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+class SearchController extends BaseController
+{
 
-class SearchController extends BaseController{
     /**
      * @Route("/advance-search",name="encore_advance_search")
      */
 
-    public function searchAction(){
+    public function searchAction()
+    {
         return $this->render("EncoreCustomerBundle:Search:advance-search.html.twig");
     }
 

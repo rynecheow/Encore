@@ -10,19 +10,22 @@ namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+class PaymentController extends BaseController
+{
 
-class PaymentController extends BaseController{
     /**
      * @Route("/payment",name="encore_payment")
      */
-    public function paymentAction(){
+    public function paymentAction()
+    {
         return $this->render("EncoreCustomerBundle:Payment:payment-gateway.html.twig");
     }
 
     /**
      * @Route("/summary",name="encore_summary")
      */
-    public function summaryAction(){
+    public function summaryAction()
+    {
         return $this->render("EncoreCustomerBundle:Payment:summary.html.twig");
     }
 

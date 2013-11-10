@@ -157,7 +157,6 @@ class AuthenticationController extends BaseController
         return $error;
     }
 
-
     private function createUser($params)
     {
 //        $now = new \DateTime();
@@ -420,7 +419,6 @@ class AuthenticationController extends BaseController
                 "status" => $result["status"] === "error" ? false : true,
             ];
         }
-
 
         return new Response(json_encode($response));
 
