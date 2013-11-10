@@ -13,6 +13,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class UserEmail
 {
+
     use ORMBehaviors\Timestampable\Timestampable;
 
     /**
@@ -53,6 +54,7 @@ class UserEmail
      * Set email
      *
      * @param string $email
+     *
      * @return UserEmail
      */
     public function setEmail($email)
@@ -71,7 +73,6 @@ class UserEmail
     {
         return $this->email;
     }
-
 
     /**
      * @param \Encore\CustomerBundle\Entity\User $user

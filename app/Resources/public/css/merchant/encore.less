@@ -57,13 +57,12 @@ table {
 /* End Of Reset CSS */
 
 /* Variables */
-@darkMain : #262626;
-@darkSecondary : #1a1a1a;
-@lightMain: #e5e5e5;
-@lightSecondary: #e0e0e0;
-@lightChoc: #a99d9d;
-@greenMain: #d46235;
-@greenSecondary: #e8a159;
+@darkMain : #1B1B1B;
+@darkSecondary: #282827;
+@lightMain: #E4E4E4;
+@lightSecondary: #DCD8CF;
+@orangeMain: #F1684E;
+@orangeSecondary : #E25D33;
 @mainFont: elena-web-basic, georgia;
 @translucent : 0 1px 2px rgba(0, 0, 0, 0.05);
 @errorRedMain : #8b232a;
@@ -130,21 +129,21 @@ html, body {
   .to_register {
     margin-top: 10px;
     p {
-      color: @lightChoc;
+      color: @darkMain;
       font-size: 15pt;
     }
   }
   .signIn-form {
     padding: 131px 100px 59px 72px;
     margin: 0 auto;
-    background-color: @darkMain;
-    border: 1px solid @darkSecondary;
+    background-color: @darkSecondary;
+    border: 1px solid @darkMain;
     border-radius: 5px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     margin-top: 200px;
 
     h1.signIn-header {
-      color: @lightSecondary;
+      color: @lightMain;
       font-family: 'elena-web-basic';
       font-size: 32pt;
       text-align: center;
@@ -166,15 +165,14 @@ html, body {
       line-height: 1.33;
       border-radius: 6px;
       color: @lightMain;
-      background-color: @greenMain;
-      border-color: @greenMain;
+      background-color: @orangeSecondary;
       margin-bottom: 0;
       text-align: center;
       white-space: nowrap;
       vertical-align: middle;
       cursor: pointer;
       background-image: none;
-      border: 1px solid transparent;
+      border: 1px solid @orangeMain;
     }
 
     input[type="text"], input[type="password"] {
@@ -184,7 +182,7 @@ html, body {
       margin-bottom: 15px;
       padding: 7px 9px;
       width: 350px;
-      color: @darkSecondary;
+      color: @darkMain;
       background: white;
     }
   }
@@ -209,18 +207,39 @@ html, body {
   }
 
   #merchant-main-logo {
-    background: url('../../bundles/encoremerchant/images/logo/logo-dark.svg');
+    background: url('../../bundles/encoremerchant/images/logo/logo-color.svg');
     top: 35px;
     left: 35px;
     margin: 0 auto;
-    width: 150px;
-    height: 41px;
+    width: 200px;
+    height: 54px;
     position: fixed;
     z-index: 11;
     background-size: cover;
   }
+  article.merchant-recent-events{
+    background: @darkSecondary;
+    left: 0px;
+    position: relative;
+    top: 0px;
+    width: 100%;
+    overflow: hidden;
+    min-height: 800px;
+    div.merchant-events-wrapper {
 
-  .merchant-events-wrapper{
+    }
+  }
 
+
+  article.merchant-analytics{
+    width: 100%;
+    min-height: 800px;
+    background: @lightSecondary;
+    h2.spread-headline {
+      color: @darkSecondary;
+    }
+    div.merchant-analytics-wrapper {
+
+    }
   }
 }

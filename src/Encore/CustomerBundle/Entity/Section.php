@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Section
 {
+
     /**
      * @var integer
      *
@@ -41,7 +42,6 @@ class Section
      */
     protected $name;
 
-
     /**
      * Get id
      *
@@ -52,9 +52,9 @@ class Section
         return $this->id;
     }
 
-
     /**
      * @param \Encore\CustomerBundle\Entity\Venue $venue
+     *
      * @return Section
      */
     public function setVenue($venue)
@@ -76,6 +76,7 @@ class Section
      * Set name
      *
      * @param string $name
+     *
      * @return Section
      */
     public function setName($name)
@@ -97,6 +98,7 @@ class Section
 
     /**
      * @param \Encore\CustomerBundle\Entity\Seat[] $seats
+     *
      * @return $this
      */
     public function setSeats($seats)

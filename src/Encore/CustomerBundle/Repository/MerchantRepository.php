@@ -12,4 +12,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class MerchantRepository extends EntityRepository
 {
+
 }

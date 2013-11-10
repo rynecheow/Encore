@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PurchaseController extends BaseController
 {
+
     /**
      * @Route("/events/{id}/purchase", requirements={"id" = "\d+"})
      */

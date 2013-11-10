@@ -10,90 +10,100 @@
 {% endblock css %}
 
 {% block content %}
-    <div>
-        <label>Date:</label>
-        <input class="datepicker" id="datepicker-select" placeholder="Select Date" readonly="true" type="text" />
-        <label>Ticket Quantity:</label>
-        <input id="ticketQtySelector" type="number" min="0" max="8" value="0" />
-    </div>
-    <table class="seatTable">
-        <tbody>
-        {% set rowArray = ["A", "B", "C", "D", "E"] %}
-        {% for row, val in rowArray %}
-            {% if row == 0 %}
-                <tr>
-                    {% for col in 0..10 %}
+    <article class="seat-selection article">
+        <div class="seat-selection-wrap">
+            <div>
+                <label>Date:</label>
+                <input class="datepicker" id="datepicker-select" placeholder="Select Date" readonly="true" type="text"/>
+                <label for="ticketQtySelector">Ticket Quantity:</label>
+                <input id="ticketQtySelector" type="number" min="0" max="8" value="0"/>
+            </div>
+            <table class="seatTable">
+                <tbody>
+                {% set rowArray = ["A", "B", "C", "D", "E"] %}
+                {% for row, val in rowArray %}
+                    {% if row == 0 %}
+                        <tr>
+                            {% for col in 0..10 %}
+                                <td>
+                                    {% if col != 0 %}
+                                        <div class="tableLabel">{{ col }}</div>
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                    <tr id="row{{ row }}">
                         <td>
-                            {% if col != 0 %}
-                                <div class="tableLabel">{{ col }}</div>
-                            {% endif %}
+                            <div class="tableLabel">{{ val }}</div>
                         </td>
-                    {% endfor %}
-                </tr>
-            {% endif %}
-            <tr id="row{{ row }}">
-                <td>
-                    <div class="tableLabel">{{ val }}</div>
-                </td>
-                {% for col in 0..9 %}
-                    <td>
-                        <div id="{{ row }}rowcol{{ col }}" class="empty">{{ col + 1 }}</div>
-                    </td>
+                        {% for col in 0..9 %}
+                            <td>
+                                <div id="{{ row }}rowcol{{ col }}" class="empty">{{ col + 1 }}</div>
+                            </td>
+                        {% endfor %}
+                    </tr>
                 {% endfor %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <input type="button" value="reset" id="resetButton" />
-    <form id="summaryForm">
-        <table>
-            <tbody>
-                <tr>
-                    <td>
-                        <label>Event:</label>
-                        <div>
-                            <label id="eventLabel" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Date & Time:</label>
-                        <div>
-                            <label id="dateTimeLabel" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Section:</label>
-                        <div>
-                            <label id="sectionLabel" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Ticket Quantity:</label>
-                        <div>
-                            <label id="ticketQtyLabel" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Seat Allocation:</label>
-                        <div>
-                            <label id="seatAllocationLabel" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" value="next" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
+                </tbody>
+            </table>
+            <input type="button" value="reset" id="resetButton"/>
+
+            <form id="summaryForm">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label>Event:</label>
+
+                            <div>
+                                <label id="eventLabel"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Date & Time:</label>
+
+                            <div>
+                                <label id="dateTimeLabel"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Section:</label>
+
+                            <div>
+                                <label id="sectionLabel"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Ticket Quantity:</label>
+
+                            <div>
+                                <label id="ticketQtyLabel"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Seat Allocation:</label>
+
+                            <div>
+                                <label id="seatAllocationLabel"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="next"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </article>
 {% endblock content %}

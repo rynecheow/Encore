@@ -124,7 +124,7 @@ html, body {
   cursor: pointer;
 }
 
-input[readonly]{
+input[readonly] {
   cursor: pointer;
 }
 
@@ -644,14 +644,14 @@ nav {
   }
   margin: 0 auto;
   width: 70%;
-//  min-height:1100px;
+  //  min-height:1100px;
   height: 100%;
   background: #ffffff;
   border-radius: 30px;
   .tab-content {
     width: 100%;
-    height:auto;
-    padding:5% 0;
+    height: auto;
+    padding: 5% 0;
   }
   .logo-wrap {
     margin: 0 auto;
@@ -863,6 +863,7 @@ nav {
 
 }
 
+/* Search page */
 .search-main {
   .list-option {
 
@@ -1038,6 +1039,58 @@ nav {
   }
 }
 
+/* Seat selection area */
+.seat-selection-wrap {
+  table.seatTable {
+    margin-top: 50px;
+
+    tbody tr td {
+      width: 30px;
+      height: 30px;
+
+      div {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+      }
+
+      div.tableLabel {
+        background: lightgoldenrodyellow;
+      }
+
+      div.empty {
+        background: green;
+      }
+
+      div.selected {
+        background: yellow;
+      }
+
+      div.locked {
+        background: orange;
+      }
+
+      div.sold {
+        background: red;
+      }
+    }
+  }
+
+  form#summaryForm {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    background: blueviolet;
+    width: 300px;
+  }
+
+  label {
+    color: red;
+  }
+}
+
+/* Payment page */
 .payment-main {
   width: 80%;
   background: @lightSecondary;
@@ -1144,6 +1197,7 @@ nav {
   }
 }
 
+/* Summary page */
 .summary-wrapper {
   #static-logo {
     position: absolute;
