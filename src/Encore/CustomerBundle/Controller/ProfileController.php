@@ -164,9 +164,9 @@ class ProfileController extends BaseController
                     ],
                     'label' => 'First Name'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $fname
                 ]
@@ -184,9 +184,9 @@ class ProfileController extends BaseController
                     ],
                     'label' => 'Last Name'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $lname
                 ]
@@ -196,17 +196,16 @@ class ProfileController extends BaseController
                 'text',
                 [
                     'attr' => [
-                        'class' => 'edit-bday',
-                        'placeholder' => $bdate,
+                        'class' => 'edit-bday datepicker',
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your birth date.',
                     ],
                     'label' => 'Birth Date'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $bdate
                 ]
@@ -225,9 +224,9 @@ class ProfileController extends BaseController
                     ],
                     'label' => 'Contact No'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $contactno
                 ]
@@ -247,9 +246,9 @@ class ProfileController extends BaseController
                     ],
                     'label' => 'Address'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $address
                 ]

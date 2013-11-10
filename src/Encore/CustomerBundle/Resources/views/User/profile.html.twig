@@ -1,10 +1,18 @@
 {# Created by rynecheow on 11/4/13. #}
 
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
+{% block css %}
+    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/datepicker.css') }}" rel="stylesheet"/>
+{% endblock css %}
+
 {% block require_js %}
     require(["encore/profile/profile"]);
     require(["encore/profile/edit-profile"]);
+    require(["libs/bootstrap/bootstrap-datepicker"]);
 {% endblock require_js %}
+
+
+
 {% block title %}View Profile{% endblock title %}
 {% block content %}
 

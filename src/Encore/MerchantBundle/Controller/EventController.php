@@ -202,71 +202,91 @@ class EventController extends Controller
 
     private function createEventForm(Event $event, $allVenueLocation)
     {
+//        ($params["event_name"])
+//                ->setType($params["event_type"])
+//        ->setDescription($params["event_description"])
+//        ->setSaleStart($params["event_sale_start"])
+//        ->setSaleEnd($params["event_sale_end"])
+//        ->setHeldDates($params["event_held_dates"]);
+
         return $this->createFormBuilder()
-            ->setAction('encore_signup')
+            ->setAction('encore_merchant_add_event')
             ->add(
-                'email',
-                'email',
+                'event_name',
+                'text',
                 [
                     'attr' => [
-                        'class' => 'signup-email',
-                        'placeholder' => 'E-mail address',
+                        'class' => 'merchant-add-text',
+                        'placeholder' => 'Event Name',
                         'data-required' => 'true',
                         'data-trigger' => 'change',
-                        'data-type' => 'email',
-                        'data-required-message' => 'Please enter your email.',
-                        'data-type-email-message' => 'Your email address is incorrect',
+                        'data-required-message' => 'Please enter your event name.',
                     ]
                     ,
-                    'label' => false
+                    'label' => 'Event Name'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                        ]
                 ]
             )
             ->add(
-                'password',
-                'password',
+                'event_description',
+                'textarea',
                 [
                     'attr' => [
-                        'class' => 'signup-password',
-                        'id' => 'sg-pw',
-                        'placeholder' => 'Password',
+                        'class' => 'merchant-add-text',
+                        'placeholder' => 'Event Name',
                         'data-required' => 'true',
-                        'data-trigger' => 'change',
-                        'data-required-message' => 'Please enter your password.',
-                        'data-minlength' => '8',
-                        'data-minlength-message' => 'Short passwords are easy to guess. Try one with at least 8 characters.',
-                    ],
-                    'label' => false
+                        'data-trigger' => 'keyup',
+                        'data-required-message' => 'Please enter your event description.',
+                        'data-rangelength' => '[20,200',
+
+                    ]
+                    ,
+                    'label' => 'Event Name'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
                 ]
             )
             ->add(
-                'verifyPassword',
-                'password',
+                'event-name',
+                'text',
                 [
                     'attr' => [
-                        'class' => 'signup-password',
-                        'placeholder' => 'Verify Password',
-                        'data-trigger' => 'change',
-                        'data-equalto' => '#form_password',
-                        'data-equalto-message' => 'You passwords do not match.',
+                        'class' => 'merchant-add-text',
+                        'placeholder' => 'Event Name',
                         'data-required' => 'true',
-                        'data-required-message' => 'Please verify your password.',
-                    ],
-                    'label' => false
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your event name.',
+                    ]
+                    ,
+                    'label' => 'Event Name'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
                 ]
             )
             ->add(
-                'agreement',
-                'checkbox',
+                'event-name',
+                'text',
                 [
                     'attr' => [
-                        'id' => 'signup-agreement',
-                        'class' => 'signup-agreement',
-                        'placeholder' => 'Verify Password',
-                        'data-trigger' => 'change',
+                        'class' => 'merchant-add-text',
+                        'placeholder' => 'Event Name',
                         'data-required' => 'true',
-                        'data-required-message' => "In order to use our services, you must agree to Encore's Terms and Privacy.",
-                    ],
-                    'label' => false
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your event name.',
+                    ]
+                    ,
+                    'label' => 'Event Name'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
                 ]
             )
             ->add(
