@@ -20,9 +20,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+
 class EventController extends Controller
 {
-
     use ControllerHelperTrait;
 
     /**
@@ -115,26 +115,103 @@ class EventController extends Controller
         if ($editEventForm->isValid()) {
             $params = $editEventForm->getData();
             $event->setName($params["event_name"])
-                ->setType($params["event_type"])
-                ->setDescription($params["event_description"])
-                ->setSaleStart($params["event_sale_start"])
-                ->setSaleEnd($params["event_sale_end"])
-                ->setHeldDates($params["event_held_dates"]);
+                ->setDescription($params["event_description"]);
 
             if (!$event->getPublish()) {
-                /**
-                 * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
-                 */
+                $event->setType($params["event_type"])
+                    ->setSaleStart($params["event_sale_start"])
+                    ->setSaleEnd($params["event_sale_end"]);
+
                 $selectedVenueId = $editEventForm->get("venue")->getData();
 
                 if ($selectedVenueId != $event->getVenue()->getId()) {
+                    /**
+                     * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
+                     */
                     $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
                         ->find($selectedVenueId);
                     $event->setVenue($selectedVenue);
+                    $eventHolders = $this->em->getRepository("EncoreCustomerBundle:EventHolder")
+                        ->findByEvent($event);
 
-                    //TODO: edit held dates, remove previous eventSection.
+                    foreach ($eventHolders as $eventHolder) {
+                        $eventSections = $this->em->getRepository("EncoreCustomerBundle:EventSection")
+                            ->findByEventHolder($eventHolder);
+
+                        foreach ($eventSections as $eventSection) {
+                            $this->em->remove($eventSection);
+                            $this->em->flush();
+                        }
+                    }
+                }
+
+                $heldDates = $editEventForm->get("heldDates")->getData();
+                $eventHolders = $this->em->getRepository("EncoreCustomerBundle:EventHolder")
+                    ->findByEvent($event);
+
+                if (count($eventHolders) === 0) {
+                    foreach ($heldDates as $heldDate) {
+                        $newEventHolder = new EventHolder();
+                        $newEventHolder->setEvent($event)
+                            ->setHeldDate($heldDate);
+                        $this->em->persist($newEventHolder);
+                        $this->em->flush();
+                        $sections = $event->getVenue()->getSections();
+
+                        /**
+                         * @var $section \Encore\CustomerBundle\Entity\Section
+                         */
+                        foreach ($sections as $section) {
+                            $seats = $section->getSeats();
+                            $eventSectionPrice = $createEventForm->get($section->getName())->getData();
+                            $eventSection = new EventSection();
+                            $eventSection->setEventHolder($eventHolder)
+                                ->setSection($section)
+                                ->setPrice($eventSectionPrice)
+                                ->setTotalSeats(count($seats))
+                                ->setTotalSold(0);
+                            $this->em->persist($eventSection);
+                            $this->em->flush();
+                        }
+                    }
                 } else {
-                    //TODO: add held dates, add eventSection.
+                    foreach ($heldDates as $heldDate) {
+                        $exist = false;
+
+                        /**
+                         * @var $eventHolder \Encore\CustomerBundle\Entity\EventHolder
+                         */
+                        foreach ($eventHolders as $eventHolder) {
+                            if ($heldDate === $eventHolder->getHeldDate()) {
+                                $exist = true;
+                            }
+                        }
+
+                        if (!exist) {
+                            $newEventHolder = new EventHolder();
+                            $newEventHolder->setEvent($event)
+                                ->setHeldDate($heldDate);
+                            $this->em->persist($newEventHolder);
+                            $this->em->flush();
+                            $sections = $event->getVenue()->getSections();
+
+                            /**
+                             * @var $section \Encore\CustomerBundle\Entity\Section
+                             */
+                            foreach ($sections as $section) {
+                                $seats = $section->getSeats();
+                                $eventSectionPrice = $createEventForm->get($section->getName())->getData();
+                                $eventSection = new EventSection();
+                                $eventSection->setEventHolder($eventHolder)
+                                    ->setSection($section)
+                                    ->setPrice($eventSectionPrice)
+                                    ->setTotalSeats(count($seats))
+                                    ->setTotalSold(0);
+                                $this->em->persist($eventSection);
+                                $this->em->flush();
+                            }
+                        }
+                    }
                 }
             }
 
@@ -200,85 +277,44 @@ class EventController extends Controller
         return new Response(json_encode($response));
     }
 
+    public function removeHeldDate()
+    {
+        $request = $this->getRequest("request");
+        $eventId = $request->query->get("eventId");
+        $heldDate = $request->query->get("heldDate");
+        $eventHolder = $this->em->getRepository("EncoreCustomerBundle:EventHolder")
+            ->findAllEventHolderByEventIdAndHeldDate($eventId, $heldDate);
+
+        if (count($eventHolder) != 0) {
+            $eventSections = $this->em->getRepository("EncoreCustomerBundle:EventSection")
+                ->findByEventHolder($eventHolder);
+
+            foreach ($eventSections as $eventSection) {
+                $this->em->remove($eventSection);
+                $this->em->flush();
+            }
+
+            $this->em->remove($eventHolder);
+            $this->em->flush();
+
+            $response = [
+                "code" => "200",
+                "status" => true,
+                "message" => "Held date has successfully removed."
+            ];
+        } else {
+            $response = [
+                "code" => "400",
+                "status" => false,
+                "message" => "Held date not found."
+            ];
+        }
+
+        return new Response(json_encode($response));
+    }
+
     private function createEventForm(Event $event, $allVenueLocation)
     {
-        return $this->createFormBuilder()
-            ->setAction('encore_signup')
-            ->add(
-                'email',
-                'email',
-                [
-                    'attr' => [
-                        'class' => 'signup-email',
-                        'placeholder' => 'E-mail address',
-                        'data-required' => 'true',
-                        'data-trigger' => 'change',
-                        'data-type' => 'email',
-                        'data-required-message' => 'Please enter your email.',
-                        'data-type-email-message' => 'Your email address is incorrect',
-                    ]
-                    ,
-                    'label' => false
-                ]
-            )
-            ->add(
-                'password',
-                'password',
-                [
-                    'attr' => [
-                        'class' => 'signup-password',
-                        'id' => 'sg-pw',
-                        'placeholder' => 'Password',
-                        'data-required' => 'true',
-                        'data-trigger' => 'change',
-                        'data-required-message' => 'Please enter your password.',
-                        'data-minlength' => '8',
-                        'data-minlength-message' => 'Short passwords are easy to guess. Try one with at least 8 characters.',
-                    ],
-                    'label' => false
-                ]
-            )
-            ->add(
-                'verifyPassword',
-                'password',
-                [
-                    'attr' => [
-                        'class' => 'signup-password',
-                        'placeholder' => 'Verify Password',
-                        'data-trigger' => 'change',
-                        'data-equalto' => '#form_password',
-                        'data-equalto-message' => 'You passwords do not match.',
-                        'data-required' => 'true',
-                        'data-required-message' => 'Please verify your password.',
-                    ],
-                    'label' => false
-                ]
-            )
-            ->add(
-                'agreement',
-                'checkbox',
-                [
-                    'attr' => [
-                        'id' => 'signup-agreement',
-                        'class' => 'signup-agreement',
-                        'placeholder' => 'Verify Password',
-                        'data-trigger' => 'change',
-                        'data-required' => 'true',
-                        'data-required-message' => "In order to use our services, you must agree to Encore's Terms and Privacy.",
-                    ],
-                    'label' => false
-                ]
-            )
-            ->add(
-                'register',
-                'submit',
-                [
-                    'attr' => [
-                        'class' => 'submit',
-                        'value' => 'Register'
-                    ]
-                ]
-            )
-            ->getForm();
+        // TODO: create form for event.
     }
 } 
