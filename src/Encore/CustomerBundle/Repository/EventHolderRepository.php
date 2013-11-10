@@ -12,5 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventHolderRepository extends EntityRepository
 {
-
+    public function findAllEventHolderByEventIdAndHeldDate($eventId, $heldDate)
+    {
+        return $this->getEntityManager()
+                    ->createQuery
+                    (
+                        "SELECT eventHolder FROM EncoreCustomerBundle:EventHolder eventHolder
+                         WHERE eventHolder.eventId = :eventId AND eventHolder.heldDate = :heldDate"
+                    )
+                    ->setParameter($eventId, $heldDate)
+                    ->getResult();
+    }
 }
