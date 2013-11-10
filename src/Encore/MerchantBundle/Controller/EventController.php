@@ -25,7 +25,6 @@ class EventController extends Controller
 {
     use ControllerHelperTrait;
 
-    private $createform;
     /**
      * @Route("/events", name="encore_merchant_events")
      */
@@ -48,58 +47,66 @@ class EventController extends Controller
 
 
         $createEventForm->handleRequest($request);
-        $this->createform = $createEventForm;
 
-        if ($createEventForm->isValid()) {
-            /**
-             * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
-             */
-            $selectedVenueId = $createEventForm->get("venue")->getData();
-            $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
-                ->find($selectedVenueId);
-            $newEvent->setVenue($selectedVenue)
-                ->setPublish(false);
-            $this->em->persist($newEvent);
-            $this->em->flush();
-            $heldDates = $createEventForm->get("heldDates")->getData();
 
-            foreach ($heldDates as $heldDate) {
-                $eventHolder = new EventHolder();
-                $eventHolder->setHeldDate($heldDate)
-                    ->setEvent($newEvent);
-                $this->em->persist($eventHolder);
-                $this->em->flush();
-
-                $sections = $newEvent->getVenue()->getSections();
-
+//        var_dump($testdata);
+//        if(!is_null($testdata))
+//            die();
+        if($this->getRequest()->getMethod()=="POST")
+        {
+//               $createEventForm->bind($request);
+            if ($createEventForm->isValid()) {
+                $testdata = $createEventForm->get("event_venue")->getViewData();
                 /**
-                 * @var $section \Encore\CustomerBundle\Entity\Section
+                 * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
                  */
-                foreach ($sections as $section) {
-                    $seats = $section->getSeats();
-                    $eventSectionPrice = $createEventForm->get($section->getName())->getData();
-                    $eventSection = new EventSection();
-                    $eventSection->setEventHolder($eventHolder)
-                        ->setSection($section)
-                        ->setPrice($eventSectionPrice)
-                        ->setTotalSeats(count($seats))
-                        ->setTotalSold(0);
-                    $this->em->persist($eventSection);
-                    $this->em->flush();
+    //            $selectedVenueId = $createEventForm->get("venue")->getData();
+    //            $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
+    //                ->find($selectedVenueId);
+    //            $newEvent->setVenue($selectedVenue)
+    //                ->setPublish(false);
+    //            $this->em->persist($newEvent);
+    //            $this->em->flush();
+    //            $heldDates = $createEventForm->get("heldDates")->getData();
+    //
+    //            foreach ($heldDates as $heldDate) {
+    //                $eventHolder = new EventHolder();
+    //                $eventHolder->setHeldDate($heldDate)
+    //                    ->setEvent($newEvent);
+    //                $this->em->persist($eventHolder);
+    //                $this->em->flush();
+    //
+    //                $sections = $newEvent->getVenue()->getSections();
+    //
+    //                /**
+    //                 * @var $section \Encore\CustomerBundle\Entity\Section
+    //                 */
+    //                foreach ($sections as $section) {
+    //                    $seats = $section->getSeats();
+    //                    $eventSectionPrice = $createEventForm->get($section->getName())->getData();
+    //                    $eventSection = new EventSection();
+    //                    $eventSection->setEventHolder($eventHolder)
+    //                        ->setSection($section)
+    //                        ->setPrice($eventSectionPrice)
+    //                        ->setTotalSeats(count($seats))
+    //                        ->setTotalSold(0);
+    //                    $this->em->persist($eventSection);
+    //                    $this->em->flush();
 
-//                foreach ($seats as $seat)
-//                {
-//                    $eventSeat = new EventSeat();
-//                    $eventSeat->setSeat($seat)
-//                              ->setStatus(0)
-//                              ->setEventSection($eventSection);
-//                    $this->em->persist($eventSeat);
-//                    $this->em->flush();
-//                }
-                }
-            }
+    //                foreach ($seats as $seat)
+    //                {
+    //                    $eventSeat = new EventSeat();
+    //                    $eventSeat->setSeat($seat)
+    //                              ->setStatus(0)
+    //                              ->setEventSection($eventSection);
+    //                    $this->em->persist($eventSeat);
+    //                    $this->em->flush();
+    //                }
+                return $this->render("EncoreMerchantBundle:Events:index.html.twig");
+                    }
+    //            }}
 
-            return $this->render("EncoreMerchantBundle:Events:index.html.twig");
+
         }
 
         return $this->render("EncoreMerchantBundle:Events:add-event.html.twig" , [
@@ -256,9 +263,7 @@ class EventController extends Controller
             "status" => true,
             "venues" => $venuesInfo
         ];
-//TODO Response for array 0
-
-        $this->createVenue();
+        //TODO Response for array 0
         return new Response(json_encode($response));
     }
 
@@ -293,11 +298,6 @@ class EventController extends Controller
         ];
 
         return new Response(json_encode($response));
-    }
-
-    private function createVenue() {
-        $this->createform->add('task', 'text');
-
     }
 
     public function removeHeldDate()
@@ -340,110 +340,119 @@ class EventController extends Controller
     {
 
 
+
+        /* Convert To Key To Key Array */
+
+        $tempArray = [];
+        foreach($allVenueLocation as $allVenueLocations)
+        {
+            foreach($allVenueLocations as $value)
+            {
+                $tempArray[] = [
+                    $value => $value
+                ];
+            }
+        }
+
         return $this->createFormBuilder()
             ->setAction('encore_merchant_add_event')
-            ->add(
-                'event_name',
-                'text',
-                [
-                    'attr' => [
-                        'class' => 'merchant-add-textbox',
-                        'placeholder' => 'Event Name',
-                        'data-required' => 'true',
-                        'data-trigger' => 'change',
-                        'data-required-message' => 'Please enter your event name.',
-                    ]
-                    ,
-                    'label' => 'Event Name'
-                    ,
-                    'label_attr' => [
-                        'class' => 'class-label'
-                    ]
-                ]
-            )
-            ->add(
-                'event_type',
-                'text',
-                [
-                    'attr' => [
-                        'class' => 'merchant-add-textbox',
-                        'placeholder' => 'Event Type',
-                        'data-required' => 'true',
-                        'data-trigger' => 'change',
-                        'data-required-message' => 'Please enter your event type.',
-                    ]
-                    ,
-                    'label' => 'Event Type'
-                    ,
-                    'label_attr' => [
-                        'class' => 'class-label'
-                    ]
-                ]
-            )
-            ->add(
-                'event_description',
-                'textarea',
-                [
-                    'attr' => [
-                        'class' => 'merchant-add-textarea',
-                        'placeholder' => 'Event Description',
-                        'data-required' => 'true',
-                        'data-trigger' => 'keyup',
-                        'data-required-message' => 'Please enter your event description.',
-                        'data-rangelength' => '[20,200]',
-
-                    ]
-                    ,
-                    'label' => 'Event Description'
-                    ,
-                    'label_attr' => [
-                        'class' => 'class-label'
-                    ]
-                ]
-            )
-            ->add(
-                'event_sale_start',
-                'text',
-                [
-                    'attr' => [
-                        'class' => 'merchant-add-text datepicker',
-                        'placeholder' => 'Event Start Date',
-                        'data-required' => 'true',
-                        'data-trigger' => 'change',
-                        'data-required-message' => 'Please enter your event start date.',
-                    ]
-                    ,
-                    'label' => 'Event Sale Start'
-                    ,
-                    'label_attr' => [
-                        'class' => 'class-label'
-                    ]
-                ]
-            )
-            ->add(
-                'event_sale_end',
-                'text',
-                [
-                    'attr' => [
-                        'class' => 'merchant-add-text datepicker',
-                        'placeholder' => 'Event End Date',
-                        'data-required' => 'true',
-                        'data-trigger' => 'change',
-                        'data-required-message' => 'Please enter your event end date.',
-                    ]
-                    ,
-                    'label' => 'Event Sale End'
-                    ,
-                    'label_attr' => [
-                        'class' => 'class-label'
-                    ]
-                ]
-            )
+//            ->add(
+//                'event_name',
+//                'text',
+//                [
+//                    'attr' => [
+//                        'class' => 'merchant-add-textbox',
+//                        'data-required' => 'true',
+//                        'data-trigger' => 'change',
+//                        'data-required-message' => 'Please enter your event name.',
+//                    ]
+//                    ,
+//                    'label' => 'Event Name'
+//                    ,
+//                    'label_attr' => [
+//                        'class' => 'class-label'
+//                    ]
+//                ]
+//            )
+//            ->add(
+//                'event_type',
+//                'text',
+//                [
+//                    'attr' => [
+//                        'class' => 'merchant-add-textbox',
+//                        'data-required' => 'true',
+//                        'data-trigger' => 'change',
+//                        'data-required-message' => 'Please enter your event type.',
+//                    ]
+//                    ,
+//                    'label' => 'Event Type'
+//                    ,
+//                    'label_attr' => [
+//                        'class' => 'class-label'
+//                    ]
+//                ]
+//            )
+//            ->add(
+//                'event_description',
+//                'textarea',
+//                [
+//                    'attr' => [
+//                        'class' => 'merchant-add-textarea',
+//                        'data-required' => 'true',
+//                        'data-trigger' => 'keyup',
+//                        'data-required-message' => 'Please enter your event description.',
+//                        'data-rangelength' => '[20,200]',
+//
+//                    ]
+//                    ,
+//                    'label' => 'Event Description'
+//                    ,
+//                    'label_attr' => [
+//                        'class' => 'class-label'
+//                    ]
+//                ]
+//            )
+//            ->add(
+//                'event_sale_start',
+//                'text',
+//                [
+//                    'attr' => [
+//                        'class' => 'merchant-add-text datepicker',
+//                        'data-required' => 'true',
+//                        'data-trigger' => 'change',
+//                        'data-required-message' => 'Please enter your event start date.',
+//                    ]
+//                    ,
+//                    'label' => 'Event Sale Start'
+//                    ,
+//                    'label_attr' => [
+//                        'class' => 'class-label'
+//                    ]
+//                ]
+//            )
+//            ->add(
+//                'event_sale_end',
+//                'text',
+//                [
+//                    'attr' => [
+//                        'class' => 'merchant-add-text datepicker',
+//                        'data-required' => 'true',
+//                        'data-trigger' => 'change',
+//                        'data-required-message' => 'Please enter your event end date.',
+//                    ]
+//                    ,
+//                    'label' => 'Event Sale End'
+//                    ,
+//                    'label_attr' => [
+//                        'class' => 'class-label'
+//                    ]
+//                ]
+//            )
             ->add(
                 'event_total_location',
                 'choice',
                 [
-                    'choices' => $allVenueLocation
+                    'choices' => $tempArray
                     ,
                     'attr' => [
                         'class' => 'merchant-location',
@@ -452,7 +461,7 @@ class EventController extends Controller
                         'data-required-message' => 'Please select your location.',
                     ]
                     ,
-                    'label' => 'Event End Date'
+                    'label' => 'Event Location'
                     ,
                     'label_attr' => [
                         'class' => 'class-label'
@@ -462,6 +471,55 @@ class EventController extends Controller
                 ]
 
             )
+            ->add(
+                'event_venue',
+                'choice',
+                [
+//                    "choices" => [],
+                    'attr' => [
+                        'class' => 'merchant-venue buttons-radio',
+//                        'data-required' => 'true',
+//                        'data-trigger' => 'change',
+//                        'data-required-message' => 'Please select your venue.',
+                        'style' => 'display:none;'
+//                        'style' => 'display:inline;'
+                    ]
+                    ,
+                    'label' => 'Event Venue'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label label-venue',
+                        'style' => 'display:none;'
+                    ]
+                    ,"expanded" => true,
+                    "multiple" =>false
+                ]
+            )
+        ->add('test','text')
+//            ->add(
+//                'event_section',
+//                'choice',
+//                [
+//                    'choices' => ["key" => "value"]
+//                    ,
+//                    'attr' => [
+//                        'class' => 'merchant-section',
+//                        'data-required' => 'true',
+//                        'data-trigger' => 'change',
+//                        'data-required-message' => 'Please select your section.',
+//                        'style' => 'display:none;'
+//                    ]
+//                    ,
+//                    'label' => 'Event Section'
+//                    ,
+//                    'label_attr' => [
+//                        'class' => 'class-label label-section',
+//                        'style' => 'display:none;'
+//                    ]
+//                    ,"expanded" => true,
+//                    "multiple" =>false
+//                ]
+//            )
             ->add(
                 'register',
                 'submit',

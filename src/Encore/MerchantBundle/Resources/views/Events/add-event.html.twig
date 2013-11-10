@@ -11,15 +11,18 @@
 {% block title %}Create An Event {% endblock title %}
 {% block content %}
     <article class="create-event-wrap">
-            <div class="create-event-container">
-                <form class="create-event-form" method="POST" action="{{ path('encore_merchant_add_event') }}" {{ form_enctype(form) }}>
-                    <h1 class="merchant-header">Create An Profile </h1>
-                    <fieldset>
-                        {{ form(form) }}
+        <div class="create-event-container">
+            <form class="create-event-form" method="POST"
+                  action="{{ path('encore_merchant_add_event') }}" {{ form_enctype(form) }}>
+                <h1 class="merchant-header">Create An Profile </h1>
+                <fieldset>
+                    {{ form_widget(form.test) }}
+                    {{ form_widget(form._token) }}
+                    {{ form_rest(form) }}
 
-                    </fieldset>
-                </form>
-            </div>
+                </fieldset>
+            </form>
+        </div>
     </article>
 
 
@@ -28,7 +31,7 @@
         $(function () {
                     $('.merchant-location').on("change", ajaxLocation);
                     function ajaxLocation(e) {
-                        var location = $(".merchant-location option:selected" ).html();
+                        var location = $(".merchant-location").val();
 
                         console.log(location);
                         $.post(
@@ -38,17 +41,57 @@
                                 },
                                 function (response) {
                                     if (response.code == 200) {
-                                          console.log("respone is %o",response);
-
-//                                        $('#invalid-email').css('display', 'none');
+                                        console.log("respone is %o", response);
+                                        console.log(response.venues[0]["name"]);
+                                        createVenueForm(response.venues);
                                         return true;
                                     } else {
-//                                        $('#invalid-email').css('display', 'inline');
+
                                         return false;
                                     }
                                 },
                                 "json"
                         );
+                    }
+
+
+                   function createVenueForm(array)
+                   {
+                       var venueLabel =  $(".label-venue"),
+                           venueDiv = $(".merchant-venue");
+
+                       venueLabel.css("display" , "inline");
+                       venueDiv.css("display" , "inline");
+                       var index = 0;
+                       var count = parseInt(index,10);
+
+//                       venueDiv.html("<br />");
+                       $.each(array, function(index, valueData) {
+                           console.log("time");
+
+                           $("<input/>").attr({
+                               type : "radio",
+                               id: "form_event_venue_" + index,
+                               name : "form[event_venue]",
+//                               required : "required",
+                               value : valueData["name"]
+//                               class : "parsley-validated"
+                           }).appendTo(venueDiv);
+
+                           $("<label/>").attr({
+                                for : "form_event_venue_" + index
+//                                class: "required"
+                           }).html(valueData["name"]).appendTo(venueDiv);
+                       });
+
+
+
+                   }
+
+                    function createSectionForm()
+                    {
+                        var sectionLabel = $(".label-section"),
+                                sectionDiv = $(".merchant-section");
                     }
                 }
         );
