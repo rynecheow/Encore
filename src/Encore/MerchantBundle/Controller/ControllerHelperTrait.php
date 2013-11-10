@@ -9,6 +9,8 @@
 namespace Encore\MerchantBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
 
 trait ControllerHelperTrait
 {
@@ -35,6 +37,7 @@ trait ControllerHelperTrait
         parent::setContainer($container);
 
         $this->request = $this->getRequest();
+
         $this->em = $this->getDoctrine()->getManager();
 
         /*
