@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Venue
 {
+
     /**
      * @var integer
      *
@@ -42,7 +43,6 @@ class Venue
 
     private $events;
 
-
     /**
      * @var \Encore\CustomerBundle\Entity\Section[]
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Section", mappedBy="venue")
@@ -60,9 +60,9 @@ class Venue
         return $this->id;
     }
 
-
     /**
      * @param \Encore\CustomerBundle\Entity\Event $events
+     *
      * @return Venue
      */
     public function setEvents($events)
@@ -82,6 +82,7 @@ class Venue
 
     /**
      * @param \Encore\CustomerBundle\Entity\Section[] $sections
+     *
      * @return Venue
      */
     public function setSections($sections)
@@ -99,11 +100,11 @@ class Venue
         return $this->sections;
     }
 
-
     /**
      * Set name
      *
      * @param string $name
+     *
      * @return Venue
      */
     public function setName($name)
@@ -127,6 +128,7 @@ class Venue
      * Set location
      *
      * @param string $location
+     *
      * @return Venue
      */
     public function setLocation($location)

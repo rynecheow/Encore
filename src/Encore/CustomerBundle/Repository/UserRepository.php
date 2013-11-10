@@ -14,6 +14,7 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class UserRepository extends EntityRepository
 {
+
     /*  Get user based on slug
      *  $slug = id OR encore_username
      */
@@ -63,6 +64,5 @@ class UserRepository extends EntityRepository
             ->setParameters(array('email' => $email))
             ->getOneOrNullResult();
     }
-
 
 }

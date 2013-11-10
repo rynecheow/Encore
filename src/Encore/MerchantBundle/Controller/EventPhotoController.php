@@ -8,14 +8,15 @@
 
 namespace Encore\MerchantBundle\Controller;
 
-
 use Encore\CustomerBundle\Entity\Event;
 use Encore\CustomerBundle\Entity\EventPhoto;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class EventPhotoController
 {
+
     use ControllerHelperTrait;
+
     /**
      * @Route("/events/add／photo", name="encore_merchant_add_event_photo")
      */
@@ -87,6 +88,7 @@ class EventPhotoController
 
     /**
      * @param $photo \Doctrine\Common\Collections\Collection
+     *
      * @return array
      */
     public function deletePhotoAction($photo)

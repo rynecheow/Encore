@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Customer
 {
+
     /**
      * @var integer
      *
@@ -95,6 +96,7 @@ class Customer
 
     /**
      * @param \Encore\CustomerBundle\Entity\TicketOrder $ticketOrders
+     *
      * @return Customer
      */
     public function setTicketOrders($ticketOrders)
@@ -104,6 +106,7 @@ class Customer
 
     /**
      * @param \Encore\CustomerBundle\Entity\User $user
+     *
      * @return Customer
      */
     public function setUser($user)
@@ -131,6 +134,7 @@ class Customer
 
     /**
      * @param \Encore\CustomerBundle\Entity\CardInfo $cardInfo
+     *
      * @return Customer
      */
     public function setCardInfo($cardInfo)
@@ -152,6 +156,7 @@ class Customer
      * Set username
      *
      * @param string $username
+     *
      * @return Customer
      */
     public function setUsername($username)
@@ -175,6 +180,7 @@ class Customer
      * Set firstName
      *
      * @param string $firstName
+     *
      * @return Customer
      */
     public function setFirstName($firstName)
@@ -198,6 +204,7 @@ class Customer
      * Set lastName
      *
      * @param string $lastName
+     *
      * @return Customer
      */
     public function setLastName($lastName)
@@ -221,6 +228,7 @@ class Customer
      * Set birthDate
      *
      * @param \DateTime $birthDate
+     *
      * @return Customer
      */
     public function setBirthDate($birthDate)
@@ -244,6 +252,7 @@ class Customer
      * Set contactNo
      *
      * @param string $contactNo
+     *
      * @return Customer
      */
     public function setContactNo($contactNo)
@@ -267,6 +276,7 @@ class Customer
      * Set address
      *
      * @param string $address
+     *
      * @return Customer
      */
     public function setAddress($address)
