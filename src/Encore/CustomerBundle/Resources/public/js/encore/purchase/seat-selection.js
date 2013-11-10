@@ -23,43 +23,34 @@ require(['domReady'],
                     return true;
                 }
 
-                $(document).click(function (e) {
+                $("table.seatTable tbody tr td div").click(function (e) {
                     var target, str, endOfRow, endOfCol, colValue, rowValue, totalCol, previousCol, nextCol, middlePreviousCol, middleNextCol, previousDiv, previousTwoDiv, nextDiv, nextTwoDiv, difference, selectedSeats, rowLabel;
                     target = $(e.target);
-                    if (target.is("table.seatTable tbody tr td div")) {
-                        str = target.attr("id");
-                        endOfRow = str.indexOf("row");
-                        endOfCol = str.indexOf("col") + 3;
-                        colValue = parseInt(str.substring(endOfCol, str.length), 10);
-                        rowValue = parseInt(str.substring(0, endOfRow), 10);
+                    str = target.attr("id");
+                    endOfRow = str.indexOf("row");
+                    endOfCol = str.indexOf("col") + 3;
+                    colValue = parseInt(str.substring(endOfCol, str.length), 10);
+                    rowValue = parseInt(str.substring(0, endOfRow), 10);
 
-                        totalCol = parseInt(seatsMatrix.col, 10);
-                        previousCol = parseInt(colValue - 2, 10);
-                        nextCol = parseInt(colValue + 2, 10);
+                    totalCol = parseInt(seatsMatrix.col, 10);
+                    previousCol = parseInt(colValue - 2, 10);
+                    nextCol = parseInt(colValue + 2, 10);
 
-                        middlePreviousCol = parseInt(colValue - 1, 10);
-                        middleNextCol = parseInt(colValue + 1, 10);
+                    middlePreviousCol = parseInt(colValue - 1, 10);
+                    middleNextCol = parseInt(colValue + 1, 10);
 
-                        previousDiv = $("#" + rowValue + "rowcol" + middlePreviousCol);
-                        previousTwoDiv = $("#" + rowValue + "rowcol" + previousCol);
+                    previousDiv = $("#" + rowValue + "rowcol" + middlePreviousCol);
+                    previousTwoDiv = $("#" + rowValue + "rowcol" + previousCol);
 
-                        nextDiv = $("#" + rowValue + "rowcol" + middleNextCol);
-                        nextTwoDiv = $("#" + rowValue + "rowcol" + nextCol);
+                    nextDiv = $("#" + rowValue + "rowcol" + middleNextCol);
+                    nextTwoDiv = $("#" + rowValue + "rowcol" + nextCol);
 
-                        if (target.hasClass("empty")) {
-                            difference = parseInt($("#ticketQtySelector").val() - $("table.seatTable tbody tr td div.selected").length, 10);
-                            if (difference !== 0) {
-                                if (previousDiv.hasClass("empty")) {
-
-                                    if (previousTwoDiv.hasClass("selected")) {
-                                        alert("You cannot select a seat which leaves a single seat gap.");
-                                    } else {
-                                        if (checkNext(nextDiv, nextTwoDiv)) {
-                                            tickDiv(target);
-                                        } else {
-                                            alert("You cannot select a seat which leaves a single seat gap.");
-                                        }
-                                    }
+                    if (target.hasClass("empty")) {
+                        difference = parseInt($("#ticketQtySelector").val() - $("table.seatTable tbody tr td div.selected").length, 10);
+                        if (difference !== 0) {
+                            if (previousDiv.hasClass("empty")) {
+                                if (previousTwoDiv.hasClass("selected")) {
+                                    alert("You cannot select a seat which leaves a single seat gap.");
                                 } else {
                                     if (checkNext(nextDiv, nextTwoDiv)) {
                                         tickDiv(target);
@@ -68,34 +59,40 @@ require(['domReady'],
                                     }
                                 }
                             } else {
-                                alert("You have reached your max amount of seleced tickets.");
+                                if (checkNext(nextDiv, nextTwoDiv)) {
+                                    tickDiv(target);
+                                } else {
+                                    alert("You cannot select a seat which leaves a single seat gap.");
+                                }
                             }
-                        } else if (target.hasClass("selected")) {
-                            if (nextDiv.hasClass("empty") || previousDiv.hasClass("empty")) {
+                        } else {
+                            alert("You have reached your max amount of seleced tickets.");
+                        }
+                    } else if (target.hasClass("selected")) {
+                        if (nextDiv.hasClass("empty") || previousDiv.hasClass("empty")) {
+                            target.attr("class", "empty");
+                        } else if (nextDiv.hasClass("selected") && !previousDiv.hasClass("selected")) {
+                            target.attr("class", "empty");
+                        } else if (previousDiv.hasClass("selected") && !nextDiv.hasClass("selected")) {
+                            target.attr("class", "empty");
+                        } else if (previousDiv.hasClass("sold") || previousDiv.hasClass("locked")) {
+                            if (totalCol === middleNextCol) {
                                 target.attr("class", "empty");
-                            } else if (nextDiv.hasClass("selected") && !previousDiv.hasClass("selected")) {
-                                target.attr("class", "empty");
-                            } else if (previousDiv.hasClass("selected") && !nextDiv.hasClass("selected")) {
-                                target.attr("class", "empty");
-                            } else if (previousDiv.hasClass("sold") || previousDiv.hasClass("locked")) {
-                                if (totalCol === middleNextCol) {
-                                    target.attr("class", "empty");
-                                } else if (nextDiv.hasClass("sold") || nextDiv.hasClass("locked")) {
-                                    target.attr("class", "empty");
-                                } else {
-                                    alert("You cannot un-select a seat which leaves a single seat gap.");
-                                }
                             } else if (nextDiv.hasClass("sold") || nextDiv.hasClass("locked")) {
-                                if (totalCol === middlePreviousCol || middlePreviousCol < 0) {
-                                    target.attr("class", "empty");
-                                } else if (previousDiv.hasClass("sold") || previousDiv.hasClass("locked")) {
-                                    target.attr("class", "empty");
-                                } else {
-                                    alert("You cannot un-select a seat which leaves a single seat gap.");
-                                }
+                                target.attr("class", "empty");
                             } else {
                                 alert("You cannot un-select a seat which leaves a single seat gap.");
                             }
+                        } else if (nextDiv.hasClass("sold") || nextDiv.hasClass("locked")) {
+                            if (totalCol === middlePreviousCol || middlePreviousCol < 0) {
+                                target.attr("class", "empty");
+                            } else if (previousDiv.hasClass("sold") || previousDiv.hasClass("locked")) {
+                                target.attr("class", "empty");
+                            } else {
+                                alert("You cannot un-select a seat which leaves a single seat gap.");
+                            }
+                        } else {
+                            alert("You cannot un-select a seat which leaves a single seat gap.");
                         }
                     }
 
@@ -124,12 +121,36 @@ require(['domReady'],
                     });
                 });
 
-                $('#datepicker-select').datepicker().on('changeDate', function () {
-                    $("#dateTimeLabel").html($("#datepicker-select").val());
+//                $('#datepicker-select').datepicker().on('changeDate', function () {
+//                    $("#dateTimeLabel").html($("#datepicker-select").val());
+//                });
+
+                $("input[type='radio'][name='timeGroup']").change(function () {
+                    alert("change");
+                });
+
+                $("#dateList").change(function () {
+                    var selectedDate = $("#dateList").val();
+                    if (selectedDate !== "Select Date") {
+                        $("#selectTimeDiv").removeAttr("hidden");
+                    } else {
+                        $("#selectTimeDiv").attr("hidden", "hidden");
+                        $("#ticketQtyDiv").attr("hidden", "hidden");
+                        $("#selectSectionDiv").attr("hidden", "hidden");
+                        $("#seatAllocateDiv").attr("hidden", "hidden");
+                    }
                 });
 
                 $("#ticketQtySelector").change(function () {
-                    $("#ticketQtyLabel").html($("#ticketQtySelector").val() + " ticket(s)");
+                    var value, selectedLength;
+                    value = parseInt($("#ticketQtySelector").val(), 10);
+                    selectedLength = $("table.seatTable tbody tr td div.selected").length;
+                    if (value < selectedLength) {
+                        parseInt($("#ticketQtySelector").val(selectedLength));
+                        alert("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
+                    } else {
+                        $("#ticketQtyLabel").html(value + " ticket(s)");
+                    }
                 });
 
                 $("form").submit(function () {
