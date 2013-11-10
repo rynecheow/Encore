@@ -23,6 +23,9 @@ require(['domReady'],
                     return true;
                 }
 
+                /**
+                 * Called when a seat is selected
+                 */
                 $("table.seatTable tbody tr td div").click(function (e) {
                     var target, str, endOfRow, endOfCol, colValue, rowValue, totalCol, previousCol, nextCol, middlePreviousCol, middleNextCol, previousDiv, previousTwoDiv, nextDiv, nextTwoDiv, difference, selectedSeats, rowLabel;
                     target = $(e.target);
@@ -66,7 +69,7 @@ require(['domReady'],
                                 }
                             }
                         } else {
-                            alert("You have reached your max amount of seleced tickets.");
+                            alert("You have reached your max amount of selected tickets.");
                         }
                     } else if (target.hasClass("selected")) {
                         if (nextDiv.hasClass("empty") || previousDiv.hasClass("empty")) {
@@ -94,6 +97,10 @@ require(['domReady'],
                         } else {
                             alert("You cannot un-select a seat which leaves a single seat gap.");
                         }
+                    } else if (target.hasClass("sold")) {
+                        alert("You cannot select a seat which has already been sold.");
+                    } else if (target.hasClass("locked")) {
+                        alert("You cannot select a seat which is currently locked.");
                     }
 
                     selectedSeats = $("table.seatTable tbody tr td div.selected");
@@ -113,46 +120,167 @@ require(['domReady'],
 
                     difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td div.selected").length;
                     $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
-                });
-
-                $("#resetButton").click(function () {
-                    $("table.seatTable tbody tr td div.selected").each(function () {
-                        $(this).attr("class", "empty");
-                    });
-                });
-
-//                $('#datepicker-select').datepicker().on('changeDate', function () {
-//                    $("#dateTimeLabel").html($("#datepicker-select").val());
-//                });
-
-                $("input[type='radio'][name='timeGroup']").change(function () {
-                    alert("change");
-                });
-
-                $("#dateList").change(function () {
-                    var selectedDate = $("#dateList").val();
-                    if (selectedDate !== "Select Date") {
-                        $("#selectTimeDiv").removeAttr("hidden");
+                    if (difference > 0) {
+                        $("input:submit").attr("hidden", "hidden");
                     } else {
-                        $("#selectTimeDiv").attr("hidden", "hidden");
-                        $("#ticketQtyDiv").attr("hidden", "hidden");
-                        $("#selectSectionDiv").attr("hidden", "hidden");
-                        $("#seatAllocateDiv").attr("hidden", "hidden");
+                        $("input:submit").removeAttr("hidden");
                     }
                 });
 
+                /**
+                 * Unselects all selected seats
+                 * Remove text in seat allocation label at summary form
+                 * Reset text in ticket quantity label to value to ticket quantity to purchase
+                 */
+                function resetSeats() {
+                    $("table.seatTable tbody tr td div.selected").each(function () {
+                        $(this).attr("class", "empty");
+                    });
+                    $("#seatAllocationLabel").html("");
+                }
+
+                /**
+                 * Called when reset button for seat allocation is pressed
+                 * Reset selected seats and change ticket quantity label
+                 */
+                $("#resetButton").click(function () {
+                    resetSeats();
+                    $("#ticketQtyLabel").html(parseInt($("#ticketQtySelector").val(), 10) + " unselected ticket(s)");
+                });
+
+                /**
+                 * Hides/Display time selection step and un-check all checked time radio buttons
+                 * @param hideFlag
+                 */
+                function hideTimeStep(hideFlag) {
+                    $("#dateTimeLabel").html("");
+                    if (hideFlag) {
+                        $("#selectTimeDiv").attr("hidden", "hidden");
+                    } else {
+                        $("input:radio[name='timeGroup']").removeAttr("checked");
+                        $("#selectTimeDiv").removeAttr("hidden");
+                    }
+                }
+
+                /**
+                 * Hides/Display section selection step and un-check all checked section radio buttons
+                 * @param hideFlag
+                 */
+                function hideSectionStep(hideFlag) {
+                    $("#sectionLabel").html("");
+                    if (hideFlag) {
+                        $("#selectSectionDiv").attr("hidden", "hidden");
+                    } else {
+                        $("input:radio[name='sectionGroup']").removeAttr("checked");
+                        $("#selectSectionDiv").removeAttr("hidden");
+                    }
+                }
+
+                /**
+                 * Hides/Display ticket quantity step and set ticket quantity to 0
+                 * @param hideFlag
+                 */
+                function hideTicketQtyStep(hideFlag) {
+                    $("#ticketQtyLabel").html("");
+                    if (hideFlag) {
+                        $("#ticketQtyDiv").attr("hidden", "hidden");
+                    } else {
+                        $("#ticketQtySelector").val(0);
+                        $("#ticketQtyDiv").removeAttr("hidden");
+                    }
+                }
+
+                /**
+                 * Hides and reset seat allocation step or Displays seat allocation step
+                 * @param hideFlag
+                 */
+                function hideSeatAllocateStep(hideFlag) {
+                    if (hideFlag) {
+                        resetSeats();
+                        $("#seatAllocateDiv").attr("hidden", "hidden");
+                        $("input:submit").attr("hidden", "hidden");
+                    } else {
+                        $("#seatAllocateDiv").removeAttr("hidden");
+                    }
+                }
+
+                /**
+                 * Hides submit button
+                 * @param hideFlag
+                 */
+                function hideSubmitButton(hideFlag) {
+                    if (hideFlag) {
+                        $("input:submit").attr("hidden", "hidden");
+                    } else {
+                        $("input:submit").removeAttr("hidden");
+                    }
+                }
+
+                /**
+                 * Called when drop down list for date changes
+                 * If selected date is valid, unhidden time step
+                 * Else, reset all other values and hide all other steps
+                 */
+                $("#dateList").change(function () {
+                    var selectedDate = $("#dateList").val();
+                    if (selectedDate !== "Select Date") {
+                        hideTimeStep(false);
+                        $("#dateTimeLabel").html(selectedDate);
+                    } else {
+                        hideTimeStep(true);
+                    }
+                    hideSectionStep(true);
+                    hideTicketQtyStep(true);
+                    hideSeatAllocateStep(true);
+                });
+
+                /**
+                 * Called when radio button for time changes
+                 * Hides section selection step and hides ticket quantity and seat allocation steps
+                 */
+                $("input:radio[name='timeGroup']").change(function () {
+                    hideSectionStep(false);
+                    $("#dateTimeLabel").html($("#dateList").val() + " " + $("input:radio[name='timeGroup']:checked").val());
+                    hideTicketQtyStep(true);
+                    hideSeatAllocateStep(true);
+                });
+
+                /**
+                 * Called when radio button for section changes
+                 * Displays ticket quantity step and hides seat allocation step
+                 */
+                $("input:radio[name='sectionGroup']").change(function () {
+                    hideTicketQtyStep(false);
+                    $("#sectionLabel").html($("input:radio[name='sectionGroup']:checked").val());
+                    hideSeatAllocateStep(true);
+                });
+
+                /**
+                 * Called when ticket quantity selector changes
+                 */
                 $("#ticketQtySelector").change(function () {
-                    var value, selectedLength;
+                    var value, selectedLength, difference;
+                    hideSeatAllocateStep(false);
                     value = parseInt($("#ticketQtySelector").val(), 10);
                     selectedLength = $("table.seatTable tbody tr td div.selected").length;
                     if (value < selectedLength) {
                         parseInt($("#ticketQtySelector").val(selectedLength));
                         alert("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
                     } else {
-                        $("#ticketQtyLabel").html(value + " ticket(s)");
+                        difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td div.selected").length;
+                        $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
+                        if (difference > 0) {
+                            $("input:submit").attr("hidden", "hidden");
+                        } else {
+                            $("input:submit").removeAttr("hidden");
+                        }
+                        $("#ticketQtyLabel").html(value + " unselected ticket(s)");
                     }
                 });
 
+                /**
+                 * Form submission after all steps completed
+                 */
                 $("form").submit(function () {
                     var form, selectedSeats, seatFlag;
                     selectedSeats = $("table.seatTable tbody tr td div.selected");
@@ -199,7 +327,6 @@ require(['domReady'],
                         alert("You have not selected any seats.");
                         return false;
                     }
-
                 });
             }
         );

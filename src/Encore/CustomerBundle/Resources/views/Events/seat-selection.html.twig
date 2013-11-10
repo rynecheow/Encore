@@ -28,21 +28,21 @@
                 <label>Time:</label>
                 {% set timeArray = ["8:00", "12:00", "14:00"] %}
                 {% for timeIndex, time in timeArray  %}
-                    <input type="radio" name="timeGroup">{{ time }}
+                    <input type="radio" value="{{ time }}" name="timeGroup">{{ time }}
                 {% endfor %}
-            </div>
-
-            <div id="ticketQtyDiv" hidden="hidden">
-                <label for="ticketQtySelector">Ticket Quantity:</label>
-                <input id="ticketQtySelector" type="number" min="0" max="8" value="0"/>
             </div>
 
             <div id="selectSectionDiv" hidden="hidden">
                 <label>Section:</label>
                 {% set sectionArray = ["VIP", "Premium", "Standard"] %}
                 {% for secIndex, section in sectionArray  %}
-                    <input type="radio" name="sectionGroup">{{ section }}
+                    <input type="radio" value="{{ section }}" name="sectionGroup">{{ section }}
                 {% endfor %}
+            </div>
+
+            <div id="ticketQtyDiv" hidden="hidden">
+                <label for="ticketQtySelector">Ticket Quantity:</label>
+                <input id="ticketQtySelector" type="number" min="0" max="8" value="0"/>
             </div>
 
             <div id="seatAllocateDiv" hidden="hidden">
@@ -127,7 +127,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="submit" value="next"/>
+                            <input type="submit" value="next" hidden="hidden"/>
                         </td>
                     </tr>
                     </tbody>
