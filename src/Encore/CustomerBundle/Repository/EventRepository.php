@@ -15,6 +15,7 @@ use Doctrine\ORM\QueryBuilder;
  */
 class EventRepository extends EntityRepository
 {
+
     /**
      * Gets events.
      *

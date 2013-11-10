@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class EncoreCustomerExtension extends Extension
 {
+
     /**
      * {@inheritDoc}
      */

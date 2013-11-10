@@ -448,6 +448,7 @@ class Event
 
     /**
      * @param boolean $publish
+     *
      * @return $this
      */
     public function setPublish($publish)
@@ -467,6 +468,7 @@ class Event
 
     /**
      * @param \Encore\CustomerBundle\Entity\EventHolder[] $heldDates
+     *
      * @return $this
      */
     public function setHeldDates($heldDates)

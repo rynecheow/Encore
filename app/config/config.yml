@@ -39,7 +39,6 @@ assetic:
             inputs:
                - css/fonts/*.css
                - css/encore/encore.less
-               - css/encore/seat-selection.less
             output: css/encore.css
         encore_merchant_css:
             inputs:

@@ -15,6 +15,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+
     use ORMBehaviors\Timestampable\Timestampable;
 
     const ROLE_ADMIN = 'ROLE_ADMIN';
@@ -48,7 +49,6 @@ class User extends BaseUser
      */
     private $merchant;
 
-
     /**
      * @var \Encore\CustomerBundle\Entity\UserEmail[]
      *
@@ -56,13 +56,11 @@ class User extends BaseUser
      */
     private $emails;
 
-
     public function __construct()
     {
         parent::__construct();
         $this->emails = new ArrayCollection();
     }
-
 
     /**
      * @return int

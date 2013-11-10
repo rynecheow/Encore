@@ -15,6 +15,7 @@ use Encore\CustomerBundle\Entity\UserEmail;
 
 class EncoreUserManager
 {
+
     /**
      * @var EntityManager
      */
@@ -26,7 +27,7 @@ class EncoreUserManager
     private $sc;
 
     /**
-     * @param EntityManager $em The Doctrine entity manager.
+     * @param EntityManager   $em The Doctrine entity manager.
      * @param SecurityContext $sc The Symfony security context.
      */
     public function __construct(EntityManager $em, SecurityContext $sc)
@@ -39,6 +40,7 @@ class EncoreUserManager
      * Checks the availability of an email address.
      *
      * @param string $email
+     *
      * @return boolean
      */
     public function checkEmailAvailability($email)
@@ -58,7 +60,6 @@ class EncoreUserManager
 
         return $userEmail;
     }
-
 
     public function removeEmail(UserEmail $userEmail)
     {

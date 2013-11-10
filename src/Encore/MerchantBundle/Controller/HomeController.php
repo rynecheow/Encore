@@ -19,6 +19,7 @@ use Symfony\Component\Security\Core\SecurityContext;
  */
 class HomeController extends Controller
 {
+
     use ControllerHelperTrait;
 
     /**

@@ -17,6 +17,12 @@ class HomeController extends BaseController
      */
     public function indexAction()
     {
+        if ($this->isLoggedIn()) {
+            if (!$this->authenticatedUser->isEnabled()) {
+                return $this->redirect($this->generateUrl("encore_complete_profile"));
+            }
+        }
+
         /**
          * @var $eventManager \Encore\CustomerBundle\Model\EventManager
          */

@@ -14,8 +14,9 @@
         <form class="complete-profile-form" method="post" {{ form_enctype(form) }}>
             <h1 class="complete-profile-header">Complete Your Information</h1>
             <fieldset>
-                {{ form(form) }}
+                {{ form_widget(form.username) }}
                 <span class="parsley-error-list" style="display:none;" id="invalid-username">User Name Exists</span>
+                {{ form_rest(form) }}
             </fieldset>
         </form>
     </div>
@@ -44,10 +45,10 @@
                                                 "json"
                                         );
 
-                                        $('#invalid-email').css('display', 'none');
+                                        $('#invalid-username').css('display', 'none');
                                         return true;
                                     } else {
-                                        $('#invalid-email').css('display', 'inline');
+                                        $('#invalid-username').css('display', 'inline');
                                         return false;
                                     }
                                 },

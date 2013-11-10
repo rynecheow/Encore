@@ -20,10 +20,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-
 class EventController extends Controller
 {
+
     use ControllerHelperTrait;
+
     /**
      * @Route("/events", name="encore_merchant_events")
      */
@@ -38,30 +39,28 @@ class EventController extends Controller
     public function addAction(Request $request)
     {
         $allVenueLocations = $this->em->getRepository("EncoreCustomerBundle:Venue")
-                                  ->findAllLocation();
+            ->findAllLocation();
         $newEvent = new Event();
         $createEventForm = $this->createEventForm($newEvent, $allVenueLocations);
         $createEventForm->handleRequest($request);
 
-        if ($createEventForm->isValid())
-        {
+        if ($createEventForm->isValid()) {
             /**
              * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
              */
             $selectedVenueId = $createEventForm->get("venue")->getData();
             $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
-                                  ->find($selectedVenueId);
+                ->find($selectedVenueId);
             $newEvent->setVenue($selectedVenue)
-                     ->setPublish(false);
+                ->setPublish(false);
             $this->em->persist($newEvent);
             $this->em->flush();
             $heldDates = $createEventForm->get("heldDates")->getData();
 
-            foreach ($heldDates as $heldDate)
-            {
+            foreach ($heldDates as $heldDate) {
                 $eventHolder = new EventHolder();
                 $eventHolder->setHeldDate($heldDate)
-                            ->setEvent($newEvent);
+                    ->setEvent($newEvent);
                 $this->em->persist($eventHolder);
                 $this->em->flush();
 
@@ -70,8 +69,7 @@ class EventController extends Controller
                 /**
                  * @var $section \Encore\CustomerBundle\Entity\Section
                  */
-                foreach ($sections as $section)
-                {
+                foreach ($sections as $section) {
                     $seats = $section->getSeats();
                     $eventSectionPrice = $createEventForm->get($section->getName())->getData();
                     $eventSection = new EventSection();
@@ -114,8 +112,7 @@ class EventController extends Controller
         $editEventForm = $this->createEventForm($event, $allVenueLocations);
         $editEventForm->handleRequest($request);
 
-        if ($editEventForm->isValid())
-        {
+        if ($editEventForm->isValid()) {
             $params = $editEventForm->getData();
             $event->setName($params["event_name"])
                 ->setType($params["event_type"])
@@ -124,24 +121,19 @@ class EventController extends Controller
                 ->setSaleEnd($params["event_sale_end"])
                 ->setHeldDates($params["event_held_dates"]);
 
-            if (!$event->getPublish())
-            {
+            if (!$event->getPublish()) {
                 /**
                  * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
                  */
                 $selectedVenueId = $editEventForm->get("venue")->getData();
 
-                if ($selectedVenueId != $event->getVenue()->getId())
-                {
+                if ($selectedVenueId != $event->getVenue()->getId()) {
                     $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
                         ->find($selectedVenueId);
                     $event->setVenue($selectedVenue);
 
                     //TODO: edit held dates, remove previous eventSection.
-                }
-
-                else
-                {
+                } else {
                     //TODO: add held dates, add eventSection.
                 }
             }
@@ -157,14 +149,13 @@ class EventController extends Controller
         $request = $this->getRequest("request");
         $location = $request->query->get("location");
         $venues = $this->em->getRepository("EncoreCustomerBundle:Venue")
-                       ->findByLocation($location);
+            ->findByLocation($location);
         $venuesInfo = [];
 
         /**
          * @var $venue \Encore\CustomerBundle\Entity\Venue
          */
-        foreach ($venues as $venue)
-        {
+        foreach ($venues as $venue) {
             $venuesInfo[] = [
                 "id" => $venue->getId(),
                 "name" => $venue->getName(),
@@ -185,15 +176,14 @@ class EventController extends Controller
         $request = $this->getRequest("request");
         $venueId = $request->query->get("venueId");
         $venue = $this->em->getRepository("EncoreCustomerBundle:Venue")
-                      ->find($venueId);
+            ->find($venueId);
         $sections = $venue->getSections();
         $sectionsInfo = [];
 
         /**
          * @var $section \Encore\CustomerBundle\Entity\Section
          */
-        foreach ($sections as $section)
-        {
+        foreach ($sections as $section) {
             $sectionsInfo[] = [
                 "id" => $section->getId(),
                 "name" => $section->getName(),
@@ -212,6 +202,83 @@ class EventController extends Controller
 
     private function createEventForm(Event $event, $allVenueLocation)
     {
-        // TODO: create form for event.
+        return $this->createFormBuilder()
+            ->setAction('encore_signup')
+            ->add(
+                'email',
+                'email',
+                [
+                    'attr' => [
+                        'class' => 'signup-email',
+                        'placeholder' => 'E-mail address',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-type' => 'email',
+                        'data-required-message' => 'Please enter your email.',
+                        'data-type-email-message' => 'Your email address is incorrect',
+                    ]
+                    ,
+                    'label' => false
+                ]
+            )
+            ->add(
+                'password',
+                'password',
+                [
+                    'attr' => [
+                        'class' => 'signup-password',
+                        'id' => 'sg-pw',
+                        'placeholder' => 'Password',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your password.',
+                        'data-minlength' => '8',
+                        'data-minlength-message' => 'Short passwords are easy to guess. Try one with at least 8 characters.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'verifyPassword',
+                'password',
+                [
+                    'attr' => [
+                        'class' => 'signup-password',
+                        'placeholder' => 'Verify Password',
+                        'data-trigger' => 'change',
+                        'data-equalto' => '#form_password',
+                        'data-equalto-message' => 'You passwords do not match.',
+                        'data-required' => 'true',
+                        'data-required-message' => 'Please verify your password.',
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'agreement',
+                'checkbox',
+                [
+                    'attr' => [
+                        'id' => 'signup-agreement',
+                        'class' => 'signup-agreement',
+                        'placeholder' => 'Verify Password',
+                        'data-trigger' => 'change',
+                        'data-required' => 'true',
+                        'data-required-message' => "In order to use our services, you must agree to Encore's Terms and Privacy.",
+                    ],
+                    'label' => false
+                ]
+            )
+            ->add(
+                'register',
+                'submit',
+                [
+                    'attr' => [
+                        'class' => 'submit',
+                        'value' => 'Register'
+                    ]
+                ]
+            )
+            ->getForm();
     }
 } 
