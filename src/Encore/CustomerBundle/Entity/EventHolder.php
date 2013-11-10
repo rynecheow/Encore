@@ -24,7 +24,7 @@ class EventHolder
 
     /**
      * @var \Encore\CustomerBundle\Entity\Event
-     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Event", inversedBy="eventSections")
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Event", inversedBy="eventHolders")
      * @ORM\JoinColumn(name="eventID", referencedColumnName="id", nullable=false)
      */
     private $event;

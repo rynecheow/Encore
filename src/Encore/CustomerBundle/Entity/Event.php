@@ -85,7 +85,7 @@ class Event
      * @var \Encore\CustomerBundle\Entity\EventHolder[]
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventHolder", mappedBy="event")
      */
-    private $heldDates;
+    private $eventHolders;
 
     /**
      * @var integer
@@ -108,13 +108,6 @@ class Event
      */
 
     private $creator;
-
-    /**
-     * @var \Encore\CustomerBundle\Entity\EventSection[]
-     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSection", mappedBy="event")
-     */
-
-    private $eventSections;
 
     /**
      * @var \Encore\CustomerBundle\Entity\EventPhoto[]
@@ -471,7 +464,7 @@ class Event
      *
      * @return $this
      */
-    public function setHeldDates($heldDates)
+    public function setEventHolders($heldDates)
     {
         $this->heldDates = $heldDates;
 
@@ -481,7 +474,7 @@ class Event
     /**
      * @return \Encore\CustomerBundle\Entity\EventHolder[]
      */
-    public function getHeldDates()
+    public function getEventHolders()
     {
         return $this->heldDates;
     }
