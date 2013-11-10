@@ -45,7 +45,8 @@
         "leafo/lessphp": "dev-master",
         "cboden/ratchet": "dev-master",
         "vich/uploader-bundle": "v0.9.0",
-        "jms/security-extra-bundle": "1.5.1"
+        "jms/security-extra-bundle": "1.5.1",
+        "rhumsaa/uuid": "2.5.0"
 
     },
     "require-dev": {

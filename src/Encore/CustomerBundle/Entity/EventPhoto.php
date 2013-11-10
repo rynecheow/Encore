@@ -39,7 +39,7 @@ class EventPhoto
      *     maxSize="1M",
      *     mimeTypes={"image/png", "image/jpeg"}
      * )
-     * @Vich\UploadableField(mapping="event", fileNameProperty="imagePath")
+     * @Vich\UploadableField(mapping="event_image", fileNameProperty="imagePath")
      */
     private $image;
 

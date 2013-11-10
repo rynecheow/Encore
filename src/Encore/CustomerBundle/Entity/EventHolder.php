@@ -14,6 +14,12 @@ class EventHolder
 {
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="heldDate", type="datetime")
+     */
+    protected $heldDate;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -21,20 +27,12 @@ class EventHolder
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var \Encore\CustomerBundle\Entity\Event
-     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Event", inversedBy="eventSections")
+     * @ORM\ManyToOne(targetEntity="Encore\CustomerBundle\Entity\Event", inversedBy="eventHolders")
      * @ORM\JoinColumn(name="eventID", referencedColumnName="id", nullable=false)
      */
     private $event;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="heldDate", type="datetime")
-     */
-    protected $heldDate;
 
     /**
      * Get id
@@ -44,6 +42,14 @@ class EventHolder
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return \Encore\CustomerBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
     }
 
     /**
@@ -59,11 +65,11 @@ class EventHolder
     }
 
     /**
-     * @return \Encore\CustomerBundle\Entity\Event
+     * @return \DateTime
      */
-    public function getEvent()
+    public function getHeldDate()
     {
-        return $this->event;
+        return $this->heldDate;
     }
 
     /**
@@ -76,13 +82,5 @@ class EventHolder
         $this->heldDate = $heldDate;
 
         return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getHeldDate()
-    {
-        return $this->heldDate;
     }
 }
