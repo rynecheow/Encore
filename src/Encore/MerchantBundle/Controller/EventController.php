@@ -25,6 +25,7 @@ class EventController extends Controller
 {
     use ControllerHelperTrait;
 
+    private $createform;
     /**
      * @Route("/events", name="encore_merchant_events")
      */
@@ -42,7 +43,12 @@ class EventController extends Controller
             ->findAllLocation();
         $newEvent = new Event();
         $createEventForm = $this->createEventForm($newEvent, $allVenueLocations);
+
+
+
+
         $createEventForm->handleRequest($request);
+        $this->createform = $createEventForm;
 
         if ($createEventForm->isValid()) {
             /**
@@ -93,10 +99,12 @@ class EventController extends Controller
                 }
             }
 
-            return $this->render("EncoreMerchantBundle::Events:index.html.twig");
+            return $this->render("EncoreMerchantBundle:Events:index.html.twig");
         }
 
-        return $this->render("EncoreMerchantBundle::Events:add-event.html.twig");
+        return $this->render("EncoreMerchantBundle:Events:add-event.html.twig" , [
+                "form" => $createEventForm->createView()
+            ]) ;
     }
 
     /**
@@ -215,16 +223,20 @@ class EventController extends Controller
                 }
             }
 
-            return $this->render("EncoreMerchantBundle::Events:index.html.twig");
+            return $this->render("EncoreMerchantBundle:Events:index.html.twig");
         }
 
-        return $this->render("EncoreMerchantBundle::Events:edit-event.html.twig");
+        return $this->render("EncoreMerchantBundle:Events:edit-event.html.twig");
     }
 
+    /**
+     * @Route("/venue-location", name="encore_venue_location")
+     * @Method("POST")
+     */
     public function getLocationVenue()
     {
-        $request = $this->getRequest("request");
-        $location = $request->query->get("location");
+        $request = $this->getRequest();
+        $location = $request->get("location");
         $venues = $this->em->getRepository("EncoreCustomerBundle:Venue")
             ->findByLocation($location);
         $venuesInfo = [];
@@ -244,14 +256,20 @@ class EventController extends Controller
             "status" => true,
             "venues" => $venuesInfo
         ];
+//TODO Response for array 0
 
+        $this->createVenue();
         return new Response(json_encode($response));
     }
 
+    /**
+     * @Route("/venue-section", name="encore_venue_section")
+     * @Method("POST")
+     */
     public function getVenueSection()
     {
-        $request = $this->getRequest("request");
-        $venueId = $request->query->get("venueId");
+        $request = $this->getRequest();
+        $venueId = $request->get("venueId");
         $venue = $this->em->getRepository("EncoreCustomerBundle:Venue")
             ->find($venueId);
         $sections = $venue->getSections();
@@ -275,6 +293,11 @@ class EventController extends Controller
         ];
 
         return new Response(json_encode($response));
+    }
+
+    private function createVenue() {
+        $this->createform->add('task', 'text');
+
     }
 
     public function removeHeldDate()
@@ -315,6 +338,140 @@ class EventController extends Controller
 
     private function createEventForm(Event $event, $allVenueLocation)
     {
-        // TODO: create form for event.
+
+
+        return $this->createFormBuilder()
+            ->setAction('encore_merchant_add_event')
+            ->add(
+                'event_name',
+                'text',
+                [
+                    'attr' => [
+                        'class' => 'merchant-add-textbox',
+                        'placeholder' => 'Event Name',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your event name.',
+                    ]
+                    ,
+                    'label' => 'Event Name'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
+                ]
+            )
+            ->add(
+                'event_type',
+                'text',
+                [
+                    'attr' => [
+                        'class' => 'merchant-add-textbox',
+                        'placeholder' => 'Event Type',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your event type.',
+                    ]
+                    ,
+                    'label' => 'Event Type'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
+                ]
+            )
+            ->add(
+                'event_description',
+                'textarea',
+                [
+                    'attr' => [
+                        'class' => 'merchant-add-textarea',
+                        'placeholder' => 'Event Description',
+                        'data-required' => 'true',
+                        'data-trigger' => 'keyup',
+                        'data-required-message' => 'Please enter your event description.',
+                        'data-rangelength' => '[20,200]',
+
+                    ]
+                    ,
+                    'label' => 'Event Description'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
+                ]
+            )
+            ->add(
+                'event_sale_start',
+                'text',
+                [
+                    'attr' => [
+                        'class' => 'merchant-add-text datepicker',
+                        'placeholder' => 'Event Start Date',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your event start date.',
+                    ]
+                    ,
+                    'label' => 'Event Sale Start'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
+                ]
+            )
+            ->add(
+                'event_sale_end',
+                'text',
+                [
+                    'attr' => [
+                        'class' => 'merchant-add-text datepicker',
+                        'placeholder' => 'Event End Date',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please enter your event end date.',
+                    ]
+                    ,
+                    'label' => 'Event Sale End'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
+                ]
+            )
+            ->add(
+                'event_total_location',
+                'choice',
+                [
+                    'choices' => $allVenueLocation
+                    ,
+                    'attr' => [
+                        'class' => 'merchant-location',
+                        'data-required' => 'true',
+                        'data-trigger' => 'change',
+                        'data-required-message' => 'Please select your location.',
+                    ]
+                    ,
+                    'label' => 'Event End Date'
+                    ,
+                    'label_attr' => [
+                        'class' => 'class-label'
+                    ]
+                    ,"expanded" => false,
+                    "multiple" =>false
+                ]
+
+            )
+            ->add(
+                'register',
+                'submit',
+                [
+                    'attr' => [
+                        'class' => 'merchant-add-submit',
+                        'value' => 'Register'
+                    ]
+                ]
+            )
+            ->getForm();
     }
 } 

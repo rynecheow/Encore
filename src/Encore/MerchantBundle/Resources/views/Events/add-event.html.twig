@@ -10,15 +10,47 @@
 
 {% block title %}Create An Event {% endblock title %}
 {% block content %}
-    <div class="create-event-wrap">
+    <article class="create-event-wrap">
             <div class="create-event-container">
                 <form class="create-event-form" method="POST" action="{{ path('encore_merchant_add_event') }}" {{ form_enctype(form) }}>
                     <h1 class="merchant-header">Create An Profile </h1>
                     <fieldset>
                         {{ form(form) }}
-                        {{ form_rest(form) }}
+
                     </fieldset>
                 </form>
             </div>
-    </div>
+    </article>
+
+
+
+    <script type="application/javascript">
+        $(function () {
+                    $('.merchant-location').on("change", ajaxLocation);
+                    function ajaxLocation(e) {
+                        var location = $(".merchant-location option:selected" ).html();
+
+                        console.log(location);
+                        $.post(
+                                "{{ path('encore_venue_location') }}",
+                                {
+                                    "location": location
+                                },
+                                function (response) {
+                                    if (response.code == 200) {
+                                          console.log("respone is %o",response);
+
+//                                        $('#invalid-email').css('display', 'none');
+                                        return true;
+                                    } else {
+//                                        $('#invalid-email').css('display', 'inline');
+                                        return false;
+                                    }
+                                },
+                                "json"
+                        );
+                    }
+                }
+        );
+    </script>
 {% endblock content %}
