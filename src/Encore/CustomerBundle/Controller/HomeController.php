@@ -28,15 +28,15 @@ class HomeController extends BaseController
          * @var $eventManager \Encore\CustomerBundle\Model\EventManager
          */
         $eventManager = $this->get('encore.event_manager');
-        $featured = $eventManager->getFeaturedEvents(1);
+        $featured = $eventManager->getFeaturedEvents(5);
         $featuredEvents = $this->trimEvents($featured);
-
+        //only can be published featured event
         $new = $eventManager->getNewEvents(10);
         $newEvents = $this->trimEvents($new);
 
         $param = [
             'featured_events' => $featuredEvents,
-            'newEvents' => $newEvents,
+            'new_events' => $newEvents,
         ];
 
         return $this->render('EncoreCustomerBundle:Home:index.html.twig', $param);
@@ -52,7 +52,7 @@ class HomeController extends BaseController
             $trimmedEvents = [];
             foreach ($events as $event) {
                 $photos = $event->getPhotos();
-                if($photos){
+                if ($photos) {
                     foreach ($photos as $photo) {
                         // first photo only
                         array_push(
@@ -66,7 +66,7 @@ class HomeController extends BaseController
                         );
                         break;
                     }
-                }else{
+                } else {
                     return null;
                 }
             }
