@@ -14,6 +14,7 @@ use Encore\CustomerBundle\Entity\User;
 
 class AuthenticationHelper
 {
+
     /**
      * @var SecurityContext
      */
@@ -23,7 +24,6 @@ class AuthenticationHelper
      * @var EntityManager
      */
     private $em;
-
 
     public function __construct(SecurityContext $sc, EntityManager $em)
     {

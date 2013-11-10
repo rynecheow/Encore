@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class EventPhoto
 {
+
     /**
      * @var integer
      *
@@ -79,6 +80,7 @@ class EventPhoto
      * Set imagePath
      *
      * @param string $imagePath
+     *
      * @return EventPhoto
      */
     public function setImagePath($imagePath)
@@ -102,6 +104,7 @@ class EventPhoto
      * Set image
      *
      * @param File $image
+     *
      * @return EventPhoto
      */
     public function setImage(File $image)
@@ -130,6 +133,7 @@ class EventPhoto
      * Set caption
      *
      * @param string $caption
+     *
      * @return EventPhoto
      */
     public function setCaption($caption)
@@ -153,6 +157,7 @@ class EventPhoto
      * Set product
      *
      * @param \Encore\CustomerBundle\Entity\Event $product
+     *
      * @return EventPhoto
      */
     public function setEvent(Event $product)

@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EventSection
 {
+
     /**
      * @var integer
      *
@@ -61,7 +62,6 @@ class EventSection
      * @ORM\Column(name="totalSold", type="integer")
      */
     protected $totalSold;
-
 
     /**
      * Get id
@@ -115,6 +115,7 @@ class EventSection
 
     /**
      * @param \Encore\CustomerBundle\Entity\EventSeat[] $eventSeats
+     *
      * @return EventSection
      */
     public function setEventSeats($eventSeats)
@@ -136,6 +137,7 @@ class EventSection
      * Set price
      *
      * @param float $price
+     *
      * @return EventSection
      */
     public function setPrice($price)
@@ -159,6 +161,7 @@ class EventSection
      * Set totalSeats
      *
      * @param integer $totalSeats
+     *
      * @return EventSection
      */
     public function setTotalSeats($totalSeats)
@@ -182,6 +185,7 @@ class EventSection
      * Set totalSold
      *
      * @param integer $totalSold
+     *
      * @return EventSection
      */
     public function setTotalSold($totalSold)

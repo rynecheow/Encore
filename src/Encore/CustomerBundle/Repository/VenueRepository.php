@@ -12,13 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class VenueRepository extends EntityRepository
 {
+
     public function findAllLocation()
     {
         return $this->getEntityManager()
-                    ->createQuery
-                      (
-                        "SELECT DISTINCT location FROM EncoreCustomerBundle:Venue"
-                      )
-                    ->getResult();
+            ->createQuery
+            (
+                "SELECT DISTINCT location FROM EncoreCustomerBundle:Venue"
+            )
+            ->getResult();
     }
 }

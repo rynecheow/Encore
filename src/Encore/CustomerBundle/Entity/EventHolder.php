@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EventHolder
 {
+
     /**
      * @var integer
      *
@@ -38,7 +39,7 @@ class EventHolder
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -47,6 +48,7 @@ class EventHolder
 
     /**
      * @param \Encore\CustomerBundle\Entity\Event $event
+     *
      * @return $this
      */
     public function setEvent($event)
@@ -66,6 +68,7 @@ class EventHolder
 
     /**
      * @param \DateTime $heldDate
+     *
      * @return $this
      */
     public function setHeldDate($heldDate)

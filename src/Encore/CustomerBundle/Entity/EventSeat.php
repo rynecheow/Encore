@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EventSeat
 {
+
     /**
      * @var integer
      *
@@ -60,6 +61,7 @@ class EventSeat
 
     /**
      * @param \Encore\CustomerBundle\Entity\EventSection $eventSection
+     *
      * @return EventSeat
      */
     public function setEventSection($eventSection)
@@ -77,6 +79,7 @@ class EventSeat
 
     /**
      * @param \Encore\CustomerBundle\Entity\Seat $seat
+     *
      * @return EventSeat
      */
     public function setSeat($seat)
@@ -94,6 +97,7 @@ class EventSeat
 
     /**
      * @param \Encore\CustomerBundle\Entity\Ticket $ticket
+     *
      * @return EventSeat
      */
     public function setTicket($ticket)
@@ -115,6 +119,7 @@ class EventSeat
      * Set status
      *
      * @param integer $status
+     *
      * @return EventSeat
      */
     public function setStatus($status)

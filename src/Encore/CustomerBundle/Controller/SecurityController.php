@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 
 class SecurityController extends BaseSecurityController
 {
+
     public function loginAction(Request $request)
     {
         $sc = $this->container->get('security.context');
@@ -19,13 +20,11 @@ class SecurityController extends BaseSecurityController
             return new RedirectResponse($url);
         }
 
-
         if ($sc->isGranted('ROLE_MERCHANT')) {
             $url = $this->container->get('router')->generate('encore_merchant_home');
 
             return new RedirectResponse($url);
         }
-
 
         return parent::loginAction($request);
     }
