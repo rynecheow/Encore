@@ -339,7 +339,7 @@ class AuthenticationController extends BaseController
                 ]
             )
             ->add(
-                'complete registration',
+                'complete_registration',
                 'submit',
                 [
                     'attr' => [
