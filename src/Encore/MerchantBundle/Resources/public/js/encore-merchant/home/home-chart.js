@@ -3,7 +3,7 @@ require(['domReady'],
         domReady(
             function () {
                 // Create our graph from the data table and specify a container to put the graph in
-                createGraph('#data-table', '.chart');
+                createGraph('#data-table', '.merchant-analytics-wrapper');
 
                 // Here be graphs
                 function createGraph(data, container) {
@@ -147,14 +147,14 @@ require(['domReady'],
                     });
                     yAxisList.appendTo(graphContainer);
 
-                    // Add bars to graph
-                    barContainer.appendTo(graphContainer);
-
-                    // Add graph to graph container
-                    graphContainer.appendTo(figureContainer);
-
-                    // Add graph container to main container
-                    figureContainer.appendTo(container);
+//                    // Add bars to graph
+//                    barContainer.appendTo(graphContainer);
+//
+//                    // Add graph to graph container
+//                    graphContainer.appendTo(figureContainer);
+//
+//                    // Add graph container to main container
+//                    figureContainer.appendTo(container);
 
                     // Set individual height of bars
                     function displayGraph(bars, i) {
@@ -173,32 +173,32 @@ require(['domReady'],
                     }
 
                     // Reset graph settings and prepare for display
-                    function resetGraph() {
-                        // Stop all animations and set bar height to 0
-                        $.each(bars, function (i) {
-                            $(bars[i].bar).stop().css('height', 0);
-                        });
-
-                        // Clear timers
-                        clearTimeout(barTimer);
-                        clearTimeout(graphTimer);
-
-                        // Restart timer
-                        graphTimer = setTimeout(function () {
-                            displayGraph(bars, 0);
-                        }, 200);
-                    }
-
-                    // Helper functions
-
-                    // Call resetGraph() when button is clicked to start graph over
-                    $('#reset-graph-button').click(function () {
-                        resetGraph();
-                        return false;
-                    });
+//                    function resetGraph() {
+//                        // Stop all animations and set bar height to 0
+//                        $.each(bars, function (i) {
+//                            $(bars[i].bar).stop().css('height', 0);
+//                        });
+//
+//                        // Clear timers
+//                        clearTimeout(barTimer);
+//                        clearTimeout(graphTimer);
+//
+//                        // Restart timer
+//                        graphTimer = setTimeout(function () {
+//                            displayGraph(bars, 0);
+//                        }, 200);
+//                    }
+//
+//                    // Helper functions
+//
+//                    // Call resetGraph() when button is clicked to start graph over
+//                    $('#reset-graph-button').click(function () {
+//                        resetGraph();
+//                        return false;
+//                    });
 
                     // Finally, display graph via reset function
-                    resetGraph();
+//                    resetGraph();
                 }
             }
         );

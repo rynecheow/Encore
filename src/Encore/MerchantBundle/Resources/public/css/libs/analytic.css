@@ -30,65 +30,65 @@ a {
 }
 
 /* Table */
-#data-table {
-    border: none; /* Turn off all borders */
-    border-top: 1px solid #ccc;
-    width: 540px;
-}
+/*#data-table {*/
+    /*border: none; *//* Turn off all borders */
+    /*border-top: 1px solid #ccc;*/
+    /*width: 540px;*/
+/*}*/
 
-#data-table caption {
-    color: #545454;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 20px;
-    margin: 0 0 20px 0;
-    padding: 0;
-    text-align: center;
-}
+/*#data-table caption {*/
+    /*color: #545454;*/
+    /*font-size: 14px;*/
+    /*font-weight: normal;*/
+    /*line-height: 20px;*/
+    /*margin: 0 0 20px 0;*/
+    /*padding: 0;*/
+    /*text-align: center;*/
+/*}*/
 
-#data-table thead {
-    background: #f0f0f0;
-}
+/*#data-table thead {*/
+    /*background: #f0f0f0;*/
+/*}*/
 
-#data-table th,
-#data-table td {
-    border: none; /* Turn off all borders */
-    border-bottom: 1px solid #ccc;
-    margin: 0;
-    padding: 10px;
-    text-align: left;
-}
+/*#data-table th,*/
+/*#data-table td {*/
+    /*border: none; *//* Turn off all borders */
+    /*border-bottom: 1px solid #ccc;*/
+    /*margin: 0;*/
+    /*padding: 10px;*/
+    /*text-align: left;*/
+/*}*/
 
 /* Toggle */
-.toggles {
-    background: #ebebeb;
-    color: #545454;
-    height: 20px;
-    padding: 15px;
-}
+/*.toggles {*/
+    /*background: #ebebeb;*/
+    /*color: #545454;*/
+    /*height: 20px;*/
+    /*padding: 15px;*/
+/*}*/
 
-.toggles p {
-    margin: 0;
-}
+/*.toggles p {*/
+    /*margin: 0;*/
+/*}*/
 
-.toggles a {
-    background: #222;
-    border-radius: 3px;
-    color: #fff;
-    display: block;
-    float: left;
-    margin: 0 10px 0 0;
-    padding: 0 6px;
-    text-decoration: none;
-}
+/*.toggles a {*/
+    /*background: #222;*/
+    /*border-radius: 3px;*/
+    /*color: #fff;*/
+    /*display: block;*/
+    /*float: left;*/
+    /*margin: 0 10px 0 0;*/
+    /*padding: 0 6px;*/
+    /*text-decoration: none;*/
+/*}*/
 
-.toggles a:hover {
-    background: #666;
-}
+/*.toggles a:hover {*/
+    /*background: #666;*/
+/*}*/
 
-#reset-graph-button {
-    float: right;
-}
+/*#reset-graph-button {*/
+    /*float: right;*/
+/*}*/
 
 /* Graph */
 /* Containers */
@@ -173,7 +173,7 @@ a {
 .y-axis li {
     border-top: 1px solid #ccc;
     display: block;
-    height: 62px;
+    height: 50px;
     width: 100%;
 }
 
@@ -207,20 +207,20 @@ a {
     height: 0;
     position: absolute;
     text-align: center;
-    width: 24px;
+    width: 50px;
 }
 
-.bar.fig0 {
-    left: 0;
-}
+/*.bar.fig0 {*/
+    /*left: 0;*/
+/*}*/
 
 .bar.fig1 {
-    left: 26px;
+    left: 12px;
 }
 
-.bar.fig2 {
-    left: 52px;
-}
+/*.bar.fig2 {*/
+    /*left: 52px;*/
+/*}*/
 
 .bar span {
     background: #fefefe;
@@ -247,17 +247,17 @@ a {
 }
 
 .bar span {
-    background: #fefefe url(../images/info-bg.gif) 0 100% repeat-x;
+    background: #fefefe;
 }
 
 .fig0 {
-    background: #747474 url(../images/bar-01-bg.gif) 0 0 repeat-y;
+    background: #747474 ;
 }
 
 .fig1 {
-    background: #65c2e8 url(../images/bar-02-bg.gif) 0 0 repeat-y;
+    background: #65c2e8 ;
 }
 
 .fig2 {
-    background: #eea151 url(../images/bar-03-bg.gif) 0 0 repeat-y;
+    background: #eea151;
 }

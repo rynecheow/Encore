@@ -6,3 +6,19 @@ services:
             - @security.context
             - @doctrine.orm.entity_manager
     # </helper>
+
+    # <form>
+    encore_merchant.file_type_extension:
+        class: Encore\MerchantBundle\Form\Extension\FileTypeExtension
+        arguments:
+            - @encore_merchant.validator_helper
+        tags:
+            - { name: form.type_extension, alias: file }
+    # </form>
+
+    # <helpers>
+    encore_merchant.validator_helper:
+        class: Encore\MerchantBundle\Services\ValidatorHelper
+        arguments:
+            - @validator
+    # </helper>
