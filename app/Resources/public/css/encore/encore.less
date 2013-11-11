@@ -1064,38 +1064,40 @@ nav {
     }
   }
 
-  table.seatTable {
-    margin-top: 50px;
+  div#seatAllocateDiv {
+    .table-wrapper {
+      width: 800px;
+      overflow: auto;
 
-    tbody tr td {
-      width: 30px;
-      height: 30px;
+      table.seatTable {
 
-      div {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-      }
+        tbody tr{
+          td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+          }
 
-      div.tableLabel {
-        background: lightgoldenrodyellow;
-      }
+          td.tableLabel {
+            background: lightgoldenrodyellow;
+          }
 
-      div.empty {
-        background: green;
-      }
+          td.empty {
+            background: green;
+          }
 
-      div.selected {
-        background: yellow;
-      }
+          td.selected {
+            background: yellow;
+          }
 
-      div.locked {
-        background: orange;
-      }
+          td.locked {
+            background: orange;
+          }
 
-      div.sold {
-        background: red;
+          td.sold {
+            background: red;
+          }
+        }
       }
     }
   }

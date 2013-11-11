@@ -31,14 +31,14 @@ require(['domReady'],
                 /**
                  * Called when a seat is selected
                  */
-                $("table.seatTable tbody tr td div").click(function (e) {
+                $("table.seatTable tbody tr td").click(function (e) {
                     var target, str, endOfRow, endOfCol, colValue, rowValue, totalCol, previousCol, nextCol, middlePreviousCol, middleNextCol, previousDiv, previousTwoDiv, nextDiv, nextTwoDiv, difference, selectedSeats, rowLabel;
                     target = $(e.target);
                     str = target.attr("id");
-                    endOfRow = str.indexOf("row");
+                    endOfRow = str.indexOf("row") + 3;
                     endOfCol = str.indexOf("col") + 3;
                     colValue = parseInt(str.substring(endOfCol, str.length), 10);
-                    rowValue = parseInt(str.substring(0, endOfRow), 10);
+                    rowValue = parseInt(str.substring(endOfRow, str.indexOf("col")), 10);
 
                     totalCol = parseInt($("table.seatTable tbody tr[id='row" + rowValue + "'] td").length, 10) - 1;
                     previousCol = parseInt(colValue - 2, 10);
@@ -47,14 +47,14 @@ require(['domReady'],
                     middlePreviousCol = parseInt(colValue - 1, 10);
                     middleNextCol = parseInt(colValue + 1, 10);
 
-                    previousDiv = $("#" + rowValue + "rowcol" + middlePreviousCol);
-                    previousTwoDiv = $("#" + rowValue + "rowcol" + previousCol);
+                    previousDiv = $("#row" + rowValue + "col" + middlePreviousCol);
+                    previousTwoDiv = $("#row" + rowValue + "col" + previousCol);
 
-                    nextDiv = $("#" + rowValue + "rowcol" + middleNextCol);
-                    nextTwoDiv = $("#" + rowValue + "rowcol" + nextCol);
+                    nextDiv = $("#row" + rowValue + "col" + middleNextCol);
+                    nextTwoDiv = $("#row" + rowValue + "col" + nextCol);
 
                     if (target.hasClass("empty")) {
-                        difference = parseInt($("#ticketQtySelector").val() - $("table.seatTable tbody tr td div.selected").length, 10);
+                        difference = parseInt($("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length, 10);
                         if (difference !== 0) {
                             if (previousDiv.hasClass("empty")) {
                                 if (previousTwoDiv.hasClass("selected")) {
@@ -108,22 +108,22 @@ require(['domReady'],
                         popupMessageError("You cannot select a seat which is currently locked.");
                     }
 
-                    selectedSeats = $("table.seatTable tbody tr td div.selected");
+                    selectedSeats = $("table.seatTable tbody tr td.selected");
                     selectedSeats.sort();
                     $("#seatAllocationLabel").html("");
                     $.each(selectedSeats, function (index, target) {
                         str = $(target).attr("id");
-                        endOfRow = str.indexOf("row");
+                        endOfRow = str.indexOf("row") + 3;
                         endOfCol = str.indexOf("col") + 3;
                         colValue = parseInt(str.substring(endOfCol, str.length), 10);
-                        rowValue = parseInt(str.substring(0, endOfRow), 10);
-                        rowLabel = $("tr[id='row" + rowValue + "'] td div.tableLabel").text();
+                        rowValue = parseInt(str.substring(endOfRow, str.indexOf("col")), 10);
+                        rowLabel = $("tr[id='row" + rowValue + "'] td.tableLabel").text();
                         colValue = colValue + 1;
                         rowValue = rowValue + 1;
                         $("#seatAllocationLabel").append("<p>Row : " + rowLabel + "; Seat No. : " + colValue + "</p>");
                     });
 
-                    difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td div.selected").length;
+                    difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length;
                     $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
                     if (difference > 0) {
                         $("input:submit").attr("hidden", "hidden");
@@ -140,7 +140,7 @@ require(['domReady'],
                  * Reset text in ticket quantity label to value to ticket quantity to purchase
                  */
                 function resetSeats() {
-                    $("table.seatTable tbody tr td div.selected").each(function () {
+                    $("table.seatTable tbody tr td.selected").each(function () {
                         $(this).attr("class", "empty");
                     });
                     $("#seatAllocationLabel").html("");
@@ -282,7 +282,7 @@ require(['domReady'],
                     var value, selectedLength, difference;
                     hideSeatAllocateStep(false);
                     value = parseInt($("#ticketQtySelector").val(), 10);
-                    selectedLength = $("table.seatTable tbody tr td div.selected").length;
+                    selectedLength = $("table.seatTable tbody tr td.selected").length;
                     if (value < selectedLength) {
                         parseInt($("#ticketQtySelector").val(selectedLength));
                         popupMessageError("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
@@ -291,7 +291,7 @@ require(['domReady'],
                         hideSubmitButton(true);
                         hideSeatAllocateStep(true);
                     } else {
-                        difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td div.selected").length;
+                        difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length;
                         $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
                         if (difference > 0) {
                             $("input:submit").attr("hidden", "hidden");
@@ -308,16 +308,16 @@ require(['domReady'],
                  */
                 $("form").submit(function () {
                     var form, selectedSeats, seatFlag;
-                    selectedSeats = $("table.seatTable tbody tr td div.selected");
+                    selectedSeats = $("table.seatTable tbody tr td.selected");
                     seatFlag = true;
                     if (selectedSeats.length > 0) {
                         $.each(selectedSeats, function (index, target) {
                             var str, endOfRow, endOfCol, colValue, rowValue, previousCol, nextCol, middlePreviousCol, middleNextCol, previousDiv, previousTwoDiv, nextDiv, nextTwoDiv;
                             str = $(target).attr("id");
-                            endOfRow = str.indexOf("row");
+                            endOfRow = str.indexOf("row") + 3;
                             endOfCol = str.indexOf("col") + 3;
                             colValue = parseInt(str.substring(endOfCol, str.length), 10);
-                            rowValue = parseInt(str.substring(0, endOfRow), 10);
+                            rowValue = parseInt(str.substring(endOfRow, str.indexOf("col")), 10);
 
                             previousCol = parseInt(colValue - 2, 10);
                             nextCol = parseInt(colValue + 2, 10);
@@ -325,11 +325,11 @@ require(['domReady'],
                             middlePreviousCol = parseInt(colValue - 1, 10);
                             middleNextCol = parseInt(colValue + 1, 10);
 
-                            previousDiv = $("#" + rowValue + "rowcol" + middlePreviousCol);
-                            previousTwoDiv = $("#" + rowValue + "rowcol" + previousCol);
+                            previousDiv = $("#row" + rowValue + "col" + middlePreviousCol);
+                            previousTwoDiv = $("#row" + rowValue + "col" + previousCol);
 
-                            nextDiv = $("#" + rowValue + "rowcol" + middleNextCol);
-                            nextTwoDiv = $("#" + rowValue + "rowcol" + nextCol);
+                            nextDiv = $("#row" + rowValue + "col" + middleNextCol);
+                            nextTwoDiv = $("#row" + rowValue + "col" + nextCol);
 
                             if (previousDiv.hasClass("empty") && previousTwoDiv.hasClass("selected")) {
                                 seatFlag = false;

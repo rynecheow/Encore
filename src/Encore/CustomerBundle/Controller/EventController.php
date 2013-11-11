@@ -35,7 +35,7 @@ class EventController extends BaseController
 
         $merchant = $event->getCreator();
 
-        if (!$venue) {
+        if (!$merchant) {
             throw $this->createNotFoundException("No merchant found for id " . $merchant->getId() . " WHYYYYY!");
         }
 
