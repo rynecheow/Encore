@@ -6,6 +6,7 @@
 /app/logs/*
 /app/config/parameters.yml
 /app/phpunit.xml
+/app/var/sessions/*
 /build/
 /vendor/
 /bin/
