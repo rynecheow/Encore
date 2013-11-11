@@ -1,7 +1,0 @@
-encore_merchant_welcome:
-  resource: "@EncoreMerchantBundle/Controller/HomeController.php"
-  type:     annotation
-
-encore_merchant_event:
-  resource:  "@EncoreMerchantBundle/Controller/EventController.php"
-  type:     annotation
