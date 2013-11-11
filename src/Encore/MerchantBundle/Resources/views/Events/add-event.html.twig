@@ -12,8 +12,73 @@
 {% block content %}
     <article class="create-event-wrap">
         <div class="create-event-container">
+            <h2>Create Your Event</h2>
+            <br/>
+
             <form class="merchant-add-form" action="{{ path('encore_merchant_add_event') }}" method="POST">
-                {{ form(form) }}
+                <div>
+                    <span class="class-label">Event Name</span>
+                    <input type="text" class="merchant-add-textbox" name="event_name" data-required="true"
+                           data-trigger="keyup"
+                           data-required-message="Please enter your event name"/>
+                </div>
+                <div>
+                    <span class="class-label">Event Type</span>
+                    <input type="text" class="merchant-add-textbox" name="event_type" data-required="true"
+                           data-trigger="keyup"
+                           data-required-message="Please enter your event type"/>
+                </div>
+                <div>
+                    <span class="class-label">Event Description</span>
+                    <textarea type="text" class="merchant-add-textbox" name="event_description" data-required="true"
+                              data-trigger="keyup"
+                              data-required-message="Please enter your event description" style="resize:none;"
+                              data-rangelength="[20,200]"></textarea>
+                </div>
+                <div>
+                    <span class="class-label">Event Sale Start</span>
+                    <input type="text" class="merchant-add-textbox datepicker" name="event_sale_start"
+                           data-required="true" data-trigger="change"
+                           data-required-message="Please enter your event sale start date" readonly/>
+                </div>
+                <div>
+                    <span class="class-label">Event Sale End</span>
+                    <input type="text" class="merchant-add-textbox datepicker" name="event_sale_end"
+                           data-required="true" data-trigger="change"
+                           data-required-message="Please enter your event sale end date" readonly/>
+                </div>
+                <div>
+                    <span class="class-label">Event Location</span>
+                    <select class="merchant-location" name="event_location" data-required="true" data-trigger="change"
+                            data-required-message="Please enter your event location">
+                        <option value>Please Select Location</option>
+                        {% for key , location in locations %}
+                            {% for key in location %}
+                                <option value="{{ key }}"> {{ key }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="venue-div" style="display:none;">
+                    <span class="class-label label-venue">Event Venue</span>
+                    <select class="merchant-venue" name="event_venue" data-required="true" data-trigger="change"
+                            data-required-message="Please enter your event venue">
+                        <option value>Please Select Venue</option>
+                    </select>
+                </div>
+                <div class="section-div" style="display:none;">
+                    <table class="section-table">
+                        <tr>
+                            <th><span>Id</span></th>
+                            <th><span>Section Name</span></th>
+                            <th><span>Total Seats</span></th>
+                            <th><span>Seats Price ($)</span></th>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <input type="submit" value="submit"/>
             </form>
         </div>
     </article>
@@ -21,19 +86,27 @@
     <script type="application/javascript">
         $(function () {
                     $('.merchant-location').on("change", ajaxLocation);
+                    $('.merchant-venue').on("change", ajaxVenue);
+
                     function ajaxLocation(e) {
+
+
                         var location = $(".merchant-location").val();
 
-                        console.log(location);
                         $.post(
                                 "{{ path('encore_venue_location') }}",
                                 {
                                     "location": location
                                 },
                                 function (response) {
+                                    if ($(".merchant-location").prop("selectedIndex") === 0) {
+                                        $('.section-div').css("display", "none");
+                                        $('.venue-div').css("display", "none");
+                                        return;
+                                    }
+
                                     if (response.code == 200) {
-                                        console.log("respone is %o", response);
-                                        console.log(response.venues[0]["name"]);
+
                                         createVenueForm(response.venues);
                                         return true;
                                     } else {
@@ -45,43 +118,86 @@
                         );
                     }
 
+                    function ajaxVenue(e) {
 
-                   function createVenueForm(array)
-                   {
-                       var venueLabel =  $(".label-venue"),
-                           venueDiv = $(".merchant-venue");
+                        var venue = $(".merchant-venue").val();
+                        console.log(venue);
+                        $('.section-div').css("display", "inline");
 
-                       venueLabel.css("display" , "inline");
-                       venueDiv.css("display" , "inline");
+                        $.post(
+                                "{{ path('encore_venue_section') }}",
+                                {
+                                    "venueId": venue
+                                },
+                                function (response) {
+                                    if ($(".merchant-venue").prop("selectedIndex") === 0) {
+                                        $('.section-div').css("display", "none");
+                                        return;
+                                    }
+
+                                    if (response.code == 200) {
+                                        console.log("section %o", response);
+                                        createSectionForm(response.sections);
+                                        return true;
+                                    } else {
+
+                                        return false;
+                                    }
+                                },
+                                "json"
+                        );
+                    }
 
 
-//                       venueDiv.html("<br />");
-                       $.each(array, function(index, valueData) {
-                           console.log("time");
+                    function createVenueForm(array) {
+                        if (array === undefined || array === null) {
+                            return;
+                        }
 
-                           $("<input/>").attr({
-                               type : "radio",
-                               id: "form_event_venue_" + index,
-                               name : "form[event_venue]",
-//                               required : "required",
-                               value : valueData["name"]
-//                               class : "parsley-validated"
-                           }).appendTo(venueDiv);
+                        $('.venue-div').css("display", "inline");
 
-                           $("<label/>").attr({
-                                for : "form_event_venue_" + index
-//                                class: "required"
-                           }).html(valueData["name"]).appendTo(venueDiv);
-                       });
+                        var venueSelect = $('.merchant-venue');
+
+                        $.each(array, function (index, valueData) {
+                            $(document.createElement("option")).attr({
+                                value: valueData["id"]
+                            }).html(valueData["name"]).appendTo(venueSelect);
+                        });
+
+                    }
+
+                    function createSectionForm(array) {
+                        if (array === undefined || array === null) {
+                            return;
+                        }
+
+                        $('.section-div').css("display", "inline");
+                        var sectionTable = $('.section-table');
 
 
+                        $.each(array, function (index, valueData) {
 
-                   }
+                            var price = $("<input/>").attr({
+                                "data-required": "true",
+                                "data-trigger": "change",
+                                "data-required-message": "Please enter your seats price",
+                                "data-type": "number"
+                            });
 
-                    function createSectionForm()
-                    {
-                        var sectionLabel = $(".label-section"),
-                                sectionDiv = $(".merchant-section");
+                            var idTd = $(document.createElement("td")),
+                                    nameTd = $(document.createElement("td")),
+                                    seatsTd = $(document.createElement("td")),
+                                    priceTd = $(document.createElement("td")),
+                                    row = $(document.createElement("tr"));
+
+                            idTd.html(valueData["id"]).appendTo(row);
+                            nameTd.html(valueData["name"]).appendTo(row);
+                            seatsTd.html(valueData["total_seats"]).appendTo(row);
+                            priceTd.html(price).appendTo(row);
+
+                            row.appendTo(sectionTable);
+                        });
+
                     }
                 }
         );
