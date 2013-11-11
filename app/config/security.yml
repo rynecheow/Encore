@@ -49,7 +49,7 @@ security:
             request_matcher: encore.customer.request_matcher
             form_login:
                 provider: fos_userbundle
-                csrf_provider: form.csrf_provider
+#                csrf_provider: form.csrf_provider
                 login_path:                         "%encore.route_prefix.customer%/login"
                 use_forward:                        false
                 check_path:                         "%encore.route_prefix.customer%/login_check"
@@ -69,7 +69,7 @@ security:
             request_matcher: encore.merchant.request_matcher
             form_login:
                 provider: fos_userbundle
-                csrf_provider: form.csrf_provider
+#                csrf_provider: form.csrf_provider
                 login_path:                         "%encore.route_prefix.merchant%/login"
                 use_forward:                        false
                 check_path:                         "%encore.route_prefix.merchant%/login_check"
