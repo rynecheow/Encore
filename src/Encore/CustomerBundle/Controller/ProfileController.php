@@ -99,14 +99,20 @@ class ProfileController extends BaseController
             $this->gotoHome();
         }
 
+        /**
+         * @var $user User
+         */
+        $user = $this->authenticatedUser;
+
         $form = $this->createEditProfileForm();
+
 
         return $this->render(
             "EncoreCustomerBundle:User:profile.html.twig",
             [
-                'username' => 'kokhong'
+                'username' => $user->getUsername()
                 ,
-                'email' => 'kokhong200gmail.com'
+                'email' => $user->getEmail()
                 ,
                 'firstname' => 'Kok Hong'
                 ,
@@ -164,9 +170,9 @@ class ProfileController extends BaseController
                     ],
                     'label' => 'First Name'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $fname
                 ]
@@ -184,9 +190,9 @@ class ProfileController extends BaseController
                     ],
                     'label' => 'Last Name'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $lname
                 ]
@@ -196,17 +202,18 @@ class ProfileController extends BaseController
                 'text',
                 [
                     'attr' => [
-                        'class' => 'edit-bday',
+                        'class' => 'edit-bday datepicker',
                         'placeholder' => $bdate,
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your birth date.',
+                        'readonly' => ''
                     ],
                     'label' => 'Birth Date'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $bdate
                 ]
@@ -225,9 +232,9 @@ class ProfileController extends BaseController
                     ],
                     'label' => 'Contact No'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $contactno
                 ]
@@ -247,9 +254,9 @@ class ProfileController extends BaseController
                     ],
                     'label' => 'Address'
                     ,
-                    'label_attr' => array(
+                    'label_attr' => [
                         'class' => 'class-label'
-                    )
+                    ]
                     ,
                     'data' => $address
                 ]
