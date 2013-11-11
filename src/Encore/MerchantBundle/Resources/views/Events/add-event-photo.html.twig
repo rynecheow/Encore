@@ -1,0 +1,10 @@
+<form action="{{ path("encore_merchant_add_event_photo", {"eventId" : eventId}) }}" method="POST" {{ form_enctype(form) }}>
+    {{ form(form) }}
+</form>
+{% if uploadedPhotos is not empty %}
+
+    {% for uploadedPhoto in uploadedPhotos %}
+        <img src="{{ vich_uploader_asset(uploadedPhoto, 'image') }}" alt="{{ uploadedPhoto.caption }}" />
+    {% endfor %}
+
+{% endif %}

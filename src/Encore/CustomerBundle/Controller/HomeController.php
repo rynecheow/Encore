@@ -28,7 +28,7 @@ class HomeController extends BaseController
          * @var $eventManager \Encore\CustomerBundle\Model\EventManager
          */
         $eventManager = $this->get('encore.event_manager');
-        $featured = $eventManager->getFeaturedEvents(5);
+        $featured = $eventManager->getFeaturedEvents(2);
         $featuredEvents = $this->trimEvents($featured);
         //only can be published featured event
         $new = $eventManager->getNewEvents(10);
