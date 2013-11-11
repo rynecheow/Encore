@@ -12,6 +12,14 @@
 {% block content %}
     <article class="seat-selection article">
         <div class="seat-selection-wrap">
+            <div id='errorMessageContainer' style='display: none;'>
+                <div id='errorMessageDiv' class='alert'>
+                    <strong>Warning!</strong>
+                    <ul>
+                        <li id='errorMessage' />
+                    </ul>
+                </div>
+            </div>
             <div id="selectDateDiv">
                 <label>Date:</label>
                 <select id="dateList">
