@@ -3,6 +3,9 @@ require(['domReady'],
         domReady(
             function () {
                 $(function () {
+
+                        $('.datepicker').datepicker();
+                        
                         var view = $(".view-profile");
                         var edit = $(".edit-profile");
                         var history = $(".history-profile");

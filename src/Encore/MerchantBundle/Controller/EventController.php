@@ -30,73 +30,90 @@ class EventController extends Controller
      */
     public function indexAction()
     {
-        return $this->render("EncoreMerchantBundle::Events:index.html.twig");
+        return $this->render("EncoreMerchantBundle:Ev=ents:index.html.twig");
     }
 
     /**
      * @Route("/events/add", name="encore_merchant_add_event")
+     *
      */
-    public function addAction(Request $request)
+    public function addAction()
     {
-        $allVenueLocations = $this->em->getRepository("EncoreCustomerBundle:Venue")
-            ->findAllLocation();
-        $newEvent = new Event();
-        $createEventForm = $this->createEventForm($newEvent, $allVenueLocations);
-        $createEventForm->handleRequest($request);
-
-        if ($createEventForm->isValid()) {
-            /**
-             * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
-             */
-            $selectedVenueId = $createEventForm->get("venue")->getData();
-            $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
-                ->find($selectedVenueId);
-            $newEvent->setVenue($selectedVenue)
-                ->setPublish(false);
-            $this->em->persist($newEvent);
-            $this->em->flush();
-            $heldDates = $createEventForm->get("heldDates")->getData();
-
-            foreach ($heldDates as $heldDate) {
-                $eventHolder = new EventHolder();
-                $eventHolder->setHeldDate($heldDate)
-                    ->setEvent($newEvent);
-                $this->em->persist($eventHolder);
-                $this->em->flush();
-
-                $sections = $newEvent->getVenue()->getSections();
-
-                /**
-                 * @var $section \Encore\CustomerBundle\Entity\Section
-                 */
-                foreach ($sections as $section) {
-                    $seats = $section->getSeats();
-                    $eventSectionPrice = $createEventForm->get($section->getName())->getData();
-                    $eventSection = new EventSection();
-                    $eventSection->setEventHolder($eventHolder)
-                        ->setSection($section)
-                        ->setPrice($eventSectionPrice)
-                        ->setTotalSeats(count($seats))
-                        ->setTotalSold(0);
-                    $this->em->persist($eventSection);
-                    $this->em->flush();
-
-//                foreach ($seats as $seat)
-//                {
-//                    $eventSeat = new EventSeat();
-//                    $eventSeat->setSeat($seat)
-//                              ->setStatus(0)
-//                              ->setEventSection($eventSection);
-//                    $this->em->persist($eventSeat);
-//                    $this->em->flush();
-//                }
-                }
+        /* Convert To Key To Key Array */
+        $allVenueLocations = $this->em->getRepository("EncoreCustomerBundle:Venue")->findAllLocation();
+        $array = json_decode(json_encode($allVenueLocations), true);
+        $allLocations = [];
+        foreach ($array as $allVenueLocation) {
+            foreach ($allVenueLocation as $value) {
+                $allLocations[] = [
+                    $value => $value
+                ];
             }
-
-            return $this->render("EncoreMerchantBundle::Events:index.html.twig");
         }
 
-        return $this->render("EncoreMerchantBundle::Events:add-event.html.twig");
+
+        $request = $this->getRequest();
+
+        if ($request->getMethod() === "POST") {
+            $formData = $request->request->all();
+
+//            if ($createEventForm->isValid()) {
+//                /**
+//                 * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
+//                 */
+            //            $selectedVenueId = $createEventForm->get("venue")->getData();
+            //            $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
+            //                ->find($selectedVenueId);
+            //            $newEvent->setVenue($selectedVenue)
+            //                ->setPublish(false);
+            //            $this->em->persist($newEvent);
+            //            $this->em->flush();
+            //            $heldDates = $createEventForm->get("heldDates")->getData();
+            //
+            //            foreach ($heldDates as $heldDate) {
+            //                $eventHolder = new EventHolder();
+            //                $eventHolder->setHeldDate($heldDate)
+            //                    ->setEvent($newEvent);
+            //                $this->em->persist($eventHolder);
+            //                $this->em->flush();
+            //
+            //                $sections = $newEvent->getVenue()->getSections();
+            //
+            //                /**
+            //                 * @var $section \Encore\CustomerBundle\Entity\Section
+            //                 */
+            //                foreach ($sections as $section) {
+            //                    $seats = $section->getSeats();
+            //                    $eventSectionPrice = $createEventForm->get($section->getName())->getData();
+            //                    $eventSection = new EventSection();
+            //                    $eventSection->setEventHolder($eventHolder)
+            //                        ->setSection($section)
+            //                        ->setPrice($eventSectionPrice)
+            //                        ->setTotalSeats(count($seats))
+            //                        ->setTotalSold(0);
+            //                    $this->em->persist($eventSection);
+            //                    $this->em->flush();
+
+            //                foreach ($seats as $seat)
+            //                {
+            //                    $eventSeat = new EventSeat();
+            //                    $eventSeat->setSeat($seat)
+            //                              ->setStatus(0)
+            //                              ->setEventSection($eventSection);
+            //                    $this->em->persist($eventSeat);
+            //                    $this->em->flush();
+            //                }
+            return $this->render("EncoreMerchantBundle:Events:index.html.twig");
+//            }
+//            //            }}
+        }
+
+        return $this->render(
+            "EncoreMerchantBundle:Events:add-event.html.twig",
+            [
+                "locations" => $allLocations
+            ]
+        );
     }
 
     /**
@@ -163,7 +180,7 @@ class EventController extends Controller
                          */
                         foreach ($sections as $section) {
                             $seats = $section->getSeats();
-                            $eventSectionPrice = $createEventForm->get($section->getName())->getData();
+                            $eventSectionPrice = $editEventForm->get($section->getName())->getData();
                             $eventSection = new EventSection();
                             $eventSection->setEventHolder($eventHolder)
                                 ->setSection($section)
@@ -200,7 +217,7 @@ class EventController extends Controller
                              */
                             foreach ($sections as $section) {
                                 $seats = $section->getSeats();
-                                $eventSectionPrice = $createEventForm->get($section->getName())->getData();
+                                $eventSectionPrice = $editEventForm->get($section->getName())->getData();
                                 $eventSection = new EventSection();
                                 $eventSection->setEventHolder($eventHolder)
                                     ->setSection($section)
@@ -215,16 +232,20 @@ class EventController extends Controller
                 }
             }
 
-            return $this->render("EncoreMerchantBundle::Events:index.html.twig");
+            return $this->render("EncoreMerchantBundle:Events:index.html.twig");
         }
 
-        return $this->render("EncoreMerchantBundle::Events:edit-event.html.twig");
+        return $this->render("EncoreMerchantBundle:Events:edit-event.html.twig");
     }
 
+    /**
+     * @Route("/venue-location", name="encore_venue_location")
+     * @Method("POST")
+     */
     public function getLocationVenue()
     {
-        $request = $this->getRequest("request");
-        $location = $request->query->get("location");
+        $request = $this->getRequest();
+        $location = $request->get("location");
         $venues = $this->em->getRepository("EncoreCustomerBundle:Venue")
             ->findByLocation($location);
         $venuesInfo = [];
@@ -245,13 +266,18 @@ class EventController extends Controller
             "venues" => $venuesInfo
         ];
 
+        //TODO Response for array 0
         return new Response(json_encode($response));
     }
 
+    /**
+     * @Route("/venue-section", name="encore_venue_section")
+     * @Method("POST")
+     */
     public function getVenueSection()
     {
-        $request = $this->getRequest("request");
-        $venueId = $request->query->get("venueId");
+        $request = $this->getRequest();
+        $venueId = $request->get("venueId");
         $venue = $this->em->getRepository("EncoreCustomerBundle:Venue")
             ->find($venueId);
         $sections = $venue->getSections();
@@ -313,8 +339,40 @@ class EventController extends Controller
         return new Response(json_encode($response));
     }
 
-    private function createEventForm(Event $event, $allVenueLocation)
+    private function getAllVenueInfo()
     {
-        // TODO: create form for event.
+        $allVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
+            ->findAll();
+        $venuesInfo = [];
+        $i = 0;
+
+        /**
+         * @var $venue \Encore\CustomerBundle\Entity\Venue
+         */
+        foreach ($allVenue as $venue) {
+            $sections = $this->em->getRepository("EncoreCustomerBundle:Section")
+                ->findByVenue($venue);
+            $sectionsInfo = [];
+            $j = 0;
+
+            /**
+             * @var $section \Encore\CustomerBundle\Entity\Section
+             */
+            foreach ($sections as $section) {
+                $sectionsInfo[$j] = [
+                    "id" => $section->getId(),
+                    "name" => $section->getName()
+                ];
+            }
+
+            $venuesInfo[$i] = [
+                "id" => $venue->getId(),
+                "name" => $venue->getName(),
+                "location" => $venue->getLocation(),
+                "sections" => $sectionsInfo
+            ];
+        }
+
+        return $venuesInfo;
     }
 } 

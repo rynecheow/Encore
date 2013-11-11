@@ -1,0 +1,210 @@
+{% extends 'EncoreMerchantBundle::layout.html.twig' %}
+{% block css %}
+    <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/datepicker.css') }}" rel="stylesheet"/>
+{% endblock css %}
+
+{% block require_js %}
+    require(["libs/bootstrap/bootstrap-datepicker"]);
+    require(["encore-merchant/events/create-event"]);
+{% endblock require_js %}
+
+{% block title %}Create An Event {% endblock title %}
+{% block content %}
+    <article class="create-event-wrap">
+        <div class="create-event-container">
+            <h2>Create Your Event</h2>
+            <br/>
+
+            <form class="merchant-add-form" action="{{ path('encore_merchant_add_event') }}" method="POST">
+                <div>
+                    <span class="class-label">Event Name</span>
+                    <input type="text" class="merchant-add-textbox" name="event_name" data-required="true"
+                           data-trigger="keyup"
+                           data-required-message="Please enter your event name"/>
+                </div>
+                <div>
+                    <span class="class-label">Event Type</span>
+                    <select class="merchant-add-textbox" name="event_type" data-required="true"
+                            data-trigger="change" data-required-message="Please select your event type">
+                        <option value="">Please Select An Event Type</option>
+                        <option value="1">Performing Arts</option>
+                        <option value="2">Concert</option>
+                        <option value="3">Art</option>
+                        <option value="4">Exhibition</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="class-label">Event Description</span>
+                    <textarea type="text" class="merchant-add-textbox" name="event_description" data-required="true"
+                              data-trigger="keyup"
+                              data-required-message="Please enter your event description" style="resize:none;"
+                              data-rangelength="[20,200]"></textarea>
+                </div>
+                <div>
+                    <span class="class-label">Event Sale Start</span>
+                    <input type="text" class="merchant-add-textbox datepicker" name="event_sale_start"
+                           data-required="true" data-trigger="change"
+                           data-required-message="Please enter your event sale start date" readonly/>
+                </div>
+                <div>
+                    <span class="class-label">Event Sale End</span>
+                    <input type="text" class="merchant-add-textbox datepicker" name="event_sale_end"
+                           data-required="true" data-trigger="change"
+                           data-required-message="Please enter your event sale end date" readonly/>
+                </div>
+                <div>
+                    <span class="class-label">Event Location</span>
+                    <select class="merchant-location" name="event_location" data-required="true" data-trigger="change"
+                            data-required-message="Please enter your event location">
+                        <option value>Please Select Location</option>
+                        {% for key , location in locations %}
+                            {% for key in location %}
+                                <option value="{{ key }}"> {{ key }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="venue-div" style="display:none;">
+                    <span class="class-label label-venue">Event Venue</span>
+                    <select class="merchant-venue" name="event_venue" data-required="true" data-trigger="change"
+                            data-required-message="Please enter your event venue">
+                        <option value>Please Select Venue</option>
+                    </select>
+                </div>
+                <div class="section-div" style="display:none;">
+                    <table class="section-table">
+                        <tr>
+                            <th><span>Id</span></th>
+                            <th><span>Section Name</span></th>
+                            <th><span>Total Seats</span></th>
+                            <th><span>Seats Price ($)</span></th>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <input type="submit" value="submit"/>
+            </form>
+        </div>
+    </article>
+
+    <script type="application/javascript">
+        $(function () {
+                    $('.merchant-location').on("change", ajaxLocation);
+                    $('.merchant-venue').on("change", ajaxVenue);
+
+                    function ajaxLocation(e) {
+
+
+                        var location = $(".merchant-location").val();
+
+                        $.post(
+                                "{{ path('encore_venue_location') }}",
+                                {
+                                    "location": location
+                                },
+                                function (response) {
+                                    if ($(".merchant-location").prop("selectedIndex") === 0) {
+                                        $('.section-div').css("display", "none");
+                                        $('.venue-div').css("display", "none");
+                                        return;
+                                    }
+
+                                    if (response.code == 200) {
+
+                                        createVenueForm(response.venues);
+                                        return true;
+                                    } else {
+
+                                        return false;
+                                    }
+                                },
+                                "json"
+                        );
+                    }
+
+                    function ajaxVenue(e) {
+
+                        var venue = $(".merchant-venue").val();
+                        console.log(venue);
+                        $('.section-div').css("display", "inline");
+
+                        $.post(
+                                "{{ path('encore_venue_section') }}",
+                                {
+                                    "venueId": venue
+                                },
+                                function (response) {
+                                    if ($(".merchant-venue").prop("selectedIndex") === 0) {
+                                        $('.section-div').css("display", "none");
+                                        return;
+                                    }
+
+                                    if (response.code == 200) {
+                                        console.log("section %o", response);
+                                        createSectionForm(response.sections);
+                                        return true;
+                                    } else {
+
+                                        return false;
+                                    }
+                                },
+                                "json"
+                        );
+                    }
+
+
+                    function createVenueForm(array) {
+                        if (array === undefined || array === null) {
+                            return;
+                        }
+
+                        $('.venue-div').css("display", "inline");
+
+                        var venueSelect = $('.merchant-venue');
+
+                        $.each(array, function (index, valueData) {
+                            $(document.createElement("option")).attr({
+                                value: valueData["id"]
+                            }).html(valueData["name"]).appendTo(venueSelect);
+                        });
+
+                    }
+
+                    function createSectionForm(array) {
+                        if (array === undefined || array === null) {
+                            return;
+                        }
+
+                        $('.section-div').css("display", "inline");
+                        var sectionTable = $('.section-table');
+
+
+                        $.each(array, function (index, valueData) {
+
+                            var price = $("<input/>").attr({
+                                "data-required": "true",
+                                "data-trigger": "change",
+                                "data-required-message": "Please enter your seats price",
+                                "data-type": "number"
+                            });
+
+                            var idTd = $(document.createElement("td")),
+                                    nameTd = $(document.createElement("td")),
+                                    seatsTd = $(document.createElement("td")),
+                                    priceTd = $(document.createElement("td")),
+                                    row = $(document.createElement("tr"));
+
+                            idTd.html(valueData["id"]).appendTo(row);
+                            nameTd.html(valueData["name"]).appendTo(row);
+                            seatsTd.html(valueData["total_seats"]).appendTo(row);
+                            priceTd.html(price).appendTo(row);
+
+                            row.appendTo(sectionTable);
+                        });
+
+                    }
+                }
+        );
+    </script>
+{% endblock content %}
