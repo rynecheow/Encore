@@ -24,9 +24,14 @@
                 </div>
                 <div>
                     <span class="class-label">Event Type</span>
-                    <input type="text" class="merchant-add-textbox" name="event_type" data-required="true"
-                           data-trigger="keyup"
-                           data-required-message="Please enter your event type"/>
+                    <select class="merchant-add-textbox" name="event_type" data-required="true"
+                            data-trigger="change" data-required-message="Please select your event type">
+                        <option value="">Please Select An Event Type</option>
+                        <option value="1">Performing Arts</option>
+                        <option value="2">Concert</option>
+                        <option value="3">Art</option>
+                        <option value="4">Exhibition</option>
+                    </select>
                 </div>
                 <div>
                     <span class="class-label">Event Description</span>
