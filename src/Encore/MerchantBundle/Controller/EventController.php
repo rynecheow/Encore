@@ -94,8 +94,6 @@ class EventController extends Controller
                 return $this->render("EncoreMerchantBundle:Events:index.html.twig");
             }
             //            }}
-
-
         }
 
         return $this->render("EncoreMerchantBundle:Events:add-event.html.twig", [
@@ -325,18 +323,18 @@ class EventController extends Controller
         return new Response(json_encode($response));
     }
 
-    private function createEventForm($allVenueLocation)
+    private function createEventForm($allVenueLocations)
     {
         /* Convert To Key To Key Array */
 
-        $tempArray = [];
-        foreach ($allVenueLocation as $allVenueLocations) {
-            foreach ($allVenueLocations as $value) {
-                $tempArray[] = [
-                    $value => $value
-                ];
-            }
-        }
+//        $tempArray = [];
+//        foreach ($allVenueLocation as $allVenueLocations) {
+//            foreach ($allVenueLocations as $value) {
+//                $tempArray[] = [
+//                    $value => $value
+//                ];
+//            }
+//        }
 
         return $this->createFormBuilder()
 //            ->setAction('encore_merchant_add_event')
@@ -432,53 +430,53 @@ class EventController extends Controller
 //                    ]
 //                ]
 //            )
-            ->add(
-                'event_total_location',
-                'choice',
-                [
-                    'choices' => $tempArray
-                    ,
-                    'attr' => [
-                        'class' => 'merchant-location',
-                        'data-required' => 'true',
-                        'data-trigger' => 'change',
-                        'data-required-message' => 'Please select your location.',
-                    ]
-                    ,
-                    'label' => 'Event Location'
-                    ,
-                    'label_attr' => [
-                        'class' => 'class-label'
-                    ]
-                    , "expanded" => false,
-                    "multiple" => false
-                ]
-
-            )
-            ->add(
-                'event_venue',
-                'choice',
-                [
-//
-                    'attr' => [
-                        'class' => 'merchant-venue buttons-radio',
+//            ->add(
+//                'event_total_location',
+//                'choice',
+//                [
+//                    'choices' => $tempArray
+//                    ,
+//                    'attr' => [
+//                        'class' => 'merchant-location',
 //                        'data-required' => 'true',
 //                        'data-trigger' => 'change',
-//                        'data-required-message' => 'Please select your venue.',
-                        'style' => 'display:none;'
-//                        'style' => 'display:inline;'
-                    ]
-                    ,
-                    'label' => 'Event Venue'
-                    ,
-                    'label_attr' => [
-                        'class' => 'class-label label-venue',
-                        'style' => 'display:none;'
-                    ]
-                    , "expanded" => true,
-                    "multiple" => false
-                ]
-            )
+//                        'data-required-message' => 'Please select your location.',
+//                    ]
+//                    ,
+//                    'label' => 'Event Location'
+//                    ,
+//                    'label_attr' => [
+//                        'class' => 'class-label'
+//                    ]
+//                    , "expanded" => false,
+//                    "multiple" => false
+//                ]
+//
+//            )
+//            ->add(
+//                'event_venue',
+//                'choice',
+//                [
+////
+//                    'attr' => [
+//                        'class' => 'merchant-venue buttons-radio',
+////                        'data-required' => 'true',
+////                        'data-trigger' => 'change',
+////                        'data-required-message' => 'Please select your venue.',
+//                        'style' => 'display:none;'
+////                        'style' => 'display:inline;'
+//                    ]
+//                    ,
+//                    'label' => 'Event Venue'
+//                    ,
+//                    'label_attr' => [
+//                        'class' => 'class-label label-venue',
+//                        'style' => 'display:none;'
+//                    ]
+//                    , "expanded" => true,
+//                    "multiple" => false
+//                ]
+//            )
             ->add('test', 'text')
 //            ->add(
 //                'event_section',
