@@ -18,7 +18,7 @@ class VenueRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery
             (
-                "SELECT DISTINCT location FROM EncoreCustomerBundle:Venue"
+                "SELECT DISTINCT venue.location FROM EncoreCustomerBundle:Venue venue"
             )
             ->getResult();
     }
