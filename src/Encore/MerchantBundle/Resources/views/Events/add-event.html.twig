@@ -5,85 +5,85 @@
 
 {% block require_js %}
     require(["libs/bootstrap/bootstrap-datepicker"]);
-    {#require(["encore-merchant/events/create-event"]);#}
+    require(["encore-merchant/events/create-event"]);
 {% endblock require_js %}
 
 {% block title %}Create An Event {% endblock title %}
 {% block content %}
     <article class="create-event-wrap">
         <div class="create-event-container">
-            <form class="merchant-add-form" action="{{ path('encore_merchant_events') }}" method="POST">
+            <form class="merchant-add-form" action="{{ path('encore_merchant_add_event') }}" method="POST">
                 {{ form(form) }}
             </form>
         </div>
     </article>
 
-    {#<script type="application/javascript">#}
-        {#$(function () {#}
-                    {#$('.merchant-location').on("change", ajaxLocation);#}
-                    {#function ajaxLocation(e) {#}
-                        {#var location = $(".merchant-location").val();#}
+    <script type="application/javascript">
+        $(function () {
+                    $('.merchant-location').on("change", ajaxLocation);
+                    function ajaxLocation(e) {
+                        var location = $(".merchant-location").val();
 
-                        {#console.log(location);#}
-                        {#$.post(#}
-                                {#"{{ path('encore_venue_location') }}",#}
-                                {#{#}
-                                    {#"location": location#}
-                                {#},#}
-                                {#function (response) {#}
-                                    {#if (response.code == 200) {#}
-                                        {#console.log("respone is %o", response);#}
-                                        {#console.log(response.venues[0]["name"]);#}
-                                        {#createVenueForm(response.venues);#}
-                                        {#return true;#}
-                                    {#} else {#}
+                        console.log(location);
+                        $.post(
+                                "{{ path('encore_venue_location') }}",
+                                {
+                                    "location": location
+                                },
+                                function (response) {
+                                    if (response.code == 200) {
+                                        console.log("respone is %o", response);
+                                        console.log(response.venues[0]["name"]);
+                                        createVenueForm(response.venues);
+                                        return true;
+                                    } else {
 
-                                        {#return false;#}
-                                    {#}#}
-                                {#},#}
-                                {#"json"#}
-                        {#);#}
-                    {#}#}
-
-
-                   {#function createVenueForm(array)#}
-                   {#{#}
-                       {#var venueLabel =  $(".label-venue"),#}
-                           {#venueDiv = $(".merchant-venue");#}
-
-                       {#venueLabel.css("display" , "inline");#}
-                       {#venueDiv.css("display" , "inline");#}
+                                        return false;
+                                    }
+                                },
+                                "json"
+                        );
+                    }
 
 
-{#//                       venueDiv.html("<br />");#}
-                       {#$.each(array, function(index, valueData) {#}
-                           {#console.log("time");#}
+                   function createVenueForm(array)
+                   {
+                       var venueLabel =  $(".label-venue"),
+                           venueDiv = $(".merchant-venue");
 
-                           {#$("<input/>").attr({#}
-                               {#type : "radio",#}
-                               {#id: "form_event_venue_" + index,#}
-                               {#name : "form[event_venue]",#}
-{#//                               required : "required",#}
-                               {#value : valueData["name"]#}
-{#//                               class : "parsley-validated"#}
-                           {#}).appendTo(venueDiv);#}
-
-                           {#$("<label/>").attr({#}
-                                {#for : "form_event_venue_" + index#}
-{#//                                class: "required"#}
-                           {#}).html(valueData["name"]).appendTo(venueDiv);#}
-                       {#});#}
+                       venueLabel.css("display" , "inline");
+                       venueDiv.css("display" , "inline");
 
 
+//                       venueDiv.html("<br />");
+                       $.each(array, function(index, valueData) {
+                           console.log("time");
 
-                   {#}#}
+                           $("<input/>").attr({
+                               type : "radio",
+                               id: "form_event_venue_" + index,
+                               name : "form[event_venue]",
+//                               required : "required",
+                               value : valueData["name"]
+//                               class : "parsley-validated"
+                           }).appendTo(venueDiv);
 
-                    {#function createSectionForm()#}
-                    {#{#}
-                        {#var sectionLabel = $(".label-section"),#}
-                                {#sectionDiv = $(".merchant-section");#}
-                    {#}#}
-                {#}#}
-        {#);#}
-    {#</script>#}
+                           $("<label/>").attr({
+                                for : "form_event_venue_" + index
+//                                class: "required"
+                           }).html(valueData["name"]).appendTo(venueDiv);
+                       });
+
+
+
+                   }
+
+                    function createSectionForm()
+                    {
+                        var sectionLabel = $(".label-section"),
+                                sectionDiv = $(".merchant-section");
+                    }
+                }
+        );
+    </script>
 {% endblock content %}
