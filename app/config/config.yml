@@ -17,7 +17,7 @@ framework:
     templating:
         engines: [ "twig" ]
         assets_base_urls:
-            http: [ "http://%encore.host.merchant%:%encore.port%/" ] # php server use port 8000
+            http: [ "http://%encore.host.main%:%encore.port%/" ] # php server use port 8000
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:
