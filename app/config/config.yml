@@ -11,15 +11,17 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     form:            ~
-    csrf_protection: ~
+    csrf_protection:
+       enabled:        false
     validation:      { enable_annotations: true }
     templating:
         engines: [ "twig" ]
         assets_base_urls:
-            http: [ "http://%encore.host.main%:%encore.port%/" ] # php server use port 8000
+            http: [ "http://%encore.host.merchant%:%encore.port%/" ] # php server use port 8000
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:
+        save_path:        %kernel.root_dir%/var/sessions
         cookie_lifetime:    2592000
         cookie_domain: "*.encore.com"
     fragments:       ~
