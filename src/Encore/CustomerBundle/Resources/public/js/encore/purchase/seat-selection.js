@@ -3,7 +3,6 @@ require(['domReady'],
         "use strict";
         domReady(
             function () {
-
                 /**
                  * Set empty/selected to selected seat
                  * @param target
@@ -41,7 +40,7 @@ require(['domReady'],
                     colValue = parseInt(str.substring(endOfCol, str.length), 10);
                     rowValue = parseInt(str.substring(0, endOfRow), 10);
 
-                    totalCol = parseInt(seatsMatrix.col, 10);
+                    totalCol = parseInt($("table.seatTable tbody tr[id='row" + rowValue + "'] td").length, 10) - 1;
                     previousCol = parseInt(colValue - 2, 10);
                     nextCol = parseInt(colValue + 2, 10);
 
@@ -59,23 +58,23 @@ require(['domReady'],
                         if (difference !== 0) {
                             if (previousDiv.hasClass("empty")) {
                                 if (previousTwoDiv.hasClass("selected")) {
-                                    alert("You cannot select a seat which leaves a single seat gap.");
+                                    popupMessageError("You cannot select a seat which leaves a single seat gap.");
                                 } else {
                                     if (checkNext(nextDiv, nextTwoDiv)) {
                                         tickDiv(target);
                                     } else {
-                                        alert("You cannot select a seat which leaves a single seat gap.");
+                                        popupMessageError("You cannot select a seat which leaves a single seat gap.");
                                     }
                                 }
                             } else {
                                 if (checkNext(nextDiv, nextTwoDiv)) {
                                     tickDiv(target);
                                 } else {
-                                    alert("You cannot select a seat which leaves a single seat gap.");
+                                    popupMessageError("You cannot select a seat which leaves a single seat gap.");
                                 }
                             }
                         } else {
-                            alert("You have reached your max amount of selected tickets.");
+                            popupMessageError("You have reached your max amount of selected tickets.");
                         }
                     } else if (target.hasClass("selected")) {
                         if (nextDiv.hasClass("empty") || previousDiv.hasClass("empty")) {
@@ -90,7 +89,7 @@ require(['domReady'],
                             } else if (nextDiv.hasClass("sold") || nextDiv.hasClass("locked")) {
                                 target.attr("class", "empty");
                             } else {
-                                alert("You cannot un-select a seat which leaves a single seat gap.");
+                                popupMessageError("You cannot un-select a seat which leaves a single seat gap.");
                             }
                         } else if (nextDiv.hasClass("sold") || nextDiv.hasClass("locked")) {
                             if (totalCol === middlePreviousCol || middlePreviousCol < 0) {
@@ -98,15 +97,15 @@ require(['domReady'],
                             } else if (previousDiv.hasClass("sold") || previousDiv.hasClass("locked")) {
                                 target.attr("class", "empty");
                             } else {
-                                alert("You cannot un-select a seat which leaves a single seat gap.");
+                                popupMessageError("You cannot un-select a seat which leaves a single seat gap.");
                             }
                         } else {
-                            alert("You cannot un-select a seat which leaves a single seat gap.");
+                            popupMessageError("You cannot un-select a seat which leaves a single seat gap.");
                         }
                     } else if (target.hasClass("sold")) {
-                        alert("You cannot select a seat which has already been sold.");
+                        popupMessageError("You cannot select a seat which has already been sold.");
                     } else if (target.hasClass("locked")) {
-                        alert("You cannot select a seat which is currently locked.");
+                        popupMessageError("You cannot select a seat which is currently locked.");
                     }
 
                     selectedSeats = $("table.seatTable tbody tr td div.selected");
@@ -286,7 +285,7 @@ require(['domReady'],
                     selectedLength = $("table.seatTable tbody tr td div.selected").length;
                     if (value < selectedLength) {
                         parseInt($("#ticketQtySelector").val(selectedLength));
-                        alert("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
+                        popupMessageError("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
                     } else if (value === 0) {
                         $("#ticketQtyLabel").html("");
                         hideSubmitButton(true);
@@ -346,13 +345,29 @@ require(['domReady'],
                         if (seatFlag) {
                             $("form").attr("method", "post");
                         } else {
-                            alert("You cannot select a seat which leaves a single seat gap.");
+                            popupMessageError("You cannot select a seat which leaves a single seat gap.");
                             return false;
                         }
                     } else {
-                        alert("You have not selected any seats.");
+                        popupMessageError("You have not selected any seats.");
                         return false;
                     }
+                });
+
+                /**
+                 * Custom Popup Message
+                 * @param message
+                 */
+                function popupMessageError(message) {
+                    $("#errorMessage").html(message);
+                    $("#errorMessageContainer").fadeIn("slow");
+                }
+
+                /**
+                 * Closing Custom Popup Message box by clicking anywhere
+                 */
+                $("#errorMessageContainer").click(function () {
+                    $("#errorMessageContainer").fadeOut("fast");
                 });
             }
         );
