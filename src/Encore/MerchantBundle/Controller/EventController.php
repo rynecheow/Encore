@@ -30,7 +30,7 @@ class EventController extends Controller
      */
     public function indexAction()
     {
-        return $this->render("EncoreMerchantBundle:Ev=ents:index.html.twig");
+        return $this->render("EncoreMerchantBundle:Events:index.html.twig");
     }
 
     /**
