@@ -15,7 +15,7 @@ vich_uploader:
     db_driver: orm
     mappings:
         event_image:
-            uri_prefix: encore.uri_prefix.event
+            uri_prefix: /images/data/events
             upload_destination: %kernel.root_dir%/../web/images/data/events
             namer: encore.file_namer.uuid_namer
             delete_on_remove: false

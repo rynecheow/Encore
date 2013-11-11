@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sysadm
+ * User: LiHao
  * Date: 11/8/13
  * Time: 8:04 PM
  */
@@ -26,123 +26,78 @@ class EventPhotoController extends Controller
      * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
      * @Method({"GET","POST"})
      */
-    public function testAction(Event $event)
+    public function addPhotoAction(Event $event)
     {
-        $request = $this->getRequest();
-        $eventPhoto = new EventPhoto();
-        $form = $this->createFormBuilder($eventPhoto)
-                     ->add('caption', 'text')
-                     ->add('image', 'file')
-                     ->add('save', 'submit')
-                     ->getForm();
-
-        if ($request->getMethod() === "POST")
-        {
-            $form->handleRequest($request);
-
-            if ($form->isValid())
-            {
-                $eventPhoto->setEvent($event);
-                $this->em->persist($eventPhoto);
-                $this->em->flush();
-            }
-        }
-
-        return $this->render("EncoreMerchantBundle:Events:add-event-photo.html.twig", array(
-                "form" =>$form->createView(),
-                "eventId" => "1"
-            ));
-    }
-
-    public function addPhotosAction(Event $event)
-    {
-        $photos = [];
-        $request = $this->getRequest();
-        $controlPhotoForm = $this->controlPhotoForm($photos);
-        $controlPhotoForm->handleRequest($request);
-
-        if ($controlPhotoForm->isValid()) {
-            $photos = $controlPhotoForm->getData();
-
-            foreach ($photos as $photo) {
-                $eventPhoto = new EventPhoto();
-                $eventPhoto->setEvent($event)
-                    ->setImage($photo);
-                $this->em->persist($eventPhoto);
-                $this->em->flush();
-                $event->addPhoto($eventPhoto);
-            }
-
-            return $this->render("EncoreMerchantBundle::Events:index.html.twig");
-        }
-
-        return $this->render("EncoreMerchantBundle::Events:add-event-photo.html.twig");
-    }
-
-    public function editPhotosAction(Event $event)
-    {
-        $photos = [];
-        $eventPhotos = $event->getPhotos();
-
-        /**
-         * @var $eventPhoto \Encore\CustomerBundle\Entity\EventPhoto
-         */
-
-        foreach ($eventPhotos as $eventPhoto) {
-            $photos[] = $eventPhoto->getImage();
-        }
-
-        $request = $this->getRequest();
-        $controlPhotoForm = $this->controlPhotoForm($photos);
-        $controlPhotoForm->handleRequest($request);
-
-        if ($controlPhotoForm->isValid()) {
-            $photos = $controlPhotoForm->getData();
-
-            foreach ($photos as $photo) {
-                $eventPhoto = $this->em->getRepository("EncoreCustomerBundle:EventPhoto")
-                    ->findByImage($photo);
-                $exist = count($eventPhoto);
-
-                if ($exist == 0) {
-                    $eventPhoto = new EventPhoto();
-                    $eventPhoto->setEvent($event)
-                        ->setImage($photo);
-                    $this->em->persist($eventPhoto);
-                    $this->em->flush();
-                    $event->addPhoto($eventPhoto);
-                }
-            }
-
-            return $this->render("EncoreMerchantBundle::Events:index.html.twig");
-        }
-
-        return $this->render("EncoreMerchantBundle::Events:edit-event-photo.html.twig");
+        $this->handleUploadRequest($event);
     }
 
     /**
-     * @param $photo \Doctrine\Common\Collections\Collection
-     *
+     * @Route("/events/{eventId}/edit/photo", name="encore_merchant_event_edit_photo")
+     * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
+     * @Method({"GET","POST"})
+     */
+    public function editPhotoAction(Event $event)
+    {
+        $this->handleUploadRequest($event);
+    }
+
+    private function handleUploadRequest(Event $event)
+    {
+        $request = $this->getRequest();
+        $eventPhoto = new EventPhoto();
+        $eventPhotos = $this->em->getRepository("EncoreCustomerBundle:EventPhoto")
+            ->findByEvent($event);
+        $uploadPhotoForm = $this->uploadPhotoForm($eventPhoto);
+
+        if ($request->getMethod() === "POST") {
+            $uploadPhotoForm->handleRequest($request);
+
+            if ($uploadPhotoForm->isValid()) {
+                $eventPhoto->setEvent($event);
+                $this->em->persist($eventPhoto);
+                $this->em->flush();
+                $event->addPhoto($eventPhoto);
+                $this->em->flush();
+                $eventPhotos = $this->em->getRepository("EncoreCustomerBundle:EventPhoto")
+                    ->findByEvent($event);
+            }
+        }
+
+        return $this->render(
+            "EncoreMerchantBundle:Events:add-event-photo.html.twig",
+            array(
+                "form" => $uploadPhotoForm->createView(),
+                "eventId" => $event->getId(),
+                "uploadedPhotos" => $eventPhotos
+            )
+        );
+    }
+
+    /**
+     * @param $eventPhoto
      * @return array
      */
-    public function deletePhotoAction($photo)
+    public function deletePhotoAction($eventPhoto)
     {
-        $eventPhoto = $this->em->getRepository("EncoreCustomerBundle:EventPhoto")
-            ->findByImage($photo);
         $event = $eventPhoto->getEvent();
         $event->removePhoto($eventPhoto);
         $this->em->flush();
+        $this->em->remove($eventPhoto);
+        $this->flush();
 
         return [
             "status" => true
         ];
     }
 
-    /**
-     * @param $photos array of photo's path
-     */
-    private function controlPhotoForm($eventPhoto)
+    private function uploadPhotoForm($eventPhoto)
     {
-        //TODO: create upload and remove photo form
+        $form = $this->createFormBuilder($eventPhoto)
+            ->add('caption', 'text')
+            ->add('image', 'file')
+            ->add('save', 'submit')
+            ->getForm();
+
+        return $form;
     }
 }
