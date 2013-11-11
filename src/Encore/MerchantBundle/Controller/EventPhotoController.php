@@ -10,9 +10,11 @@ namespace Encore\MerchantBundle\Controller;
 
 use Encore\CustomerBundle\Entity\Event;
 use Encore\CustomerBundle\Entity\EventPhoto;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class EventPhotoController extends Controller
 {
@@ -20,29 +22,37 @@ class EventPhotoController extends Controller
     use ControllerHelperTrait;
 
     /**
-     * @Route("/events/add/photo", name="encore_merchant_add_event_photo")
+     * @Route("/events/add/{eventId}/photo", name="encore_merchant_add_event_photo")
+     * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
+     * @Method({"GET","POST"})
      */
-    public function testAction()
+    public function testAction(Event $event)
     {
         $request = $this->getRequest();
         $eventPhoto = new EventPhoto();
         $form = $this->createFormBuilder($eventPhoto)
+                     ->add('caption', 'text')
                      ->add('image', 'file')
                      ->add('save', 'submit')
                      ->getForm();
-        $form->handleRequest($request);
 
-        if ($form->isValid())
+        if ($request->getMethod() === "POST")
         {
-            $this->em->persist($eventPhoto);
-            $this->em->flush();
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+                $eventPhoto->setEvent($event);
+                $this->em->persist($eventPhoto);
+                $this->em->flush();
+            }
         }
 
         return $this->render("EncoreMerchantBundle:Events:add-event-photo.html.twig", array(
-                "form" =>$form->createView()
+                "form" =>$form->createView(),
+                "eventId" => "1"
             ));
     }
-
 
     public function addPhotosAction(Event $event)
     {
@@ -131,7 +141,7 @@ class EventPhotoController extends Controller
     /**
      * @param $photos array of photo's path
      */
-    private function controlPhotoForm($photos)
+    private function controlPhotoForm($eventPhoto)
     {
         //TODO: create upload and remove photo form
     }

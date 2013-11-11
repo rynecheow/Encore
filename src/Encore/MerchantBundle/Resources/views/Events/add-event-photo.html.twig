@@ -1,2 +1,3 @@
-{{ form(form) }}
-{{ form_widget(form._token) }}
+<form action="{{ path("encore_merchant_add_event_photo", {"eventId" : "1"}) }}" method="POST" {{ form_enctype(form) }}>
+    {{ form(form) }}
+</form>

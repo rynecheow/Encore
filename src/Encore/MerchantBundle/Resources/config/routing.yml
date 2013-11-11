@@ -5,3 +5,7 @@ encore_merchant_welcome:
 encore_merchant_event:
   resource:  "@EncoreMerchantBundle/Controller/EventController.php"
   type:     annotation
+
+encore_merchant_add_event_photo:
+  resource:  "@EncoreMerchantBundle/Controller/EventController.php"
+  type:     annotation
