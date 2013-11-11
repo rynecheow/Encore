@@ -304,7 +304,14 @@ class AuthenticationController extends BaseController
                         'data-required-message' => 'Please enter select your birthday.',
                     ],
                     'label' => 'Date Of Birth',
-                    'empty_value' => ['year' => 'Year', 'month' => 'Month', 'day' => 'Day']
+                    'format' => 'd MMMM yyyy',
+                    'widget' => 'choice',
+                    'years' => range(1900, date('Y')),
+                    'empty_value' => [
+                        'year' => 'Year',
+                        'month' => 'Month',
+                        'day' => 'Day',
+                    ],
                 ]
             )
             ->add(
