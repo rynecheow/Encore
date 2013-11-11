@@ -12,16 +12,7 @@
 {% block content %}
     <article class="create-event-wrap">
         <div class="create-event-container">
-            <form class="create-event-form" method="POST"
-                  action="{{ path('encore_merchant_add_event') }}" {{ form_enctype(form) }}>
-                <h1 class="merchant-header">Create An Profile </h1>
-                <fieldset>
-                    {{ form_widget(form.test) }}
-                    {{ form_widget(form._token) }}
-                    {{ form_rest(form) }}
-
-                </fieldset>
-            </form>
+                {{ form(form) }}
         </div>
     </article>
 
@@ -62,8 +53,7 @@
 
                        venueLabel.css("display" , "inline");
                        venueDiv.css("display" , "inline");
-                       var index = 0;
-                       var count = parseInt(index,10);
+
 
 //                       venueDiv.html("<br />");
                        $.each(array, function(index, valueData) {

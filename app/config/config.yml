@@ -21,7 +21,7 @@ framework:
     trusted_proxies: ~
     session:
         cookie_lifetime:    2592000
-        cookie_domain:      "%encore.host.main%"
+        cookie_domain: "*.encore.com"
     fragments:       ~
     http_method_override: true
 

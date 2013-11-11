@@ -99,14 +99,20 @@ class ProfileController extends BaseController
             $this->gotoHome();
         }
 
+        /**
+         * @var $user User
+         */
+        $user = $this->authenticatedUser;
+
         $form = $this->createEditProfileForm();
+
 
         return $this->render(
             "EncoreCustomerBundle:User:profile.html.twig",
             [
-                'username' => 'kokhong'
+                'username' => $user->getUsername()
                 ,
-                'email' => 'kokhong200gmail.com'
+                'email' => $user->getEmail()
                 ,
                 'firstname' => 'Kok Hong'
                 ,
@@ -201,6 +207,7 @@ class ProfileController extends BaseController
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your birth date.',
+                        'readonly' => ''
                     ],
                     'label' => 'Birth Date'
                     ,
