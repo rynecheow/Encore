@@ -72,6 +72,7 @@ class EventController extends Controller
                 throw $this->createNotFoundException("No venue found for id " . $venue->getId() . " WHYYYYY!");
             }
 
+            //TODO: put back when log in done.
             //$merchant = $this->getLoggedInUser()->getMerchant();
 
             $merchant = $this->em->getRepository("EncoreCustomerBundle:Merchant")
@@ -93,6 +94,8 @@ class EventController extends Controller
                 ->setCreator($merchant);
             $this->em->persist($newEvent);
             $this->em->flush();
+
+            //TODO: held dates & event section
 
             //            $heldDates = $createEventForm->get("heldDates")->getData();
             //
@@ -130,7 +133,12 @@ class EventController extends Controller
             //                    $this->em->flush();
             //                }
 
-            return $this->render("EncoreMerchantBundle:Events:index.html.twig");
+            return $this->redirect($this->generateUrl(
+                    "encore_merchant_add_event_photo",
+                    [
+                        "eventId" => $newEvent->getId()
+                    ]
+                ));
         }
 
         return $this->render(
@@ -148,14 +156,76 @@ class EventController extends Controller
      */
     public function editAction(Event $event)
     {
-        $allVenueLocations = $this->em->getRepository("EncoreCustomerBundle:Venue")
-            ->findAllLocation();
-        $request = $this->getRequest();
-        $editEventForm = $this->createEventForm($event, $allVenueLocations);
-        $editEventForm->handleRequest($request);
+        /* Convert To Key To Key Array */
+        $allVenueLocations = $this->em->getRepository("EncoreCustomerBundle:Venue")->findAllLocation();
+        $array = json_decode(json_encode($allVenueLocations), true);
+        $allLocations = [];
 
-        if ($editEventForm->isValid()) {
-            $params = $editEventForm->getData();
+        foreach ($array as $allVenueLocation) {
+            foreach ($allVenueLocation as $value) {
+                $allLocations[] = [
+                    $value => $value
+                ];
+            }
+        }
+
+        //TODO: retrieve held dates
+
+        $request = $this->getRequest();
+
+        if ($request->getMethod() === "POST") {
+            $formData = $request->request->all();
+            $saleEnd = DateTime::createFromFormat("m/d/Y", $formData["event_sale_end"]);
+
+            if ($event->getPublish())
+            {
+                $event->setSaleEnd($saleEnd)
+                    ->setDescription($formData["event_description"]);
+            }
+
+            else
+            {
+                $saleStart = DateTime::createFromFormat("m/d/Y", $formData["event_sale_start"]);
+
+                /**
+                 * @var $venue \Encore\CustomerBundle\Entity\Venue
+                 */
+                $venue = $this->em->getRepository("EncoreCustomerBundle:Venue")
+                    ->find($formData["event_venue"]);
+
+                if (!$venue) {
+                    throw $this->createNotFoundException("No venue found for id " . $venue->getId() . " WHYYYYY!");
+                }
+
+                $event->setName($formData["event_name"])
+                    ->setType($formData["event_type"])
+                    ->setDescription($formData["event_description"])
+                    ->setSaleStart($saleStart)
+                    ->setSaleEnd($saleEnd)
+                    ->setVenue($venue);
+
+                //TODO: held dates & event section
+            }
+
+            $this->em->flush();
+
+            return $this->render(
+                "EncoreMerchantBundle:Events:add-event-photo.html.twig",
+                [
+                    "eventId" => $event->getId()
+                ]
+            );
+        }
+
+        return $this->render(
+            "EncoreMerchantBundle:Events:add-event.html.twig",
+            [
+                "locations" => $allLocations,
+                "event" => $event
+            ]
+        );
+
+
             $event->setName($params["event_name"])
                 ->setDescription($params["event_description"]);
 
@@ -258,7 +328,7 @@ class EventController extends Controller
             }
 
             return $this->render("EncoreMerchantBundle:Events:index.html.twig");
-        }
+
 
         return $this->render("EncoreMerchantBundle:Events:edit-event.html.twig");
     }
