@@ -59,31 +59,93 @@ require(['domReady'],
                             }
                         });
 
-                        $(".type-div button").on("click",function(e){
-                            "use strict";
-                            var target = $(e.target);
-                            if(target.hasClass("active")){
-                                target.css("border","2px solid rgb(226, 226 ,226)");
-                            }
-                            else
-                                target.css("border","2px solid #da4f49")
-                        });
 
-                        $(".location-div button").on("click",function(e){
+                        function filterTypeEvent(e) {
                             "use strict";
                             var target = $(e.target);
-                            if(target.hasClass("active")){
-                                target.css("border","2px solid rgb(226, 226 ,226)");
-                            }
-                            else
-                                target.css("border","2px solid #da4f49")
-                        });
+                            var divParent = $(".label-div");
 
-                        $(".new-label").on("click",function(e){
+                            if (target.hasClass("active")) {
+                                target.css("border", "2px solid #e2e2e2");
+                                $.each($(".new-label"), function (index, valueData) {
+                                    if ($(this).html() === target.html()) {
+                                        $(this).remove();
+                                    }
+                                });
+                            }
+                            else {
+                                var a = $(document.createElement("a")),
+                                    span = $(document.createElement("span"));
+
+                                a.html(target.html()).appendTo(divParent);
+                                a.attr("class", "new-label");
+                                a.attr("href", "javascript:void(0)");
+                                a.on("click", function (e) {
+                                    "use strict";
+
+                                    $.each($(".type-div button"), function (index, valueData) {
+                                        if ($(this).html() === $(e.target).html()) {
+                                            $(this).css("border", "2px solid #e2e2e2");
+                                            $(this).removeClass("active");
+                                        }
+                                    });
+                                    e.target.remove();
+                                });
+                                target.css("border", "2px solid #da4f49");
+                            }
+
+                        }
+
+                        function filterLocationEvent(e) {
                             "use strict";
                             var target = $(e.target);
-                            target.css()
-                        });
+                            var divParent = $(".label-div");
+
+                            if (target.hasClass("active")) {
+                                target.css("border", "2px solid #e2e2e2");
+                                $.each($(".new-label"), function (index, valueData) {
+                                    if ($(this).html() === target.html()) {
+                                        $(this).remove();
+                                    }
+                                });
+                            }
+                            else {
+                                if($(".location-div .active").length > 1 )
+                                {
+
+                                    $(target).popover();
+                                    $(target).removeClass("active");
+                                    return;
+                                }
+
+
+                                var a = $(document.createElement("a")),
+                                    span = $(document.createElement("span"));
+
+                                a.html(target.html()).appendTo(divParent);
+                                a.attr("class", "new-label");
+                                a.attr("href", "javascript:void(0)");
+                                a.on("click", function (e) {
+                                    "use strict";
+
+                                    $.each($(".location-div button"), function (index, valueData) {
+                                        if ($(this).html() === $(e.target).html()) {
+                                            $(this).css("border", "2px solid #e2e2e2");
+                                            $(this).removeClass("active");
+                                        }
+                                    });
+                                    e.target.remove();
+                                });
+                                target.css("border", "2px solid #da4f49");
+                            }
+
+                        }
+
+                        $(".type-div button").on("click", filterTypeEvent);
+
+
+                        $(".location-div button").on("click", filterLocationEvent);
+
 
                     }
                 );
