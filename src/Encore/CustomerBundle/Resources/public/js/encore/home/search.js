@@ -20,6 +20,7 @@ require(['domReady'],
                 });
 
                 searchbox.on('focus', function (e) {
+                    searchbox.val('');
                     var $form = $(".home-search-wrapper").find('.search-form');
                     if (!($form.hasClass("user-focused"))) {
                         $form.addClass("user-focused");
