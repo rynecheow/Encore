@@ -197,9 +197,9 @@ nav {
   h2.spread-headline {
     font-family: @mainFont;
     -webkit-font-smoothing: antialiased;
-    letter-spacing: 1.2em;
+    letter-spacing: 1.2rem;
     color: @lightMain;
-    font-size: 1.4em;
+    font-size: 1.4rem;
     margin: 0px auto;
     text-indent: 34px;
     padding-top: 60px;
@@ -248,7 +248,7 @@ nav {
           border-image-outset: initial;
           border-image-repeat: initial;
           color: rgb(255, 255, 255);
-          font-size: 3.6em;
+          font-size: 3.6rem;
           height: 110px;
           outline: none;
           padding-left: 114px;
@@ -354,7 +354,7 @@ nav {
       z-index: 11;
       text-decoration: none;
       color: white;
-      font-size: 4.5em;
+      font-size: 4.5rem;
       font-family: "Euphemia UCAS";
       transition: top 0.3s, right 0.3s;
       -webkit-transition: top 0.3s, right 0.3s;
@@ -404,12 +404,12 @@ nav {
     font-weight: bold;
     color: @darkMain;
     text-align: left;
-    line-height: 2em;
+    line-height: 2rem;
   }
 
   p, a {
     color: @darkMain;
-    line-height: 1.5em;
+    line-height: 1.5rem;
   }
 
   a {
@@ -708,7 +708,7 @@ nav {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   font-size: 13px;
   text-align: justify;
-  line-height: 1.5em;
+  line-height: 1.5rem;
 
   .submit {
     display: block;
@@ -888,12 +888,12 @@ nav {
   .profile-title {
     color: #9cceff;
     margin: 1% auto;
-    font-size: 1.2em;
+    font-size: 1.2rem;
   }
 
   .profile-big-title {
     color: #9cceff;
-    font-size: 1.8em;
+    font-size: 1.8rem;
   }
 
   hr {
@@ -949,7 +949,7 @@ nav {
     }
 
     .parsley-error-list {
-      font-size: 0.9em;
+      font-size: 0.9rem;
       color: @errorRedMain;
     }
 
@@ -958,7 +958,7 @@ nav {
     }
 
     .class-label {
-      font-size: 1.4em;
+      font-size: 1.4rem;
       color: #9cceff;
     }
   }
@@ -1009,43 +1009,192 @@ nav {
 
 /* Search page */
 .search-main {
-  .list-option {
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 100%;
+  min-height: 1000px;
+  background: #ffffff;
+  overflow-x: hidden;
 
-    position: fixed;
-    color: @lightSecondary;
-    float: right;
-    right: 40%;
-    margin-top: 10%;
-    h2 {
-      font-size: 28px;
+  .search-background {
+    background: #F3AEAE;
+  }
+
+  .placeholder-font;
+  .nav-tabs {
+    border: none;
+  }
+  .nav-div {
+    min-height: 100px;
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+
+    a {
+      margin: 50% 50%;
+      line-height: 82px;
+      letter-spacing: 0.128em;
+      font-family: proxima-nova, sans-serif;
+      color: rgb(0, 0, 0);
+      width: 100%;
+      height: 100%;
+      font-size: 0.6em;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      width: 100%;
+    }
+    .li-search {
+      text-decoration: none;
+      float: left;
+      width: 50%;
+
+      font-size: 1.7em;
+      div {
+        height: 80px;
+      }
     }
 
-    .option-button {
+    .li-filter {
+      text-decoration: none;
+      float: right;
+      width: 50%;
+      font-size: 1.7em;
+
+      div {
+        height: 80px;
+      }
+    }
+  }
+
+  #filter {
+    margin: 0 auto;
+    min-height: 300px;
+    width: 40%;
+  }
+
+  #search {
+    margin: 0 auto;
+    min-height: 100px;
+    width: 90%;
+  }
+
+  .tab-content {
+    .search-bar {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      font-size: 3rem;
+      line-height: 1em;
+      font-family: @mainFont;
+    }
+
+    .search-logo {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      right: 0;
+      margin-top: -5%;
+      margin-right: 6%;
+      background: url('../../bundles/encorecustomer/images/logo/search/search.svg');
+      background-size: contain;
+      z-index: 3;
+    }
+    .main-selection button {
+      border-radius: 10px;
+      width: 115px;
+      height: 35px;
+      border: none;
+      margin-left: 15%;
+      margin-top: 15%;
+      line-height: 1.9rem;
+      letter-spacing: 0.128em;
+      font-family: proxima-nova, sans-serif;
+      font-weight: 400;
+    }
+
+    .type-div {
+      margin: 5% 18%;
       button {
-        display: inline;
-        width: 75px;
-        padding: 5px 16px;
-        font-size: 15px;
-        line-height: 1.33;
-        border-radius: 6px;
-        color: @lightMain;
-        background-color: @pinkMain;
-        border-color: @pinkSecondary;
-        margin-top: 15px;
-        margin-bottom: 0;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid transparent;
-
+        width: 177px;
+        height: 80px;
+        margin-left: 1%;
+        background: white;
+        color: black;
+        border: 2px solid #e2e2e2;
+        margin-top: 1%;
+        line-height: 1.9rem;
+        letter-spacing: 0.128em;
+        font-family: proxima-nova, sans-serif;
+        font-weight: 400;
       }
-      .gallery {
-        margin-left: 50px;
+      button:hover {
+        color: white;
+        background: #da4f49;
       }
     }
 
+    .location-div {
+      margin: 6% 0%;
+      button {
+        width: 177px;
+        height: 80px;
+        margin-left: 1%;
+        background: white;
+        color: black;
+        border: 2px solid #e2e2e2;
+        margin-top: 1%;
+        line-height: 1.9rem;
+        letter-spacing: 0.128em;
+        font-family: proxima-nova, sans-serif;
+        font-weight: 400;
+      }
+      button:hover {
+        color: white;
+        background: #da4f49;
+      }
+    }
+    .date-div {
+      button {
+        border-radius: 10px;
+        width: 115px;
+        height: 35px;
+        background:white;
+        border: 2px solid #e2e2e2;
+        line-height: 1.9rem;
+        letter-spacing: 0.128em;
+        font-family: proxima-nova, sans-serif;
+        font-weight: 400;
+      }
+      #from-date {
+        margin-left: 2.5%;
+      }
+      #to-date {
+        margin-left: 6%;
+      }
+      input {
+        height: 25px;
+        border-radius: 10px;
+      }
+    }
+
+
+  }
+
+  .label-div {
+    color: #777777;
+    font-family: proxima-nova, sans-serif;
+    font-weight: 400;
+    font-size: 1.3em;
+
+    .new-label{
+        margin-left:3%;
+        cursor:pointer;
+        font-size: 0.9rem;
+        background:aliceblue;
+        text-decoration: none;
+    }
   }
 
   #static-logo {
@@ -1104,7 +1253,7 @@ nav {
 
         .checkbox label {
           width: 70px;
-          line-height: 1.5em;
+          line-height: 1.5rem;
         }
 
       }
@@ -1316,7 +1465,7 @@ nav {
   padding: 35px 35px;
   font-size: 14px;
   text-align: left;
-  line-height: 1.5em;
+  line-height: 1.5rem;
   h2 {
     font-size: 24px;
     font-style: italic;
@@ -1332,17 +1481,17 @@ nav {
     float: right;
     right: 10%;
     cursor: pointer;
-    margin-bottom: 2em;
+    margin-bottom: 2rem;
     position: absolute;
 
   }
   .payment-form {
-    margin-top: 5em;
+    margin-top: 5rem;
     label {
-      width: 15em;
+      width: 15rem;
       float: left;
       text-align: left;
-      margin-right: 1em;
+      margin-right: 1rem;
       display: block;
       cursor: auto;
     }
@@ -1355,7 +1504,7 @@ nav {
       border-bottom: 1.5px solid @darkMain;
       padding: 10px 10px;
       select {
-        width: 7.5em;
+        width: 7.5rem;
       }
     }
     .payment-form-billing-detail {
@@ -1389,7 +1538,7 @@ nav {
 
       button {
         display: inline-block;
-        width: 10em;
+        width: 10rem;
         padding: 5px 16px;
         font-size: 14.5px;
         line-height: 1.33;
@@ -1436,7 +1585,7 @@ nav {
     padding: 35px 35px;
     font-size: 14px;
     text-align: left;
-    line-height: 2em;
+    line-height: 2rem;
 
     h1 {
       font-size: 45px;
@@ -1448,10 +1597,10 @@ nav {
       margin-bottom: 15px;
     }
     label {
-      width: 15em;
+      width: 15rem;
       float: left;
       text-align: left;
-      margin-right: 1em;
+      margin-right: 1rem;
       margin-left: 5%;
       display: block;
       cursor: auto;
@@ -1485,7 +1634,7 @@ nav {
       margin-right: 20%;
       button {
         display: inline-block;
-        width: 10em;
+        width: 10rem;
         padding: 5px 16px;
         font-size: 14.5px;
         line-height: 1.33;
