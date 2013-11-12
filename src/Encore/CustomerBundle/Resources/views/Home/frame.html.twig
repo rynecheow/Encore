@@ -4,7 +4,7 @@
 {% block title %}Welcome{% endblock title %}
 
 {% block require_js %}
-    require(["libs/jquery.slides.min","encore/home/slider"]);
+    require(["libs/jquery.slides.min","encore/home/slider","libs/ghostwriter.min","encore/home/search"]);
 {% endblock require_js %}
 
 {% block css %}
@@ -15,6 +15,11 @@
 
 {% block content %}
     <section class="home-content">
+        <div id="main-logo"></div>
+        <article class="home-search">
+            {% block home_search %}
+            {% endblock home_search %}
+        </article>
         <article class="home-featured">
             {% block slideshow %}
             {% endblock slideshow %}
