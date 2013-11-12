@@ -1051,6 +1051,7 @@ nav {
 
 /* Seat selection area */
 .seat-selection-wrap {
+  cursor: pointer;
   #errorMessageContainer{
     position: fixed;
     width: 100%;
@@ -1064,38 +1065,40 @@ nav {
     }
   }
 
-  table.seatTable {
-    margin-top: 50px;
+  div#seatAllocateDiv {
+    .table-wrapper {
+      width: 800px;
+      overflow: auto;
 
-    tbody tr td {
-      width: 30px;
-      height: 30px;
+      table.seatTable {
 
-      div {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-      }
+        tbody tr{
+          td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+          }
 
-      div.tableLabel {
-        background: lightgoldenrodyellow;
-      }
+          td.tableLabel {
+            background: lightgoldenrodyellow;
+          }
 
-      div.empty {
-        background: green;
-      }
+          td.empty {
+            background: green;
+          }
 
-      div.selected {
-        background: yellow;
-      }
+          td.selected {
+            background: yellow;
+          }
 
-      div.locked {
-        background: orange;
-      }
+          td.locked {
+            background: orange;
+          }
 
-      div.sold {
-        background: red;
+          td.sold {
+            background: red;
+          }
+        }
       }
     }
   }
@@ -1104,8 +1107,35 @@ nav {
     position: fixed;
     top: 25px;
     right: 25px;
-    background: blueviolet;
-    width: 300px;
+    background-color: #e0e0e0;
+    width: 250px;
+    border-radius: 25px;
+    padding: 25px 25px;
+
+    h2 {
+      text-align: center;
+      font-size: 23px;
+      margin-bottom: 15px;
+    }
+
+    .submit {
+      width: 200px;
+      padding: 5px 16px;
+      font-size: 14.5px;
+      line-height: 1.33;
+      border-radius: 6px;
+      color: #e5e5e5;
+      background-color: #d44877;
+      border-color: #d42852;
+      margin-top: 15px;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+    }
 
     table tbody tr {
       td:nth-child(1) {
