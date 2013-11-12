@@ -157,6 +157,17 @@ nav {
 
 /*Home page*/
 .home-content {
+  #main-logo {
+    background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
+    top: 35px;
+    left: 35px;
+    margin: 0 auto;
+    width: 150px;
+    height: 41px;
+    position: fixed;
+    z-index: 11;
+    background-size: cover;
+  }
   h2.spread-headline {
     font-family: @mainFont;
     -webkit-font-smoothing: antialiased;
@@ -173,7 +184,102 @@ nav {
     z-index: 11;
 
   }
-  .home-featured {
+
+  article.home-search {
+    width: 100%;
+
+    div.home-search-wrapper {
+      height: 300px;
+      overflow: hidden;
+      background: url('../../bundles/encorecustomer/images/bg/search-bg.jpg');
+      background-size: cover;
+      position: relative;
+
+      form {
+        background: rgba(0, 0, 0, 0.298039);
+        height: 110px;
+        left: 0px;
+        position: relative;
+        top: 0px;
+        width: 95%;
+        max-width: 1140px;
+        margin: 0px auto;
+        z-index: 2;
+        margin-top: 100px;
+
+        .twitter-typeahead {
+          width: 100%;
+        }
+        input {
+          font-family: elena-web-basic, georgia;
+          font-weight: 400;
+          -webkit-font-smoothing: antialiased;
+          background: none;
+          border: none;
+          border-image-source: initial;
+          border-image-slice: initial;
+          border-image-width: initial;
+          border-image-outset: initial;
+          border-image-repeat: initial;
+          color: rgb(255, 255, 255);
+          font-size: 3.6em;
+          height: 110px;
+          outline: none;
+          padding-left: 114px;
+          padding-right: 0px;
+          text-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 0px;
+          width: 1006px;
+          box-shadow: none;
+            input:focus{
+
+          }
+        }
+
+        button {
+          background-color: transparent;
+          border: 2px solid rgba(0, 0, 0, 0);
+          border-image-source: initial;
+          border-image-slice: initial;
+          border-image-width: initial;
+          border-image-outset: initial;
+          border-image-repeat: initial;
+          box-shadow: none;
+          left: 0px;
+          margin: 10px;
+          outline: none;
+          padding: 28px 34px 29px;
+          position: absolute;
+          right: auto;
+          top: 0px;
+          span {
+            background-image: url('../../bundles/encorecustomer/css/img/marmoset-icons.png');
+            background-position: -80px -2896px;
+            background-repeat: no-repeat;
+            display: block;
+            height: 29px;
+            width: 28px;
+          }
+        }
+      }
+      form.user-focused {
+        background-color: rgba(0, 0, 0, 0.8);
+        button {
+          border: 2px solid rgb(255, 255, 255);
+          border-image-source: initial;
+          border-image-slice: initial;
+          border-image-width: initial;
+          border-image-outset: initial;
+          border-image-repeat: initial;
+          box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 0px, rgba(0, 0, 0, 0.14902) 0px 1px 0px inset;
+          cursor: pointer;
+          left: auto;
+          right: 0px;
+        }
+      }
+
+    }
+  }
+  article.home-featured {
     left: 0px;
     position: relative;
     top: 0px;
@@ -194,18 +300,6 @@ nav {
       width: 31px;
       background-image: url('../../bundles/encorecustomer/css/img/marmoset-icons.png');
       background-position: -78px -651px;
-    }
-    ///
-    #main-logo {
-      background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
-      top: 35px;
-      left: 35px;
-      margin: 0 auto;
-      width: 150px;
-      height: 41px;
-      position: fixed;
-      z-index: 11;
-      background-size: cover;
     }
 
     a.slider-previous:hover {
@@ -237,14 +331,14 @@ nav {
     }
 
   }
-  .home-new {
+  article.home-new {
     width: 100%;
     .home-new-events {
       overflow: hidden;
-      background-color: @lightMain;
+      background: url('../../bundles/encorecustomer/images/bg/new-events-background.jpg');
       position: relative;
       .spread-headline {
-        color: @darkMain
+        color: @darkMain;
       }
       .revealer {
         margin-top: 100px;
@@ -1051,7 +1145,7 @@ nav {
 
 /* Seat selection area */
 .seat-selection-wrap {
-  #errorMessageContainer{
+  #errorMessageContainer {
     position: fixed;
     width: 100%;
     z-index: 2;
