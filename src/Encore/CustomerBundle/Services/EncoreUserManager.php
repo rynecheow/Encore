@@ -113,16 +113,4 @@ class EncoreUserManager
     {
         return ($this->getAuthenticatedUser() != null);
     }
-
-    /**
-     *
-     */
-//    public function removeDuplicateEmailAccounts($email){
-//        $userEmails = $this->em->getRepository("EncoreCustomerBundle:UserEmail")->findByEmail($email);
-//        foreach ($userEmails as $userEmail) {
-//            if ($userEmail->getVerificationCode()) {
-//                $this->em->remove($userEmail->getUser());
-//            }
-//        }
-//    }
 } 

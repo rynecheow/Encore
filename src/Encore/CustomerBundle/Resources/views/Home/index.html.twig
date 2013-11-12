@@ -2,13 +2,63 @@
 
 {% extends 'EncoreCustomerBundle:Home:frame.html.twig' %}
 
+{% block home_search %}
+    <div class="home-search-wrapper">
+        <form class="desktop search-form" action="{{ path('encore_global_search') }}">
+            <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
+                <input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled=""
+                       style="
+                       position: absolute;
+                       top: 0px;
+                       left: 0px;
+                       border-color: transparent;
+                       box-shadow: none;
+                       background-attachment: scroll;
+                       background-clip: border-box;
+                       background-color: rgba(0, 0, 0, 0);
+                       background-image: none;
+                       background-origin: padding-box;
+                       background-size: auto;
+                       background-position: 0% 0%;
+                       background-repeat: repeat repeat;"/>
+                <input type="text" data-value="Find the hottest events nearby."
+                       class=tt-query" id="search" name="keywords" autocomplete="off" spellcheck="false"
+                       dir="auto" style="
+                       position: relative;
+                       vertical-align: top;
+                       background-color: transparent;"
+                        />
+                <span style="
+                position: absolute;
+                left: -9999px;
+                visibility: hidden;
+                white-space: nowrap;
+                font-family: elena-web-basic, georgia;
+                font-size: 56px; font-style: normal;
+                font-variant: normal; font-weight: 400;
+                word-spacing: 0px;
+                letter-spacing: 0px;
+                text-indent: 0px;
+                text-rendering: auto;
+                text-transform: none;">
+                </span>
+                <span class="tt-dropdown-menu"
+                      style="position: absolute;
+                      top: 100%;
+                      left: 0px;
+                      z-index: 100;
+                      display: none;
+                      right: auto;">
+                </span>
+            </span>
+            <button id="search-submit" type="submit" disabled="true">
+                <span></span>
+            </button>
+        </form>
+    </div>
+{% endblock home_search %}
+
 {% block slideshow %}
-    {% for flashMessage in app.session.flashbag.get('error') %}
-        <div class="flash-notice">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
-    <div id="main-logo"></div>
     <h2 class="spread-headline">
         Featured Events
     </h2>

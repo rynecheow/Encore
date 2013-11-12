@@ -23,7 +23,6 @@
             <div id="selectDateDiv">
                 <label>Date:</label>
                 <select id="dateList">
-                    {% set dateArray = ["11/12/2013", "11/13/2013", "11/15/2013"] %}
                     <option selected="selected">Select Date</option>
                     {% for dateIndex, date in dateArray %}
                         <option value="{{ date }}">{{ date }}</option>
@@ -33,58 +32,60 @@
 
             <div id="selectTimeDiv" hidden="hidden">
                 <label>Time:</label>
-                {% set timeArray = ["8:00", "12:00", "14:00"] %}
-                {% for timeIndex, time in timeArray  %}
-                    <input type="radio" value="{{ time }}" name="timeGroup">{{ time }}
-                {% endfor %}
+                    <div class="btn-group" data-toggle="buttons-radio">
+                        {% for timeIndex, time in timeArray  %}
+                            <button type="button" class="btn btn-primary selectTime" value="{{ time }}">{{ time }}</button>
+                        {% endfor %}
+                    </div>
             </div>
 
             <div id="selectSectionDiv" hidden="hidden">
                 <label>Section:</label>
-                {% set sectionArray = ["VIP", "Premium", "Standard"] %}
-                {% for secIndex, section in sectionArray  %}
-                    <input type="radio" value="{{ section }}" name="sectionGroup">{{ section }}
-                {% endfor %}
+                <div class="btn-group" data-toggle="buttons-radio">
+                    {% for secIndex, section in sectionArray  %}
+                        <button type="button" class="btn btn-primary selectSection" value="{{ section }}">{{ section }}</button>
+                    {% endfor %}
+                </div>
             </div>
 
             <div id="ticketQtyDiv" hidden="hidden">
-                <label for="ticketQtySelector">Ticket Quantity:</label>
-                <input id="ticketQtySelector" type="number" min="0" max="8" value="0"/>
+                <label>Ticket Quantity:</label>
+                <input id="ticketQtySelector" type="number" min="0" max="{{ availableSeats }}" value="0"/>
             </div>
-
             <div id="seatAllocateDiv" hidden="hidden">
-                <table class="seatTable">
-                    <tbody>
-                    {% set rowArray = ["A", "B", "C", "D", "E"] %}
-                    {% for row, val in rowArray %}
-                        {% if row == 0 %}
-                            <tr>
-                                {% for col in 0..10 %}
-                                    <td>
-                                        {% if col != 0 %}
-                                            <div class="tableLabel">{{ col }}</div>
-                                        {% endif %}
+                <label>Seat Allocation:</label>
+                <div class="table-wrapper">
+                    <table class="seatTable">
+                        {% for row, val in rowArray %}
+                            {% if row == 0 %}
+                                <tr>
+                                    {% for col in 0..70 %}
+                                        <td class="tableLabel">
+                                            {% if col != 0 %}
+                                                {{ col }}
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endif %}
+                            <tr id="row{{ row }}">
+                                <td class="tableLabel">
+                                    {{ val }}
+                                </td>
+                                {% for col in 0..69 %}
+                                    <td id="row{{ row }}col{{ col }}" class="empty">
+                                        {{ col + 1 }}
                                     </td>
                                 {% endfor %}
                             </tr>
-                        {% endif %}
-                        <tr id="row{{ row }}">
-                            <td>
-                                <div class="tableLabel">{{ val }}</div>
-                            </td>
-                            {% for col in 0..9 %}
-                                <td>
-                                    <div id="{{ row }}rowcol{{ col }}" class="empty">{{ col + 1 }}</div>
-                                </td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <input type="button" value="reset" id="resetButton"/>
+                        {% endfor %}
+                    </table>
+                </div>
+                <input type="button" class="reset" value="reset" id="resetButton"/>
             </div>
 
             <form id="summaryForm">
+                <h2>Summary</h2>
                 <table>
                     <tbody>
                     <tr>
@@ -92,9 +93,9 @@
                             <div id="eventComplete" class="complete"/>
                         </td>
                         <td>
-                            <label>Event:</label>
+                            <h3>Event:</h3>
                             <div>
-                                <label id="eventLabel"/>
+                                <label id="eventLabel">{{ event_name }}</label>
                             </div>
                         </td>
                     </tr>
@@ -103,7 +104,7 @@
                             <div id="datetimeComplete" class="incomplete" />
                         </td>
                         <td>
-                            <label>Date & Time:</label>
+                            <h3>Date & Time:</h3>
                             <div>
                                 <label id="dateTimeLabel"/>
                             </div>
@@ -114,7 +115,7 @@
                             <div id="sectionComplete" class="incomplete" />
                         </td>
                         <td>
-                            <label>Section:</label>
+                            <h3>Section:</h3>
                             <div>
                                 <label id="sectionLabel"/>
                             </div>
@@ -125,7 +126,7 @@
                             <div id="ticketQtyComplete" class="incomplete" />
                         </td>
                         <td>
-                            <label>Ticket Quantity:</label>
+                            <h3>Ticket Quantity:</h3>
                             <div>
                                 <label id="ticketQtyLabel" />
                             </div>
@@ -136,7 +137,7 @@
                             <div id="seatAllocComplete" class="incomplete" />
                         </td>
                         <td>
-                            <label>Seat Allocation:</label>
+                            <h3>Seat Allocation:</h3>
                             <div>
                                 <label id="seatAllocationLabel"/>
                             </div>
@@ -144,7 +145,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="submit" value="next" hidden="hidden"/>
+                            <input class="submit" type="submit" value="next" hidden="hidden"/>
                         </td>
                     </tr>
                     </tbody>
