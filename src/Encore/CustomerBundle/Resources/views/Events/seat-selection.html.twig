@@ -23,7 +23,6 @@
             <div id="selectDateDiv">
                 <label>Date:</label>
                 <select id="dateList">
-                    {% set dateArray = ["11/12/2013", "11/13/2013", "11/15/2013"] %}
                     <option selected="selected">Select Date</option>
                     {% for dateIndex, date in dateArray %}
                         <option value="{{ date }}">{{ date }}</option>
@@ -33,7 +32,6 @@
 
             <div id="selectTimeDiv" hidden="hidden">
                 <label>Time:</label>
-                {% set timeArray = ["8:00", "12:00", "14:00"] %}
                 {% for timeIndex, time in timeArray  %}
                     <input type="radio" value="{{ time }}" name="timeGroup">{{ time }}
                 {% endfor %}
@@ -41,7 +39,6 @@
 
             <div id="selectSectionDiv" hidden="hidden">
                 <label>Section:</label>
-                {% set sectionArray = ["VIP", "Premium", "Standard"] %}
                 {% for secIndex, section in sectionArray  %}
                     <input type="radio" value="{{ section }}" name="sectionGroup">{{ section }}
                 {% endfor %}
@@ -49,12 +46,11 @@
 
             <div id="ticketQtyDiv" hidden="hidden">
                 <label for="ticketQtySelector">Ticket Quantity:</label>
-                <input id="ticketQtySelector" type="number" min="0" max="8" value="0"/>
+                <input id="ticketQtySelector" type="number" min="0" max="{{ availableSeats }}" value="0"/>
             </div>
             <div id="seatAllocateDiv" hidden="hidden">
                 <div class="table-wrapper">
                     <table class="seatTable">
-                        {% set rowArray = ["A", "B", "C", "D", "E"] %}
                         {% for row, val in rowArray %}
                             {% if row == 0 %}
                                 <tr>
@@ -84,6 +80,7 @@
             </div>
 
             <form id="summaryForm">
+                <h2>Summary</h2>
                 <table>
                     <tbody>
                     <tr>
@@ -93,7 +90,7 @@
                         <td>
                             <label>Event:</label>
                             <div>
-                                <label id="eventLabel"/>
+                                <label id="eventLabel">{{ event_name }}</label>
                             </div>
                         </td>
                     </tr>
@@ -143,7 +140,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input type="submit" value="next" hidden="hidden"/>
+                            <input class="submit" type="submit" value="next" hidden="hidden"/>
                         </td>
                     </tr>
                     </tbody>
