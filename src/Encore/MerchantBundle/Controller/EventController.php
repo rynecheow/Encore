@@ -19,6 +19,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Validator\Constraints\Date;
+use DateTime;
 
 
 class EventController extends Controller
@@ -30,7 +32,7 @@ class EventController extends Controller
      */
     public function indexAction()
     {
-        return $this->render("EncoreMerchantBundle:Ev=ents:index.html.twig");
+        return $this->render("EncoreMerchantBundle:Events:index.html.twig");
     }
 
     /**
@@ -43,6 +45,7 @@ class EventController extends Controller
         $allVenueLocations = $this->em->getRepository("EncoreCustomerBundle:Venue")->findAllLocation();
         $array = json_decode(json_encode($allVenueLocations), true);
         $allLocations = [];
+
         foreach ($array as $allVenueLocation) {
             foreach ($allVenueLocation as $value) {
                 $allLocations[] = [
@@ -51,23 +54,46 @@ class EventController extends Controller
             }
         }
 
-
         $request = $this->getRequest();
 
         if ($request->getMethod() === "POST") {
             $formData = $request->request->all();
+            $currentDate = new \DateTime();
+            $saleStart = DateTime::createFromFormat("m/d/Y", $formData["event_sale_start"]);
+            $saleEnd = DateTime::createFromFormat("m/d/Y", $formData["event_sale_end"]);
 
-//            if ($createEventForm->isValid()) {
-//                /**
-//                 * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
-//                 */
-            //            $selectedVenueId = $createEventForm->get("venue")->getData();
-            //            $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
-            //                ->find($selectedVenueId);
-            //            $newEvent->setVenue($selectedVenue)
-            //                ->setPublish(false);
-            //            $this->em->persist($newEvent);
-            //            $this->em->flush();
+            /**
+             * @var $venue \Encore\CustomerBundle\Entity\Venue
+             */
+            $venue = $this->em->getRepository("EncoreCustomerBundle:Venue")
+                ->find($formData["event_venue"]);
+
+            if (!$venue) {
+                throw $this->createNotFoundException("No venue found for id " . $venue->getId() . " WHYYYYY!");
+            }
+
+            //$merchant = $this->getLoggedInUser()->getMerchant();
+
+            $merchant = $this->em->getRepository("EncoreCustomerBundle:Merchant")
+                             ->find("1");
+
+            if (!$merchant) {
+                throw $this->createNotFoundException("No merchant found for id " . $merchant->getId() . " WHYYYYY!");
+            }
+
+            $newEvent = new Event();
+            $newEvent->setName($formData["event_name"])
+                ->setType($formData["event_type"])
+                ->setDescription($formData["event_description"])
+                ->setCreateAt($currentDate)
+                ->setSaleStart($saleStart)
+                ->setSaleEnd($saleEnd)
+                ->setPublish(false)
+                ->setVenue($venue)
+                ->setCreator($merchant);
+            $this->em->persist($newEvent);
+            $this->em->flush();
+
             //            $heldDates = $createEventForm->get("heldDates")->getData();
             //
             //            foreach ($heldDates as $heldDate) {
@@ -103,9 +129,8 @@ class EventController extends Controller
             //                    $this->em->persist($eventSeat);
             //                    $this->em->flush();
             //                }
+
             return $this->render("EncoreMerchantBundle:Events:index.html.twig");
-//            }
-//            //            }}
         }
 
         return $this->render(
@@ -260,13 +285,21 @@ class EventController extends Controller
             ];
         }
 
-        $response = [
-            "code" => "200",
-            "status" => true,
-            "venues" => $venuesInfo
-        ];
+        if (count($venuesInfo) === 0) {
+            $response = [
+                "code" => "200",
+                "status" => true,
+                "message" => "No venue found on that location."
+            ];
+        } else {
+            $response = [
+                "code" => "200",
+                "status" => true,
+                "venues" => $venuesInfo,
+                "message" => "Venue information has returned."
+            ];
+        }
 
-        //TODO Response for array 0
         return new Response(json_encode($response));
     }
 
@@ -375,4 +408,4 @@ class EventController extends Controller
 
         return $venuesInfo;
     }
-} 
+}

@@ -60,6 +60,7 @@ table {
 @darkMain : #262626;
 @lightMain: #e5e5e5;
 @lightSecondary: #e0e0e0;
+@lightTertiary: #e2e2e2;
 @lightChoc: #a99d9d;
 @pinkMain: #d44877;
 @pinkSecondary: #d42852;
@@ -70,6 +71,31 @@ table {
 .list-style-main (@size: 1.5em) {
   line-height: @size;
   margin-left: @size * 2;
+}
+
+.seat-selection-button (@width: 200px) {
+  width: @width;
+  padding: 5px 16px;
+  font-size: 14.5px;
+  line-height: 1.33;
+  border-radius: 6px;
+  color: #e5e5e5;
+  background-color: rgb(71, 144, 205);
+  border-color: rgb(44, 108, 205);
+  margin-top: 15px;
+  margin-bottom: 0;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+}
+
+.seat-selection-td (@url) {
+  background: @url;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .placeholder-font () {
@@ -157,6 +183,17 @@ nav {
 
 /*Home page*/
 .home-content {
+  #main-logo {
+    background: url('../../bundles/encorecustomer/images/logo/logo-color.svg');
+    top: 35px;
+    left: 35px;
+    margin: 0 auto;
+    width: 150px;
+    height: 41px;
+    position: fixed;
+    z-index: 11;
+    background-size: cover;
+  }
   h2.spread-headline {
     font-family: @mainFont;
     -webkit-font-smoothing: antialiased;
@@ -173,7 +210,104 @@ nav {
     z-index: 11;
 
   }
-  .home-featured {
+
+  article.home-search {
+    width: 100%;
+
+    div.home-search-wrapper {
+      height: 300px;
+      overflow: hidden;
+      background: url('../../bundles/encorecustomer/images/bg/search-bg.jpg');
+      background-size: cover;
+      position: relative;
+
+      form {
+        background: rgba(0, 0, 0, 0.298039);
+        height: 110px;
+        left: 0px;
+        position: relative;
+        top: 0px;
+        width: 95%;
+        max-width: 1140px;
+        margin: 0px auto;
+        z-index: 2;
+        margin-top: 100px;
+
+        .twitter-typeahead {
+          width: 100%;
+        }
+        input {
+          font-family: elena-web-basic, georgia;
+          font-weight: 400;
+          -webkit-font-smoothing: antialiased;
+          background: none;
+          border: none;
+          border-image-source: initial;
+          border-image-slice: initial;
+          border-image-width: initial;
+          border-image-outset: initial;
+          border-image-repeat: initial;
+          color: rgb(255, 255, 255);
+          font-size: 3.6em;
+          height: 110px;
+          outline: none;
+          padding-left: 114px;
+          padding-right: 0px;
+          text-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 0px;
+          width: 1006px;
+          box-shadow: none;
+        }
+
+        button {
+          background-color: transparent;
+          border: 2px solid rgba(0, 0, 0, 0);
+          border-image-source: initial;
+          border-image-slice: initial;
+          border-image-width: initial;
+          border-image-outset: initial;
+          border-image-repeat: initial;
+          box-shadow: none;
+          left: 0px;
+          margin: 10px;
+          outline: none;
+          padding: 28px 34px 29px;
+          position: absolute;
+          right: auto;
+          top: 0px;
+          span {
+            background-image: url('../../bundles/encorecustomer/css/img/marmoset-icons.png');
+            background-position: -80px -2896px;
+            background-repeat: no-repeat;
+            display: block;
+            height: 29px;
+            width: 28px;
+          }
+        }
+      }
+      form.user-focused {
+        background-color: rgba(0, 0, 0, 0.8);
+        button {
+          border: 2px solid rgb(255, 255, 255);
+          border-image-source: initial;
+          border-image-slice: initial;
+          border-image-width: initial;
+          border-image-outset: initial;
+          border-image-repeat: initial;
+          box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 0px, rgba(0, 0, 0, 0.14902) 0px 1px 0px inset;
+          cursor: pointer;
+          left: auto;
+          right: 0px;
+        }
+        input {
+          padding-left: 0px;
+          padding-right: 118px;
+          text-align: center;
+        }
+      }
+
+    }
+  }
+  article.home-featured {
     left: 0px;
     position: relative;
     top: 0px;
@@ -237,14 +371,14 @@ nav {
     }
 
   }
-  .home-new {
+  article.home-new {
     width: 100%;
     .home-new-events {
       overflow: hidden;
-      background-color: @lightMain;
+      background: url('../../bundles/encorecustomer/images/bg/new-events-background.jpg');
       position: relative;
       .spread-headline {
-        color: @darkMain
+        color: @darkMain;
       }
       .revealer {
         margin-top: 100px;
@@ -1051,11 +1185,19 @@ nav {
 
 /* Seat selection area */
 .seat-selection-wrap {
-  #errorMessageContainer{
+  input {
+    cursor: pointer;
+  }
+
+  #ticketQtySelector {
+    height: 30px;
+  }
+
+  #errorMessageContainer {
     position: fixed;
     width: 100%;
-    z-index: 2;
     height: 100%;
+    z-index: 2;
     background: rgba(80, 80, 80, 0.5);
 
     #errorMessageDiv {
@@ -1064,38 +1206,56 @@ nav {
     }
   }
 
-  table.seatTable {
-    margin-top: 50px;
+  #selectDateDiv, #selectTimeDiv, #selectSectionDiv, #ticketQtyDiv, #seatAllocateDiv {
+    margin-top: 25px;
+    margin-left: 25px;
+    label {
+      color: @lightTertiary;
+    }
 
-    tbody tr td {
-      width: 30px;
-      height: 30px;
+    .reset {
+      .seat-selection-button();
+    }
+  }
 
-      div {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-      }
+  div#seatAllocateDiv {
+    cursor: pointer;
+    .table-wrapper {
+      width: 50%;
+      overflow: auto;
 
-      div.tableLabel {
-        background: lightgoldenrodyellow;
-      }
+      table.seatTable {
+        tbody tr {
+          td {
+            text-align: center;
+            position: relative;
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+            min-height: 30px;
+            min-width: 30px;
+          }
 
-      div.empty {
-        background: green;
-      }
+          td.tableLabel {
+            background: lightgoldenrodyellow;
+          }
 
-      div.selected {
-        background: yellow;
-      }
+          td.empty {
+            .seat-selection-td(url('../../bundles/encorecustomer/images/seat-selection/seat-offered.png'));
+          }
 
-      div.locked {
-        background: orange;
-      }
+          td.selected {
+            .seat-selection-td(url('../../bundles/encorecustomer/images/seat-selection/seat-selected.png'));
+          }
 
-      div.sold {
-        background: red;
+          td.locked {
+            .seat-selection-td(url('../../bundles/encorecustomer/images/seat-selection/seat-notapplicable.png'));
+          }
+
+          td.sold {
+            .seat-selection-td(url('../../bundles/encorecustomer/images/seat-selection/seat-unavailable.png'));
+          }
+        }
       }
     }
   }
@@ -1104,8 +1264,24 @@ nav {
     position: fixed;
     top: 25px;
     right: 25px;
-    background: blueviolet;
-    width: 300px;
+    background-color: #e0e0e0;
+    width: 250px;
+    border-radius: 25px;
+    padding: 25px 25px;
+
+    h2 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    .submit {
+      .seat-selection-button(200px);
+    }
 
     table tbody tr {
       td:nth-child(1) {
@@ -1114,26 +1290,19 @@ nav {
         div {
           width: 20px;
           height: 20px;
+          max-width: 20px;
+          max-height: 20px;
         }
 
-        /*
-         * Remove uncommented line and uncomment commented lines when images have been included to project
-         */
         div.complete {
-          //background: url('../../bundles/encorecustomer/images/seat-selection/complete.png');
-          background: green;
+          background: url('../../bundles/encorecustomer/images/seat-selection/step-complete.png');
         }
 
         div.incomplete {
-          //background: url('../../bundles/encorecustomer/images/seat-selection/incomplete.png');
-          background: red;
+          background: url('../../bundles/encorecustomer/images/seat-selection/step-incomplete.png');
         }
       }
     }
-  }
-
-  label {
-    color: red;
   }
 }
 

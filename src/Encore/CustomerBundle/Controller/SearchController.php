@@ -9,6 +9,7 @@
 namespace Encore\CustomerBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SearchController extends BaseController
 {
@@ -28,17 +29,24 @@ class SearchController extends BaseController
     public function globalSearchAction()
     {
         $params = [];
+        /**
+         * @var $session Session
+         */
         $session = $this->get('session');
         $session->save();
-        if ($this->getRequest()->getMethod() === "GET") {
-            $qparams = $this->getRequest()->query->all();
+
+        $request = $this->getRequest();
+        if ($request->getMethod() === "GET") {
+            $qparams = $request->request->all();
             if ($qparams) {
-                if (isset($qparams['q']) && $qparams['q']) {
-                    if (!isset($qparams['type'])) {
-                        $qparams['type'] = "default";
-                    }
-                    $qparams['user_id'] = ($this->authenticatedUser) ? $this->authenticatedUser->getId() : 0;
-                    $search_results = $this->get('encore.encore_search')->doFullSearch($qparams);
+                if (isset($qparams['keyword']) && $qparams['keyword']) {
+                    /**
+                     * @var $searcher \Encore\CustomerBundle\Services\EncoreSearch
+                     */
+                    $searcher = $this->get('encore.encore_search');
+                    $search_results = $searcher->performFullSearch($qparams);
+
+
                     $params = [
                         "search_results" => $search_results
                     ];
