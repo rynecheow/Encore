@@ -9,87 +9,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Encore\CustomerBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use DateTime;
 
 class ProfileController extends BaseController
 {
-
     /**
-     * Logged In User Editing Its Profile
-     *
-     * @Route("/profile/{userId}/edit", name="encore_edit_profile")
-     * @ParamConverter("user", class="EncoreCustomerBundle:User", options={"id" = "userId"})
+     * @Route("/profile", name="encore_view_profile")
      * @Method({"GET","POST"})
-     */
-    public function editAction(User $user)
-    {
-        $form = $this->createEditProfileForm();
-
-        return $this->render(
-            "EncoreCustomerBundle:User:editProfile.html.twig",
-            ["form" => $form->createView()]
-        );
-
-//    {
-//        $request = $this->getRequest();
-//        if ($this->isLoggedIn()) {
-//            if (!$this->authorizeRequest($request)) {
-//                return $this->redirect(
-//                    $this->generateUrl(
-//                        'encore_view_profile',
-//                        [
-//                            'id' => $request->attributes->get('id'),
-//                        ]
-//                    )
-//                );
-//            }
-//
-//            /**
-//             * @var $user User
-//             */
-//            $user = $this->authenticatedUser;
-//            $request = $this->getRequest();
-//            if (($user->isEnabled())) {
-//                $editProfileForm = $this->createEditProfileForm();
-//
-//                if ($request->isMethod('POST')) {
-//                    $editProfileForm->submit($request);
-//                    if ($editProfileForm->isValid()) {
-//                        $this->em->flush();
-//
-//                        if ($request->isXmlHttpRequest()) {
-//                            return Response::create('', 204);
-//                        }
-//
-//                        $this->pushFlashMessage('success', 'Profile saved');
-//
-//                        return $this->redirect(
-//                            $this->generateUrl(
-//                                'encore_view_profile',
-//                                [
-//                                    'id' => $request->attributes->get('id'),
-//                                ]
-//                            )
-//                        );
-//                    }
-//                }
-//
-//                return $this->render(
-//                    "EncoreCustomerBundle:User:editProfile.html.twig",
-//                    array('form' => $editProfileForm->createView())
-//                );
-//            }
-//
-//            // If Not Enabled
-//            return $this->redirect($this->generateUrl('encore_complete_profile'));
-//        }
-//
-//        // Invalid Access via url
-//        return $this->redirect($this->generateUrl('encore_login'));
-    }
-
-    /**
-     * @Route("/profile/{id}", name="encore_view_profile")
-     * @Method("GET")
      */
     public function viewAction()
     {
@@ -103,67 +29,55 @@ class ProfileController extends BaseController
          * @var $user User
          */
         $user = $this->authenticatedUser;
+        $customer = $user->getCustomer();
 
-        $form = $this->createEditProfileForm();
+        if (!$customer) {
+            throw $this->createNotFoundException("No customer found for id " . $customer->getId() . " WHYYYYY!");
+        }
 
+        $form = $this->createEditProfileForm($customer);
+        $request = $this->getRequest();
+
+        if ($request->getMethod() === "POST") {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $birthDate = DateTime::createFromFormat("Y-m-d",
+                    $form->get("birthDate")->getData());
+                $customer->setBirthDate($birthDate);
+//                $customer->setBirthDate($form->get("birthDate")->getData())
+//                    ->setAddress($form->get("address")->getData())
+//                    ->setContactNo($form->get("contactno")->getData())
+//                    ->setFirstName($form->get("firstname")->getData())
+//                    ->setLastName($form->get("lastname")->getData());
+                $this->em->flush();
+            }
+        }
 
         return $this->render(
             "EncoreCustomerBundle:User:profile.html.twig",
             [
-                'username' => $user->getUsername()
-                ,
-                'email' => $user->getEmail()
-                ,
-                'firstname' => 'Kok Hong'
-                ,
-                'lastname' => 'Choo'
-                ,
-                'birthdate' => '1991-08-26'
-                ,
-                'contactno' => '0123456789'
-                ,
-                'address' => 'ADDRESS THING Jalan Kuchai Lama 1/128b'
-                ,
+                "customer" => $customer,
                 "form" => $form->createView()
             ]
         );
     }
 
     /**
-     * Authorizes the Request against the currently logged in user.
-     *
-     * @param Request $request
-     *
-     * @return boolean whether the ID in the Request belongs to the current user
+     * @param $customer \Encore\CustomerBundle\Entity\Customer
+     * @return \Symfony\Component\Form\Form
      */
-    private function authorizeRequest(Request $request)
+    private function createEditProfileForm($customer)
     {
-        $userId = $request->attributes->get('id');
+        $birthDate = $customer->getBirthDate()->format("Y-m-d");
 
-        return ($this->authenticatedUser->getId() == $userId);
-    }
-
-    private function createEditProfileForm()
-    {
-
-        // Dummy Data
-        $fname = 'Kok Hong';
-        $lname = 'Choo';
-        $bdate = '1991-08-26';
-        $contactno = '0123456789';
-        $address = 'ADDRESS THING Jalan Kuchai Lama 1/128b';
-
-        ////////////
-        return $this->createFormBuilder()
-            ->setAction('encore_edit_profile')
-            // Get First Email In Email Array
+        return $this->createFormBuilder($customer)
             ->add(
                 'firstName',
                 'text',
                 [
                     'attr' => [
                         'class' => 'edit-text-box',
-                        'placeholder' => $fname,
+                        'placeholder' => $customer->getFirstName(),
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your first name.',
@@ -174,7 +88,7 @@ class ProfileController extends BaseController
                         'class' => 'class-label'
                     ]
                     ,
-                    'data' => $fname
+                    'data' => $customer->getFirstName()
                 ]
             )
             ->add(
@@ -183,7 +97,7 @@ class ProfileController extends BaseController
                 [
                     'attr' => [
                         'class' => 'edit-text-box',
-                        'placeholder' => $lname,
+                        'placeholder' => $customer->getLastName(),
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your last name.',
@@ -194,7 +108,7 @@ class ProfileController extends BaseController
                         'class' => 'class-label'
                     ]
                     ,
-                    'data' => $lname
+                    'data' => $customer->getLastName()
                 ]
             )
             ->add(
@@ -203,7 +117,7 @@ class ProfileController extends BaseController
                 [
                     'attr' => [
                         'class' => 'edit-bday datepicker',
-                        'placeholder' => $bdate,
+                        'placeholder' => $birthDate,
                         'data-required' => 'true',
                         'data-trigger' => 'change',
                         'data-required-message' => 'Please enter your birth date.',
@@ -215,7 +129,7 @@ class ProfileController extends BaseController
                         'class' => 'class-label'
                     ]
                     ,
-                    'data' => $bdate
+                    'data' => $birthDate
                 ]
             )
             ->add(
@@ -224,7 +138,7 @@ class ProfileController extends BaseController
                 [
                     'attr' => [
                         'class' => 'edit-text-box',
-                        'placeholder' => $contactno,
+                        'placeholder' => $customer->getContactNo(),
                         'data-required' => 'true',
                         'data-type' => 'digits',
                         'data-trigger' => 'change',
@@ -236,7 +150,7 @@ class ProfileController extends BaseController
                         'class' => 'class-label'
                     ]
                     ,
-                    'data' => $contactno
+                    'data' => $customer->getContactNo()
                 ]
             )
             ->add(
@@ -245,7 +159,7 @@ class ProfileController extends BaseController
                 [
                     'attr' => [
                         'class' => 'edit-address',
-                        'placeholder' => $address,
+                        'placeholder' => $customer->getAddress(),
                         'data-required' => 'true',
                         'data-rangelength' => '[20,200]',
                         'data-trigger' => 'keyup',
@@ -258,7 +172,7 @@ class ProfileController extends BaseController
                         'class' => 'class-label'
                     ]
                     ,
-                    'data' => $address
+                    'data' => $customer->getAddress()
                 ]
             )
             ->add(
