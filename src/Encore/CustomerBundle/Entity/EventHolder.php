@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * EventHolder
  *
- * @ORM\Table()
+ * @ORM\Table(name="EventHolder")
  * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\EventHolderRepository")
  */
 class EventHolder
