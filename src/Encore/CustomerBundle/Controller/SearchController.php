@@ -37,9 +37,9 @@ class SearchController extends BaseController
 
         $request = $this->getRequest();
         if ($request->getMethod() === "GET") {
-            $qparams = $request->request->all();
+            $qparams = $request->query->all();
             if ($qparams) {
-                if (isset($qparams['keyword']) && $qparams['keyword']) {
+                if (isset($qparams['keywords']) && $qparams['keywords']) {
                     /**
                      * @var $searcher \Encore\CustomerBundle\Services\EncoreSearch
                      */

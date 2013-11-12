@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * EventPhoto
  *
- * @ORM\Table()
+ * @ORM\Table(name="EventPhoto")
  * @ORM\Entity(repositoryClass="Encore\CustomerBundle\Repository\EventPhotoRepository")
  * @Vich\Uploadable
  */

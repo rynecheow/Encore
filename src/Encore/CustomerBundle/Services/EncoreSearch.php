@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sysadm
+ * User: rynecheow
  * Date: 11/9/13
  * Time: 7:19 PM
  */
@@ -40,30 +40,31 @@ class EncoreSearch
         $events = [];
         $search_results = [];
 
-        if (isset($qparams['q'])) {
-            $search_results['query'] = $qparams['keyword'];
+        if (isset($qparams['keywords'])) {
+            $search_results['query'] = $qparams['keywords'];
 
             if ($search_results['query'] !== '') {
-                $this->em->createQuery(
+                $events = $this->em->createQuery(
                     <<<SQL
-                SELECT e.name, v.location, e.type, ep.imagePath, eh.heldDate
+                SELECT DISTINCT e.name, v.location, e.type, ep.imagePath, eh.heldDate
                 FROM EncoreCustomerBundle:Event e
-                LEFT JOIN event.eventHolders eh
-                LEFT JOIN event.venue v
-                LEFT JOIN event_photo ep
+                INNER JOIN e.eventHolders eh
+                INNER JOIN e.venue v
+                INNER JOIN e.photos ep
 
-                WHERE e.publish <> 0
-                AND (e.description LIKE :qkey
-                OR e.name LIKE :qkey OR
-                v.location LIKE :qkey)
+
+                WHERE e.publishedAt IS NOT NULL
+                AND(e.description LIKE :qkey
+                OR e.name LIKE :qkey
+                OR v.location LIKE :qkey)
+                GROUP BY e.name, v.location
 SQL
                 )->setParameters(
                         [
-                            'qkey' => '%' . $search_results['query'] . '%'
+                            'qkey' => '%' . $search_results['query'] . "%"
                         ]
                     )->setMaxResults($this->limit)
                     ->getResult();
-
                 $bef_count = microtime(true);
 
                 //Search query time
@@ -72,6 +73,8 @@ SQL
                 //Time taken for getting the search results
                 $search_results['seconds']['searchq'] = $search_time;
             }
+
+            $search_results['data']['events'] = $events;
 
             return $search_results;
 

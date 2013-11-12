@@ -61,7 +61,8 @@ class EventManager
         $predicates = [];
 
         $predicates[] = $expr->andX(
-            $expr->isNotNull('event.createAt')
+            $expr->isNotNull('event.createAt'),
+            $expr->isNotNull('event.publishedAt')
         );
 
         return call_user_func_array([$expr, 'andX'], $predicates);
