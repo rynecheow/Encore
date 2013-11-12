@@ -32,23 +32,28 @@
 
             <div id="selectTimeDiv" hidden="hidden">
                 <label>Time:</label>
-                {% for timeIndex, time in timeArray  %}
-                    <input type="radio" value="{{ time }}" name="timeGroup">{{ time }}
-                {% endfor %}
+                    <div class="btn-group" data-toggle="buttons-radio">
+                        {% for timeIndex, time in timeArray  %}
+                            <button type="button" class="btn btn-primary selectTime" value="{{ time }}">{{ time }}</button>
+                        {% endfor %}
+                    </div>
             </div>
 
             <div id="selectSectionDiv" hidden="hidden">
                 <label>Section:</label>
-                {% for secIndex, section in sectionArray  %}
-                    <input type="radio" value="{{ section }}" name="sectionGroup">{{ section }}
-                {% endfor %}
+                <div class="btn-group" data-toggle="buttons-radio">
+                    {% for secIndex, section in sectionArray  %}
+                        <button type="button" class="btn btn-primary selectSection" value="{{ section }}">{{ section }}</button>
+                    {% endfor %}
+                </div>
             </div>
 
             <div id="ticketQtyDiv" hidden="hidden">
-                <label for="ticketQtySelector">Ticket Quantity:</label>
+                <label>Ticket Quantity:</label>
                 <input id="ticketQtySelector" type="number" min="0" max="{{ availableSeats }}" value="0"/>
             </div>
             <div id="seatAllocateDiv" hidden="hidden">
+                <label>Seat Allocation:</label>
                 <div class="table-wrapper">
                     <table class="seatTable">
                         {% for row, val in rowArray %}
@@ -76,7 +81,7 @@
                         {% endfor %}
                     </table>
                 </div>
-                <input type="button" value="reset" id="resetButton"/>
+                <input type="button" class="reset" value="reset" id="resetButton"/>
             </div>
 
             <form id="summaryForm">
@@ -88,7 +93,7 @@
                             <div id="eventComplete" class="complete"/>
                         </td>
                         <td>
-                            <label>Event:</label>
+                            <h3>Event:</h3>
                             <div>
                                 <label id="eventLabel">{{ event_name }}</label>
                             </div>
@@ -99,7 +104,7 @@
                             <div id="datetimeComplete" class="incomplete" />
                         </td>
                         <td>
-                            <label>Date & Time:</label>
+                            <h3>Date & Time:</h3>
                             <div>
                                 <label id="dateTimeLabel"/>
                             </div>
@@ -110,7 +115,7 @@
                             <div id="sectionComplete" class="incomplete" />
                         </td>
                         <td>
-                            <label>Section:</label>
+                            <h3>Section:</h3>
                             <div>
                                 <label id="sectionLabel"/>
                             </div>
@@ -121,7 +126,7 @@
                             <div id="ticketQtyComplete" class="incomplete" />
                         </td>
                         <td>
-                            <label>Ticket Quantity:</label>
+                            <h3>Ticket Quantity:</h3>
                             <div>
                                 <label id="ticketQtyLabel" />
                             </div>
@@ -132,7 +137,7 @@
                             <div id="seatAllocComplete" class="incomplete" />
                         </td>
                         <td>
-                            <label>Seat Allocation:</label>
+                            <h3>Seat Allocation:</h3>
                             <div>
                                 <label id="seatAllocationLabel"/>
                             </div>

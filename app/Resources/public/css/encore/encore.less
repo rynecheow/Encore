@@ -1051,7 +1051,14 @@ nav {
 
 /* Seat selection area */
 .seat-selection-wrap {
-  cursor: pointer;
+  input {
+    cursor: pointer;
+  }
+
+  #ticketQtySelector {
+    height: 30px;
+  }
+
   #errorMessageContainer{
     position: fixed;
     width: 100%;
@@ -1065,18 +1072,50 @@ nav {
     }
   }
 
+  #selectDateDiv, #selectTimeDiv, #selectSectionDiv, #ticketQtyDiv, #seatAllocateDiv {
+    margin-top: 25px;
+    margin-left: 25px;
+    label {
+      color: rgb(224, 224, 224);
+    }
+
+    .reset {
+      width: auto;
+      padding: 5px 16px;
+      font-size: 14.5px;
+      line-height: 1.33;
+      border-radius: 6px;
+      color: #e5e5e5;
+      background-color: rgb(71, 144, 205);
+      border-color: rgb(44, 108, 205);
+      margin-top: 15px;
+      margin-bottom: 0;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+    }
+  }
+
   div#seatAllocateDiv {
+    cursor: pointer;
     .table-wrapper {
-      width: 800px;
+      width: 50%;
       overflow: auto;
 
       table.seatTable {
 
         tbody tr{
           td {
+            text-align: center;
+            position: relative;
+            padding: 5px;
             width: 30px;
             height: 30px;
-            text-align: center;
+            min-height: 30px;
+            min-width: 30px;
           }
 
           td.tableLabel {
@@ -1084,19 +1123,27 @@ nav {
           }
 
           td.empty {
-            background: green;
+            background: url('../../bundles/encorecustomer/images/seat-selection/seat-offered.png');
+            background-repeat: no-repeat;
+            background-position: center;
           }
 
           td.selected {
-            background: yellow;
+            background: url('../../bundles/encorecustomer/images/seat-selection/seat-selected.png');
+            background-repeat: no-repeat;
+            background-position: center;
           }
 
           td.locked {
-            background: orange;
+            background: url('../../bundles/encorecustomer/images/seat-selection/seat-notapplicable.png');
+            background-repeat: no-repeat;
+            background-position: center;
           }
 
           td.sold {
-            background: red;
+            background: url('../../bundles/encorecustomer/images/seat-selection/seat-unavailable.png');
+            background-repeat: no-repeat;
+            background-position: center;
           }
         }
       }
@@ -1114,8 +1161,12 @@ nav {
 
     h2 {
       text-align: center;
-      font-size: 23px;
+      font-size: 26px;
       margin-bottom: 15px;
+    }
+
+    h3 {
+      font-size: 20px;
     }
 
     .submit {
@@ -1125,8 +1176,8 @@ nav {
       line-height: 1.33;
       border-radius: 6px;
       color: #e5e5e5;
-      background-color: #d44877;
-      border-color: #d42852;
+      background-color: rgb(71, 144, 205);
+      border-color: rgb(44, 108, 205);
       margin-top: 15px;
       margin-bottom: 0;
       text-align: center;
@@ -1144,26 +1195,19 @@ nav {
         div {
           width: 20px;
           height: 20px;
+          max-width: 20px;
+          max-height: 20px;
         }
 
-        /*
-         * Remove uncommented line and uncomment commented lines when images have been included to project
-         */
         div.complete {
-          //background: url('../../bundles/encorecustomer/images/seat-selection/complete.png');
-          background: green;
+          background: url('../../bundles/encorecustomer/images/seat-selection/step-complete.png');
         }
 
         div.incomplete {
-          //background: url('../../bundles/encorecustomer/images/seat-selection/incomplete.png');
-          background: red;
+          background: url('../../bundles/encorecustomer/images/seat-selection/step-incomplete.png');
         }
       }
     }
-  }
-
-  label {
-    color: red;
   }
 }
 

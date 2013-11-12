@@ -258,9 +258,9 @@ require(['domReady'],
                  * Called when radio button for time changes
                  * Hides section selection step and hides ticket quantity and seat allocation steps
                  */
-                $("input:radio[name='timeGroup']").change(function () {
+                $("button.selectTime").click(function (e) {
                     hideSectionStep(false);
-                    $("#dateTimeLabel").html($("#dateList").val() + " " + $("input:radio[name='timeGroup']:checked").val());
+                    $("#dateTimeLabel").html($("#dateList").val() + " " + $(e.target).val());
                     hideTicketQtyStep(true);
                     hideSeatAllocateStep(true);
                 });
@@ -269,9 +269,10 @@ require(['domReady'],
                  * Called when radio button for section changes
                  * Displays ticket quantity step and hides seat allocation step
                  */
-                $("input:radio[name='sectionGroup']").change(function () {
+                $("button.selectSection").click(function (e) {
+                //$("input:radio[name='sectionGroup']").change(function () {
                     hideTicketQtyStep(false);
-                    $("#sectionLabel").html($("input:radio[name='sectionGroup']:checked").val());
+                    $("#sectionLabel").html($(e.target).val());
                     hideSeatAllocateStep(true);
                 });
 
