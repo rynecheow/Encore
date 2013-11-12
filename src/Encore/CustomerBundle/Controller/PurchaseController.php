@@ -11,6 +11,8 @@ namespace Encore\CustomerBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Encore\CustomerBundle\Entity\Event;
 
 class PurchaseController extends BaseController
 {
@@ -83,10 +85,21 @@ class PurchaseController extends BaseController
     }
 
     /**
-     * @Route("/seat-selection")
+     * @Route("/events/{eventId}/purchase/seat-selection", name="encore_seat_selection")
+     * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
      */
-    public function selectSeatAction()
+    public function selectSeatAction(Event $event)
     {
-        return $this->render("EncoreCustomerBundle:Events:seat-selection.html.twig");
+        $params = [
+            "event_name" => "This Event",
+            "dateArray" => ["11/12/2013", "11/13/2013", "11/15/2013", "11/17/2013"],
+            "timeArray" => ["8:00", "12:00", "14:00", "16:00", "18:00"],
+            "sectionArray" => ["VVIP", "VIP", "Premium", "Standard"],
+            "availableSeats" => 10,
+            "rowArray" => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "totalCol" => 70
+        ];
+
+        return $this->render("EncoreCustomerBundle:Events:seat-selection.html.twig", $params);
     }
 }
