@@ -10,9 +10,6 @@
     require(["encore/profile/edit-profile"]);
     require(["libs/bootstrap/bootstrap-datepicker"]);
 {% endblock require_js %}
-
-
-
 {% block title %}View Profile{% endblock title %}
 {% block content %}
 
@@ -38,7 +35,7 @@
             <div class="content-wrap tab-pane active fade in" id="view">
 
                 <p class="profile-big-title">
-                    {{ username }}
+                    {{ app.user.username }}
                 </p>
 
                 <br/>
@@ -50,7 +47,7 @@
                 </p>
 
                 <p>
-                    {{ username }}
+                    {{ app.user.username }}
                 </p>
                 <hr>
                 <p class="profile-title">
@@ -59,7 +56,7 @@
 
 
                 <p>
-                    {{ email }}
+                    {{ app.user.email }}
                 </p>
                 <hr>
                 <p class="profile-title">
@@ -67,7 +64,7 @@
                 </p>
 
                 <p>
-                    {{ firstname }}
+                    {{ customer.firstname }}
                 </p>
                 <hr>
 
@@ -76,7 +73,7 @@
                 </p>
 
                 <p>
-                    {{ firstname }}
+                    {{ customer.lastname }}
                 </p>
                 <hr>
 
@@ -85,7 +82,7 @@
                 </p>
 
                 <p>
-                    {{ birthdate }}
+                    {{ customer.birthdate|date('Y-m-d') }}
                 </p>
                 <hr>
                 <p class="profile-title">
@@ -93,7 +90,7 @@
                 </p>
 
                 <p>
-                    {{ contactno }}
+                    {{ customer.contactno }}
                 </p>
                 <hr>
 
@@ -102,15 +99,14 @@
                 </p>
 
                 <p>
-                    {{ address }}
+                    {{ customer.address }}
                 </p>
             </div>
             <div class="content-wrap tab-pane fade" id="edit">
                 <hr>
-                <form class="edit-profile-form" method="post" {{ form_enctype(form) }}>
+                <form class="edit-profile-form" action="{{ path('encore_view_profile') }}" method="post" >
                     <fieldset>
                         {{ form(form) }}
-
                     </fieldset>
                 </form>
             </div>
