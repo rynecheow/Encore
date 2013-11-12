@@ -88,11 +88,11 @@ class Event
     private $eventHolders;
 
     /**
-     * @var boolean
+     * @var \DateTime
      *
-     * @ORM\Column(name="publish", type="boolean")
+     * @ORM\Column(name="publishedAt", type="datetime", nullable=true)
      */
-    protected $publish;
+    protected $publishedAt;
 
     /**
      * @var \Encore\CustomerBundle\Entity\Merchant
@@ -407,23 +407,23 @@ class Event
     }
 
     /**
-     * @param boolean $publish
+     * @param \DateTime $publishedAt
      *
      * @return $this
      */
-    public function setPublish($publish)
+    public function setPublishedAt($publishedAt)
     {
-        $this->publish = $publish;
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return \DateTime
      */
-    public function getPublish()
+    public function getPublishedAt()
     {
-        return $this->publish;
+        return $this->publishedAt;
     }
 
     /**
