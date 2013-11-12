@@ -60,6 +60,7 @@ table {
 @darkMain : #262626;
 @lightMain: #e5e5e5;
 @lightSecondary: #e0e0e0;
+@lightTertiary: #e2e2e2;
 @lightChoc: #a99d9d;
 @pinkMain: #d44877;
 @pinkSecondary: #d42852;
@@ -70,6 +71,31 @@ table {
 .list-style-main (@size: 1.5em) {
   line-height: @size;
   margin-left: @size * 2;
+}
+
+.seat-selection-button (@width: 200px) {
+  width: @width;
+  padding: 5px 16px;
+  font-size: 14.5px;
+  line-height: 1.33;
+  border-radius: 6px;
+  color: #e5e5e5;
+  background-color: rgb(71, 144, 205);
+  border-color: rgb(44, 108, 205);
+  margin-top: 15px;
+  margin-bottom: 0;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+}
+
+.seat-selection-td (@url) {
+  background: @url;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .placeholder-font () {
@@ -1051,12 +1077,19 @@ nav {
 
 /* Seat selection area */
 .seat-selection-wrap {
-  cursor: pointer;
+  input {
+    cursor: pointer;
+  }
+
+  #ticketQtySelector {
+    height: 30px;
+  }
+
   #errorMessageContainer{
     position: fixed;
     width: 100%;
-    z-index: 2;
     height: 100%;
+    z-index: 2;
     background: rgba(80, 80, 80, 0.5);
 
     #errorMessageDiv {
@@ -1065,18 +1098,34 @@ nav {
     }
   }
 
+  #selectDateDiv, #selectTimeDiv, #selectSectionDiv, #ticketQtyDiv, #seatAllocateDiv {
+    margin-top: 25px;
+    margin-left: 25px;
+    label {
+      color: @lightTertiary;
+    }
+
+    .reset {
+      .seat-selection-button();
+    }
+  }
+
   div#seatAllocateDiv {
+    cursor: pointer;
     .table-wrapper {
-      width: 800px;
+      width: 50%;
       overflow: auto;
 
       table.seatTable {
-
         tbody tr{
           td {
+            text-align: center;
+            position: relative;
+            padding: 5px;
             width: 30px;
             height: 30px;
-            text-align: center;
+            min-height: 30px;
+            min-width: 30px;
           }
 
           td.tableLabel {
@@ -1084,19 +1133,19 @@ nav {
           }
 
           td.empty {
-            background: green;
+            .seat-selection-td(url('../../bundles/encorecustomer/images/seat-selection/seat-offered.png'));
           }
 
           td.selected {
-            background: yellow;
+            .seat-selection-td(url('../../bundles/encorecustomer/images/seat-selection/seat-selected.png'));
           }
 
           td.locked {
-            background: orange;
+            .seat-selection-td(url('../../bundles/encorecustomer/images/seat-selection/seat-notapplicable.png'));
           }
 
           td.sold {
-            background: red;
+            .seat-selection-td(url('../../bundles/encorecustomer/images/seat-selection/seat-unavailable.png'));
           }
         }
       }
@@ -1114,27 +1163,16 @@ nav {
 
     h2 {
       text-align: center;
-      font-size: 23px;
+      font-size: 26px;
       margin-bottom: 15px;
     }
 
+    h3 {
+      font-size: 20px;
+    }
+
     .submit {
-      width: 200px;
-      padding: 5px 16px;
-      font-size: 14.5px;
-      line-height: 1.33;
-      border-radius: 6px;
-      color: #e5e5e5;
-      background-color: #d44877;
-      border-color: #d42852;
-      margin-top: 15px;
-      margin-bottom: 0;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-image: none;
-      border: 1px solid transparent;
+      .seat-selection-button(200px);
     }
 
     table tbody tr {
@@ -1144,26 +1182,19 @@ nav {
         div {
           width: 20px;
           height: 20px;
+          max-width: 20px;
+          max-height: 20px;
         }
 
-        /*
-         * Remove uncommented line and uncomment commented lines when images have been included to project
-         */
         div.complete {
-          //background: url('../../bundles/encorecustomer/images/seat-selection/complete.png');
-          background: green;
+          background: url('../../bundles/encorecustomer/images/seat-selection/step-complete.png');
         }
 
         div.incomplete {
-          //background: url('../../bundles/encorecustomer/images/seat-selection/incomplete.png');
-          background: red;
+          background: url('../../bundles/encorecustomer/images/seat-selection/step-incomplete.png');
         }
       }
     }
-  }
-
-  label {
-    color: red;
   }
 }
 
