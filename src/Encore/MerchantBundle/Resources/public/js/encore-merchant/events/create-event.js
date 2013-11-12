@@ -27,6 +27,13 @@ require(['domReady'],
                     }
                 );
 
+                $("#add-held").on("click",addNewHeldDate);
+
+                function addNewHeldDate(e) {
+                    "use strict";
+
+                }
+
             }
         );
     }
