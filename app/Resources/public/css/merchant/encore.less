@@ -244,12 +244,19 @@ html, body {
   }
 }
 
-/* Merchant Edit Page*/
+/* Merchant add event Page*/
 .class-label {
   font-size:1.2em;
   max-width:200px;
 }
 
+#add-held {
+  cursor:pointer;
+}
+
+.logo-action {
+  cursor:pointer;
+}
 .merchant-add-textbox {
   width: 250px;
   height: 30px;
@@ -261,15 +268,35 @@ html, body {
   height: 150px;
   border-radius: 10px;
 }
+
+.held-date-class {
+  width:90px;
+  height:40px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.held-time-class {
+  width:60px;
+  height:40px;
+  border-radius:10px;
+  text-align:center;
+}
+
 .create-event-wrap {
   width:90%;
   margin: 0 auto;
   height:100%;
 }
 
+
 .create-event-container {
   padding: 8% 10%;
   height: 100%;
+  span {
+    float:none;
+    margin-left: 0;
+  }
 }
 
 .edit-submit {
