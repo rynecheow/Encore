@@ -5,6 +5,7 @@ namespace Encore\CustomerBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Encore\CustomerBundle\Entity\Event;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/")
@@ -51,6 +52,20 @@ class HomeController extends BaseController
         if (isset($events) && $events != null) {
             $trimmedEvents = [];
             foreach ($events as $event) {
+                $eventHolders = $event->getEventHolders();
+                if ($eventHolders) {
+                    $earliest = null;
+                    foreach ($eventHolders as $eventHolder) {
+                        if ($earliest === null) {
+                            $earliest = $eventHolder->getHeldDate();
+                        } else {
+                            if ($earliest > $eventHolder->getHeldDate()) {
+                                $earliest = $eventHolder->getHeldDate();
+                            }
+                        }
+                    }
+                }
+
                 $photos = $event->getPhotos();
                 if ($photos) {
                     foreach ($photos as $photo) {
@@ -60,6 +75,7 @@ class HomeController extends BaseController
                             [
                                 "id" => $event->getId(),
                                 "name" => $event->getName(),
+                                "date" => $earliest->format("Y-m-d"),
                                 "description" => $event->getDescription(),
                                 "photo" => $photo
                             ]

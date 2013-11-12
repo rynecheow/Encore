@@ -92,48 +92,18 @@
 
         <div class="revealer">
             <ul class="grid cs-style-2">
-                <li>
-                    <figure>
-                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/gdayx-malaysia.jpg') }}"
-                             alt="img04">
-                        <figcaption>
-                            <h3>gDayx Malaysia</h3>
-                            <span>31st November 2013</span>
-                            <a href="">Take a look</a>
-                        </figcaption>
-                    </figure>
-                </li>
-                <li>
-                    <figure>
-                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/lady-gaga.jpg') }}"
-                             alt="img01">
-                        <figcaption>
-                            <h3>Lady Gaga</h3>
-                            <span>12th December 2013</span>
-                            <a href="">Take a look</a>
-                        </figcaption>
-                    </figure>
-                </li>
-                <li>
-                    <figure>
-                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/mayday.jpg') }}" alt="img02">
-                        <figcaption>
-                            <h3>May Day - 2014 World Tour</h3>
-                            <span>4th November 2013</span>
-                            <a href="">Take a look</a>
-                        </figcaption>
-                    </figure>
-                </li>
-                <li>
-                    <figure>
-                        <img src="{{ asset('bundles/encorecustomer/images/featured-cover/snsd.jpg') }}" alt="img05">
-                        <figcaption>
-                            <h3>Girls Generation - G-Star RAW</h3>
-                            <span>20th January 2014</span>
-                            <a href="">Take a look</a>
-                        </figcaption>
-                    </figure>
-                </li>
+                {% for new in new_events %}
+                    <li>
+                        <figure>
+                            <img src="{{ vich_uploader_asset(new.photo, 'image') }}" alt="{{ new.photo.caption }}" />
+                            <figcaption>
+                                <h3>{{ new.name }}</h3>
+                                <span>{{ new.date }}</span>
+                                <a href="">Take a look</a>
+                            </figcaption>
+                        </figure>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
