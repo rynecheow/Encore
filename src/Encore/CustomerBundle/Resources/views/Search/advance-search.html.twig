@@ -19,13 +19,13 @@
             <ul class="nav nav-tabs">
                 <li class="li-search">
                     <div class="search-background">
-                        <a href="#search" data-toggle="tab">SEARCH</a>
+                        <a class="search-a"href="#search" data-toggle="tab">SEARCH</a>
                     </div>
 
                 </li>
                 <li class="li-filter">
                     <div class="filter-background">
-                        <a href="#filter" data-toggle="tab">FILTER</a>
+                        <a class="filter-a" href="#filter" data-toggle="tab">FILTER</a>
                     </div>
                 </li>
             </ul>
@@ -39,10 +39,61 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="filter">
-                <div class="btn-group" data-toggle="buttons-checkbox"></div>
-                <button type="button" class="btn btn-primary">Left</button>
-                <button type="button" class="btn btn-primary">Middle</button>
-                <button type="button" class="btn btn-primary">Right</button>
+                <div class="btn-group main-selection" data-toggle="buttons-radio">
+                    <button type="button" class="btn btn-danger filter-type">TYPE</button>
+                    <button type="button" class="btn btn-danger filter-location">LOCATION</button>
+                    <button type="button" class="btn btn-danger filter-date">DATE</button>
+                </div>
+
+                <div class="type-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
+
+                    <button type="button" class="btn">Performing Arts</button>
+                    <button type="button" class="btn">Concert</button>
+                    <br />
+                    <button type="button" class="btn">Art</button>
+                    <button type="button" class="btn">Exhibition</button>
+
+                </div>
+
+                <div class="location-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
+                    <button type="button" class="btn">Selangor</button>
+                    <button type="button" class="btn">Perak</button>
+                    <button type="button" class="btn">Penang</button>
+                    <br/>
+                    <button type="button" class="btn">Kuala Lumpur</button>
+                    <button type="button" class="btn">Pahang</button>
+                    <button type="button" class="btn">Sabah</button>
+                    <br/>
+                    <button type="button" class="btn">Johor Bahru</button>
+                </div>
+
+                <div class="date-div" style="display:none;">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div style="float:right;">
+                        <button type="button" class="btn">Reset Time</button>
+                    </div>
+                    <div class="from-date">
+                        <span>From Date</span>
+                        <input type="text" readonly class="datepicker" id="from_date" />
+                    </div>
+
+                    <br/>
+                    <div class="to-date">
+                        <span>To Date</span>
+                        <input type="text" readonly class="datepicker" id="to_date" />
+                    </div>
+
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="label-div">
+                    <span> Filtered By :</span>
+                </div>
+
             </div>
         </div>
     </div>

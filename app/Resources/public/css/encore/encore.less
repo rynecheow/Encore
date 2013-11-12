@@ -880,11 +880,15 @@ nav {
   width: 100%;
   min-height: 1000px;
   background: #ffffff;
+  overflow-x: hidden;
 
+  .search-background {
+    background: #F3AEAE;
+  }
 
   .placeholder-font;
   .nav-tabs {
-    border:none;
+    border: none;
   }
   .nav-div {
     min-height: 100px;
@@ -892,16 +896,14 @@ nav {
     height: 70px;
     margin: 0 auto;
 
-    .div-selected {
-      background: #F3AEAE;
-    }
-
     a {
       margin: 50% 50%;
       line-height: 82px;
       letter-spacing: 0.128em;
       font-family: proxima-nova, sans-serif;
       color: rgb(0, 0, 0);
+      width: 100%;
+      height: 100%;
       font-size: 0.6em;
       font-weight: 700;
       text-align: center;
@@ -925,7 +927,6 @@ nav {
       float: right;
       width: 50%;
       font-size: 1.7em;
-        background: #F3AEAE;
 
       div {
         height: 80px;
@@ -934,9 +935,9 @@ nav {
   }
 
   #filter {
-    margin:0 auto;
+    margin: 0 auto;
     min-height: 300px;
-    width:90%;
+    width: 40%;
   }
 
   #search {
@@ -952,7 +953,7 @@ nav {
       height: 80px;
       font-size: 3rem;
       line-height: 1em;
-      font-family:@mainFont;
+      font-family: @mainFont;
     }
 
     .search-logo {
@@ -966,44 +967,96 @@ nav {
       background-size: contain;
       z-index: 3;
     }
-  }
-  .list-option {
-
-    position: fixed;
-    color: @lightSecondary;
-    float: right;
-    right: 40%;
-    margin-top: 10%;
-    h2 {
-      font-size: 28px;
+    .main-selection button {
+      border-radius: 10px;
+      width: 115px;
+      height: 35px;
+      border: none;
+      margin-left: 15%;
+      margin-top: 15%;
+      line-height: 1.9rem;
+      letter-spacing: 0.128em;
+      font-family: proxima-nova, sans-serif;
+      font-weight: 400;
     }
 
-    .option-button {
+    .type-div {
+      margin: 5% 18%;
       button {
-        display: inline;
-        width: 75px;
-        padding: 5px 16px;
-        font-size: 15px;
-        line-height: 1.33;
-        border-radius: 6px;
-        color: @lightMain;
-        background-color: @pinkMain;
-        border-color: @pinkSecondary;
-        margin-top: 15px;
-        margin-bottom: 0;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid transparent;
-
+        width: 177px;
+        height: 80px;
+        margin-left: 1%;
+        background: white;
+        color: black;
+        border: 2px solid #e2e2e2;
+        margin-top: 1%;
+        line-height: 1.9rem;
+        letter-spacing: 0.128em;
+        font-family: proxima-nova, sans-serif;
+        font-weight: 400;
       }
-      .gallery {
-        margin-left: 50px;
+      button:hover {
+        color: white;
+        background: #da4f49;
       }
     }
 
+    .location-div {
+      margin: 6% 0%;
+      button {
+        width: 177px;
+        height: 80px;
+        margin-left: 1%;
+        background: white;
+        color: black;
+        border: 2px solid #e2e2e2;
+        margin-top: 1%;
+        line-height: 1.9rem;
+        letter-spacing: 0.128em;
+        font-family: proxima-nova, sans-serif;
+        font-weight: 400;
+      }
+      button:hover {
+        color: white;
+        background: #da4f49;
+      }
+    }
+    .date-div {
+      button {
+        border-radius: 10px;
+        width: 115px;
+        height: 35px;
+        border: 2px solid #e2e2e2;
+        line-height: 1.9rem;
+        letter-spacing: 0.128em;
+        font-family: proxima-nova, sans-serif;
+        font-weight: 400;
+      }
+      .from-date input {
+        margin-left: 2.5%;
+      }
+      .to-date input {
+        margin-left: 6%;
+      }
+      input {
+
+        height: 25px;
+        border-radius: 10px;
+      }
+    }
+
+
+  }
+
+  .label-div {
+    color: #777777;
+    font-family: proxima-nova, sans-serif;
+    font-weight: 400;
+    font-size: 1.3em;
+
+    .new-label{
+
+    }
   }
 
   #static-logo {
