@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sysadm
+ * User: rynecheow
  * Date: 11/9/13
  * Time: 7:19 PM
  */
@@ -34,97 +34,50 @@ class EncoreSearch
         $this->limit = 100;
     }
 
-//    public function performFullSearch($qparams = [])
-//    {
-//        $bef = microtime(true);
-//        $events = [];
-//        $search_results = [];
-//
-//        if (isset($qparams['q'])) {
-//            $search_results['query'] = $qparams['q'];
-//
-//            // Default type is 'events'
-//            if (isset($qparams['type'])) {
-//                $type = $qparams['type'];
-//            } else {
-//                $type = "events";
-//            }
-//
-//            if (isset($qparams['limit'])) {
-//                $limit = $qparams['limit'];
-//            } else {
-//                $limit = 16;
-//            }
-//
-//            $bef_count = microtime(true);
-//
-//            if (strpos($search_results['query'], "@") > 0) {
-//                $search_results = $this->em->createQuery(
-//
-//SELECT *
-//FROM EncoreCustomerBundle:Event event,
-//EncoreCustomerBundle:EventHolder event_holder,
-//EncoreCustomerBundle:Venue venue
-//JOIN event.venue venue
-//JOIN event.eventHolders event_holders
-//
-//WHERE event.name = :qname
-//AND event.venue = :qvenue
-//AND event.heldDates BETWEEN :qfromdate AND :qtodate
-//                )->setParameters(
-//                        [
-//                            'qname' => $qparams["event-name"],
-//                            'qvenue' => $qparams["event-venue"],
-//                            'qfromdate' => $qparams["event-from"],
-//                            'qtodate' => $qparams["event-to"]
-//                        ]
-//                    )
-//                    ->setMaxResults(1)
-//                    ->getResult();
-//            }
-//
-//            //Search query time
-//            $search = $before_count - $before;
-//
-//        }
-//    }
+    public function performFullSearch($qparams = [])
+    {
+        $bef = microtime(true);
+        $events = [];
+        $search_results = [];
 
-//    public function performFullSearch($qparams = [])
-//    {
-//        $bef = microtime(true);
-//        $events = [];
-//        $search_results = [];
-//
-//        if (isset($qparams['q'])) {
-//            $search_results['query'] = $qparams['keyword'];
-//
-//            if ($search_results['query'] !== '') {
-//                $this->em->createQuery(
-//                    <<<SQL
-//                SELECT *
-//                FROM EncoreCustomerBundle:Event event ,
-//                EncoreCustomerBundle:EventHolder event_holder,
-//                EncoreCustomerBundle:Venue venue
-//                JOIN event.venue venue
-//                JOIN event.eventHolders event_holders
-//
-//                WHERE event.name = :qname
-//                AND event.venue = :qvenue
-//                AND event.heldDates BETWEEN :qfromdate AND :qtodate
-//SQL
-//                )->setParameters(
-//                        [
-//
-//                        ]
-//                    )->getResult();
-//            }
-//
-//            $bef_count = microtime(true);
-//
-//
-//            //Search query time
-//            $search_time = $bef_count - $bef;
-//
-//        }
-//    }
+        if (isset($qparams['keywords'])) {
+            $search_results['query'] = $qparams['keywords'];
+
+            if ($search_results['query'] !== '') {
+                $events = $this->em->createQuery(
+                    <<<SQL
+                SELECT DISTINCT e.name, v.location, e.type, ep.imagePath, eh.heldDate
+                FROM EncoreCustomerBundle:Event e
+                INNER JOIN e.eventHolders eh
+                INNER JOIN e.venue v
+                INNER JOIN e.photos ep
+
+
+                WHERE e.publishedAt IS NOT NULL
+                AND(e.description LIKE :qkey
+                OR e.name LIKE :qkey
+                OR v.location LIKE :qkey)
+                GROUP BY e.name, v.location
+SQL
+                )->setParameters(
+                        [
+                            'qkey' => '%' . $search_results['query'] . "%"
+                        ]
+                    )->setMaxResults($this->limit)
+                    ->getResult();
+                $bef_count = microtime(true);
+
+                //Search query time
+                $search_time = $bef_count - $bef;
+
+                //Time taken for getting the search results
+                $search_results['seconds']['searchq'] = $search_time;
+            }
+
+            $search_results['data']['events'] = $events;
+
+            return $search_results;
+
+        }
+    }
 } 

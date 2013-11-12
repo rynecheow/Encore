@@ -28,7 +28,7 @@ class EventPhotoController extends Controller
      */
     public function addPhotoAction(Event $event)
     {
-        $this->handleUploadRequest($event);
+        return $this->handleUploadRequest($event);
     }
 
     /**
@@ -38,7 +38,7 @@ class EventPhotoController extends Controller
      */
     public function editPhotoAction(Event $event)
     {
-        $this->handleUploadRequest($event);
+        return $this->handleUploadRequest($event);
     }
 
     private function handleUploadRequest(Event $event)
@@ -65,11 +65,11 @@ class EventPhotoController extends Controller
 
         return $this->render(
             "EncoreMerchantBundle:Events:add-event-photo.html.twig",
-            array(
+            [
                 "form" => $uploadPhotoForm->createView(),
                 "eventId" => $event->getId(),
                 "uploadedPhotos" => $eventPhotos
-            )
+            ]
         );
     }
 

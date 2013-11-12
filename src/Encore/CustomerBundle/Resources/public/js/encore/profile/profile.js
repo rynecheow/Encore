@@ -4,8 +4,11 @@ require(['domReady'],
             function () {
                 $(function () {
 
-                        $('.datepicker').datepicker();
-                        
+                        $('.datepicker').datepicker({
+                            "format" : "yyyy-mm-dd" ,
+                            autoclose : true
+                        });
+
                         var view = $(".view-profile");
                         var edit = $(".edit-profile");
                         var history = $(".history-profile");
@@ -21,18 +24,18 @@ require(['domReady'],
                             edit.attr("class", "edit-profile edit-selected div-logo");
                             history.attr("class", "history-profile div-logo");
                         });
-                        $('#view').click(function (e) {
-                            e.preventDefault();
-
-
-                            $(this).tab('show');
-                        })
-                        $('#edit').click(function (e) {
-                            e.preventDefault();
-
-
-                            $(this).tab('show');
-                        })
+//                        $('#view').click(function (e) {
+//                            e.preventDefault();
+//
+//
+//                            $(this).tab('show');
+//                        })
+//                        $('#edit').click(function (e) {
+//                            e.preventDefault();
+//
+//
+//                            $(this).tab('show');
+//                        })
                     }
                 );
 
