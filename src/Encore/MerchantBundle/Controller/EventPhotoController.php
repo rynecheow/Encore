@@ -74,20 +74,25 @@ class EventPhotoController extends Controller
     }
 
     /**
-     * @param $eventPhoto
      * @return array
      */
-    public function deletePhotoAction($eventPhoto)
+    public function deletePhotoAction()
     {
+        $request = $this->getRequest();
+        $eventPhoto = $request->get("eventPhoto");
         $event = $eventPhoto->getEvent();
         $event->removePhoto($eventPhoto);
         $this->em->flush();
         $this->em->remove($eventPhoto);
         $this->flush();
 
-        return [
-            "status" => true
+        $response = [
+            "code" => "200",
+            "status" => true,
+            "message" => "Photo has been removed successfully."
         ];
+
+        return new Response(json_encode($response));
     }
 
     private function uploadPhotoForm($eventPhoto)
