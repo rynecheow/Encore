@@ -10,12 +10,15 @@ use Encore\CustomerBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use DateTime;
+use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
 
 class ProfileController extends BaseController
 {
+
     /**
      * @Route("/profile", name="encore_view_profile")
      * @Method({"GET","POST"})
+     * @PreAuthorize("hasRole('ROLE_CUSTOMER')")
      */
     public function viewAction()
     {
@@ -41,14 +44,11 @@ class ProfileController extends BaseController
         if ($request->getMethod() === "POST") {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $birthDate = DateTime::createFromFormat("Y-m-d",
-                    $form->get("birthDate")->getData());
+                $birthDate = DateTime::createFromFormat(
+                    "Y-m-d",
+                    $form->get("birthDate")->getData()
+                );
                 $customer->setBirthDate($birthDate);
-//                $customer->setBirthDate($form->get("birthDate")->getData())
-//                    ->setAddress($form->get("address")->getData())
-//                    ->setContactNo($form->get("contactno")->getData())
-//                    ->setFirstName($form->get("firstname")->getData())
-//                    ->setLastName($form->get("lastname")->getData());
                 $this->em->flush();
             }
         }
@@ -64,6 +64,7 @@ class ProfileController extends BaseController
 
     /**
      * @param $customer \Encore\CustomerBundle\Entity\Customer
+     *
      * @return \Symfony\Component\Form\Form
      */
     private function createEditProfileForm($customer)

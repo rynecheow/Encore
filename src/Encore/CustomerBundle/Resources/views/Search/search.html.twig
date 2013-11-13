@@ -1,7 +1,7 @@
 {% extends 'EncoreCustomerBundle::layout.html.twig' %}
 
 {% block title %}
-    Advance search
+    Search
 {% endblock title %}
 
 {% block require_js %}
@@ -34,7 +34,7 @@
             <div class="tab-pane active fade in" id="search">
 
                 <form action="{{ path('encore_global_search') }}" method="GET" >
-                    <input type="text" class="search-bar" name="search_result" placeholder="Keyword..."/>
+                    <input type="text" class="search-bar" name="keywords" placeholder="Find events that suits you best."/>
                     <div class="search-logo"></div>
                 </form>
             </div>
