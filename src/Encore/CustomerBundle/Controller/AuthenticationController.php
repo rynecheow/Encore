@@ -168,9 +168,9 @@ class AuthenticationController extends BaseController
         $user = new User();
         $user->setUsername($params['email']);
         $user->setEmail($params['email']);
-        $array_role = array(
+        $array_role = []
             User::ROLE_USER,
-        );
+        ];
         $user->setRoles($array_role);
 //        $user->setSignedUpAt($now);
         $user->setEnabled(false);
@@ -365,7 +365,7 @@ class AuthenticationController extends BaseController
     private function validateCustomerInfo($params)
     {
         $error = ["status" => true, "message" => ""];
-        $entities = array("firstName", "lastName", "birthDate", "contactNo", "address");
+        $entities = ["firstName", "lastName", "birthDate", "contactNo", "address"];
         $count = count($entities);
         $i = 0;
 
