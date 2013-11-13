@@ -25,48 +25,41 @@ class EventController extends BaseController
      */
     public function eventDetailAction(Event $event)
     {
-        $heldDates = $event->getHeldDates();
-        $heldDates = $heldDates->format("Y-m-d H:i");
-        $venue = $event->getVenue();
+        $eventHolders = [];
 
-        if (!$venue) {
-            throw $this->createNotFoundException("No venue found for id " . $venue->getId() . " WHYYYYY!");
+        foreach ($event->getEventHolders() as $eventHolder)
+        {
+            $eventHolders[] = $eventHolder->getHeldDate()->format("Y-m-d");
         }
 
-        $merchant = $event->getCreator();
+        $eventType = "";
+        switch ($event->getType())
+        {
+            case "1":
+                $eventType = "Performing Arts";
+                break;
 
-        if (!$merchant) {
-            throw $this->createNotFoundException("No merchant found for id " . $merchant->getId() . " WHYYYYY!");
+            case "2":
+                $eventType = "Concert";
+                break;
+
+            case "3":
+                $eventType = "Art";
+                break;
+
+            case "4":
+                $eventType = "Exhibition";
+                break;
+
+            default:
+                $eventType = "Others";
+                break;
         }
 
-        $photos = $event->getPhotos();
-        $photoSequence = $event->getPhotoSequence();
-        $photoPath = [];
-        $photosNumber = count($photos);
-
-        foreach ($photoSequence as $photoId) {
-            for ($i = 0; $i < $photosNumber; $i++) {
-                if ($photoId == $photos[$i]->getId()) {
-                    $photoPath[] = $photos[$i]->getImagePath();
-                }
-            }
-        }
-
-        $params = [
-            "event_id" => $event->getId(),
-            "event_name" => $event->getName(),
-            "event_type" => $event->getType(),
-            "event_description" => $event->getDescription(),
-            "event_created_at" => $event->getCreateAt(),
-            "event_sale_start" => $event->getSaleStart(),
-            "event_sale_end" => $event->getSaleEnd(),
-            "event_held_dates" => $heldDates,
-            "event_total_tickets" => $event->getTotalTickets(),
-            "event_photos" => $photoPath,
-            "venue_name" => $venue->getName(),
-            "venue_location" => $venue->getLocation()
-        ];
-
-        return $this->render("EncoreCustomerBundle:Events:event.html.twig", $params);
+        return $this->render("EncoreCustomerBundle:Events:event.html.twig", [
+                "event" => $event,
+                "eventType" => $eventType,
+                "eventHolders" => $eventHolders
+            ]);
     }
 } 
