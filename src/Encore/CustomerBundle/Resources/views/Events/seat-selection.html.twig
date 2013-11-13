@@ -67,7 +67,7 @@
                     <tbody>
                     <tr>
                         <td>
-                            <div id="eventComplete" class="complete"/>
+                            <div id="eventComplete" class="complete"></div>
                         </td>
                         <td>
                             <h3>Event:</h3>
@@ -79,49 +79,49 @@
                     </tr>
                     <tr>
                         <td>
-                            <div id="datetimeComplete" class="incomplete"/>
+                            <div id="datetimeComplete" class="incomplete"></div>
                         </td>
                         <td>
                             <h3>Date & Time:</h3>
 
                             <div>
-                                <label id="dateTimeLabel"/>
+                                <label id="dateTimeLabel"></label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div id="sectionComplete" class="incomplete"/>
+                            <div id="sectionComplete" class="incomplete"></div>
                         </td>
                         <td>
                             <h3>Section:</h3>
 
                             <div>
-                                <label id="sectionLabel"/>
+                                <label id="sectionLabel"></label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div id="ticketQtyComplete" class="incomplete"/>
+                            <div id="ticketQtyComplete" class="incomplete"></div>
                         </td>
                         <td>
                             <h3>Ticket Quantity:</h3>
 
                             <div>
-                                <label id="ticketQtyLabel"/>
+                                <label id="ticketQtyLabel"></label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div id="seatAllocComplete" class="incomplete"/>
+                            <div id="seatAllocComplete" class="incomplete"></div>
                         </td>
                         <td>
                             <h3>Seat Allocation:</h3>
 
                             <div>
-                                <label id="seatAllocationLabel"/>
+                                <label id="seatAllocationLabel"></label>
                             </div>
                         </td>
                     </tr>
@@ -138,183 +138,136 @@
     </article>
 
     <script type="application/javascript">
-        $(function () {
-            /**
-             * Unselects all selected seats
-             * Remove text in seat allocation label at summary form
-             * Reset text in ticket quantity label to value to ticket quantity to purchase
-             */
-            function resetSeats() {
-                $("table.seatTable tbody tr td.selected").each(function () {
-                    $(this).attr("class", "empty");
-                });
-                $("#seatAllocationLabel").html("");
-            }
+    $(function () {
+        /**
+         * Unselects all selected seats
+         * Remove text in seat allocation label at summary form
+         * Reset text in ticket quantity label to value to ticket quantity to purchase
+         */
+        function resetSeats() {
+            $("table.seatTable tbody tr td.selected").each(function () {
+                $(this).attr("class", "empty");
+            });
+            $("#seatAllocationLabel").html("");
+        }
 
-            /**
-             * Called when reset button for seat allocation is pressed
-             * Reset selected seats and change ticket quantity label
-             */
-            $("#resetButton").click(function () {
+        /**
+         * Called when reset button for seat allocation is pressed
+         * Reset selected seats and change ticket quantity label
+         */
+        $("#resetButton").click(function () {
+            resetSeats();
+            $("#ticketQtyLabel").html(parseInt($("#ticketQtySelector").val(), 10) + " unselected ticket(s)");
+            $("input:submit").attr("hidden", "hidden");
+            $("#seatAllocComplete").attr("class", "incomplete");
+        });
+
+        /**
+         * Hides/Display time selection step and un-check all checked time radio buttons
+         * @param hideFlag
+         */
+        function hideTimeStep(hideFlag) {
+            $("#dateTimeLabel").html("");
+            if (hideFlag) {
+                $("#selectTimeDiv").attr("hidden", "hidden");
+            } else {
+                $("input:radio[name='timeGroup']").removeAttr("checked");
+                $("#selectTimeDiv").removeAttr("hidden");
+                $("#datetimeComplete").attr("class", "incomplete");
+            }
+        }
+
+        /**
+         * Hides/Display section selection step and un-check all checked section radio buttons
+         * @param hideFlag
+         */
+        function hideSectionStep(hideFlag) {
+            $("#sectionLabel").html("");
+            if (hideFlag) {
+                $("#selectSectionDiv").attr("hidden", "hidden");
+                $("#datetimeComplete").attr("class", "incomplete");
+            } else {
+                $("input:radio[name='sectionGroup']").removeAttr("checked");
+                $("#selectSectionDiv").removeAttr("hidden");
+                $("#datetimeComplete").attr("class", "complete");
+            }
+        }
+
+        /**
+         * Hides/Display ticket quantity step and set ticket quantity to 0
+         * @param hideFlag
+         */
+        function hideTicketQtyStep(hideFlag) {
+            $("#ticketQtyLabel").html("");
+            if (hideFlag) {
+                $("#ticketQtyDiv").attr("hidden", "hidden");
+                $("#sectionComplete").attr("class", "incomplete");
+            } else {
+                $("#ticketQtySelector").val(0);
+                $("#ticketQtyDiv").removeAttr("hidden");
+                $("#sectionComplete").attr("class", "complete");
+            }
+        }
+
+        /**
+         * Hides and reset seat allocation step or Displays seat allocation step
+         * @param hideFlag
+         */
+        function hideSeatAllocateStep(hideFlag) {
+            if (hideFlag) {
                 resetSeats();
-                $("#ticketQtyLabel").html(parseInt($("#ticketQtySelector").val(), 10) + " unselected ticket(s)");
+                $("#seatAllocateDiv").attr("hidden", "hidden");
                 $("input:submit").attr("hidden", "hidden");
                 $("#seatAllocComplete").attr("class", "incomplete");
-            });
-
-            /**
-             * Hides/Display time selection step and un-check all checked time radio buttons
-             * @param hideFlag
-             */
-            function hideTimeStep(hideFlag) {
-                $("#dateTimeLabel").html("");
-                if (hideFlag) {
-                    $("#selectTimeDiv").attr("hidden", "hidden");
-                } else {
-                    $("input:radio[name='timeGroup']").removeAttr("checked");
-                    $("#selectTimeDiv").removeAttr("hidden");
-                    $("#datetimeComplete").attr("class", "incomplete");
-                }
+                $("#ticketQtyComplete").attr("class", "incomplete");
+            } else {
+                $("#seatAllocateDiv").removeAttr("hidden");
+                $("#ticketQtyComplete").attr("class", "complete");
             }
+        }
 
-            /**
-             * Hides/Display section selection step and un-check all checked section radio buttons
-             * @param hideFlag
-             */
-            function hideSectionStep(hideFlag) {
-                $("#sectionLabel").html("");
-                if (hideFlag) {
-                    $("#selectSectionDiv").attr("hidden", "hidden");
-                    $("#datetimeComplete").attr("class", "incomplete");
-                } else {
-                    $("input:radio[name='sectionGroup']").removeAttr("checked");
-                    $("#selectSectionDiv").removeAttr("hidden");
-                    $("#datetimeComplete").attr("class", "complete");
-                }
+        /**
+         * Hides submit button
+         * @param hideFlag
+         */
+        function hideSubmitButton(hideFlag) {
+            if (hideFlag) {
+                $("input:submit").attr("hidden", "hidden");
+                $("#submitComplete").attr("class", "incomplete");
+                $("#seatAllocComplete").attr("class", "incomplete");
+            } else {
+                $("input:submit").removeAttr("hidden");
+                $("#seatAllocComplete").attr("class", "complete");
             }
+        }
 
-            /**
-             * Hides/Display ticket quantity step and set ticket quantity to 0
-             * @param hideFlag
-             */
-            function hideTicketQtyStep(hideFlag) {
-                $("#ticketQtyLabel").html("");
-                if (hideFlag) {
-                    $("#ticketQtyDiv").attr("hidden", "hidden");
-                    $("#sectionComplete").attr("class", "incomplete");
-                } else {
-                    $("#ticketQtySelector").val(0);
-                    $("#ticketQtyDiv").removeAttr("hidden");
-                    $("#sectionComplete").attr("class", "complete");
-                }
-            }
-
-            /**
-             * Hides and reset seat allocation step or Displays seat allocation step
-             * @param hideFlag
-             */
-            function hideSeatAllocateStep(hideFlag) {
-                if (hideFlag) {
-                    resetSeats();
-                    $("#seatAllocateDiv").attr("hidden", "hidden");
-                    $("input:submit").attr("hidden", "hidden");
-                    $("#seatAllocComplete").attr("class", "incomplete");
-                    $("#ticketQtyComplete").attr("class", "incomplete");
-                } else {
-                    $("#seatAllocateDiv").removeAttr("hidden");
-                    $("#ticketQtyComplete").attr("class", "complete");
-                }
-            }
-
-            /**
-             * Hides submit button
-             * @param hideFlag
-             */
-            function hideSubmitButton(hideFlag) {
-                if (hideFlag) {
-                    $("input:submit").attr("hidden", "hidden");
-                    $("#submitComplete").attr("class", "incomplete");
-                    $("#seatAllocComplete").attr("class", "incomplete");
-                } else {
-                    $("input:submit").removeAttr("hidden");
-                    $("#seatAllocComplete").attr("class", "complete");
-                }
-            }
-
-            /**
-             * Called when drop down list for date changes
-             * If selected date is valid, unhidden time step
-             * Else, reset all other values and hide all other steps
-             */
-            $("#dateList").change(function (e) {
-                e.preventDefault();
-                var eventID = $("#eventID").data("value");
-                var selectedDate = $("#dateList").val();
-                console.log(eventID + " " + selectedDate);
-                if (selectedDate !== "Select Date") {
-                    $.post(
-                            "{{ path('encore_select_date') }}",
-                            {
-                                'id': eventID,
-                                'date': selectedDate
-                            },
-                            function (response) {
-                                if (response.code === 200) {
-                                    var eventTimes = response.event_times;
-                                    $("div#selectTimeDiv div").html("");
-                                    $.each(eventTimes, function (index, value){
-                                        $("div#selectTimeDiv div").append("<button type='button' class='btn btn-primary selectTime'>" + value + "</button>").click(selectTime);
-                                    });
-                                    return true;
-                                } else {
-                                    hideTimeStep(true);
-                                    hideSectionStep(true);
-                                    hideTicketQtyStep(true);
-                                    hideSeatAllocateStep(true);
-                                    return false;
-                                }
-                            },
-                            "json"
-                    );
-
-                    $("#dateTimeLabel").html(selectedDate);
-                    hideTimeStep(false);
-                } else {
-                    hideTimeStep(true);
-                }
-                hideSectionStep(true);
-                hideTicketQtyStep(true);
-                hideSeatAllocateStep(true);
-            });
-
-            /**
-             * Called when radio button for time changes
-             * Hides section selection step and hides ticket quantity and seat allocation steps
-             */
-            function selectTime() {
-                var eventID = $("#eventID").data("value");
-                var selectedTime = $(this).text();
-                var selectedTimeAsInDB = $("#dateList").val() + " " + selectedTime + ":00";
-
+        /**
+         * Called when drop down list for date changes
+         * If selected date is valid, unhidden time step
+         * Else, reset all other values and hide all other steps
+         */
+        $("#dateList").change(function (e) {
+            e.preventDefault();
+            var eventID = $("#eventID").data("value");
+            var selectedDate = $("#dateList").val();
+//            console.log(eventID + " " + selectedDate);
+            if (selectedDate !== "Select Date") { // TODO please do not hard code
                 $.post(
-                        "{{ path('encore_select_time') }}",
+                        "{{ path('encore_select_date') }}",
                         {
                             'id': eventID,
-                            'datetime': selectedTimeAsInDB
+                            'date': selectedDate
                         },
                         function (response) {
                             if (response.code === 200) {
-                                var eventSections = response.event_sections;
-                                $("div#selectSectionDiv div").html("");
-                                $.each(eventSections, function (index, value){
-                                    $("div#selectSectionDiv div").append("<button type='button' class='btn btn-primary selectSection' data-sec-id='" + index + "'>" + value + "</button>").click(selectSection);
+                                var eventTimes = response.event_times;
+                                $("div#selectTimeDiv div").html("");
+                                $.each(eventTimes, function (index, value) {
+                                    $("div#selectTimeDiv div").append("<button type='button' class='btn btn-primary selectTime'>" + value + "</button>").click(selectTime);
                                 });
-                                hideSectionStep(false);
-                                $("#dateTimeLabel").html($("#dateList").val() + " " + selectedTime);
-                                hideTicketQtyStep(true);
-                                hideSeatAllocateStep(true);
                                 return true;
                             } else {
+                                hideTimeStep(true);
                                 hideSectionStep(true);
                                 hideTicketQtyStep(true);
                                 hideSeatAllocateStep(true);
@@ -323,79 +276,126 @@
                         },
                         "json"
                 );
+
+                $("#dateTimeLabel").html(selectedDate);
+                hideTimeStep(false);
+            } else {
+                hideTimeStep(true);
             }
-
-            /**
-             * Called when radio button for section changes
-             * Displays ticket quantity step and hides seat allocation step
-             */
-            function selectSection() {
-                var eventID = $("#eventID").data("value");
-                var selectedSectionId = $(this).data("sec-id");
-                var selectedSectionName = $(this).text();
-
-                $.post(
-                        "{{ path('encore_select_section') }}",
-                        {
-                            'eventId': eventID,
-                            'sectionId': selectedSectionId,
-                            'sectionName': selectedSectionName
-                        },
-                        function (response) {
-                            if (response.code === 200) {
-                                var maxTicketQty = response.max_ticket_qty;
-                                var seatPlan = response.seat_plan;
-
-                                if(maxTicketQty < 8) {
-                                    $("#ticketQtySelector").attr("max", maxTicketQty);
-                                } else {
-                                    $("#ticketQtySelector").attr("max", 8);
-                                }
-
-                                $("table.seatTable").html("");
-                                /**
-                                 * Generation of Seat Plan
-                                 */
-
-                                hideTicketQtyStep(false);
-                                $("#sectionLabel").html($(e.target).val());
-                                return true;
-                            } else {
-                                hideSeatAllocateStep(true);
-                                return false;
-                            }
-                        },
-                        "json"
-                );
-            }
-
-            /**
-             * Called when ticket quantity selector changes
-             */
-            $("#ticketQtySelector").change(function () {
-                var value, selectedLength, difference;
-                hideSeatAllocateStep(false);
-                value = parseInt($("#ticketQtySelector").val(), 10);
-                selectedLength = $("table.seatTable tbody tr td.selected").length;
-                if (value < selectedLength) {
-                    parseInt($("#ticketQtySelector").val(selectedLength));
-                    popupMessageError("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
-                } else if (value === 0) {
-                    $("#ticketQtyLabel").html("");
-                    hideSubmitButton(true);
-                    hideSeatAllocateStep(true);
-                } else {
-                    difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length;
-                    $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
-                    if (difference > 0) {
-                        $("input:submit").attr("hidden", "hidden");
-                        $("#seatAllocComplete").attr("class", "incomplete");
-                    } else {
-                        $("input:submit").removeAttr("hidden");
-                        $("#seatAllocComplete").attr("class", "complete");
-                    }
-                }
-            });
+            hideSectionStep(true);
+            hideTicketQtyStep(true);
+            hideSeatAllocateStep(true);
         });
+
+        /**
+         * Called when radio button for time changes
+         * Hides section selection step and hides ticket quantity and seat allocation steps
+         */
+        function selectTime() {
+            var eventID = $("#eventID").data("value");
+            var selectedTime = $(this).text();
+            var selectedTimeAsInDB = $("#dateList").val() + " " + selectedTime + ":00";
+
+            $.post(
+                    "{{ path('encore_select_time') }}",
+                    {
+                        'id': eventID,
+                        'datetime': selectedTimeAsInDB
+                    },
+                    function (response) {
+                        if (response.code === 200) {
+                            var eventSections = response.event_sections;
+                            $("div#selectSectionDiv div").html("");
+                            $.each(eventSections, function (index, value) {
+                                $("div#selectSectionDiv div").append("<button type='button' class='btn btn-primary selectSection' data-sec-id='" + index + "'>" + value + "</button>").click(selectSection);
+                            });
+                            hideSectionStep(false);
+                            $("#dateTimeLabel").html($("#dateList").val() + " " + selectedTime);
+                            hideTicketQtyStep(true);
+                            hideSeatAllocateStep(true);
+                            return true;
+                        } else {
+                            hideSectionStep(true);
+                            hideTicketQtyStep(true);
+                            hideSeatAllocateStep(true);
+                            return false;
+                        }
+                    },
+                    "json"
+            );
+        }
+
+        /**
+         * Called when radio button for section changes
+         * Displays ticket quantity step and hides seat allocation step
+         */
+        function selectSection() {
+            var eventID = $("#eventID").data("value");
+            var selectedSectionId = $(this).data("sec-id");
+            var selectedSectionName = $(this).text();
+
+            $.post(
+                    "{{ path('encore_select_section') }}",
+                    {
+                        'eventId': eventID,
+                        'sectionId': selectedSectionId,
+                        'sectionName': selectedSectionName
+                    },
+                    function (response) {
+                        if (response.code === 200) {
+                            var maxTicketQty = response.max_ticket_qty;
+                            var seatPlan = response.seat_plan;
+
+                            if (maxTicketQty < 8) {
+                                $("#ticketQtySelector").attr("max", maxTicketQty);
+                            } else {
+                                $("#ticketQtySelector").attr("max", 8);
+                            }
+
+                            $("table.seatTable").html("");
+                            /**
+                             * Generation of Seat Plan
+                             */
+
+                            hideTicketQtyStep(false);
+                            $("#sectionLabel").html($(e.target).val());
+                            return true;
+                        } else {
+                            hideSeatAllocateStep(true);
+                            return false;
+                        }
+                    },
+                    "json"
+            );
+        }
+
+        /**
+         * Called when ticket quantity selector changes
+         */
+        $("#ticketQtySelector").change(function () {
+            var value, selectedLength, difference;
+            hideSeatAllocateStep(false);
+            value = parseInt($("#ticketQtySelector").val(), 10);
+            selectedLength = $("table.seatTable tbody tr td.selected").length;
+            if (value < selectedLength) {
+                parseInt($("#ticketQtySelector").val(selectedLength));
+                popupMessageError("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
+            } else if (value === 0) {
+                $("#ticketQtyLabel").html("");
+                hideSubmitButton(true);
+                hideSeatAllocateStep(true);
+            } else {
+                difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length;
+                $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
+                if (difference > 0) {
+                    $("input:submit").attr("hidden", "hidden");
+                    $("#seatAllocComplete").attr("class", "incomplete");
+                } else {
+                    $("input:submit").removeAttr("hidden");
+                    $("#seatAllocComplete").attr("class", "complete");
+                }
+            }
+        });
+    });
     </script>
 {% endblock content %}

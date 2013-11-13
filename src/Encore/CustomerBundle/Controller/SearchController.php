@@ -65,6 +65,7 @@ class SearchController extends BaseController
             }
         }
 
-        return $this->render('EncoreCustomerBundle:Search:search.html.twig', ['categoryList' => $categories]);
+        return $this->render('EncoreCustomerBundle:Search:search.html.twig',
+            ['categoryList' => $categories ]);
     }
 } 
