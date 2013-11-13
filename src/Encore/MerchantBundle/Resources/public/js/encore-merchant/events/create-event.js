@@ -63,6 +63,7 @@ require(['domReady'],
 
                     count++;
                     divWrapper.attr("id", "newHeldDate" + count);
+                    divWrapper.attr("class","added-held-date");
                     dateInput.attr({
                         type: "text",
                         class: "heldpicker held-date-class",
