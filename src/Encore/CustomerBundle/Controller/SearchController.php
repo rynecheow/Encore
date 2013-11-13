@@ -43,29 +43,68 @@ class SearchController extends BaseController
                      */
                     $searcher = $this->get('encore.encore_search');
                     $search_results = $searcher->performFullSearch($qparams);
+                    /**
+                     * @var $events \Encore\CustomerBundle\Entity\Event[]
+                     */
                     $events = $search_results['data']['events'];
-
+                    $params = [];
                     foreach ($events as $event) {
                         /**
                          * @var $date \DateTime
                          */
-                        $date = $event['heldDate'];
-                        $event['heldDate'] = $date->format("Y-m-d");
-                        $params[] = $event;
+                        $date = $event->getEventHolders()[0]->getHeldDate();
+                        $photo = $event->getPhotos()[0];
+                        $location = $event->getVenue()->getLocation();
+                        $date = $date->format("Y-m-d");
+
+                        switch ($event->getType()) {
+                            case 1 :
+                                $type = "Performing Arts";
+                                break;
+                            case 2 :
+                                $type = "Concert";
+                                break;
+                            case 3 :
+                                $type = "Art";
+                                break;
+                            case 4 :
+                                $type = "Exhibition";
+                                break;
+                            default:
+                                $type = "Others";
+                                break;
+                        }
+
+                        $params[] = [
+                           "type" => $type,
+                            "id" =>$event->getId(),
+                            "location"=>$location,
+                            "heldDate" => $date,
+                            "name" => $event->getName(),
+                            "imagePath" => $photo
+                        ];
+
+                    }
+
+
+                    if (count($params) === 0) {
+                        $params = null;
                     }
 
                     return $this->render(
                         'EncoreCustomerBundle:Search:search.html.twig',
                         [
                             "event" => $params,
-                            "categoryList" => $categories,
+//                            "categoryList" => $categories,
                         ]
                     );
                 }
             }
         }
 
-        return $this->render('EncoreCustomerBundle:Search:search.html.twig',
-            ['categoryList' => $categories ]);
+        return $this->render(
+            'EncoreCustomerBundle:Search:search.html.twig',
+            ['categoryList' => $categories]
+        );
     }
 } 
