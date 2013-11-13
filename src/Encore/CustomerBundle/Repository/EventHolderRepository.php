@@ -15,12 +15,34 @@ class EventHolderRepository extends EntityRepository
     public function findAllEventHolderByEventIdAndHeldDate($eventId, $heldDate)
     {
         return $this->getEntityManager()
-                    ->createQuery
-                    (
-                        "SELECT eventHolder FROM EncoreCustomerBundle:EventHolder eventHolder
-                         WHERE eventHolder.eventId = :eventId AND eventHolder.heldDate = :heldDate"
-                    )
-                    ->setParameter($eventId, $heldDate)
-                    ->getResult();
+            ->createQuery
+            (
+                <<<SQL
+                SELECT eventHolder FROM EncoreCustomerBundle:EventHolder eventHolder
+                WHERE eventHolder.eventId = :eventId AND eventHolder.heldDate = :heldDate
+SQL
+            )
+            ->setParameter($eventId, $heldDate)
+            ->getResult();
+    }
+
+    public function findAllEventTimeByEventId($eventId)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery
+            (
+                <<<SQL
+                SELECT eh.heldDate FROM EncoreCustomerBundle:EventHolder eh
+                JOIN eh.event e
+                WHERE e.id = :id
+SQL
+            );
+
+        $query = $query->setParameters(
+            [
+                "id" => $eventId,
+            ]
+        );
+        return $query->getResult();
     }
 }
