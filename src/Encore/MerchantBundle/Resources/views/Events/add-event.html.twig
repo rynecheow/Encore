@@ -21,13 +21,13 @@
             <form class="merchant-add-form" action="{{ path('encore_merchant_add_event') }}" method="POST">
                 <div>
                     <span class="class-label">Event Name</span>
-                    <input type="text" class="merchant-add-textbox" name="event_name" data-required="true"
+                    <input id="name-id" type="text" class="merchant-add-textbox" name="event_name" data-required="true"
                            data-trigger="keyup"
                            data-required-message="Please enter your event name"/>
                 </div>
                 <div>
                     <span class="class-label">Event Type</span>
-                    <select class="merchant-add-textbox" name="event_type" data-required="true"
+                    <select id="type-id" class="merchant-add-textbox" name="event_type" data-required="true"
                             data-trigger="change" data-required-message="Please select your event type">
                         <option value="">Please Select An Event Type</option>
                         <option value="1">Performing Arts</option>
@@ -38,7 +38,8 @@
                 </div>
                 <div>
                     <span class="class-label">Event Description</span>
-                    <textarea type="text" class="merchant-add-textarea" name="event_description" data-required="true"
+                    <textarea id="descrpt-id" type="text" class="merchant-add-textarea" name="event_description"
+                              data-required="true"
                               data-trigger="keyup"
                               data-required-message="Please enter your event description" style="resize:none;"
                               data-rangelength="[20,200]"></textarea>
@@ -56,6 +57,7 @@
                            data-required-message="Please enter your event sale end date" readonly/>
                 </div>
                 <span id="error-start-end" style="display:none;" class="parsley-error-list"></span>
+
                 <div id="held-date-groups">
                     <span class="class-label">Event Held Dates</span>
                     <a id="add-held"><i class="icon-plus icon-gray"></i></a>
@@ -104,9 +106,9 @@
                         </tr>
                     </table>
                 </div>
-
-
                 <input type="submit" value="submit"/>
+
+
             </form>
         </div>
     </article>
