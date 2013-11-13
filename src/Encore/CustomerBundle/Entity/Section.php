@@ -30,6 +30,12 @@ class Section
     private $venue;
 
     /**
+     * @var \Encore\CustomerBundle\Entity\EventSection[]
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSection", mappedBy="section")
+     */
+    private $eventSection;
+
+    /**
      * @var \Encore\CustomerBundle\Entity\Seat[]
      * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\Seat", mappedBy="section")
      */
