@@ -21,22 +21,11 @@
                     </ul>
                 </div>
             </div>
-            <div id="selectDateDiv">
-                <label>Date:</label>
-                <select id="dateList">
-                    <option selected="selected">Select Date</option>
-                    {% for dateIndex, date in dateArray %}
-                        <option value="{{ date }}">{{ date }}</option>
-                    {% endfor %}
-                </select>
-            </div>
 
-            <div id="selectTimeDiv" hidden="hidden">
-                <label>Time:</label>
-
-                <div class="btn-group" data-toggle="buttons-radio">
-                    <!--<button type="button" class="btn btn-primary selectTime"></button>-->
-                </div>
+            <div class="select-time-date .pre-scrollable">
+                <a href="#" class="btn testss btn-lg btn-danger" data-toggle="popover" title="" data-placement="right"
+                   data-content="And here's some amazing content. It's very engaging. right?"
+                   role="button" data-original-title="A Title">Click to toggle popover</a>
             </div>
 
             <div id="selectSectionDiv" hidden="hidden">
@@ -165,6 +154,9 @@
     </article>
 
     <script type="application/javascript">
+    $(".testss").popover({
+        trigger: "manual"
+    });
     $(function () {
 
 

@@ -13,49 +13,6 @@
 
 {% block title %}Create An Event {% endblock title %}
 {% block content %}
-    <script>
-        function checkAllDate(e) {
-            "use strict";
-            $("#error-held-date").css("display", "none");
-            $("#error-start-end").css("display", "none");
-            var heldDateArray = $(".held-date-class"),
-                    eventStart = $("#start-sale"),
-                    eventEnd = $("#end-sale");
-
-            var tempDateStart = new Date(eventStart.val());
-            var tempDateEnd = new Date(eventEnd.val());
-
-            var valid = !!(tempDateEnd > tempDateStart);
-            console.log("in");
-            console.log("validation 1" + valid);
-            if (!valid) {
-                $("#error-start-end").html("End Sale Date Must Later Than Start Sale Date").css("display", "block");
-                return false;
-            }
-
-
-            heldDateArray.each(function (index, element) {
-                var tempDate = new Date($(this).val());
-                var endDate = new Date($("#end-sale").val());
-
-                var valid2 = !!(tempDate > endDate);
-
-                if (valid2 === false) {
-                    $("#error-held-date").html("Held Date Time Must Later Than End Sale Date").css("display", "block");
-
-                    return false;
-
-                }
-            });
-
-            if (valid1 === false || valid2 === false) {
-                return false;
-            }
-            $("#error-held-date").css("display", "none");
-            $("#error-start-end").css("display", "none");
-            return true;
-        }
-    </script>
 
     <article class="create-event-wrap">
         <div id="merchant-main-logo"></div>
@@ -64,38 +21,54 @@
                 <h2>Create Your Event</h2>
                 <br/>
 
-                <form onsubmit="return checkAllDate()" class="merchant-add-form"
-                      action="{{ path('encore_merchant_add_event') }}" method="POST">
-                    <div>
-                        <span class="class-label">Event Name</span>
-                        <input id="name-id" type="text" class="merchant-add-textbox" name="event_name"
-                               data-required="true"
-                               data-trigger="keyup"
-                               data-required-message="Please enter your event name"/>
-                    </div>
-                    <div>
-                        <span class="class-label">Event Type</span>
-                        <select id="type-id" class="merchant-add-textbox" name="event_type" data-required="true"
-                                data-trigger="change" data-required-message="Please select your event type">
-                            <option value="">Please Select An Event Type</option>
-                            <option value="1">Performing Arts</option>
-                            <option value="2">Concert</option>
-                            <option value="3">Art</option>
-                            <option value="4">Exhibition</option>
-                        </select>
-                    </div>
-                    <div>
-                        <span class="class-label">Event Description</span>
-                        <textarea id="descrpt-id" type="text" class="merchant-add-textarea" name="event_description"
-                                  data-required="true"
-                                  data-trigger="keyup"
-                                  data-required-message="Please enter your event description" style="resize:none;"
-                                  data-rangelength="[20,200]"></textarea>
-                    </div>
-                    <div>
-                        <span class="class-label">Event Sale Start</span>
-                        <input type="text" id="start-sale" class="merchant-add-textbox datepicker"
-                               name="event_sale_start"
+            <form class="merchant-add-form"
+                  action="{{ path('encore_merchant_add_event') }}" method="POST">
+                <div>
+                    <span class="class-label">Event Name</span>
+                    <input id="name-id" type="text" class="merchant-add-textbox" name="event_name" data-required="true"
+                           data-trigger="keyup"
+                           data-required-message="Please enter your event name"/>
+                </div>
+                <div>
+                    <span class="class-label">Event Type</span>
+                    <select id="type-id" class="merchant-add-textbox" name="event_type" data-required="true"
+                            data-trigger="change" data-required-message="Please select your event type">
+                        <option value="">Please Select An Event Type</option>
+                        <option value="1">Performing Arts</option>
+                        <option value="2">Concert</option>
+                        <option value="3">Art</option>
+                        <option value="4">Exhibition</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="class-label">Event Description</span>
+                    <textarea id="descrpt-id" type="text" class="merchant-add-textarea" name="event_description"
+                              data-required="true"
+                              data-trigger="keyup"
+                              data-required-message="Please enter your event description" style="resize:none;"
+                              data-rangelength="[20,200]"></textarea>
+                </div>
+                <div>
+                    <span class="class-label">Event Sale Start</span>
+                    <input type="text" id="start-sale" class="merchant-add-textbox datepicker" name="event_sale_start"
+                           data-required="true" data-trigger="change"
+                           data-required-message="Please enter your event sale start date" readonly/>
+                </div>
+                <div>
+                    <span class="class-label">Event Sale End</span>
+                    <input type="text" id="end-sale" class="merchant-add-textbox datepicker" name="event_sale_end"
+                           data-required="true" data-trigger="change"
+                           data-required-message="Please enter your event sale end date" readonly/>
+                </div>
+
+                <div id="held-date-groups">
+                    <span class="class-label">Event Held Dates</span>
+                    <a id="add-held"><i class="icon-plus icon-gray"></i></a>
+                    <br/>
+
+                    <div class="held-date-minor-wrapper">
+                        <span class="date-span">Date : </span>
+                        <input type="text" class="heldpicker held-date-class" name="event_held_date[0]"
                                data-required="true" data-trigger="change"
                                data-required-message="Please enter your event sale start date" readonly/>
                     </div>
