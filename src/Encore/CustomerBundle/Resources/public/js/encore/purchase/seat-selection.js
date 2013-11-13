@@ -3,8 +3,6 @@ require(['domReady'],
         "use strict";
         domReady(
             function () {
-                var value = $("#ticketQtySelector").val();
-                $("#ticketQtyInput").val(value);
                 /**
                  * Set empty/selected to selected seat
                  * @param target
@@ -112,19 +110,20 @@ require(['domReady'],
 
                     selectedSeats = $("table.seatTable tbody tr td.selected");
                     selectedSeats.sort();
-                    $("#seatAllocationLabel").html("");
+                    $("#seatAllocationInput").val("");
+                    $("#seatAllocationLabel").val("");
                     $.each(selectedSeats, function (index, target) {
                         str = $(target).attr("id");
                         endOfRow = str.indexOf("row") + 3;
                         endOfCol = str.indexOf("col") + 3;
                         colValue = parseInt(str.substring(endOfCol, str.length), 10);
                         rowValue = parseInt(str.substring(endOfRow, str.indexOf("col")), 10);
-                        $("#seatAllocationInput").val("Row : " + rowValue + "; Seat No. : " + colValue);
-                        $("#seatAllocationLabel").append("<p>Row : " + rowValue + "; Seat No. : " + colValue + "</p>");
+                        $("#seatAllocationInput").val($("#seatAllocationInput").val() + "Row : " + rowValue + "; Seat No. : " + colValue + "\n");
+                        $("#seatAllocationLabel").val($("#seatAllocationLabel").val() + str + "\n");
                     });
 
                     difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length;
-                    $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
+                    $("#ticketQtyInput").val(difference + " unselected ticket(s)");
                     if (difference > 0) {
                         $("input:submit").attr("hidden", "hidden");
                         $("#seatAllocComplete").attr("class", "incomplete");
@@ -143,7 +142,8 @@ require(['domReady'],
                     $("table.seatTable tbody tr td.selected").each(function () {
                         $(this).attr("class", "empty");
                     });
-                    $("#seatAllocationLabel").html("");
+                    $("#seatAllocationInput").val("");
+                    $("#seatAllocationLabel").val("");
                 }
 
                 /**
@@ -152,48 +152,17 @@ require(['domReady'],
                  */
                 $("#resetButton").click(function () {
                     resetSeats();
-                    $("#ticketQtyLabel").html(parseInt($("#ticketQtySelector").val(), 10) + " unselected ticket(s)");
+                    $("#ticketQtyInput").val(parseInt($("#ticketQtySelector").val(), 10) + " unselected ticket(s)");
                     $("input:submit").attr("hidden", "hidden");
                     $("#seatAllocComplete").attr("class", "incomplete");
                 });
-
-                /**
-                 * Hides/Display time selection step and un-check all checked time radio buttons
-                 * @param hideFlag
-                 */
-                function hideTimeStep(hideFlag) {
-                    $("#dateTimeLabel").html("");
-                    if (hideFlag) {
-                        $("#selectTimeDiv").attr("hidden", "hidden");
-                    } else {
-                        $("input:radio[name='timeGroup']").removeAttr("checked");
-                        $("#selectTimeDiv").removeAttr("hidden");
-                        $("#datetimeComplete").attr("class", "incomplete");
-                    }
-                }
-
-                /**
-                 * Hides/Display section selection step and un-check all checked section radio buttons
-                 * @param hideFlag
-                 */
-                function hideSectionStep(hideFlag) {
-                    $("#sectionLabel").html("");
-                    if (hideFlag) {
-                        $("#selectSectionDiv").attr("hidden", "hidden");
-                        $("#datetimeComplete").attr("class", "incomplete");
-                    } else {
-                        $("input:radio[name='sectionGroup']").removeAttr("checked");
-                        $("#selectSectionDiv").removeAttr("hidden");
-                        $("#datetimeComplete").attr("class", "complete");
-                    }
-                }
 
                 /**
                  * Hides/Display ticket quantity step and set ticket quantity to 0
                  * @param hideFlag
                  */
                 function hideTicketQtyStep(hideFlag) {
-                    $("#ticketQtyLabel").html("");
+                    $("#ticketQtyInput").val("");
                     if (hideFlag) {
                         $("#ticketQtyDiv").attr("hidden", "hidden");
                         $("#sectionComplete").attr("class", "incomplete");
@@ -237,40 +206,10 @@ require(['domReady'],
                 }
 
                 /**
-                 * Called when drop down list for date changes
-                 * If selected date is valid, unhidden time step
-                 * Else, reset all other values and hide all other steps
-                 */
-                $("#dateList").change(function () {
-                    var selectedDate = $("#dateList").val();
-                    if (selectedDate !== "Select Date") {
-                        hideTimeStep(false);
-                        $("#dateTimeLabel").html(selectedDate);
-                    } else {
-                        hideTimeStep(true);
-                    }
-                    hideSectionStep(true);
-                    hideTicketQtyStep(true);
-                    hideSeatAllocateStep(true);
-                });
-
-                /**
-                 * Called when radio button for time changes
-                 * Hides section selection step and hides ticket quantity and seat allocation steps
-                 */
-                $("button.selectTime").click(function (e) {
-                    hideSectionStep(false);
-                    $("#dateTimeLabel").html($("#dateList").val() + " " + $(e.target).val());
-                    hideTicketQtyStep(true);
-                    hideSeatAllocateStep(true);
-                });
-
-                /**
                  * Called when radio button for section changes
                  * Displays ticket quantity step and hides seat allocation step
                  */
                 $("button.selectSection").click(function (e) {
-                    //$("input:radio[name='sectionGroup']").change(function () {
                     hideTicketQtyStep(false);
                     $("#sectionLabel").html($(e.target).val());
                     hideSeatAllocateStep(true);
@@ -280,23 +219,21 @@ require(['domReady'],
                  * Called when ticket quantity selector changes
                  */
                 $("#ticketQtySelector").change(function (e) {
-                    var value, selectedLength, difference;
+                    var value, selectedLength, difference, qty;
                     hideSeatAllocateStep(false);
 
-                    var qty = $("#ticketQtySelector").val();
-                    $("#ticketQtyInput").val(qty);
-                    value = parseInt($("#ticketQtySelector").val(), 10);
+                    qty = $("#ticketQtySelector").val();
+                    value = parseInt(qty, 10);
                     selectedLength = $("table.seatTable tbody tr td.selected").length;
+                    difference = value - selectedLength;
                     if (value < selectedLength) {
-                        parseInt($("#ticketQtySelector").val(selectedLength));
+                        difference = 0
+                        $("#ticketQtySelector").val(selectedLength);
                         popupMessageError("You have selected " + selectedLength + " seat(s). You cannot reduce the number of ticket quantity.");
                     } else if (value === 0) {
-                        $("#ticketQtyLabel").html("");
                         hideSubmitButton(true);
                         hideSeatAllocateStep(true);
                     } else {
-                        difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length;
-                        $("#ticketQtyLabel").html(difference + " unselected ticket(s)");
                         if (difference > 0) {
                             $("input:submit").attr("hidden", "hidden");
                             $("#seatAllocComplete").attr("class", "incomplete");
@@ -305,6 +242,7 @@ require(['domReady'],
                             $("#seatAllocComplete").attr("class", "complete");
                         }
                     }
+                    $("#ticketQtyInput").val(difference + " unselected ticket(s)");
                 });
 
                 /**

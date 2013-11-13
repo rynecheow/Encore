@@ -51,9 +51,6 @@ class PurchaseController extends BaseController
             sort($dateArray);
 //            $dateArray = array_unique($dateArray);
 
-//            sort($heldDateTime);
-//            $heldDateTime = array_unique($heldDateTime);
-
             $params = [
                 "event_id" => $event->getId(),
                 "event_name" => $event->getName(),
@@ -85,18 +82,13 @@ class PurchaseController extends BaseController
 
     private function getEventHeldTime($id, $selectedDate)
     {
-        $status = 'success';
-        $msg = 'OK';
         /**
          * @var $eventRepo \Encore\CustomerBundle\Repository\EventHolderRepository
          */
         $eventRepo = $this->em->getRepository('EncoreCustomerBundle:EventHolder');
         $eventTimes = $eventRepo->findAllEventTimeByEventId($id);
         $times = [];
-        if (!count($eventTimes)) {
-            $status = 'error';
-            $msg = 'There isn\'t any time available for this event';
-        } else {
+        if (count($eventTimes)) {
             foreach ($eventTimes as $time) {
                 $time = $time['heldDate']->format("Y-m-d H:i:s");
                 if (strpos($time, $selectedDate) !== false) {
@@ -117,17 +109,74 @@ class PurchaseController extends BaseController
          * @var $eventRepo \Encore\CustomerBundle\Repository\EventHolderRepository
          */
         $eventRepo = $this->em->getRepository('EncoreCustomerBundle:EventHolder');
-        $eventSections = $eventRepo->findAllEventVenueSectionsByEventIdAndEventDateTime($id, $selectedDateTime);
-        $times = [];
-        if (!count($eventSections)) {
+        $eventHolders = $eventRepo->findEventHolderIdByEventIdAndEventDateTime($id, $selectedDateTime);
+
+        $eventHolder = $eventHolders[0];
+        $eventSections = $eventRepo->findAllEventVenueSectionsByEventHolderId($eventHolder);
+
+        $sectionIDAndNames = [];
+
+        foreach($eventSections as $eventSection)
+        {
+            $section = $eventSection->getSection();
+            $eventSectionID = $eventSection->getId();
+            $sectionIDAndNames[] = [
+                "id" => $eventSectionID,
+                "name" => $section->getName(),
+            ];
+        }
+
+        if (!count($sectionIDAndNames)) {
             $status = 'error';
-            $msg = 'There isn\'t any time available for this event';
+            $msg = 'There isn\'t any sections available for this event';
         }
 
         $result = [
             'status' => $status,
             'message' => $msg,
-            'event_sections' => $eventSections
+            'event_sections' => $sectionIDAndNames
+        ];
+
+        return $result;
+    }
+
+    private function getSectionSeats($eventSectionId)
+    {
+        $status = 'success';
+        $msg = 'OK';
+        /**
+         * @var $eventRepo \Encore\CustomerBundle\Repository\EventHolderRepository
+         */
+        $eventRepo = $this->em->getRepository('EncoreCustomerBundle:EventHolder');
+        $eventSection = $eventRepo->findEventSectionByEventSectionId($eventSectionId);
+        $sectionSeats = $eventRepo->findSeatsByEventSection($eventSection);
+
+        $totalSeats = $eventSection[0]->getTotalSeats();
+        $totalSold = $eventSection[0]->getTotalSold();
+        $availableSeatsLeft = $totalSeats - $totalSold;
+        if($availableSeatsLeft > 8)
+        {
+            $availableSeatsLeft = 8;
+        }
+
+        $seats = [];
+
+        foreach($sectionSeats as $sectionSeat)
+        {
+            $status = $sectionSeat->getStatus();
+            $seat = $sectionSeat->getSeat();
+
+            $seats[] = [
+                "seat" => $seat,
+                "status" => $status
+            ];
+        }
+
+        $result = [
+            'status' => $status,
+            'message' => $msg,
+            'event_max_ticket_qty' => $availableSeatsLeft,
+            'event_section_seats' => $seats
         ];
 
         return $result;
@@ -171,7 +220,22 @@ class PurchaseController extends BaseController
      */
     public function selectSectionAction()
     {
+        //$eventId = $this->getRequest()->get('eventId');
+        $eventSectionId = $this->getRequest()->get('eventSectionId');
+        if (isset($eventSectionId)) {
+            $result = $this->getSectionSeats($eventSectionId);
+        }
 
+        if ($result) {
+            $response = [
+                "code" => $result["status"] === "error" ? 400 : 200,
+                "status" => $result["status"] === "error" ? false : true,
+                "event_max_ticket_qty" => $result["event_max_ticket_qty"],
+                "event_section_seats" => $result["event_section_seats"]
+            ];
+        }
+
+        return new Response(json_encode($response));
     }
 
     /**
@@ -183,7 +247,8 @@ class PurchaseController extends BaseController
         $id = $this->getRequest()->get('id');
         $selectedDateTime = $this->getRequest()->get('datetime');
         if (isset($id) && isset($selectedDateTime)) {
-            $result = $this->getEventSections($id, $selectedDateTime);
+            $heldDate = date("Y-m-d H:i:s", strtotime($selectedDateTime));
+            $result = $this->getEventSections($id, $heldDate);
         }
 
         if ($result) {
@@ -191,29 +256,6 @@ class PurchaseController extends BaseController
                 "code" => $result["status"] === "error" ? 400 : 200,
                 "status" => $result["status"] === "error" ? false : true,
                 "event_sections" => $result["event_sections"]
-            ];
-        }
-
-        return new Response(json_encode($response));
-    }
-
-    /**
-     * @Route("/select_date", name="encore_select_date")
-     * @Method("POST")
-     */
-    public function selectDateAction()
-    {
-        $id = $this->getRequest()->get('eventId');
-        $selectedDate = $this->getRequest()->get('date');
-        if (isset($id) && isset($selectedDate)) {
-            $result = $this->getEventHeldTime($id, $selectedDate);
-        }
-
-        if ($result) {
-            $response = [
-                "code" => $result["status"] === "error" ? 400 : 200,
-                "status" => $result["status"] === "error" ? false : true,
-                "event_times" => $result["event_times"]
             ];
         }
 
