@@ -27,7 +27,7 @@ class UserRepository extends EntityRepository
                                             OR user.encore_username = :slug
                                             AND user.enabled = :enabled"
             )
-            ->setParameters(array('slug' => $slug, 'enabled' => 1))
+            ->setParameters(['slug' => $slug, 'enabled' => 1])
             ->getOneOrNullResult();
     }
 
@@ -61,7 +61,7 @@ class UserRepository extends EntityRepository
                                                                     WHERE user.id = userEmail.user
                                                                     AND userEmail.email = :email"
         )
-            ->setParameters(array('email' => $email))
+            ->setParameters(['email' => $email])
             ->getOneOrNullResult();
     }
 
