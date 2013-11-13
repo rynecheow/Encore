@@ -3,57 +3,67 @@
 {% block title %}Add Event Photo {% endblock title %}
 
 {% block content %}
-<div class="event-photo-main">
-    <form action="{{ path("encore_merchant_add_event_photo", {"eventId" : eventId}) }}"
-          method="POST" {{ form_enctype(form) }} class="photo-form">
-        {{ form(form) }}
-    </form>
-    {% if uploadedPhotos is not empty %}
-        {% for uploadedPhoto in uploadedPhotos %}
-            <div class="photo-wrapper">
-                <img class="image-wrapper" id="event-photo{{ loop.index }}"
-                     src="{{ vich_uploader_asset(uploadedPhoto, 'image') }}" alt="{{ uploadedPhoto.caption }}"/>
-                <a class="photo-class" id="{{ loop.index }}delete-photo"><i class="icon-remove icon-white"></i></a>
+    <div class="event-photo-wrapper">
+        <div id="merchant-main-logo"></div>
+        <div class="event-photo-main">
+            <h2>Add Event Image</h2>
 
-            </div>
-        {% endfor %}
+            <form action="{{ path("encore_merchant_add_event_photo", {"eventId" : eventId}) }}"
+                  method="POST" {{ form_enctype(form) }} class="photo-form">
+                {{ form(form) }}
 
-    {% endif %}
+                <div class="checkbox">
+                    <input type="checkbox" class="publish" id="publish" name="_publish" value="on"/>
+                    <label for="publish">Publish</label>
+                </div>
+            </form>
+            {% if uploadedPhotos is not empty %}
+                {% for uploadedPhoto in uploadedPhotos %}
+                    <div class="photo-wrapper">
+                        <img class="image-wrapper" id="event-photo{{ loop.index }}"
+                             src="{{ vich_uploader_asset(uploadedPhoto, 'image') }}" alt="{{ uploadedPhoto.caption }}"/>
+                        <a class="photo-class" id="{{ loop.index }}delete-photo"><i class="icon-remove icon-white"></i></a>
 
-    <script>
-        $(".photo-class").on("click", ajaxDeletePhoto);
-        function ajaxDeletePhoto(e) {
+                    </div>
+                {% endfor %}
 
-            var target = $(e.target),
-                    anchorObject = target.parent(),
-                    divWrapper = anchorObject.parent();
+            {% endif %}
 
-            var index = parseInt(anchorObject.attr("id"),10);
+            <script>
+                $(".photo-class").on("click", ajaxDeletePhoto);
+                function ajaxDeletePhoto(e) {
 
-            var imageObject = $("#event-photo"+index);
+                    var target = $(e.target),
+                            anchorObject = target.parent(),
+                            divWrapper = anchorObject.parent();
 
-            var urlString = imageObject.attr("src"),
-                urlIndex = urlString.lastIndexOf("/"),
-                urlOnly = urlString.substring(urlIndex+1,urlString.length);
+                    var index = parseInt(anchorObject.attr("id"), 10);
 
-            $.post(
-                    "{{ path('encore_merchant_delete_photo') }}",
-                    {
-                        "eventPhoto": urlOnly
-                    },
-                    function (response) {
-                        if (response.code == 200) {
-                            console.log("section %o", response);
-                            divWrapper.remove();
-                            return true;
-                        } else {
+                    var imageObject = $("#event-photo" + index);
 
-                            return false;
-                        }
-                    },
-                    "json"
-            );
-        }
-    </script>
-</div>
+                    var urlString = imageObject.attr("src"),
+                            urlIndex = urlString.lastIndexOf("/"),
+                            urlOnly = urlString.substring(urlIndex + 1, urlString.length);
+
+                    $.post(
+                            "{{ path('encore_merchant_delete_photo') }}",
+                            {
+                                "eventPhoto": urlOnly
+                            },
+                            function (response) {
+                                if (response.code == 200) {
+                                    console.log("section %o", response);
+                                    divWrapper.remove();
+                                    return true;
+                                } else {
+
+                                    return false;
+                                }
+                            },
+                            "json"
+                    );
+                }
+            </script>
+        </div>
+    </div>
 {% endblock content %}

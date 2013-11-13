@@ -375,12 +375,12 @@ html, body {
 
   #merchant-main-logo {
     background: url('../../bundles/encoremerchant/images/logo/logo-color.svg');
-    top: 35px;
+    top: 30px;
     left: 35px;
     margin: 0 auto;
     width: 200px;
     height: 54px;
-    position: fixed;
+    position: absolute;
     z-index: 11;
     background-size: cover;
   }
@@ -393,7 +393,7 @@ html, body {
       background: @lightSecondary;
       width: 60%;
       border-radius: 45px;
-      margin:0 auto;
+      margin: 0 auto;
       margin-top: 10%;
       font-size: 16px;
       padding: 20px 20px;
@@ -420,30 +420,29 @@ html, body {
         display: inline-table;
       }
 
-
-      .merchant-add-textbox{
+      .merchant-add-textbox {
         cursor: pointer;
       }
 
-      .held-time-class{
+      .held-time-class {
         cursor: pointer;
       }
-      .held-date-class{
+      .held-date-class {
         cursor: pointer;
       }
 
-      .section-table{
+      .section-table {
         margin-left: 15%;
 
-        .venue-capacity{
+        .venue-capacity {
           width: 7rem;
           height: 2rem;
         }
-        .venue-section{
+        .venue-section {
           width: 7rem;
         }
 
-        .venue-seat-price{
+        .venue-seat-price {
           text-align: center;
           border-radius: 10px;
         }
@@ -484,15 +483,70 @@ html, body {
 }
 
 /*************event photo*******/
-.event-photo-main{
-  width: 80%;
-  margin: 0 auto;
-  border-radius: 30px;
-  background: @lightSecondary;
-  padding :25px;
-  .photo-wrapper{
+.event-photo-wrapper {
+  #merchant-main-logo {
+    background: url('../../bundles/encoremerchant/images/logo/logo-color.svg');
+    top: 30px;
+    left: 35px;
     margin: 0 auto;
-    width :100%;
-    background: red;
+    width: 200px;
+    height: 54px;
+    position: absolute;
+    z-index: 11;
+    background-size: cover;
+  }
+
+  .event-photo-main {
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 30px;
+    background: @lightSecondary;
+    padding: 25px;
+    height: 1000px;
+    margin-bottom: 8%;
+    margin-top: 10%;
+    h2 {
+      font-size: 45px;
+      text-align: center;
+    }
+
+    label.required {
+      font-size: 25px;
+      margin-bottom: 7.5px;
+
+    }
+    #form_image {
+      font-size: 12px;
+    }
+
+    button#form_save {
+      display: inline-block;
+      width: 10rem;
+      padding: 5px 16px;
+      font-size: 14.5px;
+      line-height: 1.33;
+      border-radius: 6px;
+      color: @darkMain;
+      background-color: @orangeMain;
+      border-color: @orangeSecondary;
+      margin-top: 20px;
+      margin-left: 40%;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+    }
+    .checkbox {
+      margin-top: 5px;
+      margin-left: 46%;
+    }
+    .photo-wrapper {
+      margin: 0 auto;
+      margin-left: 17.5%;
+      margin-top: 5%;
+
+    }
   }
 }
