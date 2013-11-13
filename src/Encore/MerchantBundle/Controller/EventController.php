@@ -37,6 +37,7 @@ class EventController extends Controller
 
     /**
      * @Route("/events/add", name="encore_merchant_add_event")
+     * @Method({"GET","POST"})
      *
      */
     public function addAction()
@@ -59,8 +60,8 @@ class EventController extends Controller
         if ($request->getMethod() === "POST") {
             $formData = $request->request->all();
             $currentDate = new \DateTime();
-            $saleStart = DateTime::createFromFormat("m/d/Y", $formData["event_sale_start"]);
-            $saleEnd = DateTime::createFromFormat("m/d/Y", $formData["event_sale_end"]);
+            $saleStart = DateTime::createFromFormat("Y-m-d", $formData["event_sale_start"]);
+            $saleEnd = DateTime::createFromFormat("Y-m-d", $formData["event_sale_end"]);
 
             /**
              * @var $venue \Encore\CustomerBundle\Entity\Venue
@@ -89,13 +90,28 @@ class EventController extends Controller
                 ->setCreateAt($currentDate)
                 ->setSaleStart($saleStart)
                 ->setSaleEnd($saleEnd)
-                ->setPublish(false)
                 ->setVenue($venue)
                 ->setCreator($merchant);
             $this->em->persist($newEvent);
             $this->em->flush();
 
-            //TODO: held dates & event section
+            $dates = $formData["event_held_date"];
+            $times = $formData["event_held_time"];
+
+            foreach ($dates as $date)
+            {
+                foreach ($times as $time)
+                {
+                    $datetime = $date." ".$time;
+                    $heldDate = DateTime::createFromFormat("Y-m-d G:ia", $datetime);
+                    $eventHolder = new EventHolder();
+                    $eventHolder->setEvent($newEvent)
+                        ->setHeldDate($heldDate);
+                    $this->em->persist($eventHolder);
+                    $this->em->flush();
+                }
+            }
+            //TODO: event section
 
             //            $heldDates = $createEventForm->get("heldDates")->getData();
             //
@@ -175,7 +191,7 @@ class EventController extends Controller
 
         if ($request->getMethod() === "POST") {
             $formData = $request->request->all();
-            $saleEnd = DateTime::createFromFormat("m/d/Y", $formData["event_sale_end"]);
+            $saleEnd = DateTime::createFromFormat("Y-m-d", $formData["event_sale_end"]);
 
             if ($event->getPublish())
             {
@@ -185,7 +201,7 @@ class EventController extends Controller
 
             else
             {
-                $saleStart = DateTime::createFromFormat("m/d/Y", $formData["event_sale_start"]);
+                $saleStart = DateTime::createFromFormat("Y-m-d", $formData["event_sale_start"]);
 
                 /**
                  * @var $venue \Encore\CustomerBundle\Entity\Venue
@@ -226,111 +242,111 @@ class EventController extends Controller
         );
 
 
-            $event->setName($params["event_name"])
-                ->setDescription($params["event_description"]);
-
-            if (!$event->getPublish()) {
-                $event->setType($params["event_type"])
-                    ->setSaleStart($params["event_sale_start"])
-                    ->setSaleEnd($params["event_sale_end"]);
-
-                $selectedVenueId = $editEventForm->get("venue")->getData();
-
-                if ($selectedVenueId != $event->getVenue()->getId()) {
-                    /**
-                     * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
-                     */
-                    $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
-                        ->find($selectedVenueId);
-                    $event->setVenue($selectedVenue);
-                    $eventHolders = $this->em->getRepository("EncoreCustomerBundle:EventHolder")
-                        ->findByEvent($event);
-
-                    foreach ($eventHolders as $eventHolder) {
-                        $eventSections = $this->em->getRepository("EncoreCustomerBundle:EventSection")
-                            ->findByEventHolder($eventHolder);
-
-                        foreach ($eventSections as $eventSection) {
-                            $this->em->remove($eventSection);
-                            $this->em->flush();
-                        }
-                    }
-                }
-
-                $heldDates = $editEventForm->get("heldDates")->getData();
-                $eventHolders = $this->em->getRepository("EncoreCustomerBundle:EventHolder")
-                    ->findByEvent($event);
-
-                if (count($eventHolders) === 0) {
-                    foreach ($heldDates as $heldDate) {
-                        $newEventHolder = new EventHolder();
-                        $newEventHolder->setEvent($event)
-                            ->setHeldDate($heldDate);
-                        $this->em->persist($newEventHolder);
-                        $this->em->flush();
-                        $sections = $event->getVenue()->getSections();
-
-                        /**
-                         * @var $section \Encore\CustomerBundle\Entity\Section
-                         */
-                        foreach ($sections as $section) {
-                            $seats = $section->getSeats();
-                            $eventSectionPrice = $editEventForm->get($section->getName())->getData();
-                            $eventSection = new EventSection();
-                            $eventSection->setEventHolder($eventHolder)
-                                ->setSection($section)
-                                ->setPrice($eventSectionPrice)
-                                ->setTotalSeats(count($seats))
-                                ->setTotalSold(0);
-                            $this->em->persist($eventSection);
-                            $this->em->flush();
-                        }
-                    }
-                } else {
-                    foreach ($heldDates as $heldDate) {
-                        $exist = false;
-
-                        /**
-                         * @var $eventHolder \Encore\CustomerBundle\Entity\EventHolder
-                         */
-                        foreach ($eventHolders as $eventHolder) {
-                            if ($heldDate === $eventHolder->getHeldDate()) {
-                                $exist = true;
-                            }
-                        }
-
-                        if (!exist) {
-                            $newEventHolder = new EventHolder();
-                            $newEventHolder->setEvent($event)
-                                ->setHeldDate($heldDate);
-                            $this->em->persist($newEventHolder);
-                            $this->em->flush();
-                            $sections = $event->getVenue()->getSections();
-
-                            /**
-                             * @var $section \Encore\CustomerBundle\Entity\Section
-                             */
-                            foreach ($sections as $section) {
-                                $seats = $section->getSeats();
-                                $eventSectionPrice = $editEventForm->get($section->getName())->getData();
-                                $eventSection = new EventSection();
-                                $eventSection->setEventHolder($eventHolder)
-                                    ->setSection($section)
-                                    ->setPrice($eventSectionPrice)
-                                    ->setTotalSeats(count($seats))
-                                    ->setTotalSold(0);
-                                $this->em->persist($eventSection);
-                                $this->em->flush();
-                            }
-                        }
-                    }
-                }
-            }
-
-            return $this->render("EncoreMerchantBundle:Events:index.html.twig");
-
-
-        return $this->render("EncoreMerchantBundle:Events:edit-event.html.twig");
+//            $event->setName($params["event_name"])
+//                ->setDescription($params["event_description"]);
+//
+//            if (!$event->getPublish()) {
+//                $event->setType($params["event_type"])
+//                    ->setSaleStart($params["event_sale_start"])
+//                    ->setSaleEnd($params["event_sale_end"]);
+//
+//                $selectedVenueId = $editEventForm->get("venue")->getData();
+//
+//                if ($selectedVenueId != $event->getVenue()->getId()) {
+//                    /**
+//                     * @var $selectedVenue \Encore\CustomerBundle\Entity\Venue
+//                     */
+//                    $selectedVenue = $this->em->getRepository("EncoreCustomerBundle:Venue")
+//                        ->find($selectedVenueId);
+//                    $event->setVenue($selectedVenue);
+//                    $eventHolders = $this->em->getRepository("EncoreCustomerBundle:EventHolder")
+//                        ->findByEvent($event);
+//
+//                    foreach ($eventHolders as $eventHolder) {
+//                        $eventSections = $this->em->getRepository("EncoreCustomerBundle:EventSection")
+//                            ->findByEventHolder($eventHolder);
+//
+//                        foreach ($eventSections as $eventSection) {
+//                            $this->em->remove($eventSection);
+//                            $this->em->flush();
+//                        }
+//                    }
+//                }
+//
+//                $heldDates = $editEventForm->get("heldDates")->getData();
+//                $eventHolders = $this->em->getRepository("EncoreCustomerBundle:EventHolder")
+//                    ->findByEvent($event);
+//
+//                if (count($eventHolders) === 0) {
+//                    foreach ($heldDates as $heldDate) {
+//                        $newEventHolder = new EventHolder();
+//                        $newEventHolder->setEvent($event)
+//                            ->setHeldDate($heldDate);
+//                        $this->em->persist($newEventHolder);
+//                        $this->em->flush();
+//                        $sections = $event->getVenue()->getSections();
+//
+//                        /**
+//                         * @var $section \Encore\CustomerBundle\Entity\Section
+//                         */
+//                        foreach ($sections as $section) {
+//                            $seats = $section->getSeats();
+//                            $eventSectionPrice = $editEventForm->get($section->getName())->getData();
+//                            $eventSection = new EventSection();
+//                            $eventSection->setEventHolder($eventHolder)
+//                                ->setSection($section)
+//                                ->setPrice($eventSectionPrice)
+//                                ->setTotalSeats(count($seats))
+//                                ->setTotalSold(0);
+//                            $this->em->persist($eventSection);
+//                            $this->em->flush();
+//                        }
+//                    }
+//                } else {
+//                    foreach ($heldDates as $heldDate) {
+//                        $exist = false;
+//
+//                        /**
+//                         * @var $eventHolder \Encore\CustomerBundle\Entity\EventHolder
+//                         */
+//                        foreach ($eventHolders as $eventHolder) {
+//                            if ($heldDate === $eventHolder->getHeldDate()) {
+//                                $exist = true;
+//                            }
+//                        }
+//
+//                        if (!exist) {
+//                            $newEventHolder = new EventHolder();
+//                            $newEventHolder->setEvent($event)
+//                                ->setHeldDate($heldDate);
+//                            $this->em->persist($newEventHolder);
+//                            $this->em->flush();
+//                            $sections = $event->getVenue()->getSections();
+//
+//                            /**
+//                             * @var $section \Encore\CustomerBundle\Entity\Section
+//                             */
+//                            foreach ($sections as $section) {
+//                                $seats = $section->getSeats();
+//                                $eventSectionPrice = $editEventForm->get($section->getName())->getData();
+//                                $eventSection = new EventSection();
+//                                $eventSection->setEventHolder($eventHolder)
+//                                    ->setSection($section)
+//                                    ->setPrice($eventSectionPrice)
+//                                    ->setTotalSeats(count($seats))
+//                                    ->setTotalSold(0);
+//                                $this->em->persist($eventSection);
+//                                $this->em->flush();
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            return $this->render("EncoreMerchantBundle:Events:index.html.twig");
+//
+//
+//        return $this->render("EncoreMerchantBundle:Events:edit-event.html.twig");
     }
 
     /**
