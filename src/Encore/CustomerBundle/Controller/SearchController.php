@@ -26,6 +26,13 @@ class SearchController extends BaseController
         $session = $this->get('session');
         $session->save();
 
+        $categories = [
+            "Performing Arts",
+            "Concert",
+            "Art",
+            "Exhibition"
+        ];
+
         $request = $this->getRequest();
         if ($request->getMethod() === "GET") {
             $qparams = $request->query->all();
@@ -38,7 +45,7 @@ class SearchController extends BaseController
                     $search_results = $searcher->performFullSearch($qparams);
                     $events = $search_results['data']['events'];
 
-                    foreach($events as $event){
+                    foreach ($events as $event) {
                         /**
                          * @var $date \DateTime
                          */
@@ -47,11 +54,17 @@ class SearchController extends BaseController
                         $params[] = $event;
                     }
 
-                    return $this->render('EncoreCustomerBundle:Search:search.html.twig', $params);
+                    return $this->render(
+                        'EncoreCustomerBundle:Search:search.html.twig',
+                        [
+                            "event" => $params,
+                            "categoryList" => $categories,
+                        ]
+                    );
                 }
             }
         }
 
-        return $this->render('EncoreCustomerBundle:Search:search.html.twig');
+        return $this->render('EncoreCustomerBundle:Search:search.html.twig', ['categoryList' => $categories]);
     }
 } 
