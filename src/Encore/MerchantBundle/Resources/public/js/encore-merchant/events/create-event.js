@@ -126,7 +126,7 @@ require(['domReady'],
                     });
 
                     minusLogo.attr({
-                        class: "icon-minus icon-gray"
+                        class: "icon-remove icon-gray"
                     });
 
                     minusLogo.appendTo(minusEvent);
