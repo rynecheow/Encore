@@ -355,13 +355,144 @@ html, body {
 }
 
 .image-wrapper {
-  width:500px;
-  height:281px;
+  width: 500px;
+  height: 281px;
 }
 
-.photo-class{
-  right:0;
-  top:0;
-  position:absolute;
-  cursor:pointer;
+.photo-class {
+  right: 0;
+  top: 0;
+  position: absolute;
+  cursor: pointer;
+}
+
+/*****Add Event*******/
+
+.create-event-wrap {
+
+  width: 100%;
+  overflow-x: hidden;
+
+  #merchant-main-logo {
+    background: url('../../bundles/encoremerchant/images/logo/logo-color.svg');
+    top: 35px;
+    left: 35px;
+    margin: 0 auto;
+    width: 200px;
+    height: 54px;
+    position: fixed;
+    z-index: 11;
+    background-size: cover;
+  }
+
+  .create-event-container {
+    background: @lightMain;
+    width: 100%;
+    padding: 0;
+    .create-event-inner-container {
+      background: @lightSecondary;
+      width: 60%;
+      border-radius: 45px;
+      margin:0 auto;
+      margin-top: 10%;
+      font-size: 16px;
+      padding: 20px 20px;
+      h2 {
+        font-size: 45px;
+        color: @darkMain;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .class-label {
+        width: 15rem;
+        float: left;
+        text-align: left;
+        margin-right: 1rem;
+        margin-left: 15%;
+        display: block;
+        cursor: auto;
+      }
+      .added-held-date {
+
+        margin: 0 auto;
+        margin-left: 35%;
+        margin-right: 35%;
+        display: inline-table;
+      }
+
+
+      .merchant-add-textbox{
+        cursor: pointer;
+      }
+
+      .held-time-class{
+        cursor: pointer;
+      }
+      .held-date-class{
+        cursor: pointer;
+      }
+
+      .section-table{
+        margin-left: 15%;
+
+        .venue-capacity{
+          width: 7rem;
+          height: 2rem;
+        }
+        .venue-section{
+          width: 7rem;
+        }
+
+        .venue-seat-price{
+          text-align: center;
+          border-radius: 10px;
+        }
+
+      }
+
+      .button {
+        display: inline-block;
+        width: 10rem;
+        padding: 5px 16px;
+        font-size: 14.5px;
+        line-height: 1.33;
+        border-radius: 6px;
+        color: @darkMain;
+        background-color: @orangeMain;
+        border-color: @orangeSecondary;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        margin-left: 40%;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+
+      }
+    }
+    .parsley-error-list {
+      font-size: 12px;
+      color: @errorRedMain;
+      margin-bottom: 5px;
+      margin-left: 25%;
+      width: 250px;
+    }
+
+  }
+}
+
+/*************event photo*******/
+.event-photo-main{
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 30px;
+  background: @lightSecondary;
+  padding :25px;
+  .photo-wrapper{
+    margin: 0 auto;
+    width :100%;
+    background: red;
+  }
 }
