@@ -2,7 +2,6 @@
 
 {% block require_js %}
     require(["libs/bootstrap/bootstrap-datepicker"]);
-    require(['encore/purchase/seat-selection']);
 {% endblock require_js %}
 
 {% block css %}
@@ -10,6 +9,7 @@
 {% endblock css %}
 
 {% block content %}
+    <!--require(['encore/purchase/seat-selection']);-->
     <article class="seat-selection article">
         <div class="seat-selection-wrap">
             <div id='errorMessageContainer' style='display: none;'>
@@ -259,12 +259,11 @@
                                 'date': selectedDate
                             },
                             function (response) {
-                                console.log("%o", response);
                                 if (response.code === 200) {
                                     var eventTimes = response.event_times;
-
+                                    $("div#selectTimeDiv div").html("");
                                     $.each(eventTimes, function (index, value){
-                                        $("div#selectTimeDiv div").append("<button type='button' class='btn btn-primary selectTime'>" + value + "</button>")
+                                        $("div#selectTimeDiv div").append("<button type='button' class='btn btn-primary selectTime'>" + value + "</button>").click(selectTime);
                                     });
                                     return true;
                                 } else {
@@ -292,23 +291,83 @@
              * Called when radio button for time changes
              * Hides section selection step and hides ticket quantity and seat allocation steps
              */
-            $("button.selectTime").click(function (e) {
-                hideSectionStep(false);
-                $("#dateTimeLabel").html($("#dateList").val() + " " + $(e.target).val());
-                hideTicketQtyStep(true);
-                hideSeatAllocateStep(true);
-            });
+            function selectTime() {
+                var eventID = $("#eventID").data("value");
+                var selectedTime = $(this).text();
+                var selectedTimeAsInDB = $("#dateList").val() + " " + selectedTime + ":00";
+
+                $.post(
+                        "{{ path('encore_select_time') }}",
+                        {
+                            'id': eventID,
+                            'datetime': selectedTimeAsInDB
+                        },
+                        function (response) {
+                            if (response.code === 200) {
+                                var eventSections = response.event_sections;
+                                $("div#selectSectionDiv div").html("");
+                                $.each(eventSections, function (index, value){
+                                    $("div#selectSectionDiv div").append("<button type='button' class='btn btn-primary selectSection' data-sec-id='" + index + "'>" + value + "</button>").click(selectSection);
+                                });
+                                hideSectionStep(false);
+                                $("#dateTimeLabel").html($("#dateList").val() + " " + selectedTime);
+                                hideTicketQtyStep(true);
+                                hideSeatAllocateStep(true);
+                                return true;
+                            } else {
+                                hideSectionStep(true);
+                                hideTicketQtyStep(true);
+                                hideSeatAllocateStep(true);
+                                return false;
+                            }
+                        },
+                        "json"
+                );
+            }
 
             /**
              * Called when radio button for section changes
              * Displays ticket quantity step and hides seat allocation step
              */
-            $("button.selectSection").click(function (e) {
-                //$("input:radio[name='sectionGroup']").change(function () {
-                hideTicketQtyStep(false);
-                $("#sectionLabel").html($(e.target).val());
-                hideSeatAllocateStep(true);
-            });
+            function selectSection() {
+                var eventID = $("#eventID").data("value");
+                var selectedSectionId = $(this).data("sec-id");
+                var selectedSectionName = $(this).text();
+
+                $.post(
+                        "{{ path('encore_select_section') }}",
+                        {
+                            'eventId': eventID,
+                            'sectionId': selectedSectionId,
+                            'sectionName': selectedSectionName
+                        },
+                        function (response) {
+                            if (response.code === 200) {
+                                var maxTicketQty = response.max_ticket_qty;
+                                var seatPlan = response.seat_plan;
+
+                                if(maxTicketQty < 8) {
+                                    $("#ticketQtySelector").attr("max", maxTicketQty);
+                                } else {
+                                    $("#ticketQtySelector").attr("max", 8);
+                                }
+
+                                $("table.seatTable").html("");
+                                /**
+                                 * Generation of Seat Plan
+                                 */
+
+                                hideTicketQtyStep(false);
+                                $("#sectionLabel").html($(e.target).val());
+                                return true;
+                            } else {
+                                hideSeatAllocateStep(true);
+                                return false;
+                            }
+                        },
+                        "json"
+                );
+            }
 
             /**
              * Called when ticket quantity selector changes

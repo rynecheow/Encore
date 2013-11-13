@@ -97,6 +97,7 @@ class PurchaseController extends BaseController
             $heldDates[] = $eventHolder->getHeldDate()->format("Y-m-d");
         }
 
+        $heldDates = array_unique($heldDates);
         sort($heldDates);
 
         $params = [
@@ -114,7 +115,6 @@ class PurchaseController extends BaseController
      */
     public function selectDateAction()
     {
-
         $id = $this->getRequest()->get('id');
         $selectedDate = $this->getRequest()->get('date');
         if (isset($id) && isset($selectedDate)) {
@@ -128,7 +128,7 @@ class PurchaseController extends BaseController
                 "event_times" => $result["event_times"]
             ];
         }
-        
+
         return new Response(json_encode($response));
     }
 
@@ -162,5 +162,61 @@ class PurchaseController extends BaseController
         ];
 
         return $result;
+    }
+
+    /**
+     * @Route("/select_time", name="encore_select_time")
+     * @Method("POST")
+     */
+    public function selectTimeAction()
+    {
+        $id = $this->getRequest()->get('id');
+        $selectedDateTime = $this->getRequest()->get('datetime');
+        if (isset($id) && isset($selectedDateTime)) {
+            $result = $this->getEventSections($id, $selectedDateTime);
+        }
+
+        if ($result) {
+            $response = [
+                "code" => $result["status"] === "error" ? 400 : 200,
+                "status" => $result["status"] === "error" ? false : true,
+                "event_sections" => $result["event_sections"]
+            ];
+        }
+
+        return new Response(json_encode($response));
+    }
+
+    private function getEventSections($id, $selectedDateTime)
+    {
+        $status = 'success';
+        $msg = 'OK';
+        /**
+         * @var $eventRepo \Encore\CustomerBundle\Repository\EventHolderRepository
+         */
+        $eventRepo = $this->em->getRepository('EncoreCustomerBundle:EventHolder');
+        $eventSections = $eventRepo->findAllEventVenueSectionsByEventIdAndEventDateTime($id, $selectedDateTime);
+        $times = [];
+        if (!count($eventTimes)) {
+            $status = 'error';
+            $msg = 'There isn\'t any time available for this event';
+        }
+
+        $result = [
+            'status' => $status,
+            'message' => $msg,
+            'event_sections' => $eventSections
+        ];
+
+        return $result;
+    }
+
+    /**
+     * @Route("/select_section", name="encore_select_section")
+     * @Method("POST")
+     */
+    public function selectSectionAction()
+    {
+
     }
 }
