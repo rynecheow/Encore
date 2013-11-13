@@ -3,6 +3,8 @@ require(['domReady'],
         "use strict";
         domReady(
             function () {
+                var value = $("#ticketQtySelector").val();
+                $("#ticketQtyInput").val(value);
                 /**
                  * Set empty/selected to selected seat
                  * @param target
@@ -32,7 +34,7 @@ require(['domReady'],
                  * Called when a seat is selected
                  */
                 $("table.seatTable tbody tr td").click(function (e) {
-                    var target, str, endOfRow, endOfCol, colValue, rowValue, totalCol, previousCol, nextCol, middlePreviousCol, middleNextCol, previousDiv, previousTwoDiv, nextDiv, nextTwoDiv, difference, selectedSeats, rowLabel;
+                    var target, str, endOfRow, endOfCol, colValue, rowValue, totalCol, previousCol, nextCol, middlePreviousCol, middleNextCol, previousDiv, previousTwoDiv, nextDiv, nextTwoDiv, difference, selectedSeats;
                     target = $(e.target);
                     str = target.attr("id");
                     endOfRow = str.indexOf("row") + 3;
@@ -117,10 +119,8 @@ require(['domReady'],
                         endOfCol = str.indexOf("col") + 3;
                         colValue = parseInt(str.substring(endOfCol, str.length), 10);
                         rowValue = parseInt(str.substring(endOfRow, str.indexOf("col")), 10);
-                        rowLabel = $("tr[id='row" + rowValue + "'] td.tableLabel").text();
-                        colValue = colValue + 1;
-                        rowValue = rowValue + 1;
-                        $("#seatAllocationLabel").append("<p>Row : " + rowLabel + "; Seat No. : " + colValue + "</p>");
+                        $("#seatAllocationInput").val("Row : " + rowValue + "; Seat No. : " + colValue);
+                        $("#seatAllocationLabel").append("<p>Row : " + rowValue + "; Seat No. : " + colValue + "</p>");
                     });
 
                     difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length;
@@ -270,7 +270,7 @@ require(['domReady'],
                  * Displays ticket quantity step and hides seat allocation step
                  */
                 $("button.selectSection").click(function (e) {
-                //$("input:radio[name='sectionGroup']").change(function () {
+                    //$("input:radio[name='sectionGroup']").change(function () {
                     hideTicketQtyStep(false);
                     $("#sectionLabel").html($(e.target).val());
                     hideSeatAllocateStep(true);
@@ -279,9 +279,12 @@ require(['domReady'],
                 /**
                  * Called when ticket quantity selector changes
                  */
-                $("#ticketQtySelector").change(function () {
+                $("#ticketQtySelector").change(function (e) {
                     var value, selectedLength, difference;
                     hideSeatAllocateStep(false);
+
+                    var qty = $("#ticketQtySelector").val();
+                    $("#ticketQtyInput").val(qty);
                     value = parseInt($("#ticketQtySelector").val(), 10);
                     selectedLength = $("table.seatTable tbody tr td.selected").length;
                     if (value < selectedLength) {

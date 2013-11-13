@@ -784,7 +784,9 @@ footer[role=main] {
   width: 100%;
 
   .event-img {
-    margin-left: 30%;
+    margin:0 auto;
+    margin-right: 25%;
+    margin-left: 5%;
   }
 }
 
@@ -1564,20 +1566,23 @@ footer[role=main] {
     table tbody tr {
       td:nth-child(1) {
         width: 30px;
+        height: 30px;
 
-        div {
+        img {
           width: 20px;
           height: 20px;
+          min-height: 20px;
+          min-width: 20px;
           max-width: 20px;
           max-height: 20px;
         }
 
-        div.complete {
-          background: url('../../bundles/encorecustomer/images/seat-selection/step-complete.png');
+        img.complete {
+          content: url('../../bundles/encorecustomer/images/seat-selection/valid.svg');
         }
 
-        div.incomplete {
-          background: url('../../bundles/encorecustomer/images/seat-selection/step-incomplete.png');
+        img.incomplete {
+          content: url('../../bundles/encorecustomer/images/seat-selection/invalid.svg');
         }
       }
     }

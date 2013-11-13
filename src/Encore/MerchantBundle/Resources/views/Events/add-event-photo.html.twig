@@ -3,9 +3,9 @@
 {% block title %}Add Event Photo {% endblock title %}
 
 {% block content %}
-
+<div class="event-photo-main">
     <form action="{{ path("encore_merchant_add_event_photo", {"eventId" : eventId}) }}"
-          method="POST" {{ form_enctype(form) }}>
+          method="POST" {{ form_enctype(form) }} class="photo-form">
         {{ form(form) }}
     </form>
     {% if uploadedPhotos is not empty %}
@@ -55,5 +55,5 @@
             );
         }
     </script>
-
+</div>
 {% endblock content %}
