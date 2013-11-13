@@ -90,23 +90,17 @@ require(['domReady'],
 
 
                     count++;
-                    divWrapper.attr(
-                        {
-                            "id": "newHeldDate" + count,
-                            "class": "held-date-minor-wrapper"
-                        }
-                    );
-                    dateInput.attr(
-                        {
-                            type: "text",
-                            class: "heldpicker held-date-class",
-                            name: "event_held_date[" + count + "]",
-                            "data-required": "true",
-                            "data-trigger": "change",
-                            "data-required-message": "Please enter date.",
-                            "readonly": ""
-                        }
-                    );
+                    divWrapper.attr("id", "newHeldDate" + count);
+                    divWrapper.attr("class","added-held-date");
+                    dateInput.attr({
+                        type: "text",
+                        class: "heldpicker held-date-class",
+                        name: "event_held_date[" + count + "]",
+                        "data-required": "true",
+                        "data-trigger": "change",
+                        "data-required-message": "Please enter date.",
+                        "readonly": ""
+                    });
 
                     timeInput.attr(
                         {
