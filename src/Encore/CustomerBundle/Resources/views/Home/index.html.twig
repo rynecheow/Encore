@@ -99,7 +99,7 @@
                             <figcaption>
                                 <h3>{{ new.name }}</h3>
                                 <span>{{ new.date }}</span>
-                                <a href="">Take a look</a>
+                                <a href="{{ path("encore_event_details", {"eventId": new.id}) }}">Take a look</a>
                             </figcaption>
                         </figure>
                     </li>

@@ -1,10 +1,59 @@
-<form action="{{ path("encore_merchant_add_event_photo", {"eventId" : eventId}) }}" method="POST" {{ form_enctype(form) }}>
-    {{ form(form) }}
-</form>
-{% if uploadedPhotos is not empty %}
+{% extends 'EncoreMerchantBundle::layout.html.twig' %}
 
-    {% for uploadedPhoto in uploadedPhotos %}
-        <img src="{{ vich_uploader_asset(uploadedPhoto, 'image') }}" alt="{{ uploadedPhoto.caption }}" />
-    {% endfor %}
+{% block title %}Add Event Photo {% endblock title %}
 
-{% endif %}
+{% block content %}
+
+    <form action="{{ path("encore_merchant_add_event_photo", {"eventId" : eventId}) }}"
+          method="POST" {{ form_enctype(form) }}>
+        {{ form(form) }}
+    </form>
+    {% if uploadedPhotos is not empty %}
+        {% for uploadedPhoto in uploadedPhotos %}
+            <div class="photo-wrapper">
+                <img class="image-wrapper" id="event-photo{{ loop.index }}"
+                     src="{{ vich_uploader_asset(uploadedPhoto, 'image') }}" alt="{{ uploadedPhoto.caption }}"/>
+                <a class="photo-class" id="{{ loop.index }}delete-photo"><i class="icon-remove icon-white"></i></a>
+
+            </div>
+        {% endfor %}
+
+    {% endif %}
+
+    <script>
+        $(".photo-class").on("click", ajaxDeletePhoto);
+        function ajaxDeletePhoto(e) {
+
+            var target = $(e.target),
+                    anchorObject = target.parent(),
+                    divWrapper = anchorObject.parent();
+
+            var index = parseInt(anchorObject.attr("id"),10);
+
+            var imageObject = $("#event-photo"+index);
+
+            var urlString = imageObject.attr("src"),
+                urlIndex = urlString.lastIndexOf("/"),
+                urlOnly = urlString.substring(urlIndex+1,urlString.length);
+
+            $.post(
+                    "{{ path('encore_merchant_delete_photo') }}",
+                    {
+                        "eventPhoto": urlOnly
+                    },
+                    function (response) {
+                        if (response.code == 200) {
+                            console.log("section %o", response);
+                            divWrapper.remove();
+                            return true;
+                        } else {
+
+                            return false;
+                        }
+                    },
+                    "json"
+            );
+        }
+    </script>
+
+{% endblock content %}
