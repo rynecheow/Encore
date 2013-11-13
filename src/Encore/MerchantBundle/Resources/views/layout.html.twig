@@ -39,26 +39,6 @@
 </head>
 
 <body>
-{#<nav id="bt-menu" class="bt-menu">#}
-{#<a href="#" class="bt-menu-trigger"><span>Menu</span></a>#}
-{#<ul>#}
-{#{% if not anonymous %}#}
-{#<li><a href="{{ path('encore_merchant_logout') }}">Logout</a></li>#}
-{#<li><a href="{{ path('encore_view_profile', {'id': app.user.id }) }}">Profile</a></li>#}
-{#{% else %}#}
-{#<li><a href="{{ path('encore_merchant_login') }}">Login</a></li>#}
-{#<li><a href="{{ path('encore_signup') }}">Sign Up</a></li>#}
-{#{% endif %}#}
-{#<li><a href="{{ path('encore_home') }}"><img id="nav-logo"#}
-{#src="{{ asset('bundles/encorecustomer/images/logo/logo-white.svg') }}"#}
-{#onmouseover="this.src = {{ asset('bundles/encorecustomer/images/logo/logo-color.svg') }}"#}
-{#onmouseout="this.src = {{ asset('bundles/encorecustomer/images/logo/logo-white.svg') }}"/></a>#}
-{#</li>#}
-{#<li><a href="{{ path('encore_privacy') }}">Privacy</a></li>#}
-{#<li><a href="{{ path('encore_terms_purchase') }}">Terms</a></li>#}
-{#<li><a href="{{ path('encore_about') }}">About</a></li>#}
-{#</ul>#}
-{#</nav>#}
 <div class="wrapper">
     {% block content %}
     {% endblock content %}
