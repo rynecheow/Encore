@@ -40,40 +40,9 @@ require(['domReady'],
                 );
 
                 $("#add-held").on("click", addNewHeldDate);
-                $(".merchant-add-form").on("submit", checkAllDate);
+//                $(document).on("submit",$(".merchant-add-form"),checkAllDate);
 
-                function checkAllDate(e) {
 
-                    var heldDateArray = $(".held-date-class"),
-                        eventStart = $("#start-sale"),
-                        eventEnd = $("#end-sale");
-
-                    var tempDateStart = new Date(eventStart.val());
-                    var tempDateEnd = new Date(eventStart.val());
-
-                    var valid = !!(tempDateEnd > tempDateStart);
-
-                    if (!valid) {
-                        $("#error-start-end").html("End Sale Date Must Later Than Start Sale Date").css("display","block");
-                        return false;
-                    }
-
-                    heldDateArray.each(function (index, element) {
-                        var tempDate = new Date($(this).val());
-                        var valid = !!(tempDate > tempDateEnd);
-                        if(!valid){
-                            $("#error-held-date").html("Held Date Time Must Later Than End Sale Date").css("display","block");
-                            return false;
-
-                        }
-                    });
-
-                    $("#error-held-date").css("display","none");
-                    $("#error-start-end").css("display","none");
-
-                    return true;
-
-                }
 
                 function addNewHeldDate(e) {
                     "use strict";
@@ -94,6 +63,7 @@ require(['domReady'],
 
                     count++;
                     divWrapper.attr("id", "newHeldDate" + count);
+                    divWrapper.attr("class","added-held-date");
                     dateInput.attr({
                         type: "text",
                         class: "heldpicker held-date-class",
@@ -113,6 +83,9 @@ require(['domReady'],
                         "data-required-message": "Please enter time.",
                         "readonly": ""
                     });
+
+                    dateInput.parsley('validate');
+                    timeInput.parsley('validate');
 
                     minusEvent.attr({
                         id: count + "event_hdate",
