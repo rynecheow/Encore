@@ -84,18 +84,36 @@ class EventPhotoController extends Controller
     public function deletePhotoAction()
     {
         $request = $this->getRequest();
-        $eventPhoto = $request->get("eventPhoto");
-//        $event = $eventPhoto->getEvent();
-//        $event->removePhoto($eventPhoto);
-//        $this->em->flush();
-//        $this->em->remove($eventPhoto);
-//        $this->flush();
+        $imageURL = $request->get("eventPhoto");
+        $eventPhotos = $this->em->getRepository("EncoreCustomerBundle:EventPhoto")
+                           ->findByImagePath($imageURL);
 
-        $response = [
-            "code" => "200",
-            "status" => true,
-            "message" => "Photo has been removed successfully."
-        ];
+        if (count($eventPhotos) === 0)
+        {
+            $response = [
+                "code" => "404",
+                "status" => false,
+                "message" => "Photo not found."
+            ];
+        }
+
+        else
+        {
+            foreach ($eventPhotos as $eventPhoto)
+            {
+                $event = $eventPhoto->getEvent();
+                $event->removePhoto($eventPhoto);
+                $this->em->flush();
+                $this->em->remove($eventPhoto);
+                $this->em->flush();
+            }
+
+            $response = [
+                "code" => "200",
+                "status" => true,
+                "message" => "Photo has been removed successfully."
+            ];
+        }
 
         return new Response(json_encode($response));
     }
