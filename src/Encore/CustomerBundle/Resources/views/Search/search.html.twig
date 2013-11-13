@@ -15,91 +15,126 @@
 
 {% block content %}
     <div class="search-main">
-        <div class="nav-div">
-            <ul class="nav nav-tabs">
-                <li class="li-search">
-                    <div class="search-background">
-                        <a class="search-a"href="#search" data-toggle="tab">SEARCH</a>
-                    </div>
+    <div class="nav-div">
+        <ul class="nav nav-tabs">
+            <li class="li-search">
+                <div class="search-background">
+                    <a class="search-a" href="#search" data-toggle="tab">SEARCH</a>
+                </div>
 
-                </li>
-                <li class="li-filter">
-                    <div class="filter-background">
-                        <a class="filter-a" href="#filter" data-toggle="tab">FILTER</a>
-                    </div>
-                </li>
-            </ul>
+            </li>
+            <li class="li-filter">
+                <div class="filter-background">
+                    <a class="filter-a" href="#filter" data-toggle="tab">FILTER</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane active fade in" id="search">
+
+            <form action="{{ path('encore_global_search') }}" method="GET">
+                <input type="text" class="search-bar" name="keywords"
+                       placeholder="Find events that suits you best."/>
+
+                <div class="search-logo"></div>
+            </form>
         </div>
-        <div class="tab-content">
-            <div class="tab-pane active fade in" id="search">
-
-                <form action="{{ path('encore_global_search') }}" method="GET" >
-                    <input type="text" class="search-bar" name="keywords" placeholder="Find events that suits you best."/>
-                    <div class="search-logo"></div>
-                </form>
+        <div class="tab-pane fade" id="filter">
+            <div class="btn-group main-selection" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-danger filter-type">TYPE</button>
+                <button type="button" class="btn btn-danger filter-location">LOCATION</button>
+                <button type="button" class="btn btn-danger filter-date">DATE</button>
             </div>
-            <div class="tab-pane fade" id="filter">
-                <div class="btn-group main-selection" data-toggle="buttons-radio">
-                    <button type="button" class="btn btn-danger filter-type">TYPE</button>
-                    <button type="button" class="btn btn-danger filter-location">LOCATION</button>
-                    <button type="button" class="btn btn-danger filter-date">DATE</button>
-                </div>
 
-                <div class="type-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
+            <div class="type-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
 
-                    <button type="button" class="btn">Performing Arts</button>
-                    <button type="button" class="btn">Concert</button>
-                    <br />
-                    <button type="button" class="btn">Art</button>
-                    <button type="button" class="btn">Exhibition</button>
-
-                </div>
-
-                <div class="location-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
-                    {% set content = 'Cannot choose more than two location' %}
-                    <button type="button" data-toggle="popover" data-placement="left" data-content="{{ content }}" class="btn">Selangor</button>
-                    <button type="button"  data-toggle="popover" data-placement="top" data-content="{{ content }}"  class="btn">Perak</button>
-                    <button type="button"  data-toggle="popover" data-placement="right" data-content="{{ content }}" class="btn">Penang</button>
-                    <br/>
-                    <button type="button"  data-toggle="popover" class="btn" data-placement="left" data-content="{{ content }}">Kuala Lumpur</button>
-                    <button type="button"  data-toggle="popover" class="btn" data-placement="top" data-content="{{ content }}">Pahang</button>
-                    <button type="button"  data-toggle="popover" class="btn" data-placement="right" data-content="{{ content }}">Sabah</button>
-                    <br/>
-                    <button type="button"  data-toggle="popover" class="btn" data-placement="left" data-content="{{ content }}">Johor Bahru</button>
-                </div>
-
-                <div class="date-div" style="display:none;">
-                    <br/>
-                    <br/>
-
-                    <div style="float:right;">
-                        <button type="button" class="btn" id="reset-time">Reset Time</button>
-                        <button type="button" class="btm filter-time" data-toggle="popover" data-placement="left" data-content="Please Select From Date And To Date">Filter Time</button>
-                    </div>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div>
-                        <span>From Date</span>
-                        <input type="text" id="from-date" readonly value="" class="datepicker" id="from_date" />
-                    </div>
-
-                    <br/>
-                    <div class="to-date">
-                        <span>To Date</span>
-                        <input type="text" id="to-date" readonly value="" class="datepicker" id="to_date" />
-                    </div>
-
-                </div>
-                <br />
-                <br />
-                <br />
-                <div class="label-div">
-                    <span> Filtered By :</span>
-                    <br/>
-                </div>
+                <button type="button" class="btn">Performing Arts</button>
+                <button type="button" class="btn">Concert</button>
+                <br/>
+                <button type="button" class="btn">Art</button>
+                <button type="button" class="btn">Exhibition</button>
 
             </div>
+
+            <div class="location-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
+                {% set content = 'Cannot choose more than two location' %}
+                <button type="button" data-toggle="popover" data-placement="left" data-content="{{ content }}"
+                        class="btn">Selangor
+                </button>
+                <button type="button" data-toggle="popover" data-placement="top" data-content="{{ content }}"
+                        class="btn">Perak
+                </button>
+                <button type="button" data-toggle="popover" data-placement="right" data-content="{{ content }}"
+                        class="btn">Penang
+                </button>
+                <br/>
+                <button type="button" data-toggle="popover" class="btn" data-placement="left"
+                        data-content="{{ content }}">Kuala Lumpur
+                </button>
+                <button type="button" data-toggle="popover" class="btn" data-placement="top"
+                        data-content="{{ content }}">Pahang
+                </button>
+                <button type="button" data-toggle="popover" class="btn" data-placement="right"
+                        data-content="{{ content }}">Sabah
+                </button>
+                <br/>
+                <button type="button" data-toggle="popover" class="btn" data-placement="left"
+                        data-content="{{ content }}">Johor Bahru
+                </button>
+            </div>
+
+            <div class="date-div" style="display:none;">
+                <br/>
+                <br/>
+
+                <div style="float:right;">
+                    <button type="button" class="btn" id="reset-time">Reset Time</button>
+                    <button type="button" class="btm filter-time" data-toggle="popover" data-placement="left"
+                            data-content="Please Select From Date And To Date">Filter Time
+                    </button>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+
+                <div>
+                    <span>From Date</span>
+                    <input type="text" id="from-date" readonly value="" class="datepicker" id="from_date"/>
+                </div>
+
+                <br/>
+
+                <div class="to-date">
+                    <span>To Date</span>
+                    <input type="text" id="to-date" readonly value="" class="datepicker" id="to_date"/>
+                </div>
+
+            </div>
+            <br/>
+            <br/>
+            <br/>
+
+            <div class="label-div">
+                <span> Filtered By :</span>
+                <br/>
+            </div>
+
+
         </div>
     </div>
+
+    <div>
+    {% if event is not defined %}
+        <p>NOT DEFINED</p>
+    {% else %}
+        {% for eventItem in event %}
+            {% if eventItem is null %}
+                <p>event item is null</p>
+            {% else %}
+                <p>Event item ada</p>
+            {% endif %}
+    {% endif %}
+    </div>
+</div>
 {% endblock content %}
