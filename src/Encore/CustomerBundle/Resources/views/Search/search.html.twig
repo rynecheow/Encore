@@ -31,114 +31,123 @@
         </ul>
     </div>
     <div class="tab-content">
-        <div class="tab-pane active fade in" id="search">
+    <div class="tab-pane active fade in" id="search">
 
-            <form action="{{ path('encore_global_search') }}" method="GET">
-                <input type="text" class="search-bar" name="keywords"
-                       placeholder="Find events that suits you best."/>
+        <form action="{{ path('encore_global_search') }}" method="GET">
+            <input type="text" class="search-bar" name="keywords"
+                   placeholder="Find events that suits you best."/>
 
-                <div class="search-logo"></div>
-            </form>
+            <div class="search-logo"></div>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="filter">
+        <div class="btn-group main-selection" data-toggle="buttons-radio">
+            <button type="button" class="btn btn-danger filter-type">TYPE</button>
+            <button type="button" class="btn btn-danger filter-location">LOCATION</button>
+            <button type="button" class="btn btn-danger filter-date">DATE</button>
         </div>
-        <div class="tab-pane fade" id="filter">
-            <div class="btn-group main-selection" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-danger filter-type">TYPE</button>
-                <button type="button" class="btn btn-danger filter-location">LOCATION</button>
-                <button type="button" class="btn btn-danger filter-date">DATE</button>
-            </div>
 
-            <div class="type-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
+        <div class="type-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
 
-                <button type="button" class="btn">Performing Arts</button>
-                <button type="button" class="btn">Concert</button>
-                <br/>
-                <button type="button" class="btn">Art</button>
-                <button type="button" class="btn">Exhibition</button>
+            <button type="button" class="btn">Performing Arts</button>
+            <button type="button" class="btn">Concert</button>
+            <br/>
+            <button type="button" class="btn">Art</button>
+            <button type="button" class="btn">Exhibition</button>
 
-            </div>
+        </div>
 
-            <div class="location-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
-                {% set content = 'Cannot choose more than two location' %}
-                <button type="button" data-toggle="popover" data-placement="left" data-content="{{ content }}"
-                        class="btn">Selangor
+        <div class="location-div btn-group" data-toggle="buttons-checkbox" style="display:none;">
+            {% set content = 'Cannot choose more than two location' %}
+            <button type="button" data-toggle="popover" data-placement="left" data-content="{{ content }}"
+                    class="btn">Selangor
+            </button>
+            <button type="button" data-toggle="popover" data-placement="top" data-content="{{ content }}"
+                    class="btn">Perak
+            </button>
+            <button type="button" data-toggle="popover" data-placement="right" data-content="{{ content }}"
+                    class="btn">Penang
+            </button>
+            <br/>
+            <button type="button" data-toggle="popover" class="btn" data-placement="left"
+                    data-content="{{ content }}">Kuala Lumpur
+            </button>
+            <button type="button" data-toggle="popover" class="btn" data-placement="top"
+                    data-content="{{ content }}">Pahang
+            </button>
+            <button type="button" data-toggle="popover" class="btn" data-placement="right"
+                    data-content="{{ content }}">Sabah
+            </button>
+            <br/>
+            <button type="button" data-toggle="popover" class="btn" data-placement="left"
+                    data-content="{{ content }}">Johor Bahru
+            </button>
+        </div>
+
+        <div class="date-div" style="display:none;">
+            <br/>
+            <br/>
+
+            <div style="float:right;">
+                <button type="button" class="btn" id="reset-time">Reset Time</button>
+                <button type="button" class="btm filter-time" data-toggle="popover" data-placement="left"
+                        data-content="Please Select From Date And To Date">Filter Time
                 </button>
-                <button type="button" data-toggle="popover" data-placement="top" data-content="{{ content }}"
-                        class="btn">Perak
-                </button>
-                <button type="button" data-toggle="popover" data-placement="right" data-content="{{ content }}"
-                        class="btn">Penang
-                </button>
-                <br/>
-                <button type="button" data-toggle="popover" class="btn" data-placement="left"
-                        data-content="{{ content }}">Kuala Lumpur
-                </button>
-                <button type="button" data-toggle="popover" class="btn" data-placement="top"
-                        data-content="{{ content }}">Pahang
-                </button>
-                <button type="button" data-toggle="popover" class="btn" data-placement="right"
-                        data-content="{{ content }}">Sabah
-                </button>
-                <br/>
-                <button type="button" data-toggle="popover" class="btn" data-placement="left"
-                        data-content="{{ content }}">Johor Bahru
-                </button>
-            </div>
-
-            <div class="date-div" style="display:none;">
-                <br/>
-                <br/>
-
-                <div style="float:right;">
-                    <button type="button" class="btn" id="reset-time">Reset Time</button>
-                    <button type="button" class="btm filter-time" data-toggle="popover" data-placement="left"
-                            data-content="Please Select From Date And To Date">Filter Time
-                    </button>
-                </div>
-                <br/>
-                <br/>
-                <br/>
-
-                <div>
-                    <span>From Date</span>
-                    <input type="text" id="from-date" readonly value="" class="datepicker" id="from_date"/>
-                </div>
-
-                <br/>
-
-                <div class="to-date">
-                    <span>To Date</span>
-                    <input type="text" id="to-date" readonly value="" class="datepicker" id="to_date"/>
-                </div>
-
-                <div>
-                    {% if %}
-                </div>
-
             </div>
             <br/>
             <br/>
             <br/>
 
-            <div class="label-div">
-                <span> Filtered By :</span>
-                <br/>
+            <div>
+                <span>From Date</span>
+                <input type="text" id="from-date" readonly value="" class="datepicker" id="from_date"/>
             </div>
+
+            <br/>
+
+            <div class="to-date">
+                <span>To Date</span>
+                <input type="text" id="to-date" readonly value="" class="datepicker" id="to_date"/>
+            </div>
+
+
 
 
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
 
+    <div class="label-div">
+        <span id="filter-result"> Filtered By :</span>
+
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
     <div>
-    {% if event is not defined %}
-        <p>NOT DEFINED</p>
-    {% else %}
-        {% for eventItem in event %}
-            {% if eventItem is null %}
-                <p>event item is null</p>
-            {% else %}
-                <p>Event item ada</p>
-            {% endif %}
-    {% endif %}
+        {% if event is not defined %}
+        {% elseif event is null %}
+            <br/>
+            <br/>
+            <p>No Result Found. Try Another Keyword :( </p>
+
+        {% else %}
+            <h1>Search Result</h1>
+            {% for key , eventItem in event %}
+
+                <div style="float:left">
+                <a href="{{ path('encore_event_details',{"eventId": eventItem.id}) }}"
+                       data-type="{{ eventItem.type }}"
+                       data-location="{{ eventItem.location }}" data-date="{{ eventItem.heldDate }}">
+                <img class="result-img" alt="{{ eventItem.name }}" style="width:460px;height:288px;padding-left:5%;margin-top:10%;" src="{{ vich_uploader_asset(eventItem.imagePath, 'image') }}" />
+
+               </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+
     </div>
-</div>
 {% endblock content %}
