@@ -36,17 +36,22 @@ class SearchController extends BaseController
                      */
                     $searcher = $this->get('encore.encore_search');
                     $search_results = $searcher->performFullSearch($qparams);
+                    $events = $search_results['data']['events'];
 
-
-                    $params = [
-                        "search_results" => $search_results
-                    ];
+                    foreach($events as $event){
+                        /**
+                         * @var $date \DateTime
+                         */
+                        $date = $event['heldDate'];
+                        $event['heldDate'] = $date->format("Y-m-d");
+                        $params[] = $event;
+                    }
 
                     return $this->render('EncoreCustomerBundle:Search:search.html.twig', $params);
                 }
             }
         }
 
-        return $this->render('EncoreCustomerBundle:Search:empty-search.html.twig', $params);
+        return $this->render('EncoreCustomerBundle:Search:search.html.twig');
     }
 } 
