@@ -2,6 +2,7 @@
 
 {% block require_js %}
     require(["libs/bootstrap/bootstrap-datepicker"]);
+    require(['encore/purchase/seat-selection']);
 {% endblock require_js %}
 
 {% block css %}
@@ -22,12 +23,29 @@
             </div>
             <div id="selectDateDiv">
                 <label>Date:</label>
-                <select id="dateList">
-                    <option selected="selected">Select Date</option>
-                    {% for dateIndex, date in dateArray %}
-                        <option value="{{ date }}">{{ date }}</option>
+
+                {% for dateIndex, dates in dateArray %}
+                    {% for date, times in dates %}
+                            <table class="dateTimeTable">
+                                <tbody>
+                                    <tr>
+                                        <td class="tableDateLabel">
+                                            <div>{{ date }}</div>
+                                        </td>
+                                        <td class="tableTimeLabel">
+                                            {% for key2, time in times %}
+                                                <span>
+                                                <input type="radio" name="time" value="{{ date }} {{ time }}:00"/><strong>{{ time }}</strong>
+                                            </span>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                     {% endfor %}
-                </select>
+                {% endfor %}
+
+
             </div>
 
             <div id="selectTimeDiv" hidden="hidden">

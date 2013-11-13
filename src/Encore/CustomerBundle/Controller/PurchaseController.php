@@ -28,18 +28,27 @@ class PurchaseController extends BaseController
         if($request->getMethod() === "POST"){
 
         }else{
+            $id = $this->getRequest()->get('eventId');
             $eventHolders = $event->getEventHolders();
-            $heldDates = [];
+            $dateArray = [];
             foreach ($eventHolders as $eventHolder) {
-                $heldDates[] = $eventHolder->getHeldDate()->format("Y-m-d");
+                $heldDate_Date = $eventHolder->getHeldDate()->format("Y-m-d");
+                $heldDate_Time = $this->getEventHeldTime($id,$heldDate_Date);
+                $str = date("Y-M-d", strtotime($heldDate_Date));
+                $dateArray[] = [$str => $heldDate_Time];
+
             }
-            sort($heldDates);
-            $heldDates = array_unique($heldDates);
+
+            sort($dateArray);
+//            $dateArray = array_unique($dateArray);
+
+//            sort($heldDateTime);
+//            $heldDateTime = array_unique($heldDateTime);
 
             $params = [
                 "event_id" => $event->getId(),
                 "event_name" => $event->getName(),
-                "dateArray" => $heldDates
+                "dateArray" => $dateArray,
             ];
 
             return $this->render("EncoreCustomerBundle:Events:seat-selection.html.twig", $params);
@@ -88,13 +97,7 @@ class PurchaseController extends BaseController
             }
         }
 
-        $result = [
-            'status' => $status,
-            'message' => $msg,
-            'event_times' => $times
-        ];
-
-        return $result;
+        return $times;
     }
 
     private function getEventSections($id, $selectedDateTime)
@@ -161,7 +164,7 @@ class PurchaseController extends BaseController
      */
     public function selectDateAction()
     {
-        $id = $this->getRequest()->get('id');
+        $id = $this->getRequest()->get('eventId');
         $selectedDate = $this->getRequest()->get('date');
         if (isset($id) && isset($selectedDate)) {
             $result = $this->getEventHeldTime($id, $selectedDate);
