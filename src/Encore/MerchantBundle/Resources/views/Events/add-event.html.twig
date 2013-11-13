@@ -1,11 +1,14 @@
 {% extends 'EncoreMerchantBundle::layout.html.twig' %}
 {% block css %}
     <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/datepicker.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('bundles/encoremerchant/css/libs/bootstrap/bootstrap-timepicker.min.css') }}"
+          rel="stylesheet"/>
 {% endblock css %}
 
 {% block require_js %}
     require(["libs/bootstrap/bootstrap-datepicker"]);
     require(["encore-merchant/events/create-event"]);
+    require(["libs/bootstrap/bootstrap-timepicker.min"]);
 {% endblock require_js %}
 
 {% block title %}Create An Event {% endblock title %}
@@ -35,22 +38,42 @@
                 </div>
                 <div>
                     <span class="class-label">Event Description</span>
-                    <textarea type="text" class="merchant-add-textbox" name="event_description" data-required="true"
+                    <textarea type="text" class="merchant-add-textarea" name="event_description" data-required="true"
                               data-trigger="keyup"
                               data-required-message="Please enter your event description" style="resize:none;"
                               data-rangelength="[20,200]"></textarea>
                 </div>
                 <div>
                     <span class="class-label">Event Sale Start</span>
-                    <input type="text" class="merchant-add-textbox datepicker" name="event_sale_start"
+                    <input type="text" id="start-sale" class="merchant-add-textbox datepicker" name="event_sale_start"
                            data-required="true" data-trigger="change"
                            data-required-message="Please enter your event sale start date" readonly/>
                 </div>
                 <div>
                     <span class="class-label">Event Sale End</span>
-                    <input type="text" class="merchant-add-textbox datepicker" name="event_sale_end"
+                    <input type="text" id="end-sale" class="merchant-add-textbox datepicker" name="event_sale_end"
                            data-required="true" data-trigger="change"
                            data-required-message="Please enter your event sale end date" readonly/>
+                </div>
+                <span id="error-start-end" style="display:none;" class="parsley-error-list"></span>
+                <div id="held-date-groups">
+                    <span class="class-label">Event Held Dates</span>
+                    <a id="add-held"><i class="icon-plus icon-gray"></i></a>
+                    <br/>
+
+                    <div>
+                        <span class="date-span">Date : </span>
+                        <input type="text" class="heldpicker held-date-class" name="event_held_date[0]"
+                               data-required="true" data-trigger="change"
+                               data-required-message="Please enter at least one held date" readonly/>
+
+                        <span class="time-span">Time : </span>
+
+                        <input type="text" class="timepicker held-time-class" name="event_held_time[0]"
+                               data-required="true" data-trigger="change"
+                               data-required-message="Please enter at least one held date" readonly/>
+                    </div>
+                    <span id="error-held-date" style="display:none;" class="parsley-error-list"></span>
                 </div>
                 <div>
                     <span class="class-label">Event Location</span>
