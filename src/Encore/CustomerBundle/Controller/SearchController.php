@@ -15,15 +15,6 @@ class SearchController extends BaseController
 {
 
     /**
-     * @Route("/advance-search",name="encore_advance_search")
-     */
-
-    public function searchAction()
-    {
-        return $this->render("EncoreCustomerBundle:Search:advance-search.html.twig");
-    }
-
-    /**
      * @Route("/search", name="encore_global_search")
      */
     public function globalSearchAction()
