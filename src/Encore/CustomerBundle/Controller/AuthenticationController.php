@@ -168,7 +168,7 @@ class AuthenticationController extends BaseController
         $user = new User();
         $user->setUsername($params['email']);
         $user->setEmail($params['email']);
-        $array_role = []
+        $array_role = [
             User::ROLE_USER,
         ];
         $user->setRoles($array_role);
