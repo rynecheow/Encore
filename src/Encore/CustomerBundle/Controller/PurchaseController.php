@@ -19,55 +19,33 @@ class PurchaseController extends BaseController
 {
 
     /**
-     * @Route("/events/{id}/purchase", requirements={"id" = "\d+"})
+     * @Route("/events/{eventId}/purchase", name="encore_purchase")
+     * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
      */
-    public function purchaseAction($id)
+    public function purchaseAction(Event $event)
     {
-        $event = $this->em
-            ->getRepository("EncoreCustomerBundle:Event")
-            ->find($id);
-        $heldDates = $event->getHeldDates();
-        $heldDates = $heldDates->format("Y-m-d H:i");
+        $request = $this->getRequest();
+        if($request->getMethod() === "POST"){
 
-        $eventSection = $this->em
-            ->getRepository("EncoreCustomerBundle:EventSection")
-            ->findByEvent($id);
-
-        $sections = $this->em
-            ->getRepository("EncoreCustomerBundle:Section")
-            ->findByVenue($event->getVenue());
-
-        $totalSection = count($eventSection);
-        $sectionsInfo = [];
-
-        for ($i = 0; $i < $totalSection; $i++) {
-            $price = $eventSection[$i]->getPrice();
-            $totalSeats = $eventSection[$i]->getTotalSeats();
-            $totalSold = $eventSection[$i]->getTotalSold();
-            $seatAvailable = $totalSeats - $totalSold;
-            $name = "";
-
-            for ($j = 0; $j < $totalSection; $j++) {
-                if ($eventSection[$i]->getSection()->getId() === $sections[$j]->getId()) {
-                    $name = $sections[$j]->getName();
-                }
+        }else{
+            $eventHolders = $event->getEventHolders();
+            $heldDates = [];
+            foreach ($eventHolders as $eventHolder) {
+                $heldDates[] = $eventHolder->getHeldDate()->format("Y-m-d");
             }
+            sort($heldDates);
+            $heldDates = array_unique($heldDates);
 
-            $sectionsInfo[$i] = [
-                "price" => $price,
-                "total_seats" => $totalSeats,
-                "total_sold" => $totalSold,
-                "seat_available" => $seatAvailable,
-                "name" => $name
+            $params = [
+                "event_id" => $event->getId(),
+                "event_name" => $event->getName(),
+                "dateArray" => $heldDates
             ];
+
+            return $this->render("EncoreCustomerBundle:Events:seat-selection.html.twig", $params);
         }
 
-        $params = [
-            "event_held_dates" => $heldDates,
-            "sections" => $sectionsInfo
-        ];
 
-        return $this->render("EncoreCustomerBundle:Events:purchase.html.twig", $params);
     }
 
     /**
@@ -85,52 +63,7 @@ class PurchaseController extends BaseController
         );
     }
 
-    /**
-     * @Route("/events/{eventId}/purchase/seat-selection", name="encore_seat_selection")
-     * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
-     */
-    public function selectSeatAction(Event $event)
-    {
-        $eventHolders = $event->getEventHolders();
-        $heldDates = [];
-        foreach ($eventHolders as $eventHolder) {
-            $heldDates[] = $eventHolder->getHeldDate()->format("Y-m-d");
-        }
-
-        $heldDates = array_unique($heldDates);
-        sort($heldDates);
-
-        $params = [
-            "event_id" => $event->getId(),
-            "event_name" => $event->getName(),
-            "dateArray" => $heldDates
-        ];
-
-        return $this->render("EncoreCustomerBundle:Events:seat-selection.html.twig", $params);
-    }
-
-    /**
-     * @Route("/select_date", name="encore_select_date")
-     * @Method("POST")
-     */
-    public function selectDateAction()
-    {
-        $id = $this->getRequest()->get('id');
-        $selectedDate = $this->getRequest()->get('date');
-        if (isset($id) && isset($selectedDate)) {
-            $result = $this->getEventHeldTime($id, $selectedDate);
-        }
-
-        if ($result) {
-            $response = [
-                "code" => $result["status"] === "error" ? 400 : 200,
-                "status" => $result["status"] === "error" ? false : true,
-                "event_times" => $result["event_times"]
-            ];
-        }
-
-        return new Response(json_encode($response));
-    }
+    /* ------- ------- ------- Private Methods ------- ------- -------*/
 
     private function getEventHeldTime($id, $selectedDate)
     {
@@ -164,6 +97,41 @@ class PurchaseController extends BaseController
         return $result;
     }
 
+    private function getEventSections($id, $selectedDateTime)
+    {
+        $status = 'success';
+        $msg = 'OK';
+        /**
+         * @var $eventRepo \Encore\CustomerBundle\Repository\EventHolderRepository
+         */
+        $eventRepo = $this->em->getRepository('EncoreCustomerBundle:EventHolder');
+        $eventSections = $eventRepo->findAllEventVenueSectionsByEventIdAndEventDateTime($id, $selectedDateTime);
+        $times = [];
+        if (!count($eventSections)) {
+            $status = 'error';
+            $msg = 'There isn\'t any time available for this event';
+        }
+
+        $result = [
+            'status' => $status,
+            'message' => $msg,
+            'event_sections' => $eventSections
+        ];
+
+        return $result;
+    }
+
+    /* ------- ------- ------- AJAX ------- ------- -------*/
+
+    /**
+     * @Route("/select_section", name="encore_select_section")
+     * @Method("POST")
+     */
+    public function selectSectionAction()
+    {
+
+    }
+
     /**
      * @Route("/select_time", name="encore_select_time")
      * @Method("POST")
@@ -187,36 +155,26 @@ class PurchaseController extends BaseController
         return new Response(json_encode($response));
     }
 
-    private function getEventSections($id, $selectedDateTime)
-    {
-        $status = 'success';
-        $msg = 'OK';
-        /**
-         * @var $eventRepo \Encore\CustomerBundle\Repository\EventHolderRepository
-         */
-        $eventRepo = $this->em->getRepository('EncoreCustomerBundle:EventHolder');
-        $eventSections = $eventRepo->findAllEventVenueSectionsByEventIdAndEventDateTime($id, $selectedDateTime);
-        $times = [];
-        if (!count($eventTimes)) {
-            $status = 'error';
-            $msg = 'There isn\'t any time available for this event';
-        }
-
-        $result = [
-            'status' => $status,
-            'message' => $msg,
-            'event_sections' => $eventSections
-        ];
-
-        return $result;
-    }
-
     /**
-     * @Route("/select_section", name="encore_select_section")
+     * @Route("/select_date", name="encore_select_date")
      * @Method("POST")
      */
-    public function selectSectionAction()
+    public function selectDateAction()
     {
+        $id = $this->getRequest()->get('id');
+        $selectedDate = $this->getRequest()->get('date');
+        if (isset($id) && isset($selectedDate)) {
+            $result = $this->getEventHeldTime($id, $selectedDate);
+        }
 
+        if ($result) {
+            $response = [
+                "code" => $result["status"] === "error" ? 400 : 200,
+                "status" => $result["status"] === "error" ? false : true,
+                "event_times" => $result["event_times"]
+            ];
+        }
+
+        return new Response(json_encode($response));
     }
 }
