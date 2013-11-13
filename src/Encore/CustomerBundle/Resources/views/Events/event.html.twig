@@ -10,9 +10,9 @@
 {% block content %}
 
     <div class="event-page">
-        {% for photos in event_photos %}
+        {% for photos in event.photos %}
             <div class="event-img">
-                <img src="{{ photos }}">
+                <img src="{{ vich_uploader_asset(photos, 'image') }}" alt="{{ photos.caption }}" />
             </div>
         {% endfor %}
 
@@ -80,20 +80,26 @@
 
     <div class="event-detail">
         <ul>
-            <li>Event: {{ event_name }}</li>
+            <li>Event: {{ event.name }}</li>
 
-            <li>Event Type: {{ event_type }}</li>
+            <li>Event Type: {{ eventType }}</li>
 
-            <li>Description: {{ event_description }}</li>
+            <li>Description: {{ event.description }}</li>
 
-            <li>Held Date: {{ event_held_dates }}</li>
+            <li>Held Date: </li>
 
-            <li>Venue: {{ venue_name }}</li>
+            {% for eventHolder in eventHolders %}
 
-            <p>Location: {{ venue_location }}</p>
+                <li>{{ eventHolder }}</li>
+
+            {% endfor %}
+
+            <li>Venue: {{ event.venue.name }}</li>
+
+            <p>Location: {{ event.venue.location }}</p>
         </ul>
 
-        <form autocomplete="on" action="/events/{{ event_id }}/purchase">
+        <form autocomplete="on" action="/events/{{ event.id }}/purchase">
             <button type="submit" class="submit">Buy Now</button>
         </form>
     </div>
