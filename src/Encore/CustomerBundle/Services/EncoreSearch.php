@@ -46,12 +46,11 @@ class EncoreSearch
             if ($search_results['query'] !== '') {
                 $events = $this->em->createQuery(
                     <<<SQL
-                SELECT DISTINCT e.name, v.location, e.type, ep.imagePath, eh.heldDate
+                SELECT DISTINCT e
                 FROM EncoreCustomerBundle:Event e
                 INNER JOIN e.eventHolders eh
                 INNER JOIN e.venue v
                 INNER JOIN e.photos ep
-
 
                 WHERE e.publishedAt IS NOT NULL
                 AND(e.description LIKE :qkey
