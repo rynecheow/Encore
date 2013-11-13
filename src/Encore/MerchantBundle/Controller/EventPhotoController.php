@@ -73,18 +73,23 @@ class EventPhotoController extends Controller
         );
     }
 
+
     /**
-     * @return array
+     *
+     * @Route("/delete-photo", name="encore_merchant_delete_photo")
+     * @Method("POST")
+     *
+     * @return Response
      */
     public function deletePhotoAction()
     {
         $request = $this->getRequest();
         $eventPhoto = $request->get("eventPhoto");
-        $event = $eventPhoto->getEvent();
-        $event->removePhoto($eventPhoto);
-        $this->em->flush();
-        $this->em->remove($eventPhoto);
-        $this->flush();
+//        $event = $eventPhoto->getEvent();
+//        $event->removePhoto($eventPhoto);
+//        $this->em->flush();
+//        $this->em->remove($eventPhoto);
+//        $this->flush();
 
         $response = [
             "code" => "200",
