@@ -2,6 +2,7 @@
 
 {% block require_js %}
     require(["libs/bootstrap/bootstrap-datepicker"]);
+    require(['encore/purchase/seat-selection']);
 {% endblock require_js %}
 
 {% block css %}
@@ -35,70 +36,94 @@
                 </div>
             </div>
 
-            <div id="ticketQtyDiv" hidden="hidden">
+            <div id="ticketQtyDiv">
                 <label>Ticket Quantity:</label>
-                <input id="ticketQtySelector" type="number" min="0" max="8" value="0"/>
+                <input id="ticketQtySelector" type="number" min="0" max="8" value="2"/>
             </div>
-            <div id="seatAllocateDiv" hidden="hidden">
+            <div id="seatAllocateDiv">
                 <label>Seat Allocation:</label>
 
                 <div class="table-wrapper">
                     <table class="seatTable">
-
+                        {% set rowArray = [1,2,3,4,5] %}
+                        {% for row, val in rowArray %}
+                            {% if row == 0 %}
+                                <tr>
+                                    {% for col in 0..30 %}
+                                        <td class="tableLabel">
+                                            {% if col != 0 %}
+                                                {{ col }}
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endif %}
+                            <tr id="row{{ row }}">
+                                <td class="tableLabel">
+                                    {{ val }}
+                                </td>
+                                {% for col in 1..30 %}
+                                    <td id="row{{ val }}col{{ col }}" class="empty">
+                                        {{ col }}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
                     </table>
                 </div>
                 <input type="button" class="reset" value="reset" id="resetButton"/>
             </div>
 
-            <form id="summaryForm">
+            <form action="{{ path('encore_summary',{"eventId": event_id }) }}"id="summaryForm" style="z-index: 2;">
                 <h2>Summary</h2>
                 <table>
                     <tbody>
                     <tr>
                         <td>
-                            <div id="eventComplete" class="complete"></div>
+                            <img id="eventComplete" class="complete"/>
                         </td>
                         <td>
                             <h3>Event:</h3>
 
                             <div>
-                                <label id="eventLabel">{{ event_name }}</label>
+                                <input type="text" readonly name="event_name" value="{{ event_name }}" id="eventLabel" />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div id="datetimeComplete" class="incomplete"></div>
+                            <img id="datetimeComplete" class="incomplete"/>
                         </td>
                         <td>
                             <h3>Date & Time:</h3>
 
                             <div>
-                                <label id="dateTimeLabel"></label>
+                                <input type="text" readonly name="event_name" value="2014-01-15 00:00" id="dateTimeLabel" />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div id="sectionComplete" class="incomplete"></div>
+                            <img id="sectionComplete" class="incomplete"/>
                         </td>
                         <td>
                             <h3>Section:</h3>
 
                             <div>
-                                <label id="sectionLabel"></label>
+                                <input type="text" readonly name="event_section" value="A" id="sectionLabel" />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div id="ticketQtyComplete" class="incomplete"></div>
+                            <img id="ticketQtyComplete" class="incomplete"/>
                         </td>
                         <td>
                             <h3>Ticket Quantity:</h3>
 
                             <div>
                                 <label id="ticketQtyLabel"></label>
+                                <input type="text" readonly name="event_ticket_qty" id="ticketQtyInput"/>
                             </div>
                         </td>
                     </tr>
@@ -111,11 +136,13 @@
 
                             <div>
                                 <label id="seatAllocationLabel"></label>
+                                <input type="text" readonly name="event_seat_allocation" value="" id="seatAllocationInput" />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
+                            <input style="display:none;" value="{{ event_id }}"/>
                             <input class="submit" type="submit" value="next" hidden="hidden"/>
                         </td>
                     </tr>
@@ -123,7 +150,7 @@
                 </table>
             </form>
         </div>
-        <input id="eventID" hidden="hidden" data-value="{{ event_id }}"/>
+
     </article>
 
     <script type="application/javascript">
@@ -131,6 +158,49 @@
         trigger: "manual"
     });
     $(function () {
+
+
+        {#$("form").submit(function (e) {#}
+            {#e.preventDefault();#}
+            {#var eventId, eventName, eventDateTime, eventVenueSection, ticketQty, seats, seatId;#}
+            {#seats = [];#}
+            {#eventID = $("#eventID").data("value");#}
+            {#eventName = $("#eventLabel").text();#}
+            {#eventDateTime = $("#dateTimeLabel").text() + ":00";#}
+            {#eventVenueSection = $("#sectionLabel").text();#}
+            {#ticketQty = $("#ticketQtySelector").val();#}
+            {#$("table.seatTable tbody tr td.selected").each(function (index, value) {#}
+                {#seatId = $(value).attr("id");#}
+                {#seats.push(seatId);#}
+            {#});#}
+
+            {#console.log(seats);#}
+
+            {#$.post(#}
+                    {#"{{ path('encore_purchase_tickets') }}",#}
+                    {#{#}
+                        {#'id': eventID,#}
+                        {#'name': eventName,#}
+                        {#'datetime': eventDateTime,#}
+                        {#'section': eventVenueSection,#}
+                        {#'ticketQty': ticketQty,#}
+                        {#'seats': seats#}
+                    {#},#}
+                    {#function (response) {#}
+                        {#if (response.code === 200) {#}
+                            {#window.location.replace(response2.path);#}
+                            {#return true;#}
+                        {#} else {#}
+
+                        {#}#}
+                    {#},#}
+                    {#"json"#}
+            {#);#}
+        {#});#}
+
+
+
+
         /**
          * Unselects all selected seats
          * Remove text in seat allocation label at summary form
