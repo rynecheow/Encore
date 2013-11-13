@@ -25,13 +25,6 @@ class Customer
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=200)
-     */
-    protected $username;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="firstName", type="string", length=200)
      */
     protected $firstName;
@@ -63,13 +56,6 @@ class Customer
      * @ORM\Column(name="address", type="string", length=200)
      */
     protected $address;
-
-    /**
-     * @var \Encore\CustomerBundle\Entity\CardInfo
-     * @ORM\OneToOne(targetEntity="Encore\CustomerBundle\Entity\CardInfo", inversedBy="owner");
-     * @ORM\JoinColumn(name="cardInfoID", referencedColumnName="id", nullable=true);
-     */
-    private $cardInfo;
 
     /**
      * @var \Encore\CustomerBundle\Entity\TicketOrder
@@ -130,50 +116,6 @@ class Customer
     public function getTicketOrders()
     {
         return $this->ticketOrders;
-    }
-
-    /**
-     * @param \Encore\CustomerBundle\Entity\CardInfo $cardInfo
-     *
-     * @return Customer
-     */
-    public function setCardInfo($cardInfo)
-    {
-        $this->cardInfo = $cardInfo;
-
-        return $this;
-    }
-
-    /**
-     * @return \Encore\CustomerBundle\Entity\CardInfo
-     */
-    public function getCardInfo()
-    {
-        return $this->cardInfo;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return Customer
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
     }
 
     /**
