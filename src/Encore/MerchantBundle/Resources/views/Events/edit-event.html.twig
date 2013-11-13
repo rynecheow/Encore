@@ -17,7 +17,8 @@
             <h2>Edit Your Event</h2>
             <br/>
 
-            <form class="merchant-edit-form" action="{{ path('encore_merchant_edit_event', {'eventId': event.id}) }}" method="POST">
+            <form class="merchant-edit-form" action="{{ path('encore_merchant_edit_event', {'eventId': event.id}) }}"
+                  method="POST">
                 <div>
                     <span class="class-label">Event Name</span>
                     <input id="name-id" type="text" class="merchant-add-textbox" name="event_name" data-required="true"
@@ -64,14 +65,14 @@
 
                     <div class="data-time">
                         <span class="date-span">Date : </span>
-                        <input type="text" class="heldpicker held-date-class" id="event_held_date[0]"
+                        <input type="text" class="heldpicker held-date-class" id="event_held_date0"
                                name="event_held_date[0]"
                                data-required="true" data-trigger="change"
                                data-required-message="Please enter at least one held date" readonly/>
 
                         <span class="time-span">Time : </span>
 
-                        <input type="text" class="timepicker held-time-class" id="event_held_time[0]"
+                        <input type="text" class="timepicker held-time-class" id="event_held_time0"
                                name="event_held_time[0]"
                                data-required="true" data-trigger="change"
                                data-required-message="Please enter at least one held date" readonly/>
@@ -107,7 +108,7 @@
                         </tr>
                     </table>
                 </div>
-                {#<input type="submit" value="submit"/>#}
+                <input type="submit" value="submit"/>
 
 
             </form>
@@ -115,126 +116,249 @@
     </article>
 
     <script type="application/javascript">
-        $(function (){
-            var event = {{ event|json_encode|raw }}
+    $(document).ready(function () {
+        var dates = {{ event_held_date|json_encode|raw }}
+        var times = {{ event_held_time|json_encode|raw }}
+        var i = 0;
 
-            $("#name-id").val(event.name);
-            $("#type-id option[value="+event.type+"]").attr("selected", "selected");
-            $("#descrpt-id").val(event.description);
-            $("#start-sale").val(event.sale_start);
-            $("#end-sale").val(event.sale_end);
-            $(".merchant-location").on("change", ajaxLocation);
-            $(".merchant-venue").on("change", ajaxVenue);
-            $(".merchant-location option[value='"+event.venue_location+"']").attr("selected", "selected");
-            $(".merchant-location" ).trigger( "change" );
+        $.each(dates, function (index, valueData) {
+            console.log(times[index]);
+            $("#event_held_date" + i).val(valueData);
+            $("#event_held_time" + i).val(times[index]);
+            $("#add-held").trigger("click");
+            i++;
+        });
+        $("#add-held").trigger("click");
+    });
+    $(function () {
+                var prices = {{ section_price|json_encode|raw  }}
+                var count = 0;
+                var event = {{ event|json_encode|raw }}
 
-            function ajaxLocation(e) {
-                var location = $(".merchant-location").val();
-                $.post(
-                    "{{ path('encore_venue_location') }}",
-                    {
-                        "location": location
-                    },
-                    function (response) {
-                        if ($(".merchant-location").prop("selectedIndex") === 0) {
-                            $('.section-div').css("display", "none");
-                            $('.venue-div').css("display", "none");
-                            return;
-                        }
+                $("#add-held").on("click", addNewDate);
+                $("#name-id").val(event.name);
+                $("#type-id option[value=" + event.type + "]").attr("selected", "selected");
+                $("#descrpt-id").val(event.description);
+                $("#start-sale").val(event.sale_start);
+                $("#end-sale").val(event.sale_end);
+                $(".merchant-location").on("change", ajaxLocation);
+                $(".merchant-venue").on("change", ajaxVenue);
+                $(".merchant-location option[value='" + event.venue_location + "']").attr("selected", "selected");
+                $(".merchant-location").trigger("change");
 
-                        if (response.code == 200) {
-                            createVenueForm(response.venues);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    },
-                    "json"
-                );
-            }
+                function ajaxLocation(e) {
+                    var location = $(".merchant-location").val();
 
-            function ajaxVenue(e) {
-                var venue = $(".merchant-venue").val();
-                console.log(venue);
-                $('.section-div').css("display", "inline");
+                    $.post(
+                            "{{ path('encore_venue_location') }}",
+                            {
+                                "location": location
+                            },
+                            function (response) {
+                                if ($(".merchant-location").prop("selectedIndex") === 0) {
+                                    $('.section-div').css("display", "none");
+                                    $('.venue-div').css("display", "none");
+                                    return;
+                                }
 
-                $.post(
-                    "{{ path('encore_venue_section') }}",
-                    {
-                        "venueId": venue
-                    },
-                    function (response) {
-                        if ($(".merchant-venue").prop("selectedIndex") === 0) {
-                            $('.section-div').css("display", "none");
-                            return;
-                        }
+                                if (response.code == 200) {
 
-                        if (response.code == 200) {
-                            console.log("section %o", response);
-                            createSectionForm(response.sections);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    },
-                    "json"
-                );
-            }
-
-            function createVenueForm(array) {
-                if (array === undefined || array === null) {
-                    return;
+                                    createVenueForm(response.venues);
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            },
+                            "json"
+                    );
                 }
 
-                $('.venue-div').css("display", "inline");
+                function ajaxVenue(e) {
 
-                var venueSelect = $('.merchant-venue');
+                    var venue = $(".merchant-venue").val();
+                    console.log(venue);
+                    $('.section-div').css("display", "inline");
 
-                $.each(array, function (index, valueData) {
-                    $(document.createElement("option")).attr({
-                        value: valueData["id"]
-                    }).html(valueData["name"]).appendTo(venueSelect);
-                });
-                $(".merchant-venue option[value='"+event.venue_id+"']").attr("selected", "selected");
-                $(".merchant-venue" ).trigger( "change" );
+                    $.post(
+                            "{{ path('encore_venue_section') }}",
+                            {
+                                "venueId": venue
+                            },
+                            function (response) {
+                                if ($(".merchant-venue").prop("selectedIndex") === 0) {
+                                    $('.section-div').css("display", "none");
+                                    return;
+                                }
 
-            }
+                                if (response.code == 200) {
+                                    console.log("section %o", response);
+                                    createSectionForm(response.sections);
+                                    return true;
+                                } else {
 
-            function createSectionForm(array) {
-                if (array === undefined || array === null) {
-                    return;
+                                    return false;
+                                }
+                            },
+                            "json"
+                    );
                 }
 
-                $('.section-div').css("display", "inline");
-                var sectionTable = $('.section-table');
-                sectionTable.empty();
+                function addNewDate() {
+                    var timeSpan = $(document.createElement("span")),
+                            dateSpan = $(document.createElement("span")),
+                            dateInput = $(document.createElement("input")),
+                            timeInput = $(document.createElement("input")),
+                            minusEvent = $(document.createElement("a")),
+                            divWrapper = $(document.createElement("div")),
+                            minusLogo = $(document.createElement("i")),
+                            parentDiv = $("#held-date-groups");
 
-                $.each(array, function (index, valueData) {
 
-                    var price = $("<input/>").attr({
-                        "name": "venue_seats[" + index + "]",
+                    timeSpan.addClass("time-span").html("Time : ");
+                    dateSpan.addClass("date-span").html("Date : ");
+
+
+                    count++;
+                    divWrapper.attr("id", "newHeldDate" + count);
+                    divWrapper.attr("class", "added-held-date");
+                    dateInput.attr({
+                        type: "text",
+                        class: "heldpicker held-date-class",
+                        name: "event_held_date[" + count + "]",
+                        id: "event_held_date[" + count + "]",
                         "data-required": "true",
                         "data-trigger": "change",
-                        "data-required-message": "Please enter your seats price",
-                        "data-type": "number"
+                        "data-required-message": "Please enter date.",
+                        "readonly": ""
                     });
 
-                    //price.parsley('validate');
+                    timeInput.attr(
+                            {
+                                type: "text",
+                                class: "timepicker held-time-class",
+                                name: "event_held_time[" + count + "]",
+                                id: "event_held_time[" + count + "]",
+                                "data-required": "true",
+                                "data-trigger": "change",
+                                "data-required-message": "Please enter time.",
+                                "readonly": ""
+                            }
+                    );
 
-                    var nameTd = $(document.createElement("td")).attr("class", "venue-section"),
-                            seatsTd = $(document.createElement("td")).attr("class", "venue-capacity"),
-                            priceTd = $(document.createElement("td")).attr("class", "venue-seat-price"),
-                            row = $(document.createElement("tr"));
+//                    dateInput.parsley('validate');
+//                    timeInput.parsley('validate');
 
-                    nameTd.html(valueData["name"]).appendTo(row);
-                    seatsTd.html(valueData["total_seats"]).appendTo(row);
-                    priceTd.html(price).appendTo(row);
+                    minusEvent.attr(
+                            {
+                                id: count + "event_hdate",
+                                class: "logo-action"
+                            }
+                    );
 
-                    row.appendTo(sectionTable);
-                });
+                    minusEvent.on("click",
+                            function (e) {
+                                var parent = e.target.parentNode;
+                                var index = parseInt($(parent).attr("id"), 10);
+                                $("#newHeldDate" + index).remove();
+                            }
+                    );
+
+                    minusLogo.attr(
+                            {
+                                class: "icon-remove icon-gray"
+                            }
+                    );
+
+                    minusLogo.appendTo(minusEvent);
+
+                    divWrapper.append(dateSpan).append(dateInput).append(timeSpan).append(timeInput)
+                            .append(minusEvent);
+
+                    parentDiv.append(divWrapper);
+
+                    var newDate = new Date(saleEnd.date)
+                    newDate.setDate(newDate.getDate() + 1);
+                    dateInput.datepicker(
+                            {
+                                format: "yyyy-mm-dd",
+                                onRender: function (date) {
+                                    return date.valueOf() <= saleEnd.date.valueOf() ? 'disabled' : '';
+                                }
+                            }
+                    ).data('datepicker').setValue(newDate);
+
+                    dateInput.val("");
+
+                    timeInput.timepicker(
+                            {
+                                minuteStep: 30,
+                                defaultTime: false,
+                                template: 'modal'
+                            }
+                    );
+                }
+
+
+                function createVenueForm(array) {
+                    if (array === undefined || array === null) {
+                        return;
+                    }
+
+                    $('.venue-div').css("display", "inline");
+
+                    var venueSelect = $('.merchant-venue');
+                    venueSelect.empty();
+//                        $(document.createElement("option").attr("value","")).html("Please Select Venue").appendTo(venueSelect);
+                    $.each(array, function (index, valueData) {
+                        $(document.createElement("option")).attr({
+                            value: valueData["id"]
+                        }).html(valueData["name"]).appendTo(venueSelect);
+                    });
+
+                    $(".merchant-venue option[value='" + event.venue_id + "']").attr("selected", "selected");
+                    $(".merchant-venue").trigger("change");
+                }
+
+                function createSectionForm(array) {
+                    if (array === undefined || array === null) {
+                        return;
+                    }
+
+                    $('.section-div').css("display", "inline");
+                    var sectionTable = $('.section-table');
+                    var i = 0;
+                    sectionTable.empty();
+
+                    $.each(array, function (index, valueData) {
+
+                        var price = $("<input/>").attr({
+                            "name": "venue_seats[" + index + "]",
+                            "data-required": "true",
+                            "data-trigger": "change",
+                            "data-required-message": "Please enter your seats price",
+                            "data-type": "number"
+                        });
+                        $(price).val(prices[i])
+                        //price.parsley('validate');
+
+                        var nameTd = $(document.createElement("td")).attr("class", "venue-section"),
+                                seatsTd = $(document.createElement("td")).attr("class", "venue-capacity"),
+                                priceTd = $(document.createElement("td")).attr("class", "venue-seat-price"),
+                                row = $(document.createElement("tr"));
+
+                        nameTd.html(valueData["name"]).appendTo(row);
+                        seatsTd.html(valueData["total_seats"]).appendTo(row);
+                        priceTd.html(price).appendTo(row);
+
+                        row.appendTo(sectionTable);
+                        i++;
+                    });
+
+                }
+
 
             }
-        })
+    );
     </script>
 
 {% endblock content %}
