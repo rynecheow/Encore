@@ -229,8 +229,9 @@
             );
         });
         function initSeatsPlan(matrix) {
-            var i, j, parent, seatTable, seatRow, seatColummn;
+            var i, j, seatTable, seatRow, seatColummn;
             seatTable = $("table.seatTable");
+            seatTable.html("");
             for(i = 0; i <= matrix.row; i = i  +1) {
                 if(i === 0) {
                     seatRow = $(document.createElement('tr')).appendTo(seatTable);
@@ -385,7 +386,7 @@
                                 var seatName = "row" + value.row + "col" + value.col;
                                 var status = parseInt(value.status, 10);
                                 if(status === 2) {
-                                    $("#" + seatName).attr("class", "selected");
+                                    $("#" + seatName).attr("class", "sold");
                                 }
                             });
                             hideTicketQtyStep(false);
