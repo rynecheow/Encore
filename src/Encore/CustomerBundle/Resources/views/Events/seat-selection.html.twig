@@ -1,14 +1,11 @@
 {% extends "EncoreCustomerBundle::layout.html.twig" %}
-
 {% block require_js %}
     require(["libs/bootstrap/bootstrap-datepicker"]);
     require(['encore/purchase/seat-selection']);
 {% endblock require_js %}
-
 {% block css %}
     <link href="{{ asset('bundles/encorecustomer/css/libs/bootstrap/datepicker.css') }}" rel="stylesheet"/>
 {% endblock css %}
-
 {% block content %}
     <!--require(['encore/purchase/seat-selection']);-->
     <article class="seat-selection article">
@@ -21,7 +18,6 @@
                     </ul>
                 </div>
             </div>
-
             <div id="selectDateDiv">
                 <label>Date:</label>
                 {% for dateIndex, dates in dateArray %}
@@ -45,55 +41,24 @@
                     {% endfor %}
                 {% endfor %}
             </div>
-
-
+            /*
             <div id="selectSectionDiv" hidden="hidden">
                 <label>Section:</label>
-
                 <div class="btn-group section-group" data-toggle="buttons-radio">
-                    <!--<button type="button" class="btn btn-primary selectSection">{</button>-->
                 </div>
             </div>
-
-            <div id="ticketQtyDiv">
+            <div id="ticketQtyDiv" hidden="hidden">
                 <label>Ticket Quantity:</label>
                 <input id="ticketQtySelector" type="number" min="0" max="8" value="0"/>
             </div>
-
             <div id="seatAllocateDiv" hidden="hidden">
                 <label>Seat Allocation:</label>
-
                 <div class="table-wrapper">
                     <table class="seatTable">
-                        {% set rowArray = [1,2,3,4,5] %}
-                        {% for row, val in rowArray %}
-                            {% if row == 0 %}
-                                <tr>
-                                    {% for col in 0..30 %}
-                                        <td class="tableLabel">
-                                            {% if col != 0 %}
-                                                {{ col }}
-                                            {% endif %}
-                                        </td>
-                                    {% endfor %}
-                                </tr>
-                            {% endif %}
-                            <tr id="row{{ row }}">
-                                <td class="tableLabel">
-                                    {{ val }}
-                                </td>
-                                {% for col in 1..30 %}
-                                    <td id="row{{ val }}col{{ col }}" class="empty">
-                                        {{ col }}
-                                    </td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
                     </table>
                 </div>
                 <input type="button" class="reset" value="reset" id="resetButton"/>
             </div>
-
             <form action="{{ path('encore_summary',{"eventId": event_id }) }}"id="summaryForm" style="z-index: 2;">
                 <h2>Summary</h2>
                 <table>
@@ -104,7 +69,6 @@
                         </td>
                         <td>
                             <h3>Event:</h3>
-
                             <div>
                                 <input type="text" readonly name="event_name" value="{{ event_name }}" id="eventLabel" />
                             </div>
@@ -116,7 +80,6 @@
                         </td>
                         <td>
                             <h3>Date & Time:</h3>
-
                             <div>
                                 <input type="text" readonly name="event_date_time" id="dateTimeInput" />
                             </div>
@@ -128,9 +91,8 @@
                         </td>
                         <td>
                             <h3>Section:</h3>
-
                             <div>
-                                <input type="text" readonly name="event_section" value="A" id="sectionInput" />
+                                <input type="text" readonly name="event_section" value="" id="sectionInput" />
                             </div>
                         </td>
                     </tr>
@@ -140,7 +102,6 @@
                         </td>
                         <td>
                             <h3>Ticket Quantity:</h3>
-
                             <div>
                                 <input type="text" readonly name="event_ticket_qty" id="ticketQtyInput" />
                             </div>
@@ -152,7 +113,6 @@
                         </td>
                         <td>
                             <h3>Seat Allocation:</h3>
-
                             <div>
                                 <textarea readonly name="event_seat_allocation" id="seatAllocationInput"></textarea>
                             </div>
@@ -169,12 +129,9 @@
                 </table>
             </form>
         </div>
-
     </article>
-
     <script type="application/javascript">
     $(function () {
-
         /**
          * Unselects all selected seats
          * Remove text in seat allocation label at summary form
@@ -187,7 +144,6 @@
             $("#seatAllocationInput").val("");
             $("#seatAllocationLabel").val("");
         }
-
         /**
          * Hides/Display section selection step and un-check all checked section radio buttons
          * @param hideFlag
@@ -203,13 +159,12 @@
                 $("#datetimeComplete").attr("class", "complete");
             }
         }
-
         /**
          * Hides/Display ticket quantity step and set ticket quantity to 0
          * @param hideFlag
          */
         function hideTicketQtyStep(hideFlag) {
-            
+
             if (hideFlag) {
                 $("#ticketQtyDiv").attr("hidden", "hidden");
                 $("#sectionComplete").attr("class", "incomplete");
@@ -219,7 +174,6 @@
                 $("#sectionComplete").attr("class", "complete");
             }
         }
-
         /**
          * Hides and reset seat allocation step or Displays seat allocation step
          * @param hideFlag
@@ -236,7 +190,6 @@
                 $("#ticketQtyComplete").attr("class", "complete");
             }
         }
-
         /**
          * Called when radio button for time changes
          * Hides section selection step and hides ticket quantity and seat allocation steps
@@ -244,16 +197,6 @@
         $("input:radio").change(function () {
             var selectedDateTime = $(this).val();
             var eventID = $("#eventID").val();
-
-            /*
-                Remove when Ajax returns without error
-             */
-            $("#dateTimeInput").val(selectedDateTime);
-            $("#datetimeComplete").attr("class", "complete");
-            /*
-
-             */
-
             $.post(
                     "{{ path('encore_select_time') }}",
                     {
@@ -285,61 +228,167 @@
                     "json"
             );
         });
-
         function initSeatsPlan(matrix) {
-            var i, j, parent, seatTable, seatRow, seatColumn;
-            parent = $("body");
-            seatTable = $('<table/>', {
-                "class": "seatTable",
-                "id": "section1"
-            }).appendTo(parent);
-
-            for (i = 0; i < matrix.row; i = i + 1) {
-                seatRow = $('<tr/>', {
-                    "id": "row" + i
-                }).appendTo(seatTable);
-
-                for (j = 0; j < matrix.col; j = j + 1) {
-                    seatColumn = $('<td/>').appendTo(seatRow);
-
-                    $('<div/>', {
-                        "id": i + "row" + "col" + j,
-                        "class": "empty"
-                    }).on("click", detectEmptySeat).appendTo(seatColumn);
+            var i, j, seatTable, seatRow, seatColummn;
+            seatTable = $("table.seatTable");
+            seatTable.html("");
+            for(i = 0; i <= matrix.row; i = i  +1) {
+                if(i === 0) {
+                    seatRow = $(document.createElement('tr')).appendTo(seatTable);
+                } else {
+                    seatRow = $(document.createElement('tr')).attr({
+                        "id": "row" + i
+                    }).appendTo(seatTable);
+                }
+                for(j = 0; j <= matrix.col; j = j + 1) {
+                    if(i === 0) {
+                        if(j === 0){
+                            seatColummn = $(document.createElement('td')).appendTo(seatRow);
+                        } else {
+                            seatColummn = $(document.createElement('td')).attr({
+                                "class": "tableLabel"
+                            }).html(j).appendTo(seatRow);
+                        }
+                    } else if (j === 0) {
+                        seatColummn = $(document.createElement('td')).attr({
+                            "class": "tableLabel"
+                        }).html(i).appendTo(seatRow);
+                    } else {
+                        seatColummn = $(document.createElement('td')).attr({
+                            "id": "row" + i + "col" + j,
+                            "class": "empty"
+                        }).html(j).on("click", detectEmptySeat).appendTo(seatRow);
+                    }
                 }
             }
         }
-
+        function detectEmptySeat (e) {
+            var target, str, endOfRow, endOfCol, colValue, rowValue, totalCol, previousCol, nextCol, middlePreviousCol, middleNextCol, previousDiv, previousTwoDiv, nextDiv, nextTwoDiv, difference, selectedSeats;
+            target = $(e.target);
+            str = target.attr("id");
+            endOfRow = str.indexOf("row") + 3;
+            endOfCol = str.indexOf("col") + 3;
+            colValue = parseInt(str.substring(endOfCol, str.length), 10);
+            rowValue = parseInt(str.substring(endOfRow, str.indexOf("col")), 10);
+            totalCol = parseInt($("table.seatTable tbody tr[id='row" + rowValue + "'] td").length, 10) - 1;
+            previousCol = parseInt(colValue - 2, 10);
+            nextCol = parseInt(colValue + 2, 10);
+            middlePreviousCol = parseInt(colValue - 1, 10);
+            middleNextCol = parseInt(colValue + 1, 10);
+            previousDiv = $("#row" + rowValue + "col" + middlePreviousCol);
+            previousTwoDiv = $("#row" + rowValue + "col" + previousCol);
+            nextDiv = $("#row" + rowValue + "col" + middleNextCol);
+            nextTwoDiv = $("#row" + rowValue + "col" + nextCol);
+            if (target.hasClass("empty")) {
+                difference = parseInt($("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length, 10);
+                if (difference !== 0) {
+                    if (previousDiv.hasClass("empty")) {
+                        if (previousTwoDiv.hasClass("selected")) {
+                            popupMessageError("You cannot select a seat which leaves a single seat gap.");
+                        } else {
+                            if (checkNext(nextDiv, nextTwoDiv)) {
+                                tickDiv(target);
+                            } else {
+                                popupMessageError("You cannot select a seat which leaves a single seat gap.");
+                            }
+                        }
+                    } else {
+                        if (checkNext(nextDiv, nextTwoDiv)) {
+                            tickDiv(target);
+                        } else {
+                            popupMessageError("You cannot select a seat which leaves a single seat gap.");
+                        }
+                    }
+                } else {
+                    popupMessageError("You have reached your max amount of selected tickets.");
+                }
+            } else if (target.hasClass("selected")) {
+                if (nextDiv.hasClass("empty") || previousDiv.hasClass("empty")) {
+                    target.attr("class", "empty");
+                } else if (nextDiv.hasClass("selected") && !previousDiv.hasClass("selected")) {
+                    target.attr("class", "empty");
+                } else if (previousDiv.hasClass("selected") && !nextDiv.hasClass("selected")) {
+                    target.attr("class", "empty");
+                } else if (previousDiv.hasClass("sold") || previousDiv.hasClass("locked")) {
+                    if (totalCol === middleNextCol) {
+                        target.attr("class", "empty");
+                    } else if (nextDiv.hasClass("sold") || nextDiv.hasClass("locked")) {
+                        target.attr("class", "empty");
+                    } else {
+                        popupMessageError("You cannot un-select a seat which leaves a single seat gap.");
+                    }
+                } else if (nextDiv.hasClass("sold") || nextDiv.hasClass("locked")) {
+                    if (totalCol === middlePreviousCol || middlePreviousCol < 0) {
+                        target.attr("class", "empty");
+                    } else if (previousDiv.hasClass("sold") || previousDiv.hasClass("locked")) {
+                        target.attr("class", "empty");
+                    } else {
+                        popupMessageError("You cannot un-select a seat which leaves a single seat gap.");
+                    }
+                } else {
+                    popupMessageError("You cannot un-select a seat which leaves a single seat gap.");
+                }
+            } else if (target.hasClass("sold")) {
+                popupMessageError("You cannot select a seat which has already been sold.");
+            } else if (target.hasClass("locked")) {
+                popupMessageError("You cannot select a seat which is currently locked.");
+            }
+            selectedSeats = $("table.seatTable tbody tr td.selected");
+            selectedSeats.sort();
+            $("#seatAllocationInput").val("");
+            $("#seatAllocationLabel").val("");
+            $.each(selectedSeats, function (index, target) {
+                str = $(target).attr("id");
+                endOfRow = str.indexOf("row") + 3;
+                endOfCol = str.indexOf("col") + 3;
+                colValue = parseInt(str.substring(endOfCol, str.length), 10);
+                rowValue = parseInt(str.substring(endOfRow, str.indexOf("col")), 10);
+                $("#seatAllocationInput").val($("#seatAllocationInput").val() + "Row : " + rowValue + "; Seat No. : " + colValue + "\n");
+                $("#seatAllocationLabel").val($("#seatAllocationLabel").val() + str + "\n");
+            });
+            difference = $("#ticketQtySelector").val() - $("table.seatTable tbody tr td.selected").length;
+            $("#ticketQtyInput").val(difference + " unselected ticket(s)");
+            if (difference > 0) {
+                $("input:submit").attr("hidden", "hidden");
+                $("#seatAllocComplete").attr("class", "incomplete");
+            } else {
+                $("input:submit").removeAttr("hidden");
+                $("#seatAllocComplete").attr("class", "complete");
+            }
+        }
         /**
          * Called when radio button for section changes
          * Displays ticket quantity step and hides seat allocation step
          */
         $(".section-group").click(function(e){
-            var eventID = $("#eventID").val();
             var selectedSectionId = $(e.target).data("id");
-
             $.post(
                     "{{ path('encore_select_section') }}",
                     {
-                        //'eventId': eventID,
                         'eventSectionId': selectedSectionId
                     },
                     function (response) {
                         if (response.code === 200) {
                             var maxTicketQty = response.event_max_ticket_qty;
                             var seatPlan = response.event_section_seats;
-
+                            var noOfRows = parseInt(response.no_of_rows, 10);
+                            var noOfCols = parseInt(response.no_of_cols, 10);
+                            var matrix = {
+                                row: noOfRows,
+                                col: noOfCols
+                            };
                             $("#ticketQtySelector").attr("max", maxTicketQty);
-
-                            $("table.seatTable").html("");
                             /**
                              * Generation of Seat Plan
                              */
-                            initSeatsPlan(seatPlan);
-                            /*$(seatPlan).each(function(index, value) {
-
-                            });*/
-
+                            initSeatsPlan(matrix);
+                            $.each(seatPlan, function (index, value) {
+                                var seatName = "row" + value.row + "col" + value.col;
+                                var status = parseInt(value.status, 10);
+                                if(status === 2) {
+                                    $("#" + seatName).attr("class", "sold");
+                                }
+                            });
                             hideTicketQtyStep(false);
                             $("#sectionInput").val($(e.target).text());
                             return true;
@@ -351,7 +400,43 @@
                     "json"
             );
         });
-
+        /**
+         * Set empty/selected to selected seat
+         * @param target
+         */
+        function tickDiv(target) {
+            if (target.hasClass("empty")) {
+                target.attr("class", "selected");
+            } else {
+                target.attr("class", "empty");
+            }
+        }
+        /**
+         * Check if leave single gap space
+         * @param next1
+         * @param next2
+         * @returns {boolean}
+         */
+        function checkNext(next1, next2) {
+            if (next1.hasClass("empty")) {
+                return !next2.hasClass("selected");
+            }
+            return true;
+        }
+        /**
+         * Custom Popup Message
+         * @param message
+         */
+        function popupMessageError(message) {
+            $("#errorMessage").html(message);
+            $("#errorMessageContainer").fadeIn("slow");
+        }
+        /**
+         * Closing Custom Popup Message box by clicking anywhere
+         */
+        $("#errorMessageContainer").click(function () {
+            $("#errorMessageContainer").fadeOut("fast");
+        });
     });
     </script>
 {% endblock content %}

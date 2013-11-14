@@ -262,7 +262,7 @@ class EventController extends Controller
                 foreach ($dates as $index => $date)
                 {
                     $datetime = $date." ".$times[$index];
-                    $heldDates = DateTime::createFromFormat("Y-m-d G:ia", $datetime);
+                    $heldDates[] = DateTime::createFromFormat("Y-m-d G:ia", $datetime);
                 }
 
                 $eventHolders = $this->em->getRepository("EncoreCustomerBundle:EventHolder")
@@ -296,6 +296,8 @@ class EventController extends Controller
                         }
                     }
                 } else {
+                    $eventSectionsPrice = $formData["venue_seats"];
+
                     foreach ($heldDates as $heldDate) {
                         $exist = false;
 
@@ -305,6 +307,24 @@ class EventController extends Controller
                         foreach ($eventHolders as $eventHolder) {
                             if ($heldDate == $eventHolder->getHeldDate()) {
                                 $exist = true;
+
+                                $eventSections = $this->em->getRepository("EncoreCustomerBundle:EventSection")
+                                    ->findByEventHolder($eventHolder);
+                                $i = 0;
+
+                                /**
+                                 * @var $eventSection \Encore\CustomerBundle\Entity\EventSection
+                                 */
+                                foreach ($eventSections as $eventSection) {
+                                    if ($eventSection->getPrice() !== $eventSectionsPrice[$i])
+                                    {
+                                        $eventSection->setPrice($eventSectionsPrice[$i]);
+                                        $this->em->flush();
+                                    }
+                                    $i++;
+                                }
+
+                                break;
                             }
                         }
 
@@ -315,7 +335,6 @@ class EventController extends Controller
                             $this->em->persist($newEventHolder);
                             $this->em->flush();
                             $sections = $event->getVenue()->getSections();
-                            $eventSectionsPrice = $formData["venue_seats"];
                             $i = 0;
 
                             /**
@@ -331,18 +350,19 @@ class EventController extends Controller
                                     ->setTotalSold(0);
                                 $this->em->persist($eventSection);
                                 $this->em->flush();
+                                $i++;
                             }
                         }
                     }
                 }
             }
 
-            return $this->render(
-                "EncoreMerchantBundle:Events:add-event-photo.html.twig",
-                [
-                    "eventId" => $event->getId()
-                ]
-            );
+            return $this->redirect($this->generateUrl(
+                    "encore_merchant_event_edit_photo",
+                    [
+                        "eventId" => $event->getId()
+                    ]
+                ));
         }
 
         return $this->render(
