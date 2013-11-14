@@ -32,7 +32,7 @@ class EventPhotoController extends Controller
     }
 
     /**
-     * @Route("/events/{eventId}/edit/photo", name="encore_merchant_event_edit_photo")
+     * @Route("/event/{eventId}/edit/photo", name="encore_merchant_event_edit_photo")
      * @ParamConverter("event", class="EncoreCustomerBundle:Event", options={"id" = "eventId"})
      * @Method({"GET","POST"})
      */
