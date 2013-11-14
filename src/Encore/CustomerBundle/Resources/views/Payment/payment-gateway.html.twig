@@ -38,13 +38,13 @@
                         Description
                     </label>
 
-                    <span class="detail-result-description">Item
+                    <span class="detail-result-description">{{ data.desc }}
                     </span>
                 </p>
 
-                <p><label>Total</label><span class="detail-result-total">RM 900</span></p>
+                <p><label>Total</label><span class="detail-result-total">RM{{ data.totalPrice }}</span></p>
             </div>
-            <form action="{{ path("encore_payment") }}" method="post" class="fill-form">
+            <form action="{{ path("encore_thank_you") }}" method="post" class="fill-form">
                 <div class="payment-form-card-detail">
 
                     <h2>Card Details (As printed on your card)</h2>
@@ -83,11 +83,18 @@
                                     data-required-message="Please select expiry month"
                                     required="required">
                                 <option>month</option>
+
+                                {% for i in 1..12 %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
                             </select>
                             <select name="_expiry-date-year" class="expiry-date-year" data-required="true"
                                     data-trigger="change" data-required-message="Please select expiry year"
                                     required="required">
                                 <option>year</option>
+                                {% for i in 2013..2030 %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
                             </select>
                         </span>
                     </p>
@@ -110,7 +117,7 @@
                         <span>
                             <input name="_security-code" class="security-code" type="text"
                                    data-required="true" data-trigger="change"
-                                   data-max="3" data-type="digits" data-required-message="Please enter Security Code"
+                                   data-max="5" data-type="digits" data-required-message="Please enter Security Code"
                                    required="required"/>
                         </span>
                     </p>
