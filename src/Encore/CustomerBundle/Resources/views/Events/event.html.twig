@@ -33,44 +33,47 @@
                 <div class="content-1">
                     <h2>Summary</h2>
 
-                    <p>Content One Content One Content One Content One Content One Content One
-                        Content One Content One Content One Content One Content One Content One
-                        Content One Content One Content One Content One Content One Content One
-                        Content One Content One Content One Content One Content One Content One
-                        Content One Content One Content One Content One Content One Content One
+                    <p>
+                        {{ event.description }}
                     </p>
                 </div>
                 <div class="content-2">
                     <h2>Details</h2>
 
                     <p>
-                        Content Two Content TwoContent TwoContent TwoContent TwoContent TwoContent Two
-                        Content TwoContent TwoContent TwoContent TwoContent TwoContent TwoContent Two
-                        Content TwoContent TwoContent TwoContent TwoContent TwoContent TwoContent Two
-                        Content TwoContent TwoContent TwoContent TwoContent TwoContent TwoContent Two
-                        Content TwoContent TwoContent TwoContent TwoContent TwoContent TwoContent Two
+                    <ul>
+                        <li>Event: {{ event.name }}</li>
+
+                        <li>Event Type: {{ eventType }}</li>
+
+                        <li>Description: {{ event.description }}</li>
+
+                        <li>Held Date: </li>
+
+                        {% for eventHolder in eventHolders %}
+
+                            <li>{{ eventHolder }}</li>
+
+                        {% endfor %}
+
+                        <li>Venue: {{ event.venue.name }}</li>
+
+                        <p>Location: {{ event.venue.location }}</p>
+                    </ul>
                     </p>
                 </div>
                 <div class="content-3">
                     <h2>Discounts</h2>
 
                     <p>
-                        Content Three Content ThreeContent ThreeContent ThreeContent ThreeContent Three
-                        Content ThreeContent ThreeContent ThreeContent ThreeContent ThreeContent Three
-                        Content ThreeContent ThreeContent ThreeContent ThreeContent ThreeContent Three
-                        Content ThreeContent ThreeContent ThreeContent ThreeContent ThreeContent Three
-                        Content ThreeContent ThreeContent ThreeContent ThreeContent ThreeContent Three
+                        -
                     </p>
                 </div>
                 <div class="content-4">
                     <h2>Other</h2>
 
                     <p>
-                        Content Four Content FourContent FourContent FourContent FourContent FourContent Four
-                        Content FourContent FourContent FourContent FourContent FourContent FourContent Four
-                        Content FourContent FourContent FourContent FourContent FourContent FourContent Four
-                        Content FourContent FourContent FourContent FourContent FourContent FourContent Four
-                        Content FourContent FourContent FourContent FourContent FourContent FourContent Four
+                        -
                     </p>
                 </div>
             </div>

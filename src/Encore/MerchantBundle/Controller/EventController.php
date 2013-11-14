@@ -109,21 +109,23 @@ class EventController extends Controller
                 $this->em->flush();
 
                 $sections = $newEvent->getVenue()->getSections();
+                $eventSectionsPrice = $formData["venue_seats"];
+                $i = 0;
 
                 /**
                  * @var $section \Encore\CustomerBundle\Entity\Section
                  */
                 foreach ($sections as $section) {
                     $seats = $section->getSeats();
-//                            $eventSectionPrice = $formData[];
                     $eventSection = new EventSection();
                     $eventSection->setEventHolder($eventHolder)
                         ->setSection($section)
-//                                ->setPrice($eventSectionPrice)
+                        ->setPrice($eventSectionsPrice[$i])
                         ->setTotalSeats(count($seats))
                         ->setTotalSold(0);
                     $this->em->persist($eventSection);
                     $this->em->flush();
+                    $i++;
                 }
             }
 
@@ -180,12 +182,26 @@ class EventController extends Controller
         $eventHolders = $event->getEventHolders();
         $dates = [];
         $times = [];
+        $prices = [];
 
         foreach ($eventHolders as $eventHolder)
         {
             $datetime = $eventHolder->getHeldDate();
             $dates[] = $datetime->format("Y-m-d");
-            $times[] = $datetime->format("G:ia");
+            $times[] = $datetime->format("g:ia");
+        }
+
+        foreach ($eventHolders as $eventHolder)
+        {
+            $eventSections = $this->em->getRepository("EncoreCustomerBundle:EventSection")
+                                ->findByEventHolder($eventHolder);
+
+            foreach ($eventSections as $eventSection)
+            {
+                $prices[] = $eventSection->getPrice();
+            }
+
+            break;
         }
 
         $request = $this->getRequest();
@@ -194,7 +210,7 @@ class EventController extends Controller
             $formData = $request->request->all();
             $saleEnd = DateTime::createFromFormat("Y-m-d", $formData["event_sale_end"]);
 
-            if ($event->getPublish())
+            if ($event->getPublishedAt())
             {
                 $event->setSaleEnd($saleEnd)
                     ->setDescription($formData["event_description"]);
@@ -261,21 +277,22 @@ class EventController extends Controller
                         $this->em->persist($newEventHolder);
                         $this->em->flush();
                         $sections = $event->getVenue()->getSections();
-
+                        $eventSectionsPrice = $formData["venue_seats"];
+                        $i = 0;
                         /**
                          * @var $section \Encore\CustomerBundle\Entity\Section
                          */
                         foreach ($sections as $section) {
                             $seats = $section->getSeats();
-//                            $eventSectionPrice = $formData[];
                             $eventSection = new EventSection();
                             $eventSection->setEventHolder($eventHolder)
                                 ->setSection($section)
-//                                ->setPrice($eventSectionPrice)
+                                ->setPrice($eventSectionsPrice[$i])
                                 ->setTotalSeats(count($seats))
                                 ->setTotalSold(0);
                             $this->em->persist($eventSection);
                             $this->em->flush();
+                            $i++;
                         }
                     }
                 } else {
@@ -286,7 +303,7 @@ class EventController extends Controller
                          * @var $eventHolder \Encore\CustomerBundle\Entity\EventHolder
                          */
                         foreach ($eventHolders as $eventHolder) {
-                            if ($heldDate === $eventHolder->getHeldDate()) {
+                            if ($heldDate == $eventHolder->getHeldDate()) {
                                 $exist = true;
                             }
                         }
@@ -298,17 +315,18 @@ class EventController extends Controller
                             $this->em->persist($newEventHolder);
                             $this->em->flush();
                             $sections = $event->getVenue()->getSections();
+                            $eventSectionsPrice = $formData["venue_seats"];
+                            $i = 0;
 
                             /**
                              * @var $section \Encore\CustomerBundle\Entity\Section
                              */
                             foreach ($sections as $section) {
                                 $seats = $section->getSeats();
-//                                $eventSectionPrice = $formData[];
                                 $eventSection = new EventSection();
                                 $eventSection->setEventHolder($eventHolder)
                                     ->setSection($section)
-//                                    ->setPrice($eventSectionPrice)
+                                    ->setPrice($eventSectionsPrice[$i])
                                     ->setTotalSeats(count($seats))
                                     ->setTotalSold(0);
                                 $this->em->persist($eventSection);
@@ -333,7 +351,8 @@ class EventController extends Controller
                 "locations" => $allLocations,
                 "event" => $eventInfo,
                 "event_held_date" => $dates,
-                "event_held_time" => $times
+                "event_held_time" => $times,
+                "section_price" => $prices
             ]
         );
     }
