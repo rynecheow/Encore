@@ -110,38 +110,4 @@ SQL
         );
         return $query->getResult();
     }
-    public function findNoOfRowsBySection($section)
-    {
-        $query = $this->getEntityManager()
-            ->createQuery
-            (
-                <<<SQL
-                SELECT COUNT(DISTINCT seat.row) FROM EncoreCustomerBundle:Seat seat
-                WHERE seat.section = :sect
-SQL
-            );
-        $query = $query->setParameters(
-            [
-                "sect" => $section,
-            ]
-        );
-        return $query->getResult();
-    }
-    public function findNoOfColsBySection($section)
-    {
-        $query = $this->getEntityManager()
-            ->createQuery
-            (
-                <<<SQL
-                SELECT COUNT(DISTINCT seat.col) FROM EncoreCustomerBundle:Seat seat
-                WHERE seat.section = :sect
-SQL
-            );
-        $query = $query->setParameters(
-            [
-                "sect" => $section,
-            ]
-        );
-        return $query->getResult();
-    }
 }

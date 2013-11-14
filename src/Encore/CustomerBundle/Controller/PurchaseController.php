@@ -127,9 +127,6 @@ class PurchaseController extends BaseController
         $eventRepo = $this->em->getRepository('EncoreCustomerBundle:EventHolder');
         $eventSection = $eventRepo->findEventSectionByEventSectionId($eventSectionId);
         $sectionSeats = $eventRepo->findSeatsByEventSection($eventSection);
-        $section = $eventSection[0]->getSection();
-        $noOfRow = $eventRepo->findNoOfRowsBySection($section);
-        $noOfCol = $eventRepo->findNoOfColsBySection($section);
         $totalSeats = $eventSection[0]->getTotalSeats();
         $totalSold = $eventSection[0]->getTotalSold();
         $availableSeatsLeft = $totalSeats - $totalSold;
@@ -148,13 +145,19 @@ class PurchaseController extends BaseController
                 "col" => $seat->getCol(),
                 "status" => $status
             ];
+
+
+            $noOfRow = $seat->getRow();
+            $noOfCol = $seat->getCol();
         }
+
+
         $result = [
             'status' => $status,
             'message' => $msg,
             'event_max_ticket_qty' => $availableSeatsLeft,
-            "no_of_rows" => count($noOfRow[0]),
-            "no_of_cols" => count($noOfCol[0]),
+            "no_of_rows" => $noOfRow,
+            "no_of_cols" => $noOfCol,
             'event_section_seats' => $seats
         ];
         return $result;
