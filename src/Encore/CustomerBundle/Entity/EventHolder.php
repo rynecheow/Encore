@@ -35,6 +35,12 @@ class EventHolder
     private $event;
 
     /**
+     * @var \Encore\CustomerBundle\Entity\EventSection[]
+     * @ORM\OneToMany(targetEntity="Encore\CustomerBundle\Entity\EventSection", mappedBy="eventHolder")
+     */
+    private $eventSections;
+
+    /**
      * Get id
      *
      * @return integer
