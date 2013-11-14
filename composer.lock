@@ -1659,12 +1659,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/Gaufrette.git",
-                "reference": "e0047fd432f975b00a9e3601c49f28e458f61c91"
+                "reference": "a283d0d62ad09542cb75eacd8ff68b6478c1559e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/e0047fd432f975b00a9e3601c49f28e458f61c91",
-                "reference": "e0047fd432f975b00a9e3601c49f28e458f61c91",
+                "url": "https://api.github.com/repos/KnpLabs/Gaufrette/zipball/a283d0d62ad09542cb75eacd8ff68b6478c1559e",
+                "reference": "a283d0d62ad09542cb75eacd8ff68b6478c1559e",
                 "shasum": ""
             },
             "require": {
@@ -1732,7 +1732,7 @@
                 "filesystem",
                 "media"
             ],
-            "time": "2013-10-10 06:25:07"
+            "time": "2013-11-12 14:14:07"
         },
         {
             "name": "knplabs/knp-components",
@@ -1794,12 +1794,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpGaufretteBundle.git",
-                "reference": "7c210044bf083c35870391fd59507807236f5f98"
+                "reference": "3bf4e03513adf15faa4f2473eb139e8ca0ec15b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/7c210044bf083c35870391fd59507807236f5f98",
-                "reference": "7c210044bf083c35870391fd59507807236f5f98",
+                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/3bf4e03513adf15faa4f2473eb139e8ca0ec15b5",
+                "reference": "3bf4e03513adf15faa4f2473eb139e8ca0ec15b5",
                 "shasum": ""
             },
             "require": {
@@ -1845,7 +1845,7 @@
                 "filesystem",
                 "media"
             ],
-            "time": "2013-11-10 09:08:40"
+            "time": "2013-11-13 07:41:39"
         },
         {
             "name": "knplabs/knp-menu",
@@ -3340,12 +3340,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "37964b9a13fa1ccd91a2677d16e09ee77cc301af"
+                "reference": "577fdf3f53ddff207d579f1625fe1398dd2b7613"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/37964b9a13fa1ccd91a2677d16e09ee77cc301af",
-                "reference": "37964b9a13fa1ccd91a2677d16e09ee77cc301af",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/577fdf3f53ddff207d579f1625fe1398dd2b7613",
+                "reference": "577fdf3f53ddff207d579f1625fe1398dd2b7613",
                 "shasum": ""
             },
             "require": {
@@ -3395,7 +3395,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-11-01 09:26:32"
+            "time": "2013-11-13 08:05:31"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3632,12 +3632,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2bbb87ba54247297522c86b7272f3b5de917c4a6"
+                "reference": "24148d91bc58a1a666918e4b6948d343aa6c15fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2bbb87ba54247297522c86b7272f3b5de917c4a6",
-                "reference": "2bbb87ba54247297522c86b7272f3b5de917c4a6",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/24148d91bc58a1a666918e4b6948d343aa6c15fa",
+                "reference": "24148d91bc58a1a666918e4b6948d343aa6c15fa",
                 "shasum": ""
             },
             "require": {
@@ -3701,7 +3701,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-11-11 10:49:59"
+            "time": "2013-11-13 08:56:01"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
