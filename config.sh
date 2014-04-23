@@ -11,7 +11,7 @@ sudo apt-get update
 
 sudo apt-get dist-upgrade
 
-sudo apt-get install php5-mysql nodejs npm mysql-server-5.5 mysql-client-core-5.5 php5 php5-cli curl git php5-curl php5-intl
+sudo apt-get install php5-mysql nodejs mysql-server-5.5 mysql-client-core-5.5 php5 php5-cli curl git php5-curl php5-intl
 
 curl -sS https://getcomposer.org/installer | php
 
@@ -21,16 +21,18 @@ sudo npm install -g uglify-js
 
 sudo npm install -g uglifycss
 
-cd ~/Documents
+git clone https://github.com/rynecheow/Encore.git ~/Documents/Encore-Dev
 
-git clone https://github.com/rynecheow/Encore.git Encore-Dev
-
-cd Encore-Dev
+cd ~/Documents/Encore-Dev
 
 composer install
 
-bash assetic.sh
-wait 1
+php app/console assetic:dump
+
+php app/console assets:install --symlink
 
 php app/console doctrine:database:create
 
+php app/console doctrine:schema:update --force
+
+cd
