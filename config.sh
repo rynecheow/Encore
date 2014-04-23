@@ -23,10 +23,14 @@ sudo npm install -g uglifycss
 
 cd ~/Documents
 
-git clone https://github.com/rynecheow/Encore.git
+git clone https://github.com/rynecheow/Encore.git Encore-Dev
 
-cd Encore
+cd Encore-Dev
 
 composer install
 
+bash assetic.sh
+wait 1
+
+php app/console doctrine:database:create
 
