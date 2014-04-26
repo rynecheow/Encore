@@ -222,8 +222,9 @@ class AuthenticationController extends BaseController
                         $success = $this->createCustomer($user, $data);
 
                         if ($success["status"]) {
-                            // Redirect To Home Page
-                            return $this->redirect($this->generateUrl("encore_home"));
+                            $response = ["path" => $this->generateUrl("encore_home")];
+
+                            return new Response(json_encode($response));
                         }
                     }
                 }
@@ -397,8 +398,7 @@ class AuthenticationController extends BaseController
             ->setLastName($params["lastName"])
             ->setBirthDate($params["birthDate"])
             ->setContactNo($params["contactNo"])
-            ->setAddress($params["address"])
-            ->setUsername($params["username"]);
+            ->setAddress($params["address"]);
 
         $user->setUsername($params["username"]);
         $this->em->persist($customer);
